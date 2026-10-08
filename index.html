@@ -170,262 +170,482 @@
 
   <!-- ======================== STUDENT HOME (AFTER SIGN IN) ======================== -->
   <section id="home" class="section">
-    <div style="max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem;">
+    <div class="home-3col-layout">
       
-      <!-- WELCOME HERO BANNER -->
-      <div style="background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,168,107,0.1)); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2.2rem 2.5rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-        
-        <!-- TOP LEFT: CIRCULAR PFP + GREETING -->
-        <div style="display: flex; align-items: center; gap: 1.25rem; max-width: 680px;">
-          <!-- Small Circle PFP (Standard Web Style) -->
-          <div class="home-pfp-container" onclick="openUserProfileModal('overview')" title="Click to view full profile & ATS resume">
-            <div class="home-pfp-circle">
-              👨‍💻
-            </div>
-            <span class="home-pfp-online-badge" title="Active • NIT Kurukshetra"></span>
-            <span class="home-pfp-tooltip">👤 Profile & Resume</span>
+      <!-- ==================== LEFT COLUMN: PROFILE & QUICK NAVIGATION ==================== -->
+      <aside class="home-left-col">
+        <!-- 1. User Profile Card -->
+        <div class="dash-user-card">
+          <div class="dash-user-avatar-lg" onclick="openUserProfileModal('overview')" title="View / Edit Profile">
+            AK
+          </div>
+          <div class="dash-user-name">
+            <span id="dash-left-name">Anannay Kapoor</span>
+            <span style="color:#0ea5e9; font-size:0.9rem;" title="Verified Student">✓</span>
+          </div>
+          <div class="dash-user-badge-nit">
+            B.Tech CSE • NIT Kurukshetra
           </div>
 
-          <!-- User Greeting Details -->
-          <div>
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); padding: 3px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem;">
-              🔥 14-Day Streak Active • NIT Kurukshetra
+          <!-- ATS Score Meter -->
+          <div class="dash-ats-meter-box">
+            <div class="dash-ats-meter-header">
+              <span>ATS Resume Match</span>
+              <span style="color:var(--green); font-weight:800;">94%</span>
             </div>
-            <h2 style="font-size: 2.1rem; font-weight: 900; margin: 0 0 0.35rem 0; letter-spacing: -0.5px; line-height: 1.2;">
-              Welcome back, <span id="home-welcome-name">Anannay Kapoor</span>! 👋
+            <div class="dash-ats-bar">
+              <div class="dash-ats-fill" style="width: 94%;"></div>
+            </div>
+            <div style="font-size:0.68rem; color:var(--text3); margin-top:5px;">
+              🎯 Top 3% for SDE-1 MNC Roles
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <button class="btn-ghost" style="width:100%; font-size:0.8rem; padding:7px 10px; justify-content:center;" onclick="openUserProfileModal('overview')">
+              👤 View / Edit Profile
+            </button>
+            <button class="btn-primary" style="width:100%; font-size:0.8rem; padding:7px 10px; justify-content:center; background:#e056fd;" onclick="openUserProfileModal('resume')">
+              📄 ATS Resume (94%)
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Sidebar Navigation Links -->
+        <nav class="dash-sidebar-nav">
+          <a class="dash-sidebar-link active" onclick="showSection('home')">
+            <span>📊</span> Dashboard Home
+          </a>
+          <a class="dash-sidebar-link" onclick="document.getElementById('pref-card-anchor')?.scrollIntoView({behavior:'smooth'})">
+            <span>🎯</span> Work Preferences
+          </a>
+          <a class="dash-sidebar-link" onclick="openUserProfileModal('overview')">
+            <span>👤</span> My Profile
+          </a>
+          <a class="dash-sidebar-link" onclick="openUserProfileModal('overview')">
+            <span>📋</span> Applications (<span style="color:var(--primary); font-weight:700;">7</span>)
+          </a>
+          <a class="dash-sidebar-link" onclick="showSection('masterclasses')">
+            <span>🎬</span> MNC Masterclasses
+          </a>
+          <a class="dash-sidebar-link" onclick="showSection('arena')">
+            <span>⚡</span> Problem Arena
+          </a>
+          <a class="dash-sidebar-link" onclick="showSection('jobs')">
+            <span>💼</span> Jobs & Internships
+          </a>
+          <a class="dash-sidebar-link" onclick="showSection('hr-view')">
+            <span>🏢</span> Recruiter Leaderboard
+          </a>
+          <a class="dash-sidebar-link" onclick="openUserProfileModal('settings')">
+            <span>⚙️</span> Settings
+          </a>
+        </nav>
+
+        <!-- 3. Mini Activity Stats -->
+        <div class="dash-mini-metrics">
+          <div>
+            <div class="dash-mini-metric-num" style="color:var(--primary);">12</div>
+            <div class="dash-mini-metric-label">Applied</div>
+          </div>
+          <div>
+            <div class="dash-mini-metric-num" style="color:var(--green);">3</div>
+            <div class="dash-mini-metric-label">Calls</div>
+          </div>
+          <div>
+            <div class="dash-mini-metric-num" style="color:var(--orange);">28</div>
+            <div class="dash-mini-metric-label">Solved</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ==================== CENTER COLUMN: MAIN FEED & CORE ACTIONS ==================== -->
+      <main class="home-center-col">
+        <!-- 1. Welcome Hero Banner -->
+        <div class="dash-welcome-hero">
+          <div>
+            <div class="dash-welcome-tag">
+              🎓 Student Exclusive • Top 3% at NIT Kurukshetra
+            </div>
+            <h2 style="font-size:1.55rem; font-weight:900; margin:0 0 0.25rem 0; letter-spacing:-0.5px;">
+              Welcome back, <span id="home-welcome-name">Anannay</span>! 👋
             </h2>
-            <p style="color: var(--text2); font-size: 0.98rem; line-height: 1.5; margin: 0;">
-              Ready to build real MNC architecture? Your verified profile is currently <strong>94% ATS-ready</strong> with 2 active recruiter visits today.
+            <p style="color:var(--text2); font-size:0.88rem; margin:0; line-height:1.5;">
+              You have <strong style="color:var(--primary);">3 new recruiter matches</strong> and <strong style="color:var(--green);">1 interview invite</strong> today from Amazon AWS.
             </p>
           </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-          <button class="btn-primary" style="background:#e056fd;" onclick="openUserProfileModal('resume')">📄 ATS Resume (94%)</button>
-          <button class="btn-ghost" onclick="openUserProfileModal('settings')">⚙️ Settings</button>
-          <button class="btn-ghost" onclick="showSection('arena')">⚡ Arena</button>
-        </div>
-      </div>
-
-      <!-- TODAY'S STATS SUMMARY -->
-      <div class="dash-stats" style="margin-bottom: 2.5rem;">
-        <div class="dash-card">
-          <div>
-            <span class="g-label">Placement Readiness Score</span>
-            <div class="g-value" style="color: var(--primary);">81.6%</div>
-            <span style="font-size: 0.8rem; color: var(--text3);">Level 8 Practitioner (2,450 XP)</span>
-          </div>
-          <div style="font-size: 2rem;">🎯</div>
-        </div>
-        <div class="dash-card">
-          <div>
-            <span class="g-label">Active Study Groups</span>
-            <div class="g-value" style="color: var(--green);">3 Groups</div>
-            <span style="font-size: 0.8rem; color: var(--text3);">42 Peers online right now</span>
-          </div>
-          <div style="font-size: 2rem;">👥</div>
-        </div>
-      </div>
-
-      <!-- FEATURED TODAY'S CHALLENGES -->
-      <div style="margin-bottom: 3rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-          <div>
-            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;">🎯 Recommended Challenges for You</h3>
-            <p style="color: var(--text2); font-size: 0.9rem; margin: 0;">Curated based on your target MNCs and skill progression.</p>
-          </div>
-          <button class="btn-ghost small" onclick="showSection('arena')">View All Arena Challenges →</button>
-        </div>
-
-        <div class="grid-3">
-          <!-- Problem 1 -->
-          <div class="problem-card" style="background: var(--card);">
-            <div class="company-tag">Amazon</div>
-            <h3 class="problem-title">Design a Distributed Rate Limiter</h3>
-            <div class="problem-meta">
-              <span style="color: var(--red);">🎯 Hard</span>
-              <span>⏱️ Est: 45 mins</span>
-            </div>
-            <div class="tech-stack">
-              <span class="tech-tag">System Design</span>
-              <span class="tech-tag">Backend</span>
-              <span class="tech-tag">Redis</span>
-            </div>
-            <div class="problem-actions">
-              <span class="xp-reward">+500 XP</span>
-              <button class="btn-ghost small" onclick="openModal(0)">View Challenge</button>
-            </div>
-          </div>
-
-          <!-- Problem 2 -->
-          <div class="problem-card" style="background: var(--card);">
-            <div class="company-tag">Google</div>
-            <h3 class="problem-title">Optimize Search API Load Time</h3>
-            <div class="problem-meta">
-              <span style="color: var(--orange);">🎯 Medium</span>
-              <span>⏱️ Est: 45 mins</span>
-            </div>
-            <div class="tech-stack">
-              <span class="tech-tag">API</span>
-              <span class="tech-tag">Performance</span>
-              <span class="tech-tag">Node.js</span>
-            </div>
-            <div class="problem-actions">
-              <span class="xp-reward">+300 XP</span>
-              <button class="btn-ghost small" onclick="openModal(1)">View Challenge</button>
-            </div>
-          </div>
-
-          <!-- Problem 3 -->
-          <div class="problem-card" style="background: var(--card);">
-            <div class="company-tag">Uber</div>
-            <h3 class="problem-title">Real-time Driver Location Tracking</h3>
-            <div class="problem-meta">
-              <span style="color: var(--red);">🎯 Hard</span>
-              <span>⏱️ Est: 45 mins</span>
-            </div>
-            <div class="tech-stack">
-              <span class="tech-tag">WebSockets</span>
-              <span class="tech-tag">Backend</span>
-              <span class="tech-tag">Go</span>
-            </div>
-            <div class="problem-actions">
-              <span class="xp-reward">+550 XP</span>
-              <button class="btn-ghost small" onclick="openModal(4)">View Challenge</button>
-            </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-primary" style="padding:7px 14px; font-size:0.8rem;" onclick="showSection('hr-view')">
+              🏢 Recruiter Portal
+            </button>
+            <button class="btn-ghost" style="padding:7px 14px; font-size:0.8rem;" onclick="openUserProfileModal('overview')">
+              📋 Track Applications
+            </button>
           </div>
         </div>
-      </div>
 
-      <!-- FEATURED MNC VIDEO LECTURES -->
-      <div style="margin-bottom: 3rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;">🎬 Video Lectures Uploaded by MNCs</h3>
-            <p style="color: var(--text2); font-size: 0.9rem; margin: 0;">Watch real production system walkthroughs taught by engineering leads at Amazon & Netflix.</p>
+        <!-- 2. 4 Stat KPI Cards -->
+        <div class="dash-kpi-grid">
+          <div class="dash-kpi-card" style="background:linear-gradient(135deg, rgba(108,99,255,0.08), rgba(108,99,255,0.02)); border-color:rgba(108,99,255,0.25);">
+            <div class="dash-kpi-icon">⚡</div>
+            <div class="dash-kpi-val" style="color:var(--primary);">2,450 XP</div>
+            <div class="dash-kpi-sub">Total XP • Level 8</div>
           </div>
-          <button class="btn-ghost small" onclick="showSection('masterclasses')">View All Masterclasses →</button>
+          <div class="dash-kpi-card" style="background:linear-gradient(135deg, rgba(255,159,67,0.1), rgba(255,159,67,0.02)); border-color:rgba(255,159,67,0.3);">
+            <div class="dash-kpi-icon">🔥</div>
+            <div class="dash-kpi-val" style="color:var(--orange);">14 Days</div>
+            <div class="dash-kpi-sub">Daily Streak • 1.5x Multiplier</div>
+          </div>
+          <div class="dash-kpi-card" style="background:linear-gradient(135deg, rgba(0,168,107,0.08), rgba(0,168,107,0.02)); border-color:rgba(0,168,107,0.25);">
+            <div class="dash-kpi-icon">🏆</div>
+            <div class="dash-kpi-val" style="color:var(--green);">#3 Rank</div>
+            <div class="dash-kpi-sub">NIT Kurukshetra Rank</div>
+          </div>
+          <div class="dash-kpi-card" style="background:linear-gradient(135deg, rgba(14,165,233,0.08), rgba(99,102,241,0.04)); border-color:rgba(14,165,233,0.3);">
+            <div class="dash-kpi-icon">📞</div>
+            <div class="dash-kpi-val" style="color:#0ea5e9;">3 Calls</div>
+            <div class="dash-kpi-sub">Amazon, Google, Netflix</div>
+          </div>
         </div>
 
-        <div class="grid-2">
-          <!-- Featured Video 1 -->
-          <div class="video-card">
-            <div class="video-thumb" onclick="openVideoModal(0)">
-              <div class="video-thumb-inner">
-                <span class="video-mnc-badge">🟠 Amazon AWS</span>
-                <div class="video-play-btn">▶</div>
-                <span class="video-duration-badge">28:00</span>
+        <!-- 3. Search Bar -->
+        <div class="dash-search-box">
+          <span class="dash-search-icon">🔍</span>
+          <input type="text" id="dash-home-search" class="dash-search-input" placeholder="Search MNC challenges, companies, target tech stack, roles..." oninput="handleHomeSearch(this.value)" />
+        </div>
+
+        <!-- 4. Student Placement & Work Preferences Card -->
+        <div class="dash-pref-card" id="pref-card-anchor">
+          <div class="dash-pref-badges">
+            <span style="font-size:0.72rem; background:rgba(108,99,255,0.12); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">🎓 Student Exclusive</span>
+            <span style="font-size:0.72rem; background:rgba(0,168,107,0.12); color:var(--green); padding:3px 10px; border-radius:999px; font-weight:700;">✨ Smart Career Matcher Active</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h3 style="font-size:1.1rem; font-weight:800; margin:0 0 2px 0;">🎯 My Placement & Work Preferences</h3>
+              <p style="font-size:0.82rem; color:var(--text2); margin:0;">
+                Configure your preferred work arrangement, commute distance, and target joining date for tailored campus opportunities.
+              </p>
+            </div>
+            <button class="btn-ghost" style="padding:5px 12px; font-size:0.78rem;" onclick="openUserProfileModal('settings')">⚙️ Edit Preferences</button>
+          </div>
+
+          <div class="dash-pref-grid">
+            <div class="dash-pref-box">
+              <label>🏢 Mode of Work</label>
+              <select class="dash-pref-select" id="pref-mode">
+                <option selected>Hybrid (2-3 days office)</option>
+                <option>Remote Only</option>
+                <option>On-Site (Office Preferred)</option>
+              </select>
+            </div>
+            <div class="dash-pref-box">
+              <label>📍 Commute & Distance</label>
+              <select class="dash-pref-select" id="pref-location">
+                <option selected>Pan-India (Bangalore / NCR / Hyd)</option>
+                <option>Delhi-NCR Only</option>
+                <option>Bangalore Tech Corridor</option>
+              </select>
+            </div>
+            <div class="dash-pref-box">
+              <label>⏰ Joining Availability</label>
+              <select class="dash-pref-select" id="pref-joining">
+                <option selected>Immediate / 2026 Batch Graduate</option>
+                <option>Summer Internship 2025</option>
+                <option>6-Month Fulltime Intern</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--text2); flex-wrap:wrap; gap:8px;">
+            <span>🔍 Showing <strong style="color:var(--primary);">12 campus MNC roles</strong> matching your profile</span>
+            <a href="javascript:void(0)" style="color:var(--text3); font-weight:600; text-decoration:none;" onclick="alert('Filters reset to default.')">Reset Filters</a>
+          </div>
+        </div>
+
+        <!-- 5. Recommended Industry Challenges -->
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:800; margin:0;">🎯 Recommended Industry Challenges</h3>
+              <p style="font-size:0.82rem; color:var(--text2); margin:0;">Curated for your target MNC placements.</p>
+            </div>
+            <button class="btn-ghost small" onclick="showSection('arena')">View Arena (50+) →</button>
+          </div>
+
+          <div class="grid-3" id="home-problems-list">
+            <!-- Challenge 1 -->
+            <div class="problem-card" style="background:var(--card); margin:0;">
+              <div class="company-tag">Amazon</div>
+              <h3 class="problem-title">Design a Distributed Rate Limiter</h3>
+              <div class="problem-meta">
+                <span style="color:var(--red);">🎯 Hard</span>
+                <span>⏱️ 45 mins</span>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">Redis</span>
+                <span class="tech-tag">Go</span>
+                <span class="tech-tag">AWS</span>
+              </div>
+              <div class="problem-actions">
+                <span class="xp-reward">+500 XP</span>
+                <button class="btn-primary small" onclick="openModal(0)">⚡ Solve</button>
               </div>
             </div>
-            <div class="video-body">
-              <h4 class="video-title">Architecting Distributed Rate Limiters in Go</h4>
-              <div class="video-speaker">👨‍💼 Rohit Sen • Principal Systems Architect @ Amazon AWS</div>
-              <div class="video-meta">
-                <span>⭐ 4.9 (1,420 students)</span>
-                <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openVideoModal(0)">Watch Lecture ▶</button>
+
+            <!-- Challenge 2 -->
+            <div class="problem-card" style="background:var(--card); margin:0;">
+              <div class="company-tag">Google</div>
+              <h3 class="problem-title">Optimize Search API Load Time</h3>
+              <div class="problem-meta">
+                <span style="color:var(--orange);">🎯 Medium</span>
+                <span>⏱️ 45 mins</span>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">API</span>
+                <span class="tech-tag">Node.js</span>
+              </div>
+              <div class="problem-actions">
+                <span class="xp-reward">+300 XP</span>
+                <button class="btn-primary small" onclick="openModal(1)">⚡ Solve</button>
+              </div>
+            </div>
+
+            <!-- Challenge 3 -->
+            <div class="problem-card" style="background:var(--card); margin:0;">
+              <div class="company-tag">Uber</div>
+              <h3 class="problem-title">Real-time Driver Telemetry Engine</h3>
+              <div class="problem-meta">
+                <span style="color:var(--red);">🎯 Hard</span>
+                <span>⏱️ 45 mins</span>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">WebSockets</span>
+                <span class="tech-tag">Go</span>
+              </div>
+              <div class="problem-actions">
+                <span class="xp-reward">+550 XP</span>
+                <button class="btn-primary small" onclick="openModal(4)">⚡ Solve</button>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Featured Video 2 -->
-          <div class="video-card">
-            <div class="video-thumb" onclick="openVideoModal(1)">
-              <div class="video-thumb-inner">
-                <span class="video-mnc-badge">🔴 Netflix</span>
-                <div class="video-play-btn">▶</div>
-                <span class="video-duration-badge">34:00</span>
+        <!-- 6. Featured MNC Video Lectures -->
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:800; margin:0;">🎬 Video Lectures Uploaded by MNCs</h3>
+              <p style="font-size:0.82rem; color:var(--text2); margin:0;">Taught by Principal Engineers & Staff Architects.</p>
+            </div>
+            <button class="btn-ghost small" onclick="showSection('masterclasses')">All Masterclasses →</button>
+          </div>
+
+          <div class="grid-2">
+            <!-- Video 1 -->
+            <div class="video-card">
+              <div class="video-thumb" onclick="openVideoModal(0)">
+                <div class="video-thumb-inner">
+                  <span class="video-mnc-badge">🟠 Amazon AWS</span>
+                  <div class="video-play-btn">▶</div>
+                  <span class="video-duration-badge">28:00</span>
+                </div>
+              </div>
+              <div class="video-body" style="padding:1rem;">
+                <h4 class="video-title" style="font-size:0.95rem;">Architecting Distributed Rate Limiters in Go</h4>
+                <div class="video-speaker" style="font-size:0.78rem;">👨‍💼 Rohit Sen • Principal Systems Architect @ AWS</div>
+                <div class="video-meta" style="margin-top:8px;">
+                  <span style="font-size:0.78rem;">⭐ 4.9 (1,420 students)</span>
+                  <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem;" onclick="openVideoModal(0)">Watch ▶</button>
+                </div>
               </div>
             </div>
-            <div class="video-body">
-              <h4 class="video-title">Client-Side Video Buffering & Chunk Streaming Protocols</h4>
-              <div class="video-speaker">👩‍💼 Sarah Chen • Staff Frontend Infrastructure Architect @ Netflix</div>
-              <div class="video-meta">
-                <span>⭐ 5.0 (980 students)</span>
-                <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openVideoModal(1)">Watch Lecture ▶</button>
+
+            <!-- Video 2 -->
+            <div class="video-card">
+              <div class="video-thumb" onclick="openVideoModal(1)">
+                <div class="video-thumb-inner">
+                  <span class="video-mnc-badge">🔴 Netflix</span>
+                  <div class="video-play-btn">▶</div>
+                  <span class="video-duration-badge">34:00</span>
+                </div>
+              </div>
+              <div class="video-body" style="padding:1rem;">
+                <h4 class="video-title" style="font-size:0.95rem;">Client-Side Video Buffering Protocols</h4>
+                <div class="video-speaker" style="font-size:0.78rem;">👩‍💼 Sarah Chen • Staff Architect @ Netflix</div>
+                <div class="video-meta" style="margin-top:8px;">
+                  <span style="font-size:0.78rem;">⭐ 5.0 (980 students)</span>
+                  <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem;" onclick="openVideoModal(1)">Watch ▶</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ACTIVE MNC HIRING DRIVES WITH DEADLINES -->
-      <div style="margin-bottom: 3rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;">📢 Active MNC Hiring Drives & Deadlines</h3>
-            <p style="color: var(--text2); font-size: 0.9rem; margin: 0;">Solve mandatory architecture challenges before the deadline countdown expires to get shortlisted.</p>
+        <!-- 7. Active MNC Hiring Drives -->
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:800; margin:0;">📢 Active MNC Hiring Drives</h3>
+              <p style="font-size:0.82rem; color:var(--text2); margin:0;">Solve mandatory challenges before deadline countdown expires.</p>
+            </div>
+            <button class="btn-ghost small" onclick="showSection('hr-view')">Recruiter Ranks →</button>
           </div>
-          <button class="btn-ghost small" onclick="showSection('hr-view')">View Recruiter Leaderboards →</button>
-        </div>
 
-        <div class="grid-2">
-          <!-- Drive Notice 1 -->
-          <div class="hr-notice-card" style="margin-bottom:0;">
-            <div class="hr-notice-header">
-              <div>
-                <span style="font-size:0.75rem; background:var(--primary-glow); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">🟠 Amazon AWS</span>
-                <h4 style="margin: 0.5rem 0 0.2rem 0; font-size: 1.1rem; color: var(--text);">Amazon SDE-1 Cloud Systems Hiring Drive</h4>
-                <p style="margin:0; font-size:0.85rem; color:var(--primary); font-weight:600;">₹45 LPA • 2025 & 2026 Batches</p>
+          <div class="grid-2">
+            <!-- Notice 1 -->
+            <div class="hr-notice-card" style="margin-bottom:0;">
+              <div class="hr-notice-header">
+                <div>
+                  <span style="font-size:0.72rem; background:var(--primary-glow); color:var(--primary); padding:2px 8px; border-radius:999px; font-weight:700;">🟠 Amazon AWS</span>
+                  <h4 style="margin:0.4rem 0 0.1rem 0; font-size:0.95rem;">Amazon SDE-1 Cloud Drive</h4>
+                  <p style="margin:0; font-size:0.8rem; color:var(--primary); font-weight:600;">₹45 LPA • 2026 Batch</p>
+                </div>
+                <span class="hr-notice-deadline-badge green" style="font-size:0.72rem;">⏳ 17 Days Left</span>
               </div>
-              <span class="hr-notice-deadline-badge green">⏳ 17 Days Left</span>
-            </div>
-            <p style="font-size:0.85rem; color:var(--text2); margin:0.6rem 0;">Mandatory: <strong>Design a Distributed Rate Limiter</strong> (>90% test cases required).</p>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:0.8rem; margin-top:auto;">
-              <span style="font-size:0.8rem; color:var(--text3);">482 Candidates Submitted</span>
-              <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem;" onclick="openModal(0)">⚡ Solve Challenge Now</button>
-            </div>
-          </div>
-
-          <!-- Drive Notice 2 -->
-          <div class="hr-notice-card" style="margin-bottom:0;">
-            <div class="hr-notice-header">
-              <div>
-                <span style="font-size:0.75rem; background:rgba(255,75,75,0.15); color:var(--red); padding:3px 10px; border-radius:999px; font-weight:700;">🔴 Netflix Infra</span>
-                <h4 style="margin: 0.5rem 0 0.2rem 0; font-size: 1.1rem; color: var(--text);">Netflix UI Architecture Fellowship</h4>
-                <p style="margin:0; font-size:0.85rem; color:var(--primary); font-weight:600;">$120,000 / ₹60 LPA • Remote</p>
+              <p style="font-size:0.8rem; color:var(--text2); margin:0.5rem 0;">Mandatory: <strong>Distributed Rate Limiter</strong> challenge.</p>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:0.6rem; margin-top:auto;">
+                <span style="font-size:0.75rem; color:var(--text3);">482 Candidates</span>
+                <button class="btn-primary" style="padding:5px 12px; font-size:0.75rem;" onclick="openModal(0)">⚡ Solve</button>
               </div>
-              <span class="hr-notice-deadline-badge" style="background:rgba(255,75,75,0.15); color:#ff4b4b;">🔴 6 Days Left</span>
             </div>
-            <p style="font-size:0.85rem; color:var(--text2); margin:0.6rem 0;">Mandatory: <strong>Implement Video Streaming Buffering</strong> (Client MSE buffer logic).</p>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:0.8rem; margin-top:auto;">
-              <span style="font-size:0.8rem; color:var(--text3);">340 Candidates Submitted</span>
-              <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem;" onclick="openModal(3)">⚡ Solve Challenge Now</button>
+
+            <!-- Notice 2 -->
+            <div class="hr-notice-card" style="margin-bottom:0;">
+              <div class="hr-notice-header">
+                <div>
+                  <span style="font-size:0.72rem; background:rgba(255,75,75,0.15); color:var(--red); padding:2px 8px; border-radius:999px; font-weight:700;">🔴 Netflix Infra</span>
+                  <h4 style="margin:0.4rem 0 0.1rem 0; font-size:0.95rem;">Netflix Architecture Fellowship</h4>
+                  <p style="margin:0; font-size:0.8rem; color:var(--primary); font-weight:600;">$120,000 / ₹60 LPA</p>
+                </div>
+                <span class="hr-notice-deadline-badge" style="background:rgba(255,75,75,0.15); color:#ff4b4b; font-size:0.72rem;">🔴 6 Days Left</span>
+              </div>
+              <p style="font-size:0.8rem; color:var(--text2); margin:0.5rem 0;">Mandatory: <strong>Client MSE Buffer</strong> challenge.</p>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:0.6rem; margin-top:auto;">
+                <span style="font-size:0.75rem; color:var(--text3);">340 Candidates</span>
+                <button class="btn-primary" style="padding:5px 12px; font-size:0.75rem;" onclick="openModal(3)">⚡ Solve</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
-      <!-- QUICK SHORTCUT TILES -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 2rem;">
-        <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('arena')">
-          <div style="font-size: 2rem; margin-bottom: 0.6rem;">⚡</div>
-          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Engineering Arena</h4>
-          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">Solve 50+ live production backlogs.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">Open Arena →</span>
+      <!-- ==================== RIGHT COLUMN: SKILL GAPS, TRENDING & EVENTS ==================== -->
+      <aside class="home-right-col">
+        <!-- 1. Skill Gap Analysis Card -->
+        <div class="right-card">
+          <div class="right-card-title">
+            <span>📊</span> Skill Gap Analysis
+          </div>
+          
+          <div class="skill-meter-row">
+            <div class="skill-meter-meta">
+              <span>Data Structures</span>
+              <span style="color:var(--green); font-weight:700;">85%</span>
+            </div>
+            <div class="skill-meter-track">
+              <div class="skill-meter-fill" style="width:85%; background:var(--green);"></div>
+            </div>
+          </div>
+
+          <div class="skill-meter-row">
+            <div class="skill-meter-meta">
+              <span>System Design</span>
+              <span style="color:var(--orange); font-weight:700;">75%</span>
+            </div>
+            <div class="skill-meter-track">
+              <div class="skill-meter-fill" style="width:75%; background:var(--orange);"></div>
+            </div>
+          </div>
+
+          <div class="skill-meter-row">
+            <div class="skill-meter-meta">
+              <span>Cloud & Distributed</span>
+              <span style="color:var(--primary); font-weight:700;">90%</span>
+            </div>
+            <div class="skill-meter-track">
+              <div class="skill-meter-fill" style="width:90%; background:var(--primary);"></div>
+            </div>
+          </div>
+
+          <div class="skill-meter-row">
+            <div class="skill-meter-meta">
+              <span>ML / AI Engineering</span>
+              <span style="color:#f43f5e; font-weight:700;">65%</span>
+            </div>
+            <div class="skill-meter-track">
+              <div class="skill-meter-fill" style="width:65%; background:#f43f5e;"></div>
+            </div>
+          </div>
+
+          <button class="btn-ghost" style="width:100%; font-size:0.8rem; margin-top:8px; justify-content:center; padding:7px 10px;" onclick="showSection('arena')">
+            ⚡ Improve Skills in Arena
+          </button>
         </div>
 
-        <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('masterclasses')">
-          <div style="font-size: 2rem; margin-bottom: 0.6rem;">🎬</div>
-          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Video Masterclasses</h4>
-          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">Learn from senior MNC leads.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">Watch Videos →</span>
+        <!-- 2. Trending MNC Skills Card -->
+        <div class="right-card">
+          <div class="right-card-title">
+            <span>🔥</span> Trending MNC Skills
+          </div>
+          <div class="skill-chip-wrap">
+            <span class="skill-chip" onclick="filterChallengesBySkill('GenAI')">GenAI</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('Kubernetes')">Kubernetes</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('Rust')">Rust</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('GraphQL')">GraphQL</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('Redis')">Redis</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('TypeScript')">TypeScript</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('Go')">Go</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('Docker')">Docker</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('WebSockets')">WebSockets</span>
+            <span class="skill-chip" onclick="filterChallengesBySkill('MLOps')">MLOps</span>
+          </div>
         </div>
 
-        <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="toggleChat()">
-          <div style="font-size: 2rem; margin-bottom: 0.6rem;">👥</div>
-          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Peer Lounge & Mocks</h4>
-          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">Study groups & mock interviews.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">Open Lounge →</span>
+        <!-- 3. Upcoming Events & Deadlines Card -->
+        <div class="right-card">
+          <div class="right-card-title">
+            <span>📅</span> Upcoming Events & Drives
+          </div>
+          
+          <div class="event-item">
+            <div class="event-logo-badge" style="background:#e8f0fe; color:#1a73e8;">G</div>
+            <div>
+              <div style="font-size:0.85rem; font-weight:700;">Google Info Session</div>
+              <div style="font-size:0.75rem; color:var(--text3);">Sep 10, 2026 • 2:00 PM</div>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="event-logo-badge" style="background:#e0f2fe; color:#0284c7;">M</div>
+            <div>
+              <div style="font-size:0.85rem; font-weight:700;">Microsoft Hiring Drive</div>
+              <div style="font-size:0.75rem; color:var(--text3);">Sep 15, 2026 • 10:00 AM</div>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="event-logo-badge" style="background:#fff3e0; color:#ea580c;">A</div>
+            <div>
+              <div style="font-size:0.85rem; font-weight:700;">Amazon AWS Coding Round</div>
+              <div style="font-size:0.75rem; color:var(--text3);">Sep 25, 2026 • Deadline</div>
+            </div>
+          </div>
         </div>
 
-        <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('hr-view')">
-          <div style="font-size: 2rem; margin-bottom: 0.6rem;">💼</div>
-          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Recruiter Leaderboard</h4>
-          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">MNCs hiring from live rank list.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">View HR Portal →</span>
+        <!-- 4. Peer Lounge Live Card -->
+        <div class="right-card" style="background:linear-gradient(135deg, rgba(108,99,255,0.06), rgba(0,168,107,0.04));">
+          <div class="right-card-title">
+            <span>👥</span> Peer Lounge Live
+          </div>
+          <p style="font-size:0.82rem; color:var(--text2); margin:0 0 10px 0;">
+            <strong style="color:var(--green);">42 Peers Online</strong> from NIT Kurukshetra & IIT Delhi practicing live system design mocks.
+          </p>
+          <button class="btn-primary" style="width:100%; justify-content:center; font-size:0.8rem; padding:7px 10px;" onclick="toggleChat()">
+            💬 Join Peer Room
+          </button>
         </div>
-      </div>
+      </aside>
 
     </div>
   </section>

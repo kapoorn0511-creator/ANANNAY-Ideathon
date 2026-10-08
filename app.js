@@ -1689,8 +1689,32 @@ function saveUserSettings() {
   if (navName) navName.textContent = `${newName} (${newCollege})`;
   const homeName = document.getElementById('home-welcome-name');
   if (homeName) homeName.textContent = newName;
+  const leftName = document.getElementById('dash-left-name');
+  if (leftName) leftName.textContent = newName;
   alert('💾 Profile and account settings saved successfully!');
   document.getElementById('user-profile-modal')?.classList.remove('active');
+}
+
+function handleHomeSearch(val) {
+  const query = (val || '').toLowerCase().trim();
+  const cards = document.querySelectorAll('#home-problems-list .problem-card');
+  cards.forEach(c => {
+    if (!query) {
+      c.style.display = 'block';
+    } else {
+      const text = c.textContent.toLowerCase();
+      c.style.display = text.includes(query) ? 'block' : 'none';
+    }
+  });
+}
+
+function filterChallengesBySkill(skill) {
+  const input = document.getElementById('dash-home-search');
+  if (input) {
+    input.value = skill;
+    handleHomeSearch(skill);
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 // Ensure init covers basic setup
