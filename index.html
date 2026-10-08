@@ -173,20 +173,35 @@
     <div style="max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem;">
       
       <!-- WELCOME HERO BANNER -->
-      <div style="background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,168,107,0.1)); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2.5rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-        <div style="max-width: 650px;">
-          <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 0.8rem;">
-            🔥 14-Day Streak Active • Top 3% at NIT Kurukshetra
+      <div style="background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,168,107,0.1)); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2.2rem 2.5rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        
+        <!-- TOP LEFT: CIRCULAR PFP + GREETING -->
+        <div style="display: flex; align-items: center; gap: 1.25rem; max-width: 680px;">
+          <!-- Small Circle PFP (Standard Web Style) -->
+          <div class="home-pfp-container" onclick="openUserProfileModal('overview')" title="Click to view full profile & ATS resume">
+            <div class="home-pfp-circle">
+              👨‍💻
+            </div>
+            <span class="home-pfp-online-badge" title="Active • NIT Kurukshetra"></span>
+            <span class="home-pfp-tooltip">👤 Profile & Resume</span>
           </div>
-          <h2 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -0.5px;">
-            Welcome back, <span id="home-welcome-name">Anannay Kapoor</span>! 👋
-          </h2>
-          <p style="color: var(--text2); font-size: 1.05rem; line-height: 1.6; margin: 0;">
-            Ready to build real MNC architecture? Your verified profile is currently <strong>81.6% ATS-ready</strong> with 2 active recruiter profile visits today.
-          </p>
+
+          <!-- User Greeting Details -->
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); padding: 3px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem;">
+              🔥 14-Day Streak Active • NIT Kurukshetra
+            </div>
+            <h2 style="font-size: 2.1rem; font-weight: 900; margin: 0 0 0.35rem 0; letter-spacing: -0.5px; line-height: 1.2;">
+              Welcome back, <span id="home-welcome-name">Anannay Kapoor</span>! 👋
+            </h2>
+            <p style="color: var(--text2); font-size: 0.98rem; line-height: 1.5; margin: 0;">
+              Ready to build real MNC architecture? Your verified profile is currently <strong>94% ATS-ready</strong> with 2 active recruiter visits today.
+            </p>
+          </div>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn-primary" onclick="openUserProfileModal('overview')">👤 My Profile</button>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
           <button class="btn-primary" style="background:#e056fd;" onclick="openUserProfileModal('resume')">📄 ATS Resume (94%)</button>
           <button class="btn-ghost" onclick="openUserProfileModal('settings')">⚙️ Settings</button>
           <button class="btn-ghost" onclick="showSection('arena')">⚡ Arena</button>
