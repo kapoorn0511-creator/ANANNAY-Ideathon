@@ -450,17 +450,16 @@ function toggleAIModal() {
 }
 
 async function generateRoadmap() {
-  console.log("Generating roadmap... fetching from Gemini API");
+  console.log("Generating roadmap...");
   const apiKey = document.getElementById('gemini-api-key').value.trim();
   const topic = document.getElementById('roadmap-topic').value.trim();
   const outputDiv = document.getElementById('ai-roadmap-output');
   const btn = document.getElementById('ai-generate-btn');
 
-  if (!apiKey) return alert("Please enter your free Gemini API Key.");
   if (!topic) return alert("Please enter a role or topic (e.g. 'Frontend at Netflix').");
 
   // Save the key locally so the user doesn't have to retype it
-  localStorage.setItem('gemini_api_key', apiKey);
+  if (apiKey) localStorage.setItem('gemini_api_key', apiKey);
 
   // UI Loading State
   btn.innerText = "Generating...";
@@ -472,6 +471,29 @@ async function generateRoadmap() {
       <p style='color:var(--primary); font-weight: 600;'>Google Gemini is analyzing industry requirements for ${topic}...</p>
     </div>
   `;
+
+  // --- HACKATHON DEMO FALLBACK (No API Key needed) ---
+  if (!apiKey) {
+    console.log("No API key provided. Using simulated Hackathon Demo mode...");
+    setTimeout(() => {
+      outputDiv.innerHTML = `
+        <h3 style="color:var(--primary); margin-bottom:1rem;">🚀 4-Week Roadmap: ${topic} (Demo Mode)</h3>
+        <ul style="padding-left:20px; color:var(--text2);">
+          <li style="margin-bottom:10px;"><strong>Week 1: Fundamentals & System Design:</strong> Understand the core architecture. Review high-level concepts like load balancing, caching, and database scaling.</li>
+          <li style="margin-bottom:10px;"><strong>Week 2: Core Technologies:</strong> Dive deep into the specific tech stack required (e.g., Node.js, React, WebSockets). Build a mini-prototype.</li>
+          <li style="margin-bottom:10px;"><strong>Week 3: Advanced Optimization:</strong> Focus on edge cases, API rate limiting, performance tuning, and writing highly concurrent code.</li>
+          <li style="margin-bottom:10px;"><strong>Week 4: Mock Interviews & Peer Review:</strong> Use the Peer Lounge to conduct 3 mock interviews. Finalize your portfolio project.</li>
+        </ul>
+        <div style="margin-top:1.5rem; padding:10px; background:rgba(108,99,255,0.1); border-left:3px solid var(--primary); font-size:0.85rem; color:var(--text3);">
+          <em>Note: This is a simulated fallback response because no Gemini API key was entered. Enter a real API key for dynamic AI generation!</em>
+        </div>
+      `;
+      btn.innerText = "Generate";
+      btn.disabled = false;
+    }, 2500);
+    return;
+  }
+  // ----------------------------------------------------
 
   // Construct the prompt
   const promptText = `Act as an expert career coach and senior software engineer. Create a highly practical, 4-week preparation roadmap for a student aiming for this goal: ${topic}. 

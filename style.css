@@ -465,7 +465,7 @@ select:focus { outline: none; border-color: var(--primary); }
 .ai-fab {
   position: fixed !important;
   bottom: 25px !important;
-  left: 25px !important;
+  right: 25px !important;
   width: 65px !important;
   height: 65px !important;
   border-radius: 50% !important;
