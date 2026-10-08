@@ -460,3 +460,27 @@ select:focus { outline: none; border-color: var(--primary); }
 .study-group-meta { font-size: 0.85rem; color: var(--text3); display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .btn-join { background: var(--primary-glow); color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 700; width: 100%; transition: var(--transition); }
 .btn-join:hover { background: var(--primary); color: white; }
+
+/* AI FAB */
+.ai-fab {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #bb66ff, var(--primary));
+  color: white;
+  border: none;
+  box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.ai-fab:hover {
+  transform: scale(1.15) rotate(10deg);
+}

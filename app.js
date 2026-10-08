@@ -450,6 +450,7 @@ function toggleAIModal() {
 }
 
 async function generateRoadmap() {
+  console.log("Generating roadmap... fetching from Gemini API");
   const apiKey = document.getElementById('gemini-api-key').value.trim();
   const topic = document.getElementById('roadmap-topic').value.trim();
   const outputDiv = document.getElementById('ai-roadmap-output');
@@ -475,10 +476,10 @@ async function generateRoadmap() {
   // Construct the prompt
   const promptText = `Act as an expert career coach and senior software engineer. Create a highly practical, 4-week preparation roadmap for a student aiming for this goal: ${topic}. 
   Focus on real-world skills and practical application. Avoid generic outdated theories. 
-  Format the response as clean HTML with <h3>, <ul>, <li>, and <strong> tags. Do not use markdown backticks in your response. Keep it concise, engaging, and highly actionable.`;
+  Format the response STRICTLY as HTML with <h3>, <ul>, <li>, and <strong> tags. Do NOT wrap the response in markdown blocks like \`\`\`html. Keep it concise, engaging, and highly actionable.`;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -487,6 +488,7 @@ async function generateRoadmap() {
     });
 
     const data = await response.json();
+    console.log("API Response received:", data);
     
     if (data.error) {
       throw new Error(data.error.message);
@@ -495,14 +497,15 @@ async function generateRoadmap() {
     let htmlContent = data.candidates[0].content.parts[0].text;
     
     // Clean up if the model includes markdown wrapper
-    htmlContent = htmlContent.replace(/```html/g, '').replace(/```/g, '');
+    htmlContent = htmlContent.replace(/```html/gi, '').replace(/```/g, '');
 
     outputDiv.innerHTML = htmlContent;
   } catch (err) {
+    console.error("Gemini API Error:", err);
     outputDiv.innerHTML = `
       <div style="background: rgba(255, 71, 87, 0.1); border-left: 4px solid var(--red); padding: 15px; color: var(--text);">
         <strong style="color: var(--red);">API Error:</strong> ${err.message}
-        <br><br><span style="font-size: 0.85rem; color: var(--text3);">Make sure your API key is correct and active.</span>
+        <br><br><span style="font-size: 0.85rem; color: var(--text3);">Make sure your API key is correct and active. Check browser console for details.</span>
       </div>
     `;
   } finally {

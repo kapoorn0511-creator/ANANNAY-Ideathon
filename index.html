@@ -31,9 +31,6 @@
       <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
       <a href="#arena" class="nav-link" onclick="showSection('arena')">Arena</a>
       <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR View</a>
-      <a href="javascript:void(0)" class="nav-link ai-toggle-btn" style="display:flex; align-items:center; gap:6px; color: #bb66ff; font-weight: 800;" onclick="toggleAIModal()">
-        ✨ AI Roadmap
-      </a>
       <a href="javascript:void(0)" class="nav-link" style="display:flex; align-items:center; gap:6px; position:relative;" onclick="toggleChat()">
         Peer Lounge <span class="online-dot" style="position:static;"></span>
         <span class="unread-badge" id="chat-badge" style="top:-8px; right:-12px; left:auto; width:18px; height:18px; font-size:0.7rem; box-shadow:0 0 0 2px var(--card);">1</span>
@@ -451,8 +448,14 @@
       <div id="ai-roadmap-output" style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:1.5rem; max-height:400px; overflow-y:auto; display:none; line-height: 1.6; font-size: 0.95rem;">
         <!-- Roadmap goes here -->
       </div>
+      </div>
     </div>
   </div>
+
+  <!-- FLOATING AI BUTTON -->
+  <button class="ai-fab" onclick="toggleAIModal()" title="AI Roadmap Builder">
+    ✨
+  </button>
 
   <footer class="footer">
     <div class="footer-brand" style="display:flex; align-items:center; gap:6px;">
