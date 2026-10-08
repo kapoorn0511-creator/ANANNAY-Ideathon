@@ -436,7 +436,82 @@ function createStudyGroup() {
   }
 }
 
-// ---------- INIT ----------
+// ---------- AI ROADMAP (GEMINI API) ----------
+function toggleAIModal() {
+  const overlay = document.getElementById('ai-modal-overlay');
+  if (overlay.style.display === 'flex') {
+    overlay.style.display = 'none';
+  } else {
+    overlay.style.display = 'flex';
+    // Load saved API key if exists
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey) document.getElementById('gemini-api-key').value = savedKey;
+  }
+}
+
+async function generateRoadmap() {
+  const apiKey = document.getElementById('gemini-api-key').value.trim();
+  const topic = document.getElementById('roadmap-topic').value.trim();
+  const outputDiv = document.getElementById('ai-roadmap-output');
+  const btn = document.getElementById('ai-generate-btn');
+
+  if (!apiKey) return alert("Please enter your free Gemini API Key.");
+  if (!topic) return alert("Please enter a role or topic (e.g. 'Frontend at Netflix').");
+
+  // Save the key locally so the user doesn't have to retype it
+  localStorage.setItem('gemini_api_key', apiKey);
+
+  // UI Loading State
+  btn.innerText = "Generating...";
+  btn.disabled = true;
+  outputDiv.style.display = 'block';
+  outputDiv.innerHTML = `
+    <div style='text-align:center; padding: 2rem;'>
+      <div class='typing-dots' style='justify-content:center; margin-bottom: 1rem;'><span></span><span></span><span></span></div>
+      <p style='color:var(--primary); font-weight: 600;'>Google Gemini is analyzing industry requirements for ${topic}...</p>
+    </div>
+  `;
+
+  // Construct the prompt
+  const promptText = `Act as an expert career coach and senior software engineer. Create a highly practical, 4-week preparation roadmap for a student aiming for this goal: ${topic}. 
+  Focus on real-world skills and practical application. Avoid generic outdated theories. 
+  Format the response as clean HTML with <h3>, <ul>, <li>, and <strong> tags. Do not use markdown backticks in your response. Keep it concise, engaging, and highly actionable.`;
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: promptText }] }]
+      })
+    });
+
+    const data = await response.json();
+    
+    if (data.error) {
+      throw new Error(data.error.message);
+    }
+
+    let htmlContent = data.candidates[0].content.parts[0].text;
+    
+    // Clean up if the model includes markdown wrapper
+    htmlContent = htmlContent.replace(/```html/g, '').replace(/```/g, '');
+
+    outputDiv.innerHTML = htmlContent;
+  } catch (err) {
+    outputDiv.innerHTML = `
+      <div style="background: rgba(255, 71, 87, 0.1); border-left: 4px solid var(--red); padding: 15px; color: var(--text);">
+        <strong style="color: var(--red);">API Error:</strong> ${err.message}
+        <br><br><span style="font-size: 0.85rem; color: var(--text3);">Make sure your API key is correct and active.</span>
+      </div>
+    `;
+  } finally {
+    btn.innerText = "Generate";
+    btn.disabled = false;
+  }
+}
+
+// Ensure init covers basic setup
 document.addEventListener('DOMContentLoaded', () => {
   showSection('home');
   renderProblems('all');
