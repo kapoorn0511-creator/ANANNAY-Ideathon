@@ -1,5 +1,5 @@
 // ============================================================
-// IndustrySync — app.js (Enhanced)
+// SkillBridge — app.js (Enhanced)
 // ============================================================
 
 // ---------- NAV ----------
@@ -149,7 +149,7 @@ function switchCompany(companyKey, btn) {
         <td>${student.college}</td>
         <td><span class="tech-tag" style="background:var(--green);color:white;border:none;">${student.match}</span></td>
         <td class="xp-reward">${student.xp}</td>
-        <td><button class="btn-hire" onclick="alert('Interview invite sent to ${student.name} via IndustrySync platform!')">Hire / Interview</button></td>
+        <td><button class="btn-hire" onclick="alert('Interview invite sent to ${student.name} via SkillBridge platform!')">Hire / Interview</button></td>
       </tr>
     `;
   });
@@ -241,7 +241,7 @@ function mockLogin() {
   // Go to Dashboard
   showSection('dashboard');
   
-  alert("Welcome to IndustrySync! You are now logged in as Arjun S.");
+  alert("Welcome to SkillBridge! You are now logged in as Arjun S.");
 }
 
 // ---------- INIT ----------

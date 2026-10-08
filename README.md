@@ -1,4 +1,4 @@
-# 🌐 IndustrySync — The Industry-Academia Bridge
+# 🌐 SkillBridge — The Industry-Academia Bridge
 
 > **Stop grinding outdated LeetCode problems. Solve real-world tech challenges posted directly by top MNCs, earn XP, and get hired.**
 
@@ -11,7 +11,7 @@
 
 There is a massive gap between outdated university curriculums and the actual skills required by top MNCs. Students lack exposure to real-world engineering problems, and companies waste time training freshers.
 
-**IndustrySync is a platform where:**
+**SkillBridge is a platform where:**
 1. **Top MNCs (MAANG, etc.)** upload their specific tech stacks, tutorials, and **real-world problems** they are currently facing.
 2. **Students** solve these problems. (Rule: Use AI, use your brain, it doesn't matter — just solve the problem, because that's how the real world works).
 3. **Gamification:** Students earn XP points and maintain daily streaks.

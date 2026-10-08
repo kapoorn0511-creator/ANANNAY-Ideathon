@@ -3,17 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IndustrySync — Real-World Tech Challenges</title>
+  <title>SkillBridge — Real-World Tech Challenges</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
   <!-- HEADER -->
   <header class="navbar">
-    <div class="nav-brand" onclick="showSection('home')" style="cursor:pointer;">
-      <span class="shield-icon">🌐</span>
-      <span class="brand-name">IndustrySync</span>
-      <span class="badge">Beta</span>
+    <div class="nav-brand" onclick="showSection('home')" style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#logo-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <defs>
+          <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6c63ff" />
+            <stop offset="100%" stop-color="#00a86b" />
+          </linearGradient>
+        </defs>
+        <path d="M2 20h20"></path>
+        <path d="M5 20v-6a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v6"></path>
+        <path d="M9 20v-3"></path>
+        <path d="M15 20v-3"></path>
+      </svg>
+      <span class="brand-name" style="font-size:1.4rem; font-weight:900; letter-spacing:-0.5px; background:linear-gradient(90deg, var(--primary), var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">SkillBridge</span>
     </div>
     
     <!-- Internal Links (Hidden before Login) -->
@@ -50,7 +60,7 @@
         </h1>
         <p class="hero-sub">
           Universities teach 20-year-old syllabus. LeetCode gives you puzzles no one uses at work.
-          <strong>IndustrySync connects you directly with top MNCs.</strong> Learn their real tech stack, solve their current problems, earn XP, and get hired directly.
+          <strong>SkillBridge connects you directly with top MNCs.</strong> Learn their real tech stack, solve their current problems, earn XP, and get hired directly.
         </p>
         <div class="hero-cta-row">
           <button class="btn-primary large" onclick="openAuth('signup')">🚀 Start Solving Real Problems</button>
@@ -87,7 +97,7 @@
           We believe every student deserves a fair shot at top MNCs, not based on their ability to memorize 20-year-old algorithms, but on their ability to solve <strong>actual engineering problems</strong>. 
         </p>
         <p class="vision-text">
-          The industry spends 6 months training freshers because universities teach outdated curriculums. <strong>IndustrySync is bridging this gap.</strong> We are ending the era of theoretical exams and ushering in the era of practical execution. We collaborate directly with tech giants so you can prove your worth through code that matters.
+          The industry spends 6 months training freshers because universities teach outdated curriculums. <strong>SkillBridge is bridging this gap.</strong> We are ending the era of theoretical exams and ushering in the era of practical execution. We collaborate directly with tech giants so you can prove your worth through code that matters.
         </p>
       </div>
     </div>
@@ -127,7 +137,7 @@
               <th>Feature</th>
               <th>LeetCode / HackerRank</th>
               <th>University</th>
-              <th class="highlight-col">IndustrySync ✅</th>
+              <th class="highlight-col">SkillBridge ✅</th>
             </tr>
           </thead>
           <tbody>
@@ -168,7 +178,7 @@
 
     <!-- HOW IT WORKS -->
     <div class="how-section">
-      <h2 class="section-title">How IndustrySync Works</h2>
+      <h2 class="section-title">How SkillBridge Works</h2>
       <div class="steps-row">
         <div class="step-card">
           <div class="step-num">01</div>
@@ -417,7 +427,12 @@
   </div>
 
   <footer class="footer">
-    <div class="footer-brand">🌐 IndustrySync</div>
+    <div class="footer-brand" style="display:flex; align-items:center; gap:6px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6c63ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 20h20"></path><path d="M5 20v-6a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v6"></path><path d="M9 20v-3"></path><path d="M15 20v-3"></path>
+      </svg>
+      SkillBridge
+    </div>
     <div class="footer-text">Bridging the Gap between Universities & Industry | ANANNAY Ideathon 2025</div>
     <a href="https://github.com/kapoorn0511-creator/ANANNAY-Ideathon" target="_blank" class="footer-gh">GitHub →</a>
   </footer>
