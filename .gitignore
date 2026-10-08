@@ -1,0 +1,27 @@
+# .gitignore for PlacementShield
+
+# Environment files — NEVER commit real API keys
+.env
+.env.local
+.env.production
+
+# Node modules (if added later)
+node_modules/
+npm-debug.log*
+
+# Build output (if build step added later)
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/settings.json
+*.suo
+*.user
+
+# Logs
+*.log
