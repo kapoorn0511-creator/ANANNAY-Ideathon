@@ -1,6 +1,7 @@
 # 🌐 SkillBridge — The Industry-Academia Bridge
 
-**Live Demo:** [Open `index.html` directly in browser]  
+**🚀 Live Deployed Application:** https://kapoorn0511-creator.github.io/ANANNAY-Ideathon/  
+**💻 GitHub Repository:** https://github.com/kapoorn0511-creator/ANANNAY-Ideathon  
 **Built for:** ANANNAY Ideathon 2026 | PS 4 — Open Innovation (Student Pain Points)
 
 > **SkillBridge is a platform that bridges the 20-year gap between university curriculums and modern MNC requirements, while actively combating student isolation and mental burnout.**
