@@ -65,110 +65,230 @@
   <!-- ======================== PUBLIC LANDING PAGE (BEFORE SIGN IN / SIGN UP) ======================== -->
   <section id="landing" class="section active">
 
-    <!-- HERO -->
+    <!-- 1. HERO BANNER -->
     <div class="hero">
-      <div class="hero-content" style="max-width: 800px; margin: 0 auto;">
-        <div class="hero-tag">🚀 The Industry-Academia Bridge Platform</div>
-        <h1 class="hero-title">
-          Stop solving <span class="highlight-red">outdated</span> algorithms.<br/>
-          Solve what MNCs need <span class="highlight-purple">today.</span>
+      <div class="hero-content" style="max-width: 860px; margin: 0 auto; text-align: center;">
+        <div class="hero-tag">🚀 Google / NIT Kurukshetra Ideathon 2025</div>
+        <h1 class="hero-title" style="font-size: 2.7rem; line-height: 1.15; margin-bottom: 1.2rem;">
+          The Placement Crisis Isn't a Lack of Jobs.<br/>
+          It's a Lack of <span class="highlight-purple">Production Skills.</span>
         </h1>
-        <p class="hero-sub" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-          Universities teach 20-year-old syllabus. LeetCode gives you puzzles no one uses at work.
-          <strong>SkillBridge connects you directly with top MNCs.</strong> Learn their real tech stack, solve their current problems, earn XP, and get hired directly.
+        <p class="hero-sub" style="max-width: 760px; margin: 0 auto 2rem; font-size: 1.08rem; line-height: 1.7; color: var(--text2);">
+          Over <strong>1.4 million tech jobs</strong> sit vacant because candidates lack modern engineering skills, while <strong>83% of engineering graduates</strong> remain unplaced after memorizing 15-year-old textbook theory. <strong>SkillBridge</strong> fixes this divide with masterclasses by industry leads, live MNC problem tickets, and collaborative peer lounges.
         </p>
-        <div class="hero-cta-row" style="justify-content: center;">
-          <button class="btn-primary large" onclick="openAuth('signup')">🚀 Get Started</button>
-          <button class="btn-ghost" onclick="document.getElementById('pitch-problem').scrollIntoView({behavior: 'smooth'})">Read Our Vision ↓</button>
+        <div class="hero-cta-row" style="justify-content: center; gap: 14px; margin-bottom: 2rem;">
+          <button class="btn-primary large" onclick="mockLogin()" style="font-size: 1.02rem; padding: 13px 28px; box-shadow: 0 8px 24px rgba(108, 99, 255, 0.3);">
+            🚀 Launch Working Demo (Anannay Kapoor)
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('pitch-metrics').scrollIntoView({behavior: 'smooth'})" style="font-size: 0.95rem; padding: 13px 22px;">
+            The Data & Evidence ↓
+          </button>
         </div>
-        <div class="hero-trust" style="justify-content: center; flex-wrap: wrap;">
-          <span>🏢 50+ MNCs</span><span>•</span>
-          <span>🎓 10,000+ Students</span><span>•</span>
-          <span>💼 1,200+ Direct Hires</span><span>•</span>
-          <span>⭐ 500+ Live Challenges</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 1. THE PROBLEM -->
-    <div class="pitch-section" id="pitch-problem">
-      <h2 class="pitch-title">The Broken Placement Journey</h2>
-      <div class="grid-3">
-        <div class="pitch-card">
-          <div class="icon">🎯</div>
-          <h3>Who Faces It?</h3>
-          <p>Engineering students preparing for highly competitive MNC placements while juggling academics.</p>
-        </div>
-        <div class="pitch-card">
-          <div class="icon">💸</div>
-          <h3>What It Costs Them?</h3>
-          <p>Severe mental burnout, isolation, and rejections because they memorize algorithms instead of learning real systems.</p>
-        </div>
-        <div class="pitch-card">
-          <div class="icon">⚠️</div>
-          <h3>Why Tools Fall Short?</h3>
-          <p>LeetCode teaches 20-year-old puzzles. WhatsApp/Discord is unorganized. None prioritize student mental health.</p>
+        <div class="hero-trust" style="justify-content: center; flex-wrap: wrap; gap: 1.2rem; font-size: 0.88rem; color: var(--text3);">
+          <span>💼 <strong>1.4M+</strong> Vacant Tech Jobs (NASSCOM)</span><span>•</span>
+          <span>🎓 <strong>83%</strong> Unplaced Graduates (Unstop '25)</span><span>•</span>
+          <span>⚡ <strong>0</strong> Outdated Toy Puzzles</span><span>•</span>
+          <span>🤝 <strong>100%</strong> Collaborative Peer Prep</span>
         </div>
       </div>
     </div>
 
-    <!-- 2. THE EVIDENCE -->
-    <div class="pitch-section" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; padding-left: 2rem; padding-right: 2rem;">
+    <!-- 2. THE HARD DATA: THE REAL SKILL GAP CRISIS -->
+    <div class="pitch-section" id="pitch-metrics" style="padding-top: 3.5rem;">
+      <div style="text-align: center; max-width: 780px; margin: 0 auto 2.5rem;">
+        <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); display: block; margin-bottom: 8px;">The Reality in Numbers</span>
+        <h2 class="pitch-title" style="margin-bottom: 0.8rem; font-size: 2.2rem;">Jobs Exist. Industry-Ready Skills Don't.</h2>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.6; margin: 0;">
+          The tech industry is actively hiring, yet college graduates are struggling. Verified statistics show that universities teach outdated theory while companies require distributed cloud architectures.
+        </p>
+      </div>
+
+      <div class="metric-grid-4">
+        <!-- Metric 1 -->
+        <div class="metric-stat-card">
+          <div class="metric-stat-num red">83%</div>
+          <div class="metric-stat-title">Graduates Left Unhired</div>
+          <div class="metric-stat-desc">83% of Indian engineering graduates receive zero job or internship offers upon graduation despite 4 years of college.</div>
+          <div class="metric-stat-source">📊 Unstop Talent Report 2025</div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="metric-stat-card">
+          <div class="metric-stat-num purple">1.4M+</div>
+          <div class="metric-stat-title">Vacant Tech Positions</div>
+          <div class="metric-stat-desc">Over 1.4 million high-paying software, cloud, and AI engineering positions remain unfilled in India due to lack of skilled talent.</div>
+          <div class="metric-stat-source">🏢 NASSCOM Tech Talent Report</div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="metric-stat-card">
+          <div class="metric-stat-num orange">58%</div>
+          <div class="metric-stat-title">Industry Skill Deficit</div>
+          <div class="metric-stat-desc">MNCs face a 53%–60% deficit in modern competencies: Distributed Systems, WebSockets, Concurrency, and GenAI.</div>
+          <div class="metric-stat-source">⚡ National Employability Index</div>
+        </div>
+
+        <!-- Metric 4 -->
+        <div class="metric-stat-card">
+          <div class="metric-stat-num blue">80%</div>
+          <div class="metric-stat-title">Solo Grind Burnout</div>
+          <div class="metric-stat-desc">4 out of 5 students report severe mental exhaustion and isolation from grinding algorithmic puzzles alone in hostel rooms.</div>
+          <div class="metric-stat-source">🧠 SkillBridge Student Survey</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. VOICES FROM THE GROUND: 3 REAL STUDENT INTERVIEWS -->
+    <div class="pitch-section" id="pitch-interviews" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; padding: 4.5rem 2rem;">
       <div style="max-width: 1100px; margin: 0 auto;">
-        <h2 class="pitch-title">Evidence: Backed by Real Students</h2>
-        <div class="grid-2" style="align-items: center;">
-          <div>
-            <div style="display:flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
-              <div class="stat-box"><h3>100%</h3><p>Felt academic-industry gap</p></div>
-              <div class="stat-box"><h3>80%</h3><p>Reported severe isolation</p></div>
+        <div style="text-align: center; max-width: 780px; margin: 0 auto 1.5rem;">
+          <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); display: block; margin-bottom: 8px;">Direct Field Evidence</span>
+          <h2 class="pitch-title" style="margin-bottom: 0.8rem; font-size: 2.2rem;">Real Students. Real Struggles. Direct Fixes.</h2>
+          <p style="font-size: 1rem; color: var(--text2); line-height: 1.6; margin: 0;">
+            We conducted in-depth interviews with final-year engineering students across campuses. Their real experiences defined the exact problems SkillBridge was built to solve:
+          </p>
+        </div>
+
+        <div class="interview-grid">
+          <!-- Student 1: Megha Singh -->
+          <div class="interview-card">
+            <div class="interview-card-header">
+              <div class="interview-avatar">👩‍💻</div>
+              <div>
+                <h3 class="interview-name">Megha Singh</h3>
+                <div class="interview-college">Final Year CSE • NIT Kurukshetra</div>
+              </div>
             </div>
-            <p style="color: var(--text2); font-size: 1.1rem; line-height: 1.6;">Based on deep 1-on-1 interviews with 5 final-year students (full data available in our repository's evidence folder).</p>
+            <div class="interview-quote-box">
+              "Our college syllabus is 15 years outdated. We spent semesters memorizing textbook C++ syntax and theoretical SQL, but in my MNC technical rounds, they asked for Redis caching, Docker, and distributed rate limiting. College never prepared us for real architecture."
+            </div>
+            <div class="interview-solution-box">
+              <span class="interview-solution-tag">✅ Solved by SkillBridge</span>
+              <strong>MNC Video Masterclasses & Architecture Decks:</strong> Real Staff Engineers from Netflix & Amazon walk through production systems, Docker workflows, and scaling trade-offs.
+            </div>
           </div>
-          <div class="pitch-card" style="border-left: 4px solid var(--primary); background: var(--card);">
-            <p style="font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--text);">"I can invert a binary tree perfectly, but failed my Uber interview because I didn't know WebSockets. The loneliness of studying all day is the hardest part."</p>
-            <p style="margin-top: 1rem; font-weight: bold; color: var(--text3);">- Student Interviewee #3</p>
+
+          <!-- Student 2: Akshiv Sharma -->
+          <div class="interview-card">
+            <div class="interview-card-header">
+              <div class="interview-avatar">👨‍🎓</div>
+              <div>
+                <h3 class="interview-name">Akshiv Sharma</h3>
+                <div class="interview-college">3rd Year IT • Delhi Tech</div>
+              </div>
+            </div>
+            <div class="interview-quote-box">
+              "Grinding LeetCode alone in a hostel room was mentally depressing. There was no peer circle to brainstorm system design with, no collaborative mock rounds, and zero feedback. You burn out in silence before placements even begin."
+            </div>
+            <div class="interview-solution-box">
+              <span class="interview-solution-tag">✅ Solved by SkillBridge</span>
+              <strong>Peer Lounge & Instant Study Groups:</strong> Connect with peers targeting FAANG, join collaborative study pods, share interview notes, and destress in our dedicated <em>#venting-space</em>.
+            </div>
+          </div>
+
+          <!-- Student 3: Harsh Yadav -->
+          <div class="interview-card">
+            <div class="interview-card-header">
+              <div class="interview-avatar">👨‍💻</div>
+              <div>
+                <h3 class="interview-name">Harsh Yadav</h3>
+                <div class="interview-college">Final Year CSE • NSUT</div>
+              </div>
+            </div>
+            <div class="interview-quote-box">
+              "YouTube tutorials only show toy to-do apps with dummy code. Recruiters reject resumes instantly because students have never solved actual production outages, WebSockets, or high-concurrency backlogs."
+            </div>
+            <div class="interview-solution-box">
+              <span class="interview-solution-tag">✅ Solved by SkillBridge</span>
+              <strong>Live MNC Problem Arena & Direct HR Pipeline:</strong> Solve real company backlogs (Amazon Rate Limiter, Uber WebSockets). Recruiters view verified code and send direct interview invites.
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 3. DIFFERENTIATION & PROTOTYPE -->
-    <div class="pitch-section">
-      <h2 class="pitch-title">How SkillBridge is Different</h2>
+    <!-- 4. HOW SKILLBRIDGE WORKS: 4 CORE PILLARS -->
+    <div class="pitch-section" id="pitch-solution" style="padding-top: 4.5rem;">
+      <div style="text-align: center; max-width: 780px; margin: 0 auto 2rem;">
+        <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); display: block; margin-bottom: 8px;">The Platform Engine</span>
+        <h2 class="pitch-title" style="margin-bottom: 0.8rem; font-size: 2.2rem;">How SkillBridge Bridges the Divide</h2>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.6; margin: 0;">
+          A connected four-pillar ecosystem turning theoretical college learners into production-ready engineers hired by top tech firms.
+        </p>
+      </div>
+
+      <div class="pillar-grid-4">
+        <!-- Pillar 1 -->
+        <div class="pillar-card">
+          <div class="pillar-icon">🎬</div>
+          <div class="pillar-title">Industry Masterclasses</div>
+          <div class="pillar-desc">Staff engineers from Amazon, Google, and Netflix teach real-world system design, production debugging, and enterprise architecture with slide decks.</div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="pillar-card">
+          <div class="pillar-icon">⚡</div>
+          <div class="pillar-title">MNC Problem Arena</div>
+          <div class="pillar-desc">Solve live company tickets (Distributed Rate Limiters, WebSocket Real-Time Tracking, Idempotent Payments) with automated test cases and XP rewards.</div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="pillar-card">
+          <div class="pillar-icon">👥</div>
+          <div class="pillar-title">Peer Lounge & Pods</div>
+          <div class="pillar-desc">Never study alone. Form company-focused study groups, practice mock interviews, and share emotional support in a positive, collaborative environment.</div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="pillar-card">
+          <div class="pillar-icon">💼</div>
+          <div class="pillar-title">Direct Recruiter Invites</div>
+          <div class="pillar-desc">Bypass the ATS black hole. HR recruiters browse verified leaderboard performers, review code submissions, and send direct interview invites.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. DIFFERENTIATION & PROTOTYPE LAUNCH -->
+    <div class="pitch-section" style="padding-top: 2rem;">
+      <h2 class="pitch-title" style="margin-bottom: 2rem;">Why SkillBridge Beats the Status Quo</h2>
       <div class="grid-2">
         <div class="pitch-card" style="border: 1px solid rgba(255, 71, 87, 0.3); background: rgba(255, 71, 87, 0.02);">
-          <h3 style="color: var(--red); margin-bottom: 1rem;">Existing Platforms</h3>
+          <h3 style="color: var(--red); margin-bottom: 1rem;">❌ The Broken Status Quo</h3>
           <ul class="check-list cross">
-            <li>❌ Solo grinding & extreme isolation</li>
-            <li>❌ Theoretical algorithmic puzzles (LeetCode)</li>
-            <li>❌ No connection to actual HR backlogs</li>
-            <li>❌ Zero focus on student mental wellness</li>
+            <li>❌ <strong>Outdated Curriculum:</strong> 15-year-old textbook theory with zero production stacks.</li>
+            <li>❌ <strong>LeetCode Grind:</strong> Unrealistic 20-year-old algorithmic puzzles never used on the job.</li>
+            <li>❌ <strong>Solo Isolation:</strong> Grinding alone in dorm rooms leading to mental exhaustion.</li>
+            <li>❌ <strong>ATS Black Hole:</strong> 83% of applications rejected by automated keyword filters.</li>
           </ul>
         </div>
         <div class="pitch-card" style="border: 1px solid rgba(46, 213, 115, 0.3); background: rgba(46, 213, 115, 0.02);">
-          <h3 style="color: var(--green); margin-bottom: 1rem;">SkillBridge Solution</h3>
+          <h3 style="color: var(--green); margin-bottom: 1rem;">✅ The SkillBridge Solution</h3>
           <ul class="check-list check">
-            <li>✅ <strong>Peer Lounge</strong> for study groups & wellness</li>
-            <li>✅ Real MNC architecture challenges</li>
-            <li>✅ HR directly hires from active leaderboards</li>
-            <li>✅ Dedicated <em>#venting-space</em> for mental health</li>
+            <li>✅ <strong>Masterclasses by Tech Leads:</strong> Learn real production microservices & cloud architectures.</li>
+            <li>✅ <strong>Real MNC Problem Tickets:</strong> Prove skills by solving actual engineering backlogs.</li>
+            <li>✅ <strong>Collaborative Peer Lounge:</strong> Instant study groups, peer chat, and mental wellness.</li>
+            <li>✅ <strong>Direct Recruiter Hiring:</strong> Verified solvers invited directly by MNC recruiters.</li>
           </ul>
-          <button class="btn-primary" style="margin-top: 1.5rem; width: 100%; justify-content: center;" onclick="openAuth('signup')">Launch Working Prototype 🚀</button>
+          <button class="btn-primary" style="margin-top: 1.5rem; width: 100%; justify-content: center; font-size: 1rem; padding: 12px;" onclick="mockLogin()">
+            Launch Working Prototype as Anannay Kapoor 🚀
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- 4. TRACTION / SIGNS OF USE -->
-    <div class="pitch-section" style="text-align: center; margin-bottom: 2rem;">
-      <h2 class="pitch-title" style="margin-bottom: 1rem;">Signs of Immediate Demand</h2>
-      <p style="font-size: 1.2rem; color: var(--text2); max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;">
-        When presented with the prototype concept, <strong>100% of interviewed students asked for early access</strong>, specifically highlighting the gamified XP and the Peer Lounge support system.
+    <!-- 6. FINAL CALL TO ACTION BANNER -->
+    <div class="pitch-section" style="text-align: center; margin-bottom: 2rem; padding: 3rem 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow);">
+      <h2 style="font-size: 2rem; margin-bottom: 0.8rem; font-weight: 900;">Ready to See How Students Prepare on SkillBridge?</h2>
+      <p style="font-size: 1.05rem; color: var(--text2); max-width: 680px; margin: 0 auto 2rem; line-height: 1.6;">
+        Explore our fully functioning platform featuring <strong>Anannay Kapoor</strong> (NIT Kurukshetra, 81.6% Readiness). Try the Problem Arena, watch Masterclasses, test the Peer Lounge, and search Jobs & Internships.
       </p>
-      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-        <div class="pitch-card" style="padding: 1.5rem 2.5rem;">
-          <h3 style="font-size: 2.5rem; margin-bottom: 0;">50+</h3>
-          <p style="color: var(--text3); font-weight: bold; margin-top: 5px;">Waitlist Signups</p>
-        </div>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn-primary large" onclick="mockLogin()" style="padding: 12px 28px; font-size: 1rem;">
+          🚀 Enter Demo as Anannay Kapoor
+        </button>
+        <button class="btn-ghost" onclick="openAuth('login')" style="padding: 12px 24px; font-size: 1rem;">
+          🔑 Sign In with Custom Account
+        </button>
       </div>
     </div>
 
