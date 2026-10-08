@@ -449,9 +449,6 @@ function toggleAIModal() {
       const topicInput = document.getElementById('roadmap-topic');
       if (topicInput) topicInput.focus();
     }, 100);
-    const savedKey = localStorage.getItem('gemini_api_key');
-    const keyInput = document.getElementById('gemini-api-key');
-    if (savedKey && keyInput) keyInput.value = savedKey;
   } else {
     overlay.classList.remove('active');
   }
@@ -474,13 +471,11 @@ function setRoadmapTopic(topic) {
 }
 
 async function generateRoadmap() {
-  const apiKeyInput = document.getElementById('gemini-api-key');
   const topicInput = document.getElementById('roadmap-topic');
   const outputDiv = document.getElementById('ai-roadmap-output');
   const btn = document.getElementById('ai-generate-btn');
 
   const topic = topicInput ? topicInput.value.trim() : '';
-  const apiKey = apiKeyInput ? apiKeyInput.value.trim() : '';
 
   if (!topic) {
     if (outputDiv) {
@@ -494,10 +489,6 @@ async function generateRoadmap() {
     return;
   }
 
-  if (apiKey) {
-    localStorage.setItem('gemini_api_key', apiKey);
-  }
-
   // Loading state
   btn.innerText = "Analyzing...";
   btn.disabled = true;
@@ -509,57 +500,12 @@ async function generateRoadmap() {
     </div>
   `;
 
-  // 1. If Gemini API Key provided, attempt live Google Gemini API
-  if (apiKey) {
-    try {
-      const promptText = `Act as an expert technical career coach and engineering director. Create a 4-week preparation roadmap for a student aiming for: "${topic}". 
-Structure:
-Week 1: Foundations & Architecture
-Week 2: Real-World Industry Stack & Hands-on Implementation
-Week 3: Distributed Scalability, Performance & Edge Cases
-Week 4: Mock Coding Interviews, System Design & Behavioral Round
-Portfolio Project: 1 high-impact project idea
-3 Interview Questions: Commonly asked for this role.
-Format with clean HTML: <h3>, <ul>, <li>, <strong> tags. No markdown backticks.`;
-
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: promptText }] }]
-        })
-      });
-
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error.message || "Gemini API error");
-      }
-
-      let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      text = text.replace(/```html/gi, '').replace(/```/g, '');
-
-      outputDiv.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:0.75rem;">
-          <span style="font-size:0.8rem; background:rgba(0,168,107,0.15); color:var(--green); padding:3px 10px; border-radius:999px; font-weight:700;">🟢 Live Google Gemini AI Response</span>
-          <button class="btn-ghost small" onclick="copyRoadmapText()">📋 Copy</button>
-        </div>
-        ${text}
-      `;
-      btn.innerText = "Generate ✨";
-      btn.disabled = false;
-      return;
-    } catch (err) {
-      console.warn("Live Gemini API call failed, switching to Built-in AI Engine:", err);
-      // Fall through to smart built-in generator
-    }
-  }
-
-  // 2. Built-in Smart AI Engine (Guaranteed 100% reliable for Ideathon Demo)
+  // Instant intelligent AI engine (Always reliable for demo)
   setTimeout(() => {
-    outputDiv.innerHTML = renderSmartRoadmap(topic, Boolean(apiKey));
+    outputDiv.innerHTML = renderSmartRoadmap(topic);
     btn.innerText = "Generate ✨";
     btn.disabled = false;
-  }, 1000);
+  }, 900);
 }
 
 function escapeRoadmapHTML(str) {
@@ -574,7 +520,7 @@ function copyRoadmapText() {
   }
 }
 
-function renderSmartRoadmap(topic, hadApiKey) {
+function renderSmartRoadmap(topic) {
   const safeTopic = escapeRoadmapHTML(topic);
   const lower = topic.toLowerCase();
   
