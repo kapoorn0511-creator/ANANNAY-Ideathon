@@ -1583,15 +1583,35 @@
     <div id="peer-chat-window" class="peer-chat-window">
       <div class="chat-header">
         <div>
-          <h4 style="margin:0;font-size:1rem;">☕ Safe Space Lounge</h4>
-          <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.8);">142 students online — You are not alone!</p>
+          <h4 style="margin:0;font-size:1.1rem;display:flex;align-items:center;gap:6px;">☕ Peer Lounge & Study Space</h4>
+          <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.85);">142 students online • NIT Kurukshetra & IITs</p>
         </div>
         <button onclick="toggleChat()" style="background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;">✕</button>
       </div>
+
+      <!-- User Identity Bar (Anannay Kapoor) -->
+      <div class="chat-my-id-bar">
+        <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="showProfile('@anannay_k')" title="Click to view your peer profile">
+          <div class="avatar" style="width:30px; height:30px; font-size:1rem; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--green)); display:flex; align-items:center; justify-content:center;">👨‍💻</div>
+          <div>
+            <div style="font-size:0.82rem; font-weight:800; color:var(--text); line-height:1.2;">
+              Anannay Kapoor <span style="font-size:0.72rem; color:var(--primary); font-weight:600;">(@anannay_k)</span>
+            </div>
+            <div style="font-size:0.68rem; color:var(--text3);">NIT Kurukshetra • 🔥 14-Day Streak</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="font-size:0.68rem; background:rgba(0,168,107,0.12); color:var(--green); font-weight:700; padding:2px 8px; border-radius:999px;">● Online</span>
+          <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; background:var(--primary);" onclick="openCreateGroupModal()">+ Group</button>
+        </div>
+      </div>
+
+      <!-- Navigation Channels -->
       <div class="chat-channels">
         <span class="chat-channel active" onclick="switchChatChannel('venting-space', this)">💬 Venting Space</span>
         <span class="chat-channel" onclick="switchChatChannel('interview-prep', this)">📚 Interview Prep</span>
         <span class="chat-channel" onclick="switchChatChannel('study-groups', this)">👥 Study Groups</span>
+        <span class="chat-channel" onclick="switchChatChannel('active-peers', this)">🎓 Active Peers</span>
         <span class="chat-channel" onclick="switchChatChannel('general-chill', this)">☕ General Chill</span>
       </div>
       
@@ -1600,26 +1620,89 @@
       </div>
       
       <div class="chat-input-area" id="chat-input-area">
-        <input type="text" id="chat-input" placeholder="Type a supportive message..." onkeypress="handleChatEnter(event)">
+        <input type="text" id="chat-input" placeholder="Type a supportive message or ask a tech question..." onkeypress="handleChatEnter(event)">
         <button onclick="sendChatMessage()">➤</button>
       </div>
 
-      <!-- IG-Style Mini Profile Card -->
+      <!-- Enhanced IG-Style Mini Profile Card -->
       <div id="mini-profile" class="mini-profile-card" style="display:none;">
         <button class="close-profile" onclick="closeProfile()">✕</button>
         <div class="profile-header">
-          <div class="profile-avatar" id="mp-avatar">👱‍♀️</div>
+          <div class="profile-avatar" id="mp-avatar">👨‍💻</div>
           <div>
-            <h4 id="mp-name" style="margin:0; font-size:1rem;">Neha G.</h4>
-            <p id="mp-handle" style="margin:0; font-size:0.8rem; color:var(--primary); font-weight:600;">@neha_g</p>
+            <h4 id="mp-name" style="margin:0; font-size:1.05rem;">Anannay Kapoor</h4>
+            <p id="mp-handle" style="margin:0; font-size:0.8rem; color:var(--primary); font-weight:700;">@anannay_k</p>
+            <span id="mp-college" style="font-size:0.72rem; color:var(--text3);">NIT Kurukshetra</span>
           </div>
         </div>
         <div class="profile-stats">
-          <div><strong id="mp-streak">14</strong><br/>Streaks</div>
-          <div><strong id="mp-xp">2.4k</strong><br/>XP Points</div>
+          <div><strong id="mp-streak">14</strong><br/>Streaks 🔥</div>
+          <div><strong id="mp-xp">2,450 XP</strong><br/>XP Points ⚡</div>
+          <div><strong id="mp-rank">#3</strong><br/>Campus Rank 🏆</div>
         </div>
-        <p class="profile-bio" id="mp-bio">Passionate about backend & System Design. Open to mock interviews!</p>
-        <button class="btn-primary" style="width:100%; padding: 6px; font-size:0.8rem;">Follow / Message</button>
+        <p class="profile-bio" id="mp-bio">B.Tech CSE @ NIT Kurukshetra (2026 Batch). Targeting Amazon AWS & Netflix SDE-1 roles.</p>
+        <div id="mp-actions">
+          <button id="mp-btn" class="btn-primary" style="width:100%; padding:8px; font-size:0.82rem;" onclick="handleProfileActionButton()">💬 Direct Message / Invite</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE STUDY GROUP MODAL -->
+  <div id="create-study-group-modal" class="modal-overlay" onclick="closeCreateGroupModal(event)">
+    <div class="modal-box" style="max-width: 540px; text-align: left;">
+      <button class="modal-close" onclick="document.getElementById('create-study-group-modal').classList.remove('active')">✕</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem; background:var(--primary-glow); padding:8px; border-radius:10px;">👥</span>
+        <div>
+          <h3 style="margin:0; font-size:1.3rem;">Create a Peer Study Group</h3>
+          <p style="margin:0; font-size:0.82rem; color:var(--text2);">Host a mock round, architecture review, or live coding sprint with peers.</p>
+        </div>
+      </div>
+
+      <div class="portal-form">
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Group Title / Topic</label>
+        <input type="text" id="sg-title" class="portal-input" placeholder="e.g. Amazon SDE-1 Rate Limiter & Concurrency Sprint" value="Amazon SDE-1 Rate Limiter & Concurrency Sprint" />
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Target Company / Focus</label>
+            <select id="sg-company" class="portal-select">
+              <option value="Amazon">🟠 Amazon AWS (Rate Limiter)</option>
+              <option value="Netflix">🔴 Netflix (Video Buffering)</option>
+              <option value="Google">🔵 Google (API Optimization)</option>
+              <option value="Microsoft">🟦 Microsoft (Data Grid / UI)</option>
+              <option value="Uber">🚗 Uber (WebSockets)</option>
+              <option value="General">🎯 General System Design</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Group Size / Capacity</label>
+            <select id="sg-capacity" class="portal-select">
+              <option value="2">2 Members (1-on-1 Peer Mock)</option>
+              <option value="4" selected>4 Members (Small Squad)</option>
+              <option value="6">6 Members (Study Room)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Scheduled Time</label>
+            <input type="text" id="sg-time" class="portal-input" placeholder="e.g. Today 8:00 PM IST" value="Starting in 15 mins (Live Audio)" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Host</label>
+            <input type="text" id="sg-host" class="portal-input" value="Anannay Kapoor (@anannay_k)" disabled style="background:var(--bg2); cursor:not-allowed;" />
+          </div>
+        </div>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Discussion Description & Focus Area</label>
+        <textarea id="sg-desc" class="portal-input" rows="2" style="resize:vertical;" placeholder="What will this group practice together?">We will do 45 minutes of distributed rate limiting whiteboard review and test case walkthrough.</textarea>
+
+        <button class="btn-primary" style="width:100%; justify-content:center; margin-top:1rem;" onclick="submitCreateStudyGroup()">
+          🚀 Launch Study Group & Invite Peers
+        </button>
       </div>
     </div>
   </div>

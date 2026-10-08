@@ -1408,66 +1408,166 @@ function mockLogin() {
 
 // ---------- PEER CHAT ENHANCEMENTS ----------
 const USER_PROFILES = {
-  '@neha_g': { name: 'Neha Gupta', avatar: '👱‍♀️', bio: 'Backend & Cloud. Prepping for Amazon roles.', streak: 14, xp: '2.4k' },
-  '@rahul_k': { name: 'Rahul Kumar', avatar: '🧑‍💻', bio: 'Fullstack Dev. Solving real problems daily.', streak: 5, xp: '800' },
-  '@karan_m': { name: 'Karan M.', avatar: '👨‍🎓', bio: 'Looking for study partners for system design.', streak: 21, xp: '5.1k' },
-  '@priya_d': { name: 'Priya D.', avatar: '👩‍🔬', bio: 'AI enthusiast and front-end learner.', streak: 2, xp: '150' },
-  '@rohan_k': { name: 'Rohan K.', avatar: '🎸', bio: 'Music and code. Let us chill.', streak: 8, xp: '1.2k' },
+  '@anannay_k': { 
+    name: 'Anannay Kapoor', 
+    avatar: '👨‍💻', 
+    college: 'NIT Kurukshetra', 
+    bio: 'B.Tech CSE @ NIT Kurukshetra (2026 Batch). Placement Readiness 94%. Solved Amazon AWS Rate Limiter & Netflix MSE.', 
+    streak: 14, 
+    xp: '2,450 XP', 
+    rank: '#3', 
+    isYou: true 
+  },
+  '@neha_g': { 
+    name: 'Neha Gupta', 
+    avatar: '👱‍♀️', 
+    college: 'IIT Delhi', 
+    bio: 'Backend & Cloud. Prepping for Amazon AWS roles. Open to distributed system mocks!', 
+    streak: 14, 
+    xp: '4,200 XP', 
+    rank: '#1' 
+  },
+  '@rahul_k': { 
+    name: 'Rahul Kumar', 
+    avatar: '🧑‍💻', 
+    college: 'Pune Institute', 
+    bio: 'Fullstack Dev. Solving real MNC problems daily. Let us pair program!', 
+    streak: 5, 
+    xp: '3,850 XP', 
+    rank: '#2' 
+  },
+  '@karan_m': { 
+    name: 'Karan M.', 
+    avatar: '👨‍🎓', 
+    college: 'State Engineering College', 
+    bio: 'Looking for study partners for Uber WebSockets & Go concurrency.', 
+    streak: 21, 
+    xp: '5,100 XP', 
+    rank: '#4' 
+  },
+  '@priya_d': { 
+    name: 'Priya D.', 
+    avatar: '👩‍🔬', 
+    college: 'Delhi University', 
+    bio: 'Frontend Infra architect learner. Practicing Netflix Video Buffering challenge.', 
+    streak: 2, 
+    xp: '2,900 XP', 
+    rank: '#5' 
+  },
+  '@rohan_k': { 
+    name: 'Rohan K.', 
+    avatar: '🎸', 
+    college: 'NIT Trichy', 
+    bio: 'Music & code. Practicing DSA & system design. Chill vibes.', 
+    streak: 8, 
+    xp: '1,200 XP', 
+    rank: '#8' 
+  },
 };
+
+const MOCK_STUDY_GROUPS = [
+  {
+    id: 1,
+    title: "Amazon AWS Rate Limiter & Concurrency Sprint",
+    hostHandle: "@anannay_k",
+    hostName: "Anannay Kapoor",
+    hostAvatar: "👨‍💻",
+    company: "Amazon",
+    companyBadge: "🟠 Amazon AWS",
+    currentMembers: 3,
+    maxMembers: 4,
+    time: "Starting in 15 mins (Live Audio 🎧)",
+    desc: "45 mins of distributed rate limiting whiteboard review, Redis Lua atomic scripts, and test case walkthrough.",
+    isHostYou: true,
+    joined: true
+  },
+  {
+    id: 2,
+    title: "System Design Mock Interviews (1-on-1)",
+    hostHandle: "@neha_g",
+    hostName: "Neha Gupta",
+    hostAvatar: "👱‍♀️",
+    company: "Amazon",
+    companyBadge: "🟠 Amazon AWS",
+    currentMembers: 2,
+    maxMembers: 2,
+    time: "Today at 7:30 PM IST",
+    desc: "Peer mock on Designing YouTube Video Caching Architecture. Looking for serious partner.",
+    isHostYou: false,
+    joined: false
+  },
+  {
+    id: 3,
+    title: "Netflix Video Buffering & MSE Protocol Study",
+    hostHandle: "@priya_d",
+    hostName: "Priya D.",
+    hostAvatar: "👩‍🔬",
+    company: "Netflix",
+    companyBadge: "🔴 Netflix",
+    currentMembers: 3,
+    maxMembers: 5,
+    time: "Tomorrow at 6:00 PM IST",
+    desc: "Understanding MediaSource Extensions, chunk streaming algorithms, and reducing browser frame drops.",
+    isHostYou: false,
+    joined: false
+  },
+  {
+    id: 4,
+    title: "Uber Geospatial Telemetry & WebSockets Squad",
+    hostHandle: "@karan_m",
+    hostName: "Karan M.",
+    hostAvatar: "👨‍🎓",
+    company: "Uber",
+    companyBadge: "🚗 Uber",
+    currentMembers: 1,
+    maxMembers: 3,
+    time: "Tonight at 9:00 PM IST",
+    desc: "Building real-time geospatial location dispatch with Quadtrees & Go concurrency channels.",
+    isHostYou: false,
+    joined: false
+  }
+];
 
 const CHAT_DATA = {
   'venting-space': `
-    <div class="chat-msg system-msg">Welcome to Venting Space. A judgment-free zone to share your stress. 💙</div>
+    <div class="chat-msg system-msg">Welcome to Venting Space. A judgment-free zone to share your placement stress. 💙</div>
     <div class="chat-row">
       <div class="chat-avatar">👱‍♀️</div>
-      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">2 mins ago</span><br/>Feeling so burnt out today. This API rate limiter problem is making me crazy 😭</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">2 mins ago</span><br/>Feeling burnt out today. The distributed rate limiter test cases are tricky 😭</div>
     </div>
     <div class="chat-row">
       <div class="chat-avatar">🧑‍💻</div>
-      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rahul_k')">@rahul_k</span> <span class="msg-time">1 min ago</span><br/>Take a 10 min walk Neha! Mental health > XP points. Drink some water! 🫂</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rahul_k')">@rahul_k</span> <span class="msg-time">1 min ago</span><br/>Take a 10 min break Neha! Mental health > XP points. Drink some water! 🫂</div>
+    </div>
+    <div class="chat-row you">
+      <div class="chat-avatar">👨‍💻</div>
+      <div class="chat-msg">
+        <span class="chat-username" onclick="showProfile('@anannay_k')">@anannay_k</span> <span class="msg-time">Just now</span><br/>
+        Hey Neha, try using Redis Lua scripts for atomic increment. It fixed the concurrency race conditions for me!
+      </div>
     </div>
   `,
   'interview-prep': `
-    <div class="chat-msg system-msg">Welcome to Interview Prep. Let's crack these companies together! 🚀</div>
+    <div class="chat-msg system-msg">Welcome to Interview Prep. Let's crack top MNC engineering rounds together! 🚀</div>
     <div class="chat-row">
       <div class="chat-avatar">👨‍🎓</div>
-      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@karan_m')">@karan_m</span> <span class="msg-time">10 mins ago</span><br/>Anyone has good resources for understanding WebSockets? The Uber challenge is tough.</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@karan_m')">@karan_m</span> <span class="msg-time">10 mins ago</span><br/>Anyone practicing Uber geospatial tracking? How do we handle WebSocket reconnects under high latency?</div>
     </div>
     <div class="chat-row">
       <div class="chat-avatar">👩‍🔬</div>
-      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@priya_d')">@priya_d</span> <span class="msg-time">5 mins ago</span><br/>I found a great 10-min tutorial. I'll share the link here shortly!</div>
-    </div>
-  `,
-  'study-groups': `
-    <div class="chat-msg system-msg" style="margin-bottom:1rem;">Find peers preparing for the same roles and study together.</div>
-    <button class="btn-primary" style="width:100%; padding:8px; font-size:0.85rem; margin-bottom:1rem; border-radius:8px;" onclick="createStudyGroup()">+ Create Study Group</button>
-    
-    <div class="study-group-card">
-      <div class="study-group-title">Amazon SDE Prep</div>
-      <div class="study-group-meta">
-        <span>Host: <span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span></span>
-        <span>👥 3/5</span>
-      </div>
-      <button class="btn-join" onclick="joinStudyGroup(this)">Join Group</button>
-    </div>
-
-    <div class="study-group-card">
-      <div class="study-group-title">System Design Mocks</div>
-      <div class="study-group-meta">
-        <span>Host: <span class="chat-username" onclick="showProfile('@rahul_k')">@rahul_k</span></span>
-        <span>👥 1/2</span>
-      </div>
-      <button class="btn-join" onclick="joinStudyGroup(this)">Join Group</button>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@priya_d')">@priya_d</span> <span class="msg-time">5 mins ago</span><br/>Use exponential backoff with jitter on the client side, and heartbeat pings every 5 seconds.</div>
     </div>
   `,
   'general-chill': `
-    <div class="chat-msg system-msg">Welcome to General Chill. Turn on some lofi and relax. 🎧</div>
+    <div class="chat-msg system-msg">Welcome to General Chill. Turn on some lofi beats and relax. 🎧</div>
     <div class="chat-row">
       <div class="chat-avatar">🎸</div>
-      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rohan_k')">@rohan_k</span> <span class="msg-time">1 hr ago</span><br/>What's everyone listening to right now while coding?</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rohan_k')">@rohan_k</span> <span class="msg-time">1 hr ago</span><br/>What is everyone listening to while solving Arena challenges? Synthwave or lofi?</div>
     </div>
   `
 };
+
+let currentChatChannel = 'venting-space';
 
 function toggleChat() {
   const chat = document.getElementById('peer-chat-window');
@@ -1477,29 +1577,229 @@ function toggleChat() {
   
   const chatBody = document.getElementById('chat-messages');
   if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-  closeProfile(); // Ensure profile is closed when toggling
+  closeProfile();
 }
 
 function switchChatChannel(channelName, btn) {
+  currentChatChannel = channelName;
   const channels = document.querySelectorAll('.chat-channel');
   channels.forEach(c => c.classList.remove('active'));
-  if (btn) btn.classList.add('active');
+  
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    // Find matching button by text or onclick
+    channels.forEach(c => {
+      if (c.getAttribute('onclick')?.includes(channelName)) c.classList.add('active');
+    });
+  }
   
   const chatBody = document.getElementById('chat-messages');
   const inputArea = document.getElementById('chat-input-area');
   
-  if (chatBody && CHAT_DATA[channelName]) {
-    chatBody.innerHTML = CHAT_DATA[channelName];
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  // Hide input area in study-groups tab
   if (channelName === 'study-groups') {
-    inputArea.style.display = 'none';
+    renderStudyGroupsChannel();
+    if (inputArea) inputArea.style.display = 'none';
+  } else if (channelName === 'active-peers') {
+    renderActivePeersChannel();
+    if (inputArea) inputArea.style.display = 'none';
   } else {
-    inputArea.style.display = 'flex';
+    if (chatBody && CHAT_DATA[channelName]) {
+      chatBody.innerHTML = CHAT_DATA[channelName];
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    if (inputArea) inputArea.style.display = 'flex';
   }
   closeProfile();
+}
+
+function renderStudyGroupsChannel() {
+  const chatBody = document.getElementById('chat-messages');
+  if (!chatBody) return;
+
+  let html = `
+    <div class="chat-msg system-msg" style="margin-bottom:0.8rem;">
+      Find peers preparing for the same roles and practice live mocks together.
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:8px;">
+      <span style="font-size:0.85rem; font-weight:800; color:var(--text);">🔥 Active Study Squads</span>
+      <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem; background:var(--primary);" onclick="openCreateGroupModal()">
+        ➕ Create Study Group
+      </button>
+    </div>
+  `;
+
+  MOCK_STUDY_GROUPS.forEach(g => {
+    const isJoined = g.joined;
+    const isHost = g.hostHandle === '@anannay_k';
+    const hostTag = isHost ? '<span style="font-size:0.7rem; background:rgba(108,99,255,0.15); color:var(--primary); font-weight:700; padding:2px 6px; border-radius:4px; margin-left:4px;">You (Host)</span>' : '';
+    const joinText = isJoined ? 'Joined ✓ (Audio Room 🎧)' : '+ Join Group';
+    const joinStyle = isJoined ? 'background:var(--green); color:white; border-color:var(--green);' : '';
+
+    html += `
+      <div class="study-group-card-enhanced">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div>
+            <span style="font-size:0.72rem; background:var(--primary-glow); color:var(--primary); padding:2px 8px; border-radius:999px; font-weight:700;">${g.companyBadge}</span>
+            <div class="study-group-title" style="margin-top:6px; font-size:0.98rem;">${g.title}</div>
+          </div>
+          <span style="font-size:0.75rem; background:var(--bg2); color:var(--text2); padding:3px 8px; border-radius:6px; font-weight:700;">
+            👥 ${g.currentMembers}/${g.maxMembers}
+          </span>
+        </div>
+
+        <p style="font-size:0.8rem; color:var(--text2); margin:0 0 8px 0; line-height:1.4;">${g.desc}</p>
+
+        <div class="study-group-meta" style="margin-bottom:8px; font-size:0.78rem;">
+          <span>Host: <span class="chat-username" onclick="showProfile('${g.hostHandle}')">${g.hostAvatar} ${g.hostName}</span>${hostTag}</span>
+          <span>⏱️ ${g.time}</span>
+        </div>
+
+        <button class="btn-join" style="${joinStyle}" onclick="joinStudyGroup(${g.id}, this)">
+          ${joinText}
+        </button>
+      </div>
+    `;
+  });
+
+  chatBody.innerHTML = html;
+  chatBody.scrollTop = 0;
+}
+
+function renderActivePeersChannel() {
+  const chatBody = document.getElementById('chat-messages');
+  if (!chatBody) return;
+
+  let html = `
+    <div class="chat-msg system-msg" style="margin-bottom:0.8rem;">
+      Live engineering peers online from NIT Kurukshetra, IITs, and top tech campuses.
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+      <span style="font-size:0.85rem; font-weight:800; color:var(--text);">🎓 142 Peers Online Now</span>
+      <span style="font-size:0.75rem; color:var(--green); font-weight:700;">● Active</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+  `;
+
+  for (const handle in USER_PROFILES) {
+    const p = USER_PROFILES[handle];
+    const isYou = handle === '@anannay_k';
+    const youBadge = isYou ? '<span style="font-size:0.7rem; background:rgba(0,168,107,0.15); color:var(--green); font-weight:700; padding:2px 6px; border-radius:4px; margin-left:4px;">You</span>' : '';
+    const btnText = isYou ? '👤 My Profile' : '👋 Invite Mock';
+    const btnAction = isYou ? `showProfile('${handle}')` : `invitePeerMock('${handle}')`;
+    const btnClass = isYou ? 'btn-ghost' : 'btn-primary';
+
+    html += `
+      <div class="peer-dir-card">
+        <div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="showProfile('${handle}')">
+          <div class="peer-dir-avatar">
+            ${p.avatar}
+            <span class="peer-dir-online"></span>
+          </div>
+          <div>
+            <div style="font-size:0.88rem; font-weight:800; color:var(--text); line-height:1.2;">
+              ${p.name} ${youBadge}
+            </div>
+            <div style="font-size:0.75rem; color:var(--primary); font-weight:600;">
+              ${handle} • <span style="color:var(--text3);">${p.college}</span>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text3); margin-top:2px;">
+              🔥 ${p.streak} Streak • ⚡ ${p.xp} • 🏆 ${p.rank}
+            </div>
+          </div>
+        </div>
+        <button class="${btnClass}" style="padding:5px 12px; font-size:0.75rem; white-space:nowrap;" onclick="${btnAction}">
+          ${btnText}
+        </button>
+      </div>
+    `;
+  }
+
+  html += `</div>`;
+  chatBody.innerHTML = html;
+  chatBody.scrollTop = 0;
+}
+
+function invitePeerMock(handle) {
+  const p = USER_PROFILES[handle];
+  alert(`🤝 1-on-1 Mock Interview Invite sent to ${p ? p.name : handle}!\nWhen they accept, a live audio room with shared architecture canvas will launch.`);
+}
+
+function openCreateGroupModal() {
+  const modal = document.getElementById('create-study-group-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeCreateGroupModal(e) {
+  if (!e || e.target.id === 'create-study-group-modal' || (e.target && e.target.classList && e.target.classList.contains('modal-close'))) {
+    const modal = document.getElementById('create-study-group-modal');
+    if (modal) modal.classList.remove('active');
+  }
+}
+
+function submitCreateStudyGroup() {
+  const title = document.getElementById('sg-title')?.value.trim();
+  const company = document.getElementById('sg-company')?.value || 'Amazon';
+  const capacity = parseInt(document.getElementById('sg-capacity')?.value || '4', 10);
+  const time = document.getElementById('sg-time')?.value.trim() || 'Starting in 15 mins';
+  const desc = document.getElementById('sg-desc')?.value.trim() || 'Collaborative whiteboard system design session.';
+
+  if (!title) {
+    alert('Please enter a group title / topic.');
+    return;
+  }
+
+  const companyBadges = {
+    Amazon: '🟠 Amazon AWS',
+    Netflix: '🔴 Netflix',
+    Google: '🔵 Google',
+    Microsoft: '🟦 Microsoft',
+    Uber: '🚗 Uber',
+    General: '🎯 System Design'
+  };
+
+  const newGroup = {
+    id: Date.now(),
+    title: title,
+    hostHandle: '@anannay_k',
+    hostName: 'Anannay Kapoor',
+    hostAvatar: '👨‍💻',
+    company: company,
+    companyBadge: companyBadges[company] || `🏢 ${company}`,
+    currentMembers: 1,
+    maxMembers: capacity,
+    time: time,
+    desc: desc,
+    isHostYou: true,
+    joined: true
+  };
+
+  MOCK_STUDY_GROUPS.unshift(newGroup);
+
+  // Close modal
+  document.getElementById('create-study-group-modal')?.classList.remove('active');
+
+  // Switch to study groups channel
+  switchChatChannel('study-groups');
+
+  alert(`🎉 Success! Your study group "${title}" has been launched with you (@anannay_k) as the host!\nPeers online in the Lounge can now join your squad.`);
+}
+
+function joinStudyGroup(groupId, btn) {
+  const g = MOCK_STUDY_GROUPS.find(item => item.id === groupId);
+  if (!g) return;
+
+  if (!g.joined) {
+    g.joined = true;
+    g.currentMembers = Math.min(g.maxMembers, g.currentMembers + 1);
+    btn.innerHTML = 'Joined ✓ (Audio Room 🎧)';
+    btn.style.background = 'var(--green)';
+    btn.style.color = 'white';
+    btn.style.borderColor = 'var(--green)';
+    alert(`🎉 You joined "${g.title}" hosted by ${g.hostName}! Live voice/audio session is active.`);
+  } else {
+    alert(`🎧 Entering voice & whiteboard room for "${g.title}"... Connecting you with ${g.hostName} and squad!`);
+  }
 }
 
 function handleChatEnter(e) {
@@ -1516,7 +1816,7 @@ function sendChatMessage() {
     <div class="chat-row you">
       <div class="chat-avatar">👨‍💻</div>
       <div class="chat-msg">
-        <span class="chat-username">@anannay_k</span> <span class="msg-time">Just now</span><br/>
+        <span class="chat-username" onclick="showProfile('@anannay_k')">@anannay_k</span> <span class="msg-time">Just now</span><br/>
         ${msgText}
       </div>
     </div>
@@ -1557,41 +1857,59 @@ function simulatePeerReply(chatBody) {
 }
 
 // --- PROFILE & GROUP STUDY LOGIC ---
+let currentViewedHandle = null;
+
 function showProfile(handle) {
   const p = USER_PROFILES[handle];
   if(!p) return;
-  document.getElementById('mp-avatar').innerText = p.avatar;
-  document.getElementById('mp-name').innerText = p.name;
-  document.getElementById('mp-handle').innerText = handle;
-  document.getElementById('mp-bio').innerText = p.bio;
-  document.getElementById('mp-streak').innerText = p.streak;
-  document.getElementById('mp-xp').innerText = p.xp;
+  currentViewedHandle = handle;
+
+  const mpAvatar = document.getElementById('mp-avatar');
+  const mpName = document.getElementById('mp-name');
+  const mpHandle = document.getElementById('mp-handle');
+  const mpCollege = document.getElementById('mp-college');
+  const mpStreak = document.getElementById('mp-streak');
+  const mpXp = document.getElementById('mp-xp');
+  const mpRank = document.getElementById('mp-rank');
+  const mpBio = document.getElementById('mp-bio');
+  const mpBtn = document.getElementById('mp-btn');
+
+  if (mpAvatar) mpAvatar.innerText = p.avatar;
+  if (mpName) mpName.innerText = p.name;
+  if (mpHandle) mpHandle.innerText = handle;
+  if (mpCollege) mpCollege.innerText = p.college || 'NIT Kurukshetra';
+  if (mpStreak) mpStreak.innerText = p.streak;
+  if (mpXp) mpXp.innerText = p.xp;
+  if (mpRank) mpRank.innerText = p.rank || '#3';
+  if (mpBio) mpBio.innerText = p.bio;
+
+  if (mpBtn) {
+    if (handle === '@anannay_k') {
+      mpBtn.innerText = '👤 Open My Full Profile & ATS Resume';
+      mpBtn.style.background = 'var(--primary)';
+    } else {
+      mpBtn.innerText = `👋 Invite ${p.name.split(' ')[0]} to 1v1 Mock`;
+      mpBtn.style.background = 'var(--green)';
+    }
+  }
+
   document.getElementById('mini-profile').style.display = 'block';
+}
+
+function handleProfileActionButton() {
+  if (currentViewedHandle === '@anannay_k') {
+    closeProfile();
+    toggleChat();
+    openUserProfileModal('overview');
+  } else {
+    const p = USER_PROFILES[currentViewedHandle];
+    alert(`🤝 Mock Interview Invite sent to ${p ? p.name : currentViewedHandle}! They will receive an in-app ping and email alert.`);
+    closeProfile();
+  }
 }
 
 function closeProfile() {
   document.getElementById('mini-profile').style.display = 'none';
-}
-
-function joinStudyGroup(btn) {
-  if(btn.innerText === 'Join Group') {
-    btn.innerText = 'Joined ✓';
-    btn.style.background = 'var(--green)';
-    btn.style.color = 'white';
-    btn.style.borderColor = 'var(--green)';
-  } else {
-    btn.innerText = 'Join Group';
-    btn.style.background = '';
-    btn.style.color = '';
-    btn.style.borderColor = '';
-  }
-}
-
-function createStudyGroup() {
-  const topic = prompt("Enter Study Group Topic (e.g., 'Google Cloud APIs'):");
-  if(topic && topic.trim() !== '') {
-    alert(`Success! Your study group '${topic}' has been created. Others can now join you.`);
-  }
 }
 
 // ---------- AI ROADMAP (GEMINI API) ----------
