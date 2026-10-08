@@ -67,7 +67,7 @@ function renderProblems(filter = 'all') {
   let recHTML = '';
   let arenaHTML = '';
 
-  MOCK_PROBLEMS.forEach(p => {
+  MOCK_PROBLEMS.forEach((p, index) => {
     // Filter logic
     if (filter !== 'all') {
       if (filter === 'hard' && p.diff !== 'Hard') return;
@@ -89,7 +89,7 @@ function renderProblems(filter = 'all') {
         </div>
         <div class="problem-actions">
           <span class="xp-reward">+${p.xp} XP</span>
-          <button class="btn-ghost small" onclick="openModal('${p.title}', '${p.company}', '${p.desc}', ${p.xp})">View Challenge</button>
+          <button class="btn-ghost small" onclick="openModal(${index})">View Challenge</button>
         </div>
       </div>
     `;
@@ -105,27 +105,39 @@ function renderProblems(filter = 'all') {
 }
 
 function filterProblems(filter, btn) {
-  // Update active chip
-  const chips = btn.parentElement.querySelectorAll('.chip');
-  chips.forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  
+  // Update active chip safely
+  if (btn) {
+    const chips = btn.parentElement.querySelectorAll('.chip');
+    chips.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+  }
   // Re-render
   renderProblems(filter);
 }
 
 function switchCompany(companyKey, btn) {
-  // Update active chip
-  const chips = btn.parentElement.querySelectorAll('.chip');
-  chips.forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
+  // Update active chip safely
+  if (btn) {
+    const chips = btn.parentElement.querySelectorAll('.chip');
+    chips.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+  }
 
   const data = HR_DATA[companyKey];
-  document.getElementById('hr-logo').textContent = data.logo;
-  document.getElementById('hr-title').textContent = `${data.name} Recruiter Dashboard`;
-  document.getElementById('hr-sub').innerHTML = `Top performers for: <strong>"${data.title}"</strong>`;
+  if (!data) return;
+
+  const hrLogo = document.getElementById('hr-logo');
+  if (hrLogo) hrLogo.textContent = data.logo;
+
+  const hrTitle = document.getElementById('hr-title');
+  if (hrTitle) hrTitle.textContent = `${data.name} Recruiter Dashboard`;
+
+  const hrSub = document.getElementById('hr-sub');
+  if (hrSub) hrSub.innerHTML = `Top performers for: <strong>"${data.title}"</strong>`;
 
   const tbody = document.getElementById('leaderboard-body');
+  if (!tbody) return;
+
   let html = '';
   data.students.forEach((student, index) => {
     const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
@@ -161,16 +173,19 @@ function renderStreakCalendar() {
 }
 
 // ---------- MODAL ----------
-function openModal(title, company, desc, xp) {
+function openModal(index) {
+  const problem = MOCK_PROBLEMS[index];
+  if (!problem) return;
+
   const content = `
-    <h2 style="font-size:1.5rem;margin-bottom:0.5rem">${title}</h2>
-    <div style="color:var(--primary);font-weight:700;margin-bottom:1.5rem;">${company} Engineering Team</div>
+    <h2 style="font-size:1.5rem;margin-bottom:0.5rem">${problem.title}</h2>
+    <div style="color:var(--primary);font-weight:700;margin-bottom:1.5rem;">${problem.company} Engineering Team</div>
     <div style="padding:1rem;background:var(--bg2);border-radius:8px;margin-bottom:1.5rem;line-height:1.6;">
       <strong>The Problem:</strong><br/>
-      ${desc}
+      ${problem.desc}
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:1.5rem;">
-      <span class="xp-reward" style="font-size:1.2rem">+${xp} XP</span>
+      <span class="xp-reward" style="font-size:1.2rem">+${problem.xp} XP</span>
       <button class="btn-primary" onclick="alert('In production, this opens an embedded VS Code instance with the starter repo.')">Start Coding</button>
     </div>
   `;
