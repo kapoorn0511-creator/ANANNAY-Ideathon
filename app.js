@@ -35,6 +35,109 @@ const MOCK_PROBLEMS = [
   { company: "Stripe", title: "Idempotent Payment Webhooks", diff: "Medium", xp: 350, tags: ["API", "Backend", "Security"], recommended: false, desc: "Ensure that if our payment webhook is triggered twice due to network retries, the user isn't charged twice." }
 ];
 
+const VIDEO_MASTERCLASSES = [
+  {
+    id: 0,
+    company: "amazon",
+    companyBadge: "🟠 Amazon AWS",
+    title: "Architecting Distributed Token-Bucket Rate Limiters in Go",
+    speaker: "Rohit Sen",
+    speakerRole: "Principal Systems Architect @ Amazon AWS",
+    duration: "28:00",
+    rating: "⭐ 4.9 (1,420 students)",
+    tags: ["System Design", "Redis", "Distributed Systems"],
+    summary: "Learn how AWS API Gateways handle 1M+ requests per second using Redis cluster caching, sliding windows, and token bucket algorithms to prevent cascade failures.",
+    chapters: [
+      "00:00 - Why standard rate limiters fail at scale",
+      "07:30 - Token Bucket vs Leaky Bucket vs Sliding Window",
+      "15:20 - Distributed Redis atomic operations (Lua scripts)",
+      "24:10 - MNC interview rubric & design trade-offs"
+    ],
+    challengeIndex: 0,
+    challengeTitle: "Design a Distributed Rate Limiter (+500 XP)"
+  },
+  {
+    id: 1,
+    company: "netflix",
+    companyBadge: "🔴 Netflix",
+    title: "Client-Side Video Buffering & Chunk Streaming Protocols",
+    speaker: "Sarah Chen",
+    speakerRole: "Staff Frontend Infrastructure Architect @ Netflix",
+    duration: "34:00",
+    rating: "⭐ 5.0 (980 students)",
+    tags: ["Frontend", "Streaming Protocols", "Algorithms"],
+    summary: "Discover how Netflix dynamically adapts video bitrates under varying mobile network conditions using client-side buffers, HLS, and MSE protocols.",
+    chapters: [
+      "00:00 - Anatomy of video chunk streaming",
+      "09:15 - MediaSource Extensions (MSE) in modern browsers",
+      "18:40 - Dynamic buffer sizing algorithms",
+      "28:00 - Live debugging production frame drops"
+    ],
+    challengeIndex: 3,
+    challengeTitle: "Implement Video Streaming Buffering (+600 XP)"
+  },
+  {
+    id: 2,
+    company: "google",
+    companyBadge: "🔵 Google",
+    title: "Sub-50ms Search API Latency: Multi-Tier Cache Invalidation",
+    speaker: "Vikram Mehta",
+    speakerRole: "Staff Site Reliability Engineer @ Google Search",
+    duration: "22:00",
+    rating: "⭐ 4.8 (1,850 students)",
+    tags: ["API Performance", "Caching", "Node.js"],
+    summary: "A deep dive into how Google Search optimizes database queries and manages cache invalidation across distributed edge clusters to guarantee sub-50ms responses.",
+    chapters: [
+      "00:00 - Profiling 400ms bottlenecks in production APIs",
+      "06:40 - Edge caching strategies & TTL optimization",
+      "14:15 - Asynchronous background cache warming",
+      "19:30 - Key metrics Google SREs watch in production"
+    ],
+    challengeIndex: 1,
+    challengeTitle: "Optimize Search API Load Time (+300 XP)"
+  },
+  {
+    id: 3,
+    company: "uber",
+    companyBadge: "🚗 Uber",
+    title: "Handling 100k Concurrent Driver Location WebSockets in Real-Time",
+    speaker: "Elena Rostova",
+    speakerRole: "Lead Systems Engineer @ Uber Core Dispatch",
+    duration: "30:00",
+    rating: "⭐ 4.9 (1,120 students)",
+    tags: ["WebSockets", "Go", "Geospatial Streaming"],
+    summary: "How Uber streams driver geospatial coordinates to riders with sub-second latency using distributed WebSocket connection pools, Go goroutines, and spatial hashing.",
+    chapters: [
+      "00:00 - Real-time geospatial dispatch architecture",
+      "08:20 - Scaling WebSocket connection termination",
+      "16:50 - Quadtrees & spatial geo-indexing in Go",
+      "25:00 - High concurrency mock interview scenario"
+    ],
+    challengeIndex: 4,
+    challengeTitle: "Real-time Driver Location Tracking (+550 XP)"
+  },
+  {
+    id: 4,
+    company: "stripe",
+    companyBadge: "💳 Stripe",
+    title: "Building Fault-Tolerant, Idempotent Payment Webhook Systems",
+    speaker: "David Miller",
+    speakerRole: "Tech Lead @ Stripe Payments Core",
+    duration: "26:00",
+    rating: "⭐ 4.9 (840 students)",
+    tags: ["Security", "Idempotency", "Backend Webhooks"],
+    summary: "Understand why network retries double-charge users if APIs lack idempotency keys, and how Stripe builds rock-solid payment webhook dispatchers.",
+    chapters: [
+      "00:00 - The double-charge nightmare & network partitions",
+      "07:10 - Designing idempotency keys & replay protection",
+      "15:30 - Exponential backoff with jitter retry queues",
+      "22:15 - Financial systems consistency requirements"
+    ],
+    challengeIndex: 5,
+    challengeTitle: "Idempotent Payment Webhooks (+350 XP)"
+  }
+];
+
 const HR_DATA = {
   amazon: {
     name: "Amazon", logo: "🟠", title: "Design a Distributed Rate Limiter",
@@ -206,6 +309,155 @@ function closeModal(e) {
   if (e.target.id === 'problem-modal' || e.target.classList.contains('modal-close')) {
     document.getElementById('problem-modal').classList.remove('active');
   }
+}
+
+// ---------- MNC VIDEO MASTERCLASSES ----------
+function renderMasterclasses(filter = 'all') {
+  const grid = document.getElementById('masterclasses-grid');
+  if (!grid) return;
+  
+  let filtered = VIDEO_MASTERCLASSES;
+  if (filter !== 'all') {
+    filtered = VIDEO_MASTERCLASSES.filter(v => v.company === filter);
+  }
+  
+  let html = '';
+  filtered.forEach((video) => {
+    html += `
+      <div class="video-card">
+        <div class="video-thumb" onclick="openVideoModal(${video.id})">
+          <div class="video-thumb-inner">
+            <span class="video-mnc-badge">${video.companyBadge}</span>
+            <div class="video-play-btn">▶</div>
+            <span class="video-duration-badge">${video.duration}</span>
+          </div>
+        </div>
+        <div class="video-body">
+          <h4 class="video-title">${video.title}</h4>
+          <div class="video-speaker">👨‍💼 ${video.speaker} • ${video.speakerRole}</div>
+          <p style="font-size:0.85rem; color:var(--text2); line-height:1.5; margin-bottom:1rem;">${video.summary.substring(0, 110)}...</p>
+          <div class="tech-stack" style="margin-bottom:0.8rem;">
+            ${video.tags.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+          </div>
+          <div class="video-meta">
+            <span>${video.rating}</span>
+            <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem;" onclick="openVideoModal(${video.id})">Watch Lecture ▶</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  grid.innerHTML = html;
+}
+
+function filterMasterclasses(filter, btn) {
+  if (btn) {
+    const chips = btn.parentElement.querySelectorAll('.chip');
+    chips.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderMasterclasses(filter);
+}
+
+function openVideoModal(id) {
+  const video = VIDEO_MASTERCLASSES.find(v => v.id === id);
+  if (!video) return;
+
+  const content = `
+    <!-- Video Player Simulation -->
+    <div class="video-player-box" style="margin-bottom: 1.2rem;">
+      <div class="video-screen-content">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem; opacity: 0.9;">🎬</div>
+        <h3 style="color: white; margin-bottom: 0.4rem; font-size: 1.2rem;">${video.title}</h3>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 1rem;">${video.speaker} • ${video.speakerRole}</p>
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 168, 107, 0.25); border: 1px solid var(--green); color: var(--green); padding: 5px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;">
+          ▶ Playing Masterclass Stream (1080p • 60fps)
+        </div>
+      </div>
+      
+      <!-- Video Controls Bar -->
+      <div class="video-controls-bar">
+        <button style="background: none; border: none; color: white; font-size: 1.1rem; cursor: pointer;">⏸</button>
+        <span style="font-size: 0.75rem; color: rgba(255,255,255,0.7); font-family: monospace;">14:20 / ${video.duration}</span>
+        <div class="video-timeline">
+          <div class="video-timeline-fill" style="width: 50%;"></div>
+        </div>
+        <span style="font-size: 0.85rem; color: rgba(255,255,255,0.8); cursor: pointer;">🔊</span>
+        <span style="font-size: 0.85rem; color: rgba(255,255,255,0.8); cursor: pointer;">⛶</span>
+      </div>
+    </div>
+
+    <!-- Details & Chapters -->
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:10px;">
+      <div>
+        <span style="font-size:0.8rem; background:var(--primary-glow); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">${video.companyBadge}</span>
+        <h2 style="font-size:1.3rem; margin:0.4rem 0 0.2rem;">${video.title}</h2>
+        <p style="font-size:0.88rem; color:var(--text2); margin:0;">Taught by <strong>${video.speaker}</strong> (${video.speakerRole})</p>
+      </div>
+      <div style="font-size:0.9rem; color:var(--text3); font-weight:700;">${video.rating}</div>
+    </div>
+
+    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:1rem; margin-bottom:1.2rem; font-size:0.9rem; line-height:1.6; color:var(--text2);">
+      ${video.summary}
+    </div>
+
+    <div style="margin-bottom:1.5rem;">
+      <h4 style="font-size:0.95rem; margin-bottom:0.6rem; color:var(--text);">📌 Lecture Chapters & System Rubric:</h4>
+      <ul style="padding-left:1.2rem; margin:0; font-size:0.85rem; color:var(--text2); line-height:1.8;">
+        ${video.chapters.map(c => `<li>${c}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:1.2rem; flex-wrap:wrap; gap:10px;">
+      <button class="btn-ghost" onclick="alert('Architecture Slide Deck downloaded (PDF)!')">📥 Download Architecture Deck (PDF)</button>
+      <button class="btn-primary" onclick="closeVideoModal(); openModal(${video.challengeIndex});">⚡ Solve Companion Challenge (+500 XP)</button>
+    </div>
+  `;
+
+  document.getElementById('video-modal-content').innerHTML = content;
+  document.getElementById('video-modal').classList.add('active');
+}
+
+function closeVideoModal(e) {
+  if (!e || e.target.id === 'video-modal' || (e.target && e.target.classList && e.target.classList.contains('modal-close'))) {
+    const modal = document.getElementById('video-modal');
+    if (modal) modal.classList.remove('active');
+  }
+}
+
+function handleVideoUpload() {
+  const title = document.getElementById('upload-video-title')?.value.trim();
+  const speaker = document.getElementById('upload-video-speaker')?.value.trim();
+  const company = document.getElementById('upload-video-company')?.value || 'Amazon';
+
+  if (!title) {
+    alert("Please enter a lecture title.");
+    return;
+  }
+
+  VIDEO_MASTERCLASSES.unshift({
+    id: Date.now(),
+    company: company.toLowerCase(),
+    companyBadge: `🏢 ${company}`,
+    title: title,
+    speaker: speaker || "Lead Engineer",
+    speakerRole: `Senior Staff Architect @ ${company}`,
+    duration: "25:00",
+    rating: "⭐ 5.0 (New Release)",
+    tags: ["System Design", "Cloud", "Live Walkthrough"],
+    summary: `Official engineering architecture masterclass published by ${company} engineers on SkillBridge.`,
+    chapters: [
+      "00:00 - Architecture overview & bottleneck analysis",
+      "10:00 - Core data structures & scaling trade-offs",
+      "20:00 - Production deployment & interview expectations"
+    ],
+    challengeIndex: 0,
+    challengeTitle: `${company} Challenge (+500 XP)`
+  });
+
+  renderMasterclasses('all');
+  alert(`✅ Success! Video Masterclass "${title}" has been published by ${company}! Students can now watch it under the Masterclasses tab.`);
+  showSection('masterclasses');
 }
 
 function closeAuthModal(e) {
@@ -662,5 +914,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProblems('all');
   switchCompany('amazon', document.querySelector('#hr-view .chip.active')); // Load initial HR view
   renderStreakCalendar();
+  renderMasterclasses('all');
   switchChatChannel('venting-space', document.querySelector('.chat-channel.active')); // Load initial chat
 });

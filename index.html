@@ -29,8 +29,9 @@
     <!-- Internal Links (Hidden before Login) -->
     <nav class="nav-links" id="internal-nav" style="display: none; align-items: center;">
       <a href="#home" class="nav-link" onclick="showSection('home')">Home</a>
-      <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
       <a href="#arena" class="nav-link" onclick="showSection('arena')">Arena</a>
+      <a href="#masterclasses" class="nav-link" onclick="showSection('masterclasses')">Masterclasses 🎬</a>
+      <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
       <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR View</a>
       <a href="javascript:void(0)" class="nav-link" style="display:flex; align-items:center; gap:6px; position:relative;" onclick="toggleChat()">
         Peer Lounge <span class="online-dot" style="position:static;"></span>
@@ -277,27 +278,85 @@
         </div>
       </div>
 
+      <!-- FEATURED MNC VIDEO LECTURES -->
+      <div style="margin-bottom: 3rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;">🎬 Video Lectures Uploaded by MNCs</h3>
+            <p style="color: var(--text2); font-size: 0.9rem; margin: 0;">Watch real production system walkthroughs taught by engineering leads at Amazon & Netflix.</p>
+          </div>
+          <button class="btn-ghost small" onclick="showSection('masterclasses')">View All Masterclasses →</button>
+        </div>
+
+        <div class="grid-2">
+          <!-- Featured Video 1 -->
+          <div class="video-card">
+            <div class="video-thumb" onclick="openVideoModal(0)">
+              <div class="video-thumb-inner">
+                <span class="video-mnc-badge">🟠 Amazon AWS</span>
+                <div class="video-play-btn">▶</div>
+                <span class="video-duration-badge">28:00</span>
+              </div>
+            </div>
+            <div class="video-body">
+              <h4 class="video-title">Architecting Distributed Rate Limiters in Go</h4>
+              <div class="video-speaker">👨‍💼 Rohit Sen • Principal Systems Architect @ Amazon AWS</div>
+              <div class="video-meta">
+                <span>⭐ 4.9 (1,420 students)</span>
+                <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openVideoModal(0)">Watch Lecture ▶</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Video 2 -->
+          <div class="video-card">
+            <div class="video-thumb" onclick="openVideoModal(1)">
+              <div class="video-thumb-inner">
+                <span class="video-mnc-badge">🔴 Netflix</span>
+                <div class="video-play-btn">▶</div>
+                <span class="video-duration-badge">34:00</span>
+              </div>
+            </div>
+            <div class="video-body">
+              <h4 class="video-title">Client-Side Video Buffering & Chunk Streaming Protocols</h4>
+              <div class="video-speaker">👩‍💼 Sarah Chen • Staff Frontend Infrastructure Architect @ Netflix</div>
+              <div class="video-meta">
+                <span>⭐ 5.0 (980 students)</span>
+                <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openVideoModal(1)">Watch Lecture ▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- QUICK SHORTCUT TILES -->
-      <div class="grid-3" style="margin-bottom: 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 2rem;">
         <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('arena')">
           <div style="font-size: 2rem; margin-bottom: 0.6rem;">⚡</div>
-          <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Engineering Arena</h4>
-          <p style="color: var(--text2); font-size: 0.88rem; line-height: 1.5;">Pick from 50+ live production backlogs and test edge cases in real environments.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 8px; display: inline-block;">Open Arena →</span>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Engineering Arena</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">Solve 50+ live production backlogs.</p>
+          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">Open Arena →</span>
+        </div>
+
+        <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('masterclasses')">
+          <div style="font-size: 2rem; margin-bottom: 0.6rem;">🎬</div>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Video Masterclasses</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">Learn from senior MNC leads.</p>
+          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">Watch Videos →</span>
         </div>
 
         <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="toggleChat()">
           <div style="font-size: 2rem; margin-bottom: 0.6rem;">👥</div>
-          <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Peer Lounge & Mocks</h4>
-          <p style="color: var(--text2); font-size: 0.88rem; line-height: 1.5;">Join study groups, simulate 1-on-1 peer mock interviews, or chat in the venting space.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 8px; display: inline-block;">Open Lounge →</span>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Peer Lounge & Mocks</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">Study groups & mock interviews.</p>
+          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">Open Lounge →</span>
         </div>
 
         <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('hr-view')">
           <div style="font-size: 2rem; margin-bottom: 0.6rem;">💼</div>
-          <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Recruiter Leaderboard</h4>
-          <p style="color: var(--text2); font-size: 0.88rem; line-height: 1.5;">Check which MNC recruiters are actively browsing candidates for your target roles.</p>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 8px; display: inline-block;">View HR Portal →</span>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Recruiter Leaderboard</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.5;">MNCs hiring from live rank list.</p>
+          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-top: 6px; display: inline-block;">View HR Portal →</span>
         </div>
       </div>
 
@@ -390,6 +449,28 @@
     </div>
   </section>
 
+  <!-- ======================== MASTERCLASSES ======================== -->
+  <section id="masterclasses" class="section">
+    <div class="arena-container">
+      <div class="step-header">
+        <h2>🎬 MNC Video Masterclasses & Architecture Walkthroughs</h2>
+        <p>Watch system architecture walkthroughs and live engineering tutorials uploaded directly by senior leads at Amazon, Netflix, Google, and Uber before solving their production challenges.</p>
+      </div>
+      <!-- FILTER TABS -->
+      <div class="filters">
+        <button class="chip active" onclick="filterMasterclasses('all', this)">All</button>
+        <button class="chip" onclick="filterMasterclasses('amazon', this)">🟠 Amazon</button>
+        <button class="chip" onclick="filterMasterclasses('netflix', this)">🔴 Netflix</button>
+        <button class="chip" onclick="filterMasterclasses('google', this)">🔵 Google</button>
+        <button class="chip" onclick="filterMasterclasses('uber', this)">🚗 Uber</button>
+        <button class="chip" onclick="filterMasterclasses('stripe', this)">💳 Stripe</button>
+      </div>
+      <div class="masterclass-grid" id="masterclasses-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
   <!-- ======================== HR VIEW ======================== -->
   <section id="hr-view" class="section">
     <div class="hr-container">
@@ -458,20 +539,21 @@
           </div>
         </div>
         <div class="portal-card">
-          <div class="portal-icon">📚</div>
-          <h3>Upload Tutorials</h3>
-          <p>Upload learning resources on the exact tech stack and skills your company uses. Students learn directly from you before applying.</p>
+          <div class="portal-icon">🎬</div>
+          <h3>Upload Video Masterclasses</h3>
+          <p>Upload recorded engineering architecture walkthroughs and system design lectures directly from your engineering leads for 10,000+ students.</p>
           <div class="portal-form">
-            <input type="text" class="portal-input" placeholder="Tutorial Title (e.g. How we use Redis at Amazon)"/>
-            <input type="text" class="portal-input" placeholder="Video / Doc Link"/>
-            <select class="portal-select">
-              <option>Redis / Caching</option>
-              <option>System Design</option>
-              <option>React / Frontend</option>
-              <option>Go / Backend</option>
-              <option>Machine Learning</option>
+            <input type="text" id="upload-video-title" class="portal-input" placeholder="Lecture Title (e.g. How AWS Architects Token Bucket Rate Limiters)"/>
+            <input type="text" id="upload-video-speaker" class="portal-input" placeholder="Instructor / Lead (e.g. Principal Systems Architect @ Amazon)"/>
+            <input type="text" id="upload-video-link" class="portal-input" placeholder="Video Link / MP4 Stream (e.g. https://cdn.amazon.jobs/lectures/rate-limiter.mp4)"/>
+            <select class="portal-select" id="upload-video-company">
+              <option value="Amazon">Amazon AWS</option>
+              <option value="Google">Google Search Core</option>
+              <option value="Netflix">Netflix Streaming Infra</option>
+              <option value="Uber">Uber Geospatial Dispatch</option>
+              <option value="Stripe">Stripe Payments Engineering</option>
             </select>
-            <button class="btn-primary" onclick="alert('Tutorial uploaded! Students will see this on their Dashboard.')">📚 Upload Tutorial</button>
+            <button class="btn-primary" onclick="handleVideoUpload()">🎬 Publish Video Masterclass</button>
           </div>
         </div>
         <div class="portal-card portal-card-full">
@@ -487,6 +569,14 @@
       </div>
     </div>
   </section>
+
+  <!-- MNC VIDEO PLAYER MODAL -->
+  <div id="video-modal" class="modal-overlay" onclick="closeVideoModal(event)">
+    <div class="modal-box" style="width: 820px; max-width: 95%; max-height: 90vh; overflow-y: auto; text-align: left; padding: 1.5rem;">
+      <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+      <div id="video-modal-content"></div>
+    </div>
+  </div>
 
   <!-- PROBLEM MODAL -->
   <div id="problem-modal" class="modal-overlay" onclick="closeModal(event)">
