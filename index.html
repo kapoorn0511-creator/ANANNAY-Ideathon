@@ -1662,7 +1662,7 @@
       </div>
 
       <!-- 5. INBOX VIEW: COMMUNITY LOUNGE CHANNELS (Tab 3) -->
-      <div id="insta-channels-wrap" style="display:none; flex:1; flex-direction:column; background:#ffffff;">
+      <div id="insta-channels-wrap" style="display:none; flex:1; flex-direction:column; background:#ffffff; overflow:hidden;">
         <div class="chat-channels" style="padding:10px 14px; background:#fafafa;">
           <span class="chat-channel active" onclick="switchChatChannel('venting-space', this)">💬 Venting Space</span>
           <span class="chat-channel" onclick="switchChatChannel('interview-prep', this)">📚 Interview Prep</span>
@@ -1670,6 +1670,42 @@
         </div>
         <div class="chat-body" id="chat-messages" style="flex:1; overflow-y:auto; padding:14px;">
           <!-- Lounge messages -->
+        </div>
+
+        <!-- Emoji Quick Palette for Lounge -->
+        <div class="insta-emoji-tray" id="lounge-emoji-tray" style="display:none;">
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('❤️')">❤️</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('🔥')">🔥</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('👏')">👏</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('😂')">😂</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('🚀')">🚀</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('💯')">💯</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('☕')">☕</span>
+          <span class="insta-emoji-item" onclick="insertLoungeEmoji('⚡')">⚡</span>
+        </div>
+
+        <!-- Lounge Bottom Pill Input Bar -->
+        <div class="insta-input-bar" id="lounge-input-bar">
+          <div class="insta-pill-input-box">
+            <button class="insta-action-icon" onclick="toggleLoungeEmojiTray()" title="Add emoji">
+              😊
+            </button>
+            <input 
+              type="text" 
+              id="lounge-msg-input" 
+              class="insta-input-field" 
+              placeholder="Message in #venting-space..." 
+              autocomplete="off"
+              oninput="handleLoungeInputChange(this)" 
+              onkeydown="handleLoungeInputKey(event)" 
+            />
+            <button class="insta-action-icon" onclick="sendLoungeMediaSimulation()" title="Share Code Screenshot">
+              🖼️
+            </button>
+          </div>
+          <button class="insta-dynamic-btn" id="lounge-dynamic-btn" onclick="handleLoungeDynamicBtnClick()" title="Send like heart">
+            ❤️
+          </button>
         </div>
       </div>
 

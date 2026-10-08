@@ -2198,6 +2198,7 @@ function showCurrentPeerProfile() {
   }
 }
 
+// ---------- LOUNGE ROOM CHAT LOGIC ----------
 function switchChatChannel(channelName, btn) {
   currentChatChannel = channelName;
   const channels = document.querySelectorAll('.chat-channel');
@@ -2216,6 +2217,216 @@ function switchChatChannel(channelName, btn) {
     chatBody.innerHTML = CHAT_DATA[channelName];
     chatBody.scrollTop = chatBody.scrollHeight;
   }
+
+  // Update input placeholder with current channel name
+  const loungeInput = document.getElementById('lounge-msg-input');
+  if (loungeInput) {
+    loungeInput.placeholder = `Message in #${channelName}...`;
+  }
+}
+
+function handleLoungeInputChange(input) {
+  const dynamicBtn = document.getElementById('lounge-dynamic-btn');
+  if (!dynamicBtn) return;
+
+  const val = input.value.trim();
+  if (val.length > 0) {
+    dynamicBtn.classList.add('send-mode');
+    dynamicBtn.innerText = 'Send';
+    dynamicBtn.title = 'Send message to Lounge';
+  } else {
+    dynamicBtn.classList.remove('send-mode');
+    dynamicBtn.innerText = '❤️';
+    dynamicBtn.title = 'Send like heart';
+  }
+}
+
+function handleLoungeInputKey(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    sendLoungeMessage();
+  }
+}
+
+function handleLoungeDynamicBtnClick() {
+  const dynamicBtn = document.getElementById('lounge-dynamic-btn');
+  if (dynamicBtn && dynamicBtn.classList.contains('send-mode')) {
+    sendLoungeMessage();
+  } else {
+    sendLoungeHeartSticker();
+  }
+}
+
+function sendLoungeMessage() {
+  const input = document.getElementById('lounge-msg-input');
+  if (!input) return;
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  const chatBody = document.getElementById('chat-messages');
+  if (!chatBody) return;
+
+  const msgHTML = `
+    <div class="chat-row you">
+      <div class="chat-avatar">👨‍💻</div>
+      <div class="chat-msg">
+        <span class="chat-username" onclick="showProfile('@anannay_k')">@anannay_k</span> <span class="msg-time">Just now</span><br/>
+        ${text}
+      </div>
+    </div>
+  `;
+
+  chatBody.insertAdjacentHTML('beforeend', msgHTML);
+  if (CHAT_DATA[currentChatChannel]) {
+    CHAT_DATA[currentChatChannel] += msgHTML;
+  }
+
+  input.value = '';
+  handleLoungeInputChange(input);
+
+  const emojiTray = document.getElementById('lounge-emoji-tray');
+  if (emojiTray) emojiTray.style.display = 'none';
+
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  // Trigger contextual peer reply
+  simulateLoungeReply(currentChatChannel, text);
+}
+
+function sendLoungeHeartSticker() {
+  const chatBody = document.getElementById('chat-messages');
+  if (!chatBody) return;
+
+  const msgHTML = `
+    <div class="chat-row you">
+      <div class="chat-avatar">👨‍💻</div>
+      <div class="chat-msg" style="background:transparent; box-shadow:none; padding:4px;">
+        <span style="font-size:2.8rem; line-height:1; display:inline-block; animation:popIn 0.3s ease;">❤️</span>
+      </div>
+    </div>
+  `;
+
+  chatBody.insertAdjacentHTML('beforeend', msgHTML);
+  if (CHAT_DATA[currentChatChannel]) {
+    CHAT_DATA[currentChatChannel] += msgHTML;
+  }
+
+  chatBody.scrollTop = chatBody.scrollHeight;
+  simulateLoungeReply(currentChatChannel, '❤️');
+}
+
+function toggleLoungeEmojiTray() {
+  const tray = document.getElementById('lounge-emoji-tray');
+  if (tray) {
+    tray.style.display = tray.style.display === 'none' ? 'flex' : 'none';
+  }
+}
+
+function insertLoungeEmoji(emoji) {
+  const input = document.getElementById('lounge-msg-input');
+  if (input) {
+    input.value += emoji;
+    input.focus();
+    handleLoungeInputChange(input);
+  }
+  const tray = document.getElementById('lounge-emoji-tray');
+  if (tray) tray.style.display = 'none';
+}
+
+function sendLoungeMediaSimulation() {
+  const chatBody = document.getElementById('chat-messages');
+  if (!chatBody) return;
+
+  const msgHTML = `
+    <div class="chat-row you">
+      <div class="chat-avatar">👨‍💻</div>
+      <div class="chat-msg">
+        <span class="chat-username" onclick="showProfile('@anannay_k')">@anannay_k</span> <span class="msg-time">Just now</span><br/>
+        🖼️ <em>[Shared System Architecture Diagram: Whiteboard Review #SDE-1]</em>
+      </div>
+    </div>
+  `;
+
+  chatBody.insertAdjacentHTML('beforeend', msgHTML);
+  if (CHAT_DATA[currentChatChannel]) {
+    CHAT_DATA[currentChatChannel] += msgHTML;
+  }
+
+  chatBody.scrollTop = chatBody.scrollHeight;
+  simulateLoungeReply(currentChatChannel, 'diagram');
+}
+
+function simulateLoungeReply(channelName, userText) {
+  const chatBody = document.getElementById('chat-messages');
+  if (!chatBody) return;
+
+  let peerHandle = '@neha_g';
+  let peerName = 'Neha Gupta';
+  let peerAvatar = '👱‍♀️';
+  let replyText = 'Thanks for sharing Anannay! Keep up the momentum! 🔥';
+
+  if (channelName === 'venting-space') {
+    peerHandle = '@rahul_k';
+    peerName = 'Rahul Kumar';
+    peerAvatar = '🧑‍💻';
+    replyText = userText === '❤️' 
+      ? 'Sending good vibes back to you Anannay! 🫂❤️' 
+      : 'Hang in there Anannay! We are all in this placement grind together. Take a quick 10-min tea break! ☕';
+  } else if (channelName === 'interview-prep') {
+    peerHandle = '@neha_g';
+    peerName = 'Neha Gupta';
+    peerAvatar = '👱‍♀️';
+    replyText = userText === '❤️'
+      ? 'Amazon AWS interview loop squad let\'s go! 🚀❤️'
+      : 'Great point Anannay! Redis token bucket Lua scripts are high-probability questions in Amazon SDE-1 interviews. 🚀';
+  } else if (channelName === 'general-chill') {
+    peerHandle = '@rohan_k';
+    peerName = 'Rohan K.';
+    peerAvatar = '🎸';
+    replyText = userText === '❤️'
+      ? 'Chill vibes all the way! 🎧❤️'
+      : 'Lofi synthwave beats + clean system architecture = unmatched coding flow 🔥';
+  }
+
+  // Show typing indicator
+  setTimeout(() => {
+    if (currentChatChannel !== channelName) return;
+    const typingHTML = `
+      <div class="chat-row" id="lounge-typing-indicator">
+        <div class="chat-avatar">${peerAvatar}</div>
+        <div class="chat-msg">
+          <div class="typing-dots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    `;
+    chatBody.insertAdjacentHTML('beforeend', typingHTML);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 600);
+
+  // Deliver reply
+  setTimeout(() => {
+    const indicator = document.getElementById('lounge-typing-indicator');
+    if (indicator) indicator.remove();
+
+    if (currentChatChannel !== channelName) return;
+
+    const replyHTML = `
+      <div class="chat-row">
+        <div class="chat-avatar">${peerAvatar}</div>
+        <div class="chat-msg">
+          <span class="chat-username" onclick="showProfile('${peerHandle}')">${peerHandle}</span> <span class="msg-time">Just now</span><br/>
+          ${replyText}
+        </div>
+      </div>
+    `;
+
+    chatBody.insertAdjacentHTML('beforeend', replyHTML);
+    if (CHAT_DATA[channelName]) {
+      CHAT_DATA[channelName] += replyHTML;
+    }
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 2000);
 }
 
 // --- PROFILE & GROUP STUDY LOGIC ---
