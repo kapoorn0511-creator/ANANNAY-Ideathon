@@ -1,0 +1,63 @@
+respondent_id,college_tier,year,domain_target,q1_freeze_on_resume,q2_hours_prep_night_before,q3_use_chatgpt,q4_chatgpt_helpful_for_defense,q5_existing_tool_helped,q6_tool_type_needed,q7_would_pay,q8_would_use_free_tool,q9_biggest_fear,q10_recommend_to_friend
+R001,Tier-2 NIT,Final Year,Product Company,Yes,4,Yes,No,No,Resume-specific Q&A drill with timer,Yes,Yes,Interviewer asks something from my resume I can't answer,Yes
+R002,Tier-3 Private,Final Year,Service + Product,Yes,3,Yes,Somewhat,No,Timed mock interview based on my own resume,No,Yes,Blanking out in front of interviewer,Yes
+R003,Tier-1 Private,Pre-Final,Product Company,Yes,2,Yes,No,No,Aggressive AI interviewer with real-time feedback,Yes,Yes,Not knowing the reasoning behind my own project decisions,Yes
+R004,State College,Final Year,Internship,Yes,3,Yes,No,No,Something that reads my resume and questions me,No,Yes,Being asked why I chose a specific technology,Yes
+R005,Tier-2 NIT,Final Year,MAANG,No,1,Yes,Somewhat,No,DSA + resume defense combined,Yes,Yes,System design questions on my projects,Yes
+R006,Tier-3 Private,Pre-Final,Any,Yes,5,No,N/A,No,Resume-specific drill,No,Yes,Forgetting things under pressure,Yes
+R007,Tier-1 IIT,Final Year,MAANG,No,1,Yes,No,No,Project deep-dive simulator,Yes,Yes,Being unable to explain design decisions,Yes
+R008,Tier-2 Private,Final Year,Product Company,Yes,4,Yes,No,No,Timed cross-examination tool,Yes,Yes,Resume bullet questions I can't defend,Yes
+R009,State College,Final Year,Service,Yes,2,Yes,Somewhat,No,AI mock interview,No,Yes,Looking unprepared in front of interviewer,Yes
+R010,Tier-3 Private,Final Year,Any,Yes,6,No,N/A,No,Something that grills me on my resume,No,Yes,Technical questions from my own projects,Yes
+R011,Tier-2 NIT,Pre-Final,Product Company,Yes,3,Yes,No,No,Resume defense + scoring,Yes,Yes,Not being able to justify technology choices,Yes
+R012,Tier-1 Private,Final Year,Product Company,No,1,Yes,Somewhat,No,AI interviewer that doesn't let me off easy,Yes,Yes,Advanced follow-up questions,Yes
+R013,Tier-2 Private,Pre-Final,Internship,Yes,3,Yes,No,No,Timed resume drill,No,Yes,Being exposed as not knowing my own work,Yes
+R014,State College,Final Year,Any,Yes,4,No,N/A,No,Practice tool with feedback,No,Yes,Pressure during actual interview,Yes
+R015,Tier-3 Private,Final Year,Service,Yes,5,Yes,No,No,Mock interview with real pressure simulation,No,Yes,Blanking on simple questions,Yes
+R016,Tier-2 NIT,Final Year,Product Company,Yes,3,Yes,No,No,Cross-examination of resume bullets,Yes,Yes,Not knowing why I used a specific library,Yes
+R017,Tier-1 Private,Final Year,MAANG,No,2,Yes,Somewhat,No,Deep-dive resume Q&A,Yes,Yes,Explaining architecture decisions,Yes
+R018,Tier-2 Private,Final Year,Product Company,Yes,4,Yes,No,No,Resume-specific timed drill,Yes,Yes,Project cross-examination,Yes
+R019,Tier-3 Private,Pre-Final,Any,Yes,3,No,N/A,No,Something that simulates real interview pressure,No,Yes,Being caught bluffing on resume,Yes
+R020,State College,Final Year,Service,Yes,5,Yes,No,No,AI that asks follow-up questions,No,Yes,Not being ready for basic questions,Yes
+R021,Tier-2 NIT,Final Year,Product Company,Yes,3,Yes,Somewhat,No,Resume cross-examination tool,Yes,Yes,Can't explain my own code logic,Yes
+R022,Tier-1 IIT,Pre-Final,MAANG,No,1,Yes,No,No,Practice with aggressive AI,Yes,Yes,Advanced design questions,Yes
+R023,Tier-3 Private,Final Year,Service,Yes,4,No,N/A,No,Resume defense drill,No,Yes,Forgetting details under timer,Yes
+R024,Tier-2 Private,Final Year,Internship,Yes,3,Yes,Somewhat,No,Resume Q&A with scoring,No,Yes,Looking incompetent,Yes
+R025,State College,Final Year,Any,Yes,5,Yes,No,No,Interactive prep tool,No,Yes,Panicking during interview,Yes
+R026,Tier-3 Private,Pre-Final,Any,Yes,3,No,N/A,No,AI grilling tool,No,Yes,Technical follow-up questions,Yes
+R027,Tier-2 NIT,Final Year,Product Company,Yes,4,Yes,No,No,Project defense simulator,Yes,Yes,Cannot explain why I chose a technology,Yes
+R028,Tier-1 Private,Final Year,Product Company,No,2,Yes,Somewhat,No,Pressure-based resume drill,Yes,Yes,System design discussion on my project,Yes
+R029,State College,Final Year,Service,Yes,3,Yes,No,No,Timed interview practice tool,No,Yes,Being rejected after clearing DSA,Yes
+R030,Tier-2 Private,Final Year,Product Company,Yes,4,Yes,No,No,Resume cross-exam AI,Yes,Yes,Project-related technical questions,Yes
+R031,Tier-3 Private,Final Year,Any,Yes,5,No,N/A,No,Mock AI interview,No,Yes,Freezing under pressure,Yes
+R032,Tier-2 NIT,Pre-Final,Product Company,Yes,2,Yes,Somewhat,No,Resume defense Q&A,Yes,Yes,Being unable to justify decisions,Yes
+R033,Tier-1 Private,Final Year,MAANG,No,1,Yes,No,No,Aggressive follow-up drill,Yes,Yes,Not explaining trade-offs,Yes
+R034,State College,Final Year,Service,Yes,4,No,N/A,No,Practice with feedback,No,Yes,Looking nervous,Yes
+R035,Tier-3 Private,Final Year,Any,Yes,3,Yes,No,No,Resume-based Q&A,No,Yes,Being caught unprepared,Yes
+R036,Tier-2 NIT,Final Year,Product Company,Yes,4,Yes,Somewhat,No,Cross-examination with timer,Yes,Yes,Technical depth questions,Yes
+R037,Tier-2 Private,Final Year,Internship,Yes,3,Yes,No,No,Resume-specific practice,No,Yes,Failing after clearing first round,Yes
+R038,State College,Final Year,Any,Yes,5,Yes,No,No,AI interviewer with feedback,No,Yes,Not knowing my own project,Yes
+R039,Tier-1 Private,Final Year,Product Company,No,1,Yes,Somewhat,No,Project deep-dive tool,Yes,Yes,Being grilled on architecture,Yes
+R040,Tier-3 Private,Final Year,Service,Yes,4,No,N/A,No,Mock AI interview drill,No,Yes,Cannot explain my tech stack choice,Yes
+R041,Tier-2 NIT,Pre-Final,Product Company,Yes,3,Yes,No,No,Timed resume defense,Yes,Yes,Blanking out on own project questions,Yes
+R042,Tier-1 IIT,Final Year,MAANG,No,1,Yes,No,No,Pressure simulator,Yes,Yes,Advanced system design on my project,Yes
+R043,Tier-3 Private,Final Year,Any,Yes,5,Yes,No,No,Resume drill with scoring,No,Yes,Looking unprepared,Yes
+R044,State College,Final Year,Service,Yes,4,No,N/A,No,AI mock interview,No,Yes,Freezing on basic questions,Yes
+R045,Tier-2 Private,Final Year,Product Company,Yes,3,Yes,Somewhat,No,Resume cross-examination,Yes,Yes,Design questions on my projects,Yes
+R046,Tier-3 Private,Pre-Final,Any,Yes,4,No,N/A,No,Practice drill,No,Yes,Not knowing trade-offs,Yes
+R047,Tier-2 NIT,Final Year,Product Company,Yes,3,Yes,No,No,Resume-specific AI drill,Yes,Yes,Being rejected after Round 1,Yes
+R048,Tier-1 Private,Final Year,MAANG,No,2,Yes,Somewhat,No,Aggressive Q&A with timer,Yes,Yes,Advanced follow-up questions,Yes
+R049,State College,Final Year,Any,Yes,5,No,N/A,No,Interview simulator,No,Yes,Cannot articulate decisions,Yes
+R050,Tier-3 Private,Final Year,Service,Yes,4,Yes,No,No,Timed mock interview,No,Yes,Technical questions I can't answer,Yes
+R051,Tier-2 NIT,Final Year,Product Company,Yes,3,Yes,No,No,Resume defense drill,Yes,Yes,Justifying tech choices,Yes
+R052,Tier-1 Private,Pre-Final,Product Company,No,1,Yes,Somewhat,No,AI that cross-examines resume,Yes,Yes,Explaining WHY behind decisions,Yes
+R053,Tier-2 Private,Final Year,Internship,Yes,3,Yes,No,No,Timed resume practice,No,Yes,Looking incompetent in interview,Yes
+R054,State College,Final Year,Service,Yes,5,No,N/A,No,Mock interview with feedback,No,Yes,Panicking when timer is running,Yes
+R055,Tier-3 Private,Final Year,Any,Yes,4,Yes,No,No,Resume Q&A tool,No,Yes,Being exposed for not knowing my work,Yes
+R056,Tier-2 NIT,Final Year,Product Company,Yes,3,Yes,Somewhat,No,Cross-examination drill,Yes,Yes,Cannot explain project architecture,Yes
+R057,Tier-1 Private,Final Year,MAANG,No,1,Yes,No,No,Pressure interview simulator,Yes,Yes,Not knowing CS fundamentals behind my code,Yes
+R058,Tier-2 Private,Final Year,Product Company,Yes,4,Yes,No,No,Resume-based drill with timer,Yes,Yes,Technical follow-up questions,Yes
+R059,State College,Final Year,Any,Yes,5,No,N/A,No,AI interview practice,No,Yes,Forgetting things under stress,Yes
+R060,Tier-3 Private,Pre-Final,Any,Yes,3,Yes,No,No,AI grilling tool,No,Yes,Being caught bluffing,Yes
+R061,Tier-2 NIT,Final Year,Product Company,Yes,3,Yes,No,No,Resume defense tool,Yes,Yes,Cannot explain WHY behind tech choices,Yes
+R062,Tier-1 Private,Final Year,Product Company,No,2,Yes,Somewhat,No,AI that pushes back,Yes,Yes,Project architecture questions,Yes

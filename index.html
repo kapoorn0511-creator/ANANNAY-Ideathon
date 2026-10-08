@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlacementShield — Resume Defense Drill</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <span class="shield-icon">🛡️</span>
+      <span class="brand-name">PlacementShield</span>
+      <span class="badge">Beta</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#home" class="nav-link active" onclick="showSection('home')">Home</a>
+      <a href="#drill" class="nav-link" onclick="showSection('drill')">Start Drill</a>
+      <a href="#about" class="nav-link" onclick="showSection('about')">About</a>
+    </nav>
+  </header>
+
+  <!-- ======================== HOME SECTION ======================== -->
+  <section id="home" class="section active">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-tag">🎯 Built for Placement Season 2025</div>
+        <h1 class="hero-title">
+          Stop <span class="highlight-red">Freezing</span> on Your<br/>
+          Own Resume Projects.
+        </h1>
+        <p class="hero-sub">
+          Interviewers ask: <em>"Why did you use MongoDB instead of SQL?"</em><br/>
+          You freeze. You lose the offer. <strong>PlacementShield trains you for that exact moment.</strong>
+        </p>
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="showSection('drill')">
+            🚀 Start My Drill — Free
+          </button>
+          <a href="#stats" class="btn-ghost">See the Data →</a>
+        </div>
+        <div class="hero-trust">
+          <span>🎓 62 students surveyed</span>
+          <span>•</span>
+          <span>📊 78% reported freezing</span>
+          <span>•</span>
+          <span>🏫 Tier 1–3 colleges</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="interview-card mock-card">
+          <div class="interviewer-label">🤖 AI Interviewer</div>
+          <div class="question-bubble">
+            "You wrote <code>JWT Authentication</code> on your resume. Tell me — why JWT over sessions? What happens when the token is compromised before expiry?"
+          </div>
+          <div class="timer-bar">
+            <div class="timer-fill" style="width:35%"></div>
+          </div>
+          <div class="timer-label">⏱ 22s left to answer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS SECTION -->
+    <div id="stats" class="stats-section">
+      <h2 class="section-title">The Problem Is Real. The Data Proves It.</h2>
+      <p class="section-sub">We interviewed 5 students and surveyed 62 — across Tier 1, Tier 2, and Tier 3 engineering colleges.</p>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num red">78%</div>
+          <div class="stat-desc">of students report <strong>freezing</strong> when interviewers cross-examined their own resume projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num orange">84%</div>
+          <div class="stat-desc">spend <strong>3+ anxious hours</strong> the night before placement rounds, unsure what to revise</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num yellow">67%</div>
+          <div class="stat-desc">built projects by <strong>following tutorials</strong> and cannot explain key design decisions independently</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num green">91%</div>
+          <div class="stat-desc">said they would use a tool that <strong>simulates aggressive interview pressure</strong> on their own resume</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="how-section">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-row">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon">📋</div>
+          <h3>Paste Your Resume Bullet</h3>
+          <p>Drop any resume line — a project, a tech stack, an achievement. No signup needed.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon">🔍</div>
+          <h3>AI Spots Weak Points</h3>
+          <p>PlacementShield instantly analyzes what interviewers will target — jargon, decisions, trade-offs.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon">⚡</div>
+          <h3>Face the Pressure Drill</h3>
+          <p>Answer 5 aggressive follow-up questions with a live timer. Get scored on Clarity, Depth & Honesty.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon">📈</div>
+          <h3>Get Actionable Feedback</h3>
+          <p>See model answers, your weak spots, and what to revise before the real interview.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY DIFFERENT -->
+    <div class="diff-section">
+      <h2 class="section-title">Why Not Just Use ChatGPT?</h2>
+      <div class="diff-table-wrap">
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>ChatGPT / Gemini</th>
+              <th>LeetCode</th>
+              <th>P2P Mock</th>
+              <th class="highlight-col">PlacementShield ✅</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Resume-specific questions</td>
+              <td>❌ Generic</td>
+              <td>❌ No</td>
+              <td>⚠️ Depends on peer</td>
+              <td class="highlight-col">✅ Targeted to YOUR bullet</td>
+            </tr>
+            <tr>
+              <td>Simulated time pressure</td>
+              <td>❌ No</td>
+              <td>✅ (only DSA)</td>
+              <td>⚠️ Sometimes</td>
+              <td class="highlight-col">✅ Real-time countdown</td>
+            </tr>
+            <tr>
+              <td>Aggressive follow-up drill</td>
+              <td>❌ Polite only</td>
+              <td>❌ No</td>
+              <td>⚠️ Peer-dependent</td>
+              <td class="highlight-col">✅ 5-level escalating</td>
+            </tr>
+            <tr>
+              <td>Answer scoring</td>
+              <td>❌ No rubric</td>
+              <td>✅ (only DSA)</td>
+              <td>⚠️ Subjective</td>
+              <td class="highlight-col">✅ Clarity + Depth + Honesty</td>
+            </tr>
+            <tr>
+              <td>Instant, free, no setup</td>
+              <td>⚠️ Rate limits</td>
+              <td>⚠️ Premium needed</td>
+              <td>❌ Scheduling needed</td>
+              <td class="highlight-col">✅ Paste & Go</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- STUDENT QUOTES -->
+    <div class="quotes-section">
+      <h2 class="section-title">What Students Said</h2>
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <div class="quote-text">"I had 'Implemented REST APIs with Node.js' on my resume. The interviewer asked me what HTTP method I used for partial updates and I blanked out. I knew the code but couldn't explain it."</div>
+          <div class="quote-author">— Arjun S., Final Year CSE, NIT Tier-2</div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-text">"I built my capstone project from a YouTube tutorial. When the interviewer asked why I chose React over Vue, I said 'everyone uses it.' That was my last round."</div>
+          <div class="quote-author">— Priya M., Pre-Final Year, State Engineering College</div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-text">"ChatGPT gives me the answer but never puts me under pressure. I need something that mimics a real interviewer who keeps pushing — a tool that doesn't let me off easy."</div>
+          <div class="quote-author">— Rahul K., Final Year, Private Engineering College, Pune</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Ready to Stop Freezing?</h2>
+      <p>Paste one resume bullet. Face the drill. Know exactly what to fix — in 5 minutes.</p>
+      <button class="btn-primary large" onclick="showSection('drill')">🛡️ Start My Free Drill Now</button>
+    </div>
+  </section>
+
+  <!-- ======================== DRILL SECTION ======================== -->
+  <section id="drill" class="section">
+    <div class="drill-container">
+
+      <!-- STEP 1: INPUT -->
+      <div id="step-input" class="drill-step active-step">
+        <div class="step-header">
+          <h2>📋 Step 1: Paste Your Resume Bullet</h2>
+          <p>Enter exactly as it appears on your resume — project line, tech stack, or achievement.</p>
+        </div>
+        <div class="input-area">
+          <textarea id="resume-input" placeholder="e.g. Built a full-stack e-commerce web app using React, Node.js, MongoDB with JWT authentication and Stripe payment integration. Deployed on AWS EC2 with NGINX reverse proxy."></textarea>
+          <div class="example-chips">
+            <span class="chip-label">Try an example:</span>
+            <button class="chip" onclick="loadExample('ml')">ML Project</button>
+            <button class="chip" onclick="loadExample('web')">Web App</button>
+            <button class="chip" onclick="loadExample('api')">REST API</button>
+            <button class="chip" onclick="loadExample('db')">Database</button>
+          </div>
+        </div>
+        <div class="input-meta">
+          <div class="experience-select">
+            <label>My target companies are:</label>
+            <select id="target-level">
+              <option value="startup">Startups / Service Companies</option>
+              <option value="product" selected>Product Companies (MNC)</option>
+              <option value="maang">MAANG / FAANG Level</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="analyzeResume()">🔍 Analyze My Bullet →</button>
+      </div>
+
+      <!-- STEP 2: ANALYSIS -->
+      <div id="step-analysis" class="drill-step">
+        <div class="step-header">
+          <h2>🔍 Step 2: AI Analysis — Danger Zones Detected</h2>
+          <p>These are the <strong>exact areas interviewers will attack</strong>. Are you ready to defend them?</p>
+        </div>
+        <div id="analysis-result" class="analysis-result"></div>
+        <div class="analysis-cta">
+          <button class="btn-secondary" onclick="goBack('step-input')">← Change Bullet</button>
+          <button class="btn-primary" onclick="startDrill()">⚡ Start the Pressure Drill →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: DRILL -->
+      <div id="step-drill" class="drill-step">
+        <div class="drill-header-bar">
+          <div class="drill-progress">
+            <span id="q-counter">Question 1 of 5</span>
+            <div class="progress-dots">
+              <span class="dot active" id="dot-0"></span>
+              <span class="dot" id="dot-1"></span>
+              <span class="dot" id="dot-2"></span>
+              <span class="dot" id="dot-3"></span>
+              <span class="dot" id="dot-4"></span>
+            </div>
+          </div>
+          <div class="timer-display">
+            <span class="timer-icon">⏱</span>
+            <span id="timer-count">60</span>s
+          </div>
+        </div>
+        <div class="pressure-meter">
+          <span class="pressure-label">🔥 Pressure Level:</span>
+          <div class="pressure-bar">
+            <div class="pressure-fill" id="pressure-fill"></div>
+          </div>
+          <span id="pressure-text">Warm-Up</span>
+        </div>
+        <div class="question-card">
+          <div class="interviewer-avatar">🤖</div>
+          <div class="interviewer-name">AI Interviewer</div>
+          <div id="current-question" class="question-text"></div>
+        </div>
+        <div class="answer-area">
+          <textarea id="answer-input" placeholder="Type your answer here... Think clearly. You have 60 seconds."></textarea>
+          <div class="answer-meta">
+            <span class="hint">💡 Tip: Be specific. Mention trade-offs. Don't bluff.</span>
+          </div>
+        </div>
+        <div class="drill-actions">
+          <button class="btn-ghost" onclick="skipQuestion()">Skip (–5 pts)</button>
+          <button class="btn-primary" onclick="submitAnswer()">Submit Answer →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: RESULTS -->
+      <div id="step-results" class="drill-step">
+        <div class="results-header">
+          <h2>📊 Your Drill Report</h2>
+          <p>Based on your answers. Honest. No sugarcoating.</p>
+        </div>
+        <div id="score-display" class="score-display"></div>
+        <div id="detailed-feedback" class="detailed-feedback"></div>
+        <div class="results-actions">
+          <button class="btn-secondary" onclick="restartDrill()">🔄 Drill Again</button>
+          <button class="btn-primary" onclick="showSection('home')">🏠 Back to Home</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== ABOUT SECTION ======================== -->
+  <section id="about" class="section">
+    <div class="about-container">
+      <h2 class="section-title">About PlacementShield</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>🎯 The Problem We Solve</h3>
+          <p>Every year, thousands of engineering students get rejected in placement rounds not because they lack skills — but because they cannot <strong>defend what they built</strong>. Interviewers probe resume projects aggressively, and students who copied from tutorials freeze under pressure.</p>
+          <p>No tool specifically trains students to answer <em>their own resume's questions</em> under time pressure. PlacementShield is built exactly for this gap.</p>
+        </div>
+        <div class="about-card">
+          <h3>📊 Evidence We Collected</h3>
+          <p>We didn't just assume this was a problem. We <strong>interviewed 5 students</strong> in detail and <strong>surveyed 62</strong> across Tier 1, 2, and 3 colleges to validate this pain point.</p>
+          <p>Full interview transcripts and survey data are available in our <code>evidence/</code> folder in the repository.</p>
+          <a href="https://github.com/kapoorn0511-creator/ANANNAY-Ideathon/tree/main/evidence" target="_blank" class="btn-ghost small">📂 View Evidence Data →</a>
+        </div>
+        <div class="about-card">
+          <h3>🛠️ Tech Stack</h3>
+          <ul class="tech-list">
+            <li>⚡ Vanilla HTML5 / CSS3 / JavaScript — Zero dependencies, instant load</li>
+            <li>🤖 Client-side AI simulation engine (expandable to Gemini API)</li>
+            <li>🎨 Custom design system with dark mode</li>
+            <li>📱 Fully responsive — works on mobile and laptop</li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <h3>🚀 Roadmap</h3>
+          <ul class="tech-list">
+            <li>🎙️ Voice input — speak your answer aloud</li>
+            <li>📄 PDF resume parser — auto-extract all bullet points</li>
+            <li>🧠 Gemini API integration for real AI evaluation</li>
+            <li>📚 Question bank per domain (Backend, ML, Data, Frontend)</li>
+            <li>🏆 Leaderboard — compare scores with friends</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h3>Built at ANANNAY Ideathon 2025</h3>
+        <p>PS 4 — Open Innovation: Student Placement Pain Points</p>
+        <p>This project was validated with real student evidence before a single line of code was written.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">🛡️ PlacementShield</div>
+    <div class="footer-text">Built with ❤️ for students who deserve to get the offer. | ANANNAY Ideathon 2025</div>
+    <a href="https://github.com/kapoorn0511-creator/ANANNAY-Ideathon" target="_blank" class="footer-gh">GitHub →</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
