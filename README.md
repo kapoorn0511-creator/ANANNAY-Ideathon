@@ -1,168 +1,212 @@
 # 🛡️ PlacementShield — Resume Defense Drill
 
 > **Stop Freezing on Your Own Resume Projects.**  
-> PlacementShield is an AI-powered interview pressure simulator that cross-examines students on their own resume bullets — with a live timer, aggressive follow-up questions, and honest scoring.
+> An AI-powered interview pressure simulator that cross-examines students on their own resume bullets — with a live timer, escalating follow-up questions, and honest scoring.
+
+**Live Demo:** [Open index.html directly in browser — zero setup needed]  
+**Built for:** ANANNAY Ideathon 2025 | PS 4 — Open Innovation: Student Placement Pain Points  
+**Submission Deadline:** 9 October 2025, 10:00 AM
 
 ---
 
-## 🎯 The Problem
+## 1. What It Does
 
-Every year, thousands of engineering students fail placement rounds in the **Technical Discussion round** — not because they lack skills, but because they **cannot defend what they built**.
+PlacementShield solves one specific, validated problem:
 
-Interviewers aggressively probe resume projects:
-- *"Why did you use MongoDB instead of PostgreSQL?"*
-- *"Your model has 97% accuracy — is it overfitting?"*
-- *"JWT vs sessions — what are the trade-offs?"*
+> **77.4% of students freeze when interviewers ask about their own resume projects.**
 
-Students who built projects from tutorials freeze. They know the code. They don't know **why** they wrote it.
+They built projects from tutorials. They know the code. But they never had to *defend* why they wrote it — which technology choices they made and why. In placement interviews, that costs them the offer.
 
-### What It Costs Students
-- ❌ Offer rejections after clearing DSA
-- ⏰ 3–5 anxious hours of unfocused preparation every night before interviews
-- 🤷 No tool specifically trains for this gap
+**PlacementShield is a 5-minute drill that trains exactly this skill:**
 
-### Why Existing Tools Fail
+1. **Paste your resume bullet** — any project line or tech stack from your resume
+2. **AI detects danger zones** — which technologies interviewers will attack (JWT, MongoDB, React, ML models, etc.)
+3. **Face the pressure drill** — 5 escalating questions with a 60-second live countdown timer and pressure meter
+4. **Get honest scored feedback** — Clarity (10) + Technical Depth (10) + Honesty (10)
+5. **See model answers** — know exactly what to improve before the real interview
 
-| Tool | Problem |
-|---|---|
-| LeetCode | Only trains DSA, not resume defense |
-| ChatGPT | Too polite — agrees with everything, zero pressure |
-| P2P Mock (Pramp) | Peers often not technical enough; hard to schedule |
-| YouTube | One-way — no Q&A, no feedback |
-| InterviewBit | Focus on coding, not project deep-dives |
+**No installation. No signup. Open `index.html` and start in 10 seconds.**
 
 ---
 
-## 📊 Validated Evidence
+## 2. The Problem — Validated with Evidence
 
-We **interviewed 5 students** (detailed transcripts in `evidence/`) and **surveyed 62 students** across Tier-1, Tier-2, and Tier-3 colleges.
+Every year, thousands of engineering students get rejected in the **Technical Discussion round** — not because of DSA, but because they cannot defend their own projects.
+
+Interviewers ask:
+- *"Why MongoDB and not PostgreSQL?"*
+- *"Your ML model shows 97% accuracy — could it be overfitting?"*
+- *"JWT vs sessions — what are the actual trade-offs?"*
+
+### Proof (62-Student Survey + 5 Deep Interviews)
 
 | Metric | Number |
 |---|---|
 | Students who froze on own resume questions | **77.4%** |
-| Students spending 3+ anxious hours the night before | **67.7%** |
-| Students who found no existing tool helpful | **91.9%** |
-| Students who'd use PlacementShield free | **100%** |
+| Students spending 3+ anxious hours before each interview | **67.7%** |
+| Students who found NO existing tool helpful for resume defense | **91.9%** |
+| Students who'd use PlacementShield if free | **100%** |
 | Students who'd recommend it to placement batch | **100%** |
-| Students who said ChatGPT is "too polite" for this | **67.4%** |
+| ChatGPT users who said it's "too polite / no pressure" | **67.4%** |
 
-> 📂 Full evidence in [`evidence/interview_notes.md`](evidence/interview_notes.md), [`evidence/survey_analysis.md`](evidence/survey_analysis.md), and [`evidence/survey_results.csv`](evidence/survey_results.csv)
+> 📂 Full evidence: [`evidence/interview_notes.md`](evidence/interview_notes.md) · [`evidence/survey_analysis.md`](evidence/survey_analysis.md) · [`evidence/survey_results.csv`](evidence/survey_results.csv)
 
-### Student Voices
+**Student Voices (from interviews):**
+> *"ChatGPT gives me the answer but never puts me under pressure. I need something that mimics a real interviewer who keeps pushing."* — Rahul K., Final Year CSE, Pune
 
-> *"ChatGPT gives me the answer but never puts me under pressure. I need something that mimics a real interviewer who keeps pushing."*  
-> — Rahul K., Final Year CSE, Pune
-
-> *"The tutorial I followed just used Firebase. I never questioned it. In the interview I realized I didn't actually know why."*  
-> — Priya M., Pre-Final Year, State Engineering College
-
-> *"People put things on their resume to impress recruiters, not because they understand it deeply. There's a massive gap."*  
-> — Kartik B., Final Year CSE, Delhi
+> *"People put things on their resume to impress recruiters, not because they understand it deeply. There's a massive gap between what students write and what they can actually defend."* — Kartik B., Final Year CSE, Delhi
 
 ---
 
-## 🚀 The Solution: PlacementShield
+## 3. Why Existing Tools Fall Short
 
-PlacementShield is a **web-based, zero-setup interview drill** that:
+| Tool | Specific Gap |
+|---|---|
+| **ChatGPT / Gemini** | Too agreeable — accepts any answer. Zero pressure simulation. 67.4% students confirmed this. |
+| **LeetCode** | Only trains DSA problems. Never asks about *your* project decisions. |
+| **Pramp / P2P Mock** | Peers often not technical enough. Hard to schedule. No consistent quality. |
+| **YouTube / GeeksForGeeks** | One-way learning. No Q&A, no feedback, no pressure. |
 
-1. **📋 Reads your resume bullet** — Paste any project line or achievement
-2. **🔍 Identifies danger zones** — AI detects which technologies an interviewer will attack
-3. **⚡ Drills you under pressure** — 5 escalating follow-up questions with a 60-second live timer and pressure meter
-4. **📊 Scores your answers** — Clarity (10), Technical Depth (10), Honesty (10)
-5. **💡 Gives actionable feedback** — What to improve before the real interview
+**PlacementShield fills the exact gap none of these address.**
 
 ---
 
-## 🛠️ How to Run
+## 4. Done / In Progress / Planned
 
-No installation. No backend. Runs directly in your browser.
+### ✅ Done (as of 8 Oct 2025)
+- [x] Single-page web app — 4 screens: Home, Analysis, Drill, Results
+- [x] Resume bullet analyzer — detects attack zones (JWT, MongoDB, React, ML, Docker, API, Redis, Payment, Python, Deployment)
+- [x] 5-question escalating drill — questions get harder per round
+- [x] 60-second live timer with warning at 15s
+- [x] Real-time pressure meter (Warm-Up → Building → Intense → MAX PRESSURE)
+- [x] Answer scoring engine — Clarity + Technical Depth + Honesty
+- [x] Detailed feedback with model answer guidance
+- [x] Comparison table vs existing tools on homepage
+- [x] Student quote section with validated evidence
+- [x] Dark mode responsive design
+- [x] Mobile-friendly layout with responsive breakpoints
+- [x] Evidence folder: 5 student interviews, 62-student survey, analysis
+- [x] README with all 7 required sections
 
+### 🔄 In Progress
+- [ ] GitHub Pages deployment for live public URL
+- [ ] Improving scoring algorithm with more keyword categories
+- [ ] Adding more question banks per technology domain
+
+### 📋 Planned (Post-Submission Roadmap)
+- [ ] **V2**: Gemini API integration — real generative questions, not pattern-based
+- [ ] **V2**: PDF resume parser — auto-extract all bullet points
+- [ ] **V3**: Voice mode — speak answers aloud, speech-to-text evaluation
+- [ ] **V4**: Domain-specific tracks (Backend, ML, Data Engineering, Frontend)
+- [ ] **V4**: Company-specific question banks (Startup, MNC, MAANG)
+- [ ] **V5**: College leaderboard — compare with placement batch
+- [ ] **V5**: TPO dashboard — batch mock sessions for colleges
+
+---
+
+## 5. Architecture & Technical Details
+
+```
+PlacementShield/
+├── index.html              # Single-page app — all 4 screens (Home, Analysis, Drill, Results)
+├── style.css               # Dark mode design system, fully responsive
+├── app.js                  # Core logic: pattern detection, drill engine, timer, scoring
+├── .env.example            # Template for future API key integration (Gemini API)
+├── evidence/
+│   ├── interview_notes.md  # 5 detailed student interview transcripts
+│   ├── survey_results.csv  # 62-student raw survey data
+│   └── survey_analysis.md  # Key statistics and insights
+└── README.md
+```
+
+### How the Resume Analyzer Works
+1. User pastes resume bullet into textarea
+2. `app.js` runs regex-based pattern matching against 10 technology categories
+3. Each matched category maps to a curated question bank (5 questions per category)
+4. Top 5 questions are selected (one per matched category, shuffled)
+5. Questions are ordered by difficulty (warm-up to max pressure)
+
+### How Scoring Works
+- **Clarity (0–10):** Word count analysis — penalizes one-liners, rewards structured answers
+- **Technical Depth (0–10):** Keyword matching against domain-specific technical vocabulary (e.g., "ACID", "cap theorem", "overfitting", "idempotency")
+- **Honesty (0–10):** Detects genuine reasoning phrases ("because", "trade-off", "limitation", "would improve", "learned")
+
+### Tech Stack — Why These Choices
+- **Vanilla HTML/CSS/JS** — Zero dependencies = zero setup failure risk during demo. Works offline. No `npm install`, no build step.
+- **Client-side only** — No backend server needed. Deployable as static site on GitHub Pages instantly.
+- **No frameworks** — Deliberate choice: judges can open DevTools and read the code directly. Transparent and auditable.
+- **Expandable to Gemini API** — The `evaluateAnswer()` function is designed to be swapped with a Gemini API call without changing any other code.
+
+---
+
+## 6. Tools and AI Used
+
+> **This project was built using Antigravity IDE and its built-in AI coding assistant (Antigravity AI).**
+
+### AI Tools Used
+| Tool | How It Was Used |
+|---|---|
+| **Antigravity IDE** | Primary development environment — code was written with AI assistance via Antigravity's Agent Mode and inline code suggestions |
+| **Antigravity AI (Agent Mode)** | Generated the full application structure, resume pattern detection engine, scoring algorithm, and responsive CSS design system |
+| **Antigravity AI (Inline Completion)** | Used for autocomplete while refining scoring logic and question bank categories |
+
+### How AI Accelerated This Project
+- **Problem validation**: AI helped structure interview questions for student interviews
+- **Code generation**: Full HTML/CSS/JS app generated with AI assistance in a single session
+- **Evidence organization**: Survey analysis and interview summaries structured with AI help
+- **README drafting**: This README was written with Antigravity AI assistance
+
+> All code has been reviewed and understood by the team. No API keys are used in the current version. See `.env.example` for planned Gemini API integration.
+
+---
+
+## 7. How to Run
+
+### Option A — Instant (Recommended for Demo)
 ```bash
 # Clone the repository
 git clone https://github.com/kapoorn0511-creator/ANANNAY-Ideathon.git
 cd ANANNAY-Ideathon
 
-# Open directly in browser
-# Just double-click index.html — or use Live Server in VS Code
+# Open in browser — that's it!
+# Double-click index.html  OR
+# Right-click → Open with → Chrome/Edge/Firefox
 ```
 
-That's it. No `npm install`. No Python setup. Instant demo.
-
----
-
-## 🏗️ Architecture
-
-```
-PlacementShield/
-├── index.html          # Single-page app — all 4 screens
-├── style.css           # Dark mode design system, fully responsive
-├── app.js              # Core engine: pattern detection, drill, scoring
-├── evidence/
-│   ├── interview_notes.md    # 5 detailed student interviews
-│   ├── survey_results.csv    # 62-student raw survey data
-│   └── survey_analysis.md   # Analysis with key statistics
-└── README.md
+### Option B — VS Code Live Server
+```bash
+# Install Live Server extension in VS Code
+# Right-click index.html → Open with Live Server
+# App opens at http://127.0.0.1:5500
 ```
 
-### Tech Choices (and why)
-- **Vanilla HTML/CSS/JS** — Zero dependency = zero setup = demo-safe. Works offline. No "npm not found" issues during presentations.
-- **Client-side engine** — Resume analysis uses a pattern-matching knowledge base (expandable to Gemini API with one function swap)
-- **No auth, no database** — Frictionless. Students don't need to sign up to get value.
+### Option C — GitHub Pages (Live URL)
+The app is deployed / will be deployed at:  
+`https://kapoorn0511-creator.github.io/ANANNAY-Ideathon/`
 
 ---
 
-## 🔄 Differentiation
-
-| | ChatGPT | LeetCode | P2P Mock | **PlacementShield** |
-|---|---|---|---|---|
-| Resume-specific questions | ❌ Generic | ❌ No | ⚠️ Depends on peer | ✅ Targeted to YOUR bullet |
-| Time pressure simulation | ❌ No | ✅ DSA only | ⚠️ Sometimes | ✅ 60s real-time countdown |
-| Aggressive follow-up drill | ❌ Too polite | ❌ No | ⚠️ Peer-dependent | ✅ 5-level escalating |
-| Answer scoring | ❌ No rubric | ✅ DSA only | ⚠️ Subjective | ✅ Clarity + Depth + Honesty |
-| Instant, free, zero setup | ⚠️ Rate limits | ⚠️ Premium | ❌ Scheduling needed | ✅ Paste & Go |
+## Security Notes
+- ✅ No API keys in this repository
+- ✅ No `.env` files committed
+- ✅ No `node_modules` or build artifacts
+- ✅ No passwords, tokens, or secrets anywhere in codebase
+- See `.env.example` for the planned Gemini API key format (for V2 integration)
 
 ---
 
-## 📈 Traction Signals
-
-- **100%** of surveyed students said they would use this tool
-- **41.9%** said they would pay for it
-- **8+ students independently described PlacementShield** during interviews before seeing the product — saying *"something that reads my resume and grills me with a timer"*
-
----
-
-## 🗺️ Roadmap
-
-| Phase | Feature |
-|---|---|
-| V1 (Now) | Pattern-based resume analysis + 5Q drill + scoring |
-| V2 | Gemini API integration for real generative questions + PDF resume upload |
-| V3 | Voice mode (speak your answer), speech-to-text evaluation |
-| V4 | Domain tracks (Backend, ML, Data, Frontend), company-specific question banks |
-| V5 | Friend leaderboard, batch mode for college TPO departments |
+## PS 4 Submission Checklist
+- [x] Clear problem definition — who has it, what it costs, why existing tools fail
+- [x] Evidence — 5 student interviews + 62-student survey in `evidence/` folder
+- [x] Working prototype — live demo, zero setup
+- [x] Differentiation — comparison table vs all existing tools
+- [x] Signs students would use it — 100% yes free, 41.9% would pay
+- [x] Short pitch: *"Students write things on their resume they can't defend. PlacementShield fixes that in 5 minutes."*
+- [x] AI tools disclosed in README (Rule 6)
+- [x] No API keys / secrets committed (Rule 7)
+- [x] Mobile-friendly layout (Final submission requirement)
+- [x] Regular incremental commits (ongoing)
 
 ---
 
-## 🏆 Why This Wins
-
-1. **Real problem with real proof** — Not a guess. 77.4% freeze rate, 62-person survey, 5 deep interviews.
-2. **No tool like it exists** — We checked every tool students use. None specifically does this.
-3. **Students asked for exactly this** — Organically, before seeing our product.
-4. **Live, working demo** — Open `index.html` and it works immediately. No setup.
-5. **Massive potential** — 1.5 million engineering students graduate in India annually. Every single one faces this problem.
-
----
-
-## 📋 PS 4 Checklist
-
-- [x] **Clear problem definition** — Students can't defend their own resume projects under interview pressure
-- [x] **Existing tools fall short** — Evidenced with specific gaps per tool
-- [x] **Evidence folder** — 5 student interviews + 62-student survey with raw data
-- [x] **Working prototype** — Live web app, zero setup, demo-ready
-- [x] **Differentiation** — Specific comparison table vs all existing alternatives
-- [x] **Signs students would use it** — 100% would use free, 41.9% would pay, students described the product themselves
-- [x] **Short pitch** — "Students put things on their resume they can't defend. PlacementShield fixes that in 5 minutes."
-
----
-
-*Built at ANANNAY Ideathon 2025 | PS 4 — Open Innovation: Student Placement Pain Points*
+*ANANNAY Ideathon 2025 | PS 4 — Open Innovation: Student Placement Pain Points*
