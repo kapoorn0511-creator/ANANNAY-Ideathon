@@ -258,7 +258,8 @@ select:focus { outline: none; border-color: var(--primary); }
 .companies-section { padding: 3rem 2rem; text-align: center; background: var(--bg2); }
 .companies-label { font-size: 0.9rem; color: var(--text3); font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; }
 .companies-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
-.company-logo-chip { background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 0.9rem; color: var(--text); box-shadow: 0 2px 8px rgba(108,99,255,0.05); transition: var(--transition); }
+.company-logo-chip { display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 0.9rem; color: var(--text); box-shadow: 0 2px 8px rgba(108,99,255,0.05); transition: var(--transition); }
+.company-logo-chip img { width: 16px; height: 16px; display: block; object-fit: contain; }
 .company-logo-chip:hover { transform: translateY(-2px); border-color: var(--primary); }
 
 /* VS LeetCode Table */
