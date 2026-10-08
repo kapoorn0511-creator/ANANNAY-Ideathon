@@ -255,12 +255,11 @@ select:focus { outline: none; border-color: var(--primary); }
 .nav-profile:hover { border-color: var(--primary); }
 
 /* Companies Row */
-.companies-section { padding: 3rem 2rem; text-align: center; background: var(--bg2); }
-.companies-label { font-size: 0.9rem; color: var(--text3); font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; }
-.companies-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
-.company-logo-chip { display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 0.9rem; color: var(--text); box-shadow: 0 2px 8px rgba(108,99,255,0.05); transition: var(--transition); }
-.company-logo-chip img { width: 16px; height: 16px; display: block; object-fit: contain; }
-.company-logo-chip:hover { transform: translateY(-2px); border-color: var(--primary); }
+.companies-section { padding: 4rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+.companies-label { font-size: 0.85rem; color: var(--text3); font-weight: 700; text-transform: uppercase; margin-bottom: 2rem; letter-spacing: 1.5px; }
+.partner-strip { display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+.partner-strip img { height: 28px; width: auto; opacity: 0.45; filter: grayscale(100%); transition: all 0.3s ease; }
+.partner-strip img:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
 
 /* VS LeetCode Table */
 .diff-section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
