@@ -437,70 +437,92 @@ function createStudyGroup() {
 }
 
 // ---------- AI ROADMAP (GEMINI API) ----------
-function toggleAIModal() {
-  const overlay = document.getElementById('ai-modal-overlay');
-  if (overlay.style.display === 'flex') {
-    overlay.style.display = 'none';
-  } else {
-    overlay.style.display = 'flex';
-    // Load saved API key if exists
-    const savedKey = localStorage.getItem('gemini_api_key');
-    if (savedKey) document.getElementById('gemini-api-key').value = savedKey;
-  }
-}
-
-async function generateRoadmap() {
-  console.log("Generating roadmap...");
-  const apiKey = document.getElementById('gemini-api-key').value.trim();
-  const topic = document.getElementById('roadmap-topic').value.trim();
-  const outputDiv = document.getElementById('ai-roadmap-output');
-  const btn = document.getElementById('ai-generate-btn');
-
-  if (!topic) return alert("Please enter a role or topic (e.g. 'Frontend at Netflix').");
-
-  // Save the key locally so the user doesn't have to retype it
-  if (apiKey) localStorage.setItem('gemini_api_key', apiKey);
-
-  // UI Loading State
-  btn.innerText = "Generating...";
-  btn.disabled = true;
-  outputDiv.style.display = 'block';
-  outputDiv.innerHTML = `
-    <div style='text-align:center; padding: 2rem;'>
-      <div class='typing-dots' style='justify-content:center; margin-bottom: 1rem;'><span></span><span></span><span></span></div>
-      <p style='color:var(--primary); font-weight: 600;'>Google Gemini is analyzing industry requirements for ${topic}...</p>
-    </div>
-  `;
-
-  // --- HACKATHON DEMO FALLBACK (No API Key needed) ---
-  if (!apiKey) {
-    console.log("No API key provided. Using simulated Hackathon Demo mode...");
-    setTimeout(() => {
-      outputDiv.innerHTML = `
-        <h3 style="color:var(--primary); margin-bottom:1rem;">🚀 4-Week Roadmap: ${topic} (Demo Mode)</h3>
-        <ul style="padding-left:20px; color:var(--text2);">
-          <li style="margin-bottom:10px;"><strong>Week 1: Fundamentals & System Design:</strong> Understand the core architecture. Review high-level concepts like load balancing, caching, and database scaling.</li>
-          <li style="margin-bottom:10px;"><strong>Week 2: Core Technologies:</strong> Dive deep into the specific tech stack required (e.g., Node.js, React, WebSockets). Build a mini-prototype.</li>
-          <li style="margin-bottom:10px;"><strong>Week 3: Advanced Optimization:</strong> Focus on edge cases, API rate limiting, performance tuning, and writing highly concurrent code.</li>
-          <li style="margin-bottom:10px;"><strong>Week 4: Mock Interviews & Peer Review:</strong> Use the Peer Lounge to conduct 3 mock interviews. Finalize your portfolio project.</li>
-        </ul>
-        <div style="margin-top:1.5rem; padding:10px; background:rgba(108,99,255,0.1); border-left:3px solid var(--primary); font-size:0.85rem; color:var(--text3);">
-          <em>Note: This is a simulated fallback response because no Gemini API key was entered. Enter a real API key for dynamic AI generation!</em>
-        </div>
-      `;
-      btn.innerText = "Generate";
-      btn.disabled = false;
-    }, 2500);
-    return;
-  }
-  // ----------------------------------------------------
-
-  // Construct the prompt
-  const promptText = `Act as an expert career coach and senior software engineer. Create a highly practical, 4-week preparation roadmap for a student aiming for this goal: ${topic}. 
-  Focus on real-world skills and practical application. Avoid generic outdated theories. 
-  Format the response STRICTLY as HTML with <h3>, <ul>, <li>, and <strong> tags. Do NOT wrap the response in markdown blocks like \`\`\`html. Keep it concise, engaging, and highly actionable.`;
-
+// ---------- AI ROADMAP (GEMINI API) ----------
+window.toggleAIModal = function() {
   try {
+    console.log("toggleAIModal clicked!");
+    const overlay = document.getElementById('ai-modal-overlay');
+    if (!overlay) {
+      console.error("Modal overlay not found!");
+      return;
+    }
+    
+    // Check computed style or inline style
+    const isHidden = (overlay.style.display === 'none' || overlay.style.display === '');
+    
+    if (isHidden) {
+      overlay.style.display = 'flex';
+      // Load saved API key if exists
+      const savedKey = localStorage.getItem('gemini_api_key');
+      const keyInput = document.getElementById('gemini-api-key');
+      if (savedKey && keyInput) keyInput.value = savedKey;
+    } else {
+      overlay.style.display = 'none';
+    }
+  } catch(e) {
+    console.error("Error in toggleAIModal:", e);
+  }
+};
+
+window.generateRoadmap = async function() {
+  try {
+    console.log("Generating roadmap...");
+    const apiKeyInput = document.getElementById('gemini-api-key');
+    const topicInput = document.getElementById('roadmap-topic');
+    const outputDiv = document.getElementById('ai-roadmap-output');
+    const btn = document.getElementById('ai-generate-btn');
+
+    const apiKey = apiKeyInput ? apiKeyInput.value.trim() : '';
+    const topic = topicInput ? topicInput.value.trim() : '';
+
+    outputDiv.style.display = 'block';
+
+    if (!topic) {
+      outputDiv.innerHTML = `<div style="color: var(--red); padding: 10px; border: 1px solid var(--red); border-radius: 8px;">⚠️ Please enter a role or topic (e.g. 'Frontend at Netflix') to generate a roadmap.</div>`;
+      return;
+    }
+
+    // Save the key locally so the user doesn't have to retype it
+    if (apiKey) localStorage.setItem('gemini_api_key', apiKey);
+
+    // UI Loading State
+    btn.innerText = "Generating...";
+    btn.disabled = true;
+    outputDiv.innerHTML = `
+      <div style='text-align:center; padding: 2rem;'>
+        <div class='typing-dots' style='justify-content:center; margin-bottom: 1rem;'><span></span><span></span><span></span></div>
+        <p style='color:var(--primary); font-weight: 600;'>Google Gemini is analyzing industry requirements for ${topic}...</p>
+      </div>
+    `;
+
+    // --- HACKATHON DEMO FALLBACK (No API Key needed) ---
+    if (!apiKey) {
+      console.log("No API key provided. Using simulated Hackathon Demo mode...");
+      setTimeout(() => {
+        outputDiv.innerHTML = `
+          <h3 style="color:var(--primary); margin-bottom:1rem;">🚀 4-Week Roadmap: ${topic} (Demo Mode)</h3>
+          <ul style="padding-left:20px; color:var(--text2);">
+            <li style="margin-bottom:10px;"><strong>Week 1: Fundamentals & System Design:</strong> Understand the core architecture. Review high-level concepts like load balancing, caching, and database scaling.</li>
+            <li style="margin-bottom:10px;"><strong>Week 2: Core Technologies:</strong> Dive deep into the specific tech stack required (e.g., Node.js, React, WebSockets). Build a mini-prototype.</li>
+            <li style="margin-bottom:10px;"><strong>Week 3: Advanced Optimization:</strong> Focus on edge cases, API rate limiting, performance tuning, and writing highly concurrent code.</li>
+            <li style="margin-bottom:10px;"><strong>Week 4: Mock Interviews & Peer Review:</strong> Use the Peer Lounge to conduct 3 mock interviews. Finalize your portfolio project.</li>
+          </ul>
+          <div style="margin-top:1.5rem; padding:10px; background:rgba(108,99,255,0.1); border-left:3px solid var(--primary); font-size:0.85rem; color:var(--text3);">
+            <em>Note: This is a simulated fallback response because no Gemini API key was entered. Enter a real API key for dynamic AI generation!</em>
+          </div>
+        `;
+        btn.innerText = "Generate";
+        btn.disabled = false;
+      }, 2500);
+      return;
+    }
+    // ----------------------------------------------------
+
+    // Construct the prompt
+    const promptText = `Act as an expert career coach and senior software engineer. Create a highly practical, 4-week preparation roadmap for a student aiming for this goal: ${topic}. 
+    Focus on real-world skills and practical application. Avoid generic outdated theories. 
+    Format the response STRICTLY as HTML with <h3>, <ul>, <li>, and <strong> tags. Do NOT wrap the response in markdown blocks like \`\`\`html. Keep it concise, engaging, and highly actionable.`;
+
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -519,22 +541,28 @@ async function generateRoadmap() {
     let htmlContent = data.candidates[0].content.parts[0].text;
     
     // Clean up if the model includes markdown wrapper
-    htmlContent = htmlContent.replace(/```html/gi, '').replace(/```/g, '');
+    htmlContent = htmlContent.replace(/\`\`\`html/gi, '').replace(/\`\`\`/g, '');
 
     outputDiv.innerHTML = htmlContent;
   } catch (err) {
     console.error("Gemini API Error:", err);
-    outputDiv.innerHTML = `
-      <div style="background: rgba(255, 71, 87, 0.1); border-left: 4px solid var(--red); padding: 15px; color: var(--text);">
-        <strong style="color: var(--red);">API Error:</strong> ${err.message}
-        <br><br><span style="font-size: 0.85rem; color: var(--text3);">Make sure your API key is correct and active. Check browser console for details.</span>
-      </div>
-    `;
+    const outputDiv = document.getElementById('ai-roadmap-output');
+    if(outputDiv) {
+      outputDiv.innerHTML = `
+        <div style="background: rgba(255, 71, 87, 0.1); border-left: 4px solid var(--red); padding: 15px; color: var(--text);">
+          <strong style="color: var(--red);">API Error:</strong> ${err.message}
+          <br><br><span style="font-size: 0.85rem; color: var(--text3);">Make sure your API key is correct and active. Check browser console for details.</span>
+        </div>
+      `;
+    }
   } finally {
-    btn.innerText = "Generate";
-    btn.disabled = false;
+    const btn = document.getElementById('ai-generate-btn');
+    if(btn) {
+      btn.innerText = "Generate";
+      btn.disabled = false;
+    }
   }
-}
+};
 
 // Ensure init covers basic setup
 document.addEventListener('DOMContentLoaded', () => {
