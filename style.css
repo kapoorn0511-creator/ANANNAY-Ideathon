@@ -245,6 +245,15 @@ select:focus { outline: none; border-color: var(--primary); }
 .stat-bar-num { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
 .stat-bar-label { font-size: 0.9rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
+/* ============ VISION SECTION ============ */
+.vision-section { background: var(--bg3); padding: 5rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+.vision-container { max-width: 800px; margin: 0 auto; }
+.vision-text { font-size: 1.15rem; color: var(--text2); line-height: 1.8; margin-bottom: 1.5rem; }
+.vision-text strong { color: var(--text); }
+.nav-auth { display: flex; gap: 1rem; align-items: center; }
+.nav-profile { display: flex; gap: 10px; align-items: center; cursor: pointer; padding: 4px 12px; border-radius: 999px; background: var(--bg2); border: 1px solid var(--border); }
+.nav-profile:hover { border-color: var(--primary); }
+
 /* Companies Row */
 .companies-section { padding: 3rem 2rem; text-align: center; background: var(--bg2); }
 .companies-label { font-size: 0.9rem; color: var(--text3); font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; }

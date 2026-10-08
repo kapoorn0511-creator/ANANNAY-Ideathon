@@ -199,6 +199,51 @@ function closeModal(e) {
   }
 }
 
+function closeAuthModal(e) {
+  if (e.target.id === 'auth-modal' || e.target.classList.contains('modal-close')) {
+    document.getElementById('auth-modal').classList.remove('active');
+  }
+}
+
+function openAuth(type) {
+  document.getElementById('auth-modal').classList.add('active');
+  toggleAuthMode(type);
+}
+
+function toggleAuthMode(type) {
+  const loginTab = document.getElementById('tab-login');
+  const signupTab = document.getElementById('tab-signup');
+  const signupFields = document.getElementById('signup-fields');
+  const submitBtn = document.getElementById('auth-submit-btn');
+
+  if (type === 'login') {
+    loginTab.style.color = 'var(--text)';
+    signupTab.style.color = 'var(--text3)';
+    signupFields.style.display = 'none';
+    submitBtn.textContent = 'Sign In';
+  } else {
+    loginTab.style.color = 'var(--text3)';
+    signupTab.style.color = 'var(--text)';
+    signupFields.style.display = 'flex';
+    submitBtn.textContent = 'Create Account';
+  }
+}
+
+function mockLogin() {
+  // Hide Auth Modal
+  document.getElementById('auth-modal').classList.remove('active');
+  
+  // Update Navbar UI
+  document.getElementById('auth-nav').style.display = 'none';
+  document.getElementById('internal-nav').style.display = 'flex';
+  document.getElementById('user-nav').style.display = 'flex';
+  
+  // Go to Dashboard
+  showSection('dashboard');
+  
+  alert("Welcome to IndustrySync! You are now logged in as Arjun S.");
+}
+
 // ---------- INIT ----------
 document.addEventListener('DOMContentLoaded', () => {
   showSection('home');
