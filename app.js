@@ -3275,32 +3275,21 @@ document.addEventListener('DOMContentLoaded', () => {
   switchChatChannel('venting-space', document.querySelector('.chat-channel.active')); // Load initial chat
   renderInstaInboxList(); // Pre-load Instagram DM conversations
 
-  // Check saved session in localStorage
-  let savedLogin = null;
-  try {
-    savedLogin = localStorage.getItem('sb_user_logged_in');
-  } catch (e) {}
+  // Default on page load / restart: ALWAYS show the public Landing Page
+  const authNav = document.getElementById('auth-nav');
+  if (authNav) authNav.style.display = 'flex';
 
-  if (savedLogin === 'true') {
-    // Automatically restore logged-in dashboard state
-    const authNav = document.getElementById('auth-nav');
-    if (authNav) authNav.style.display = 'none';
+  const internalNav = document.getElementById('internal-nav');
+  if (internalNav) internalNav.style.display = 'none';
 
-    const internalNav = document.getElementById('internal-nav');
-    if (internalNav) internalNav.style.display = 'flex';
+  const userWrapper = document.getElementById('user-nav-wrapper');
+  if (userWrapper) userWrapper.style.display = 'none';
 
-    const userWrapper = document.getElementById('user-nav-wrapper');
-    if (userWrapper) userWrapper.style.display = 'flex';
+  const userNav = document.getElementById('user-nav');
+  if (userNav) userNav.style.display = 'none';
 
-    const userNav = document.getElementById('user-nav');
-    if (userNav) userNav.style.display = 'flex';
+  const chatWidget = document.getElementById('chat-widget-container');
+  if (chatWidget) chatWidget.style.display = 'none';
 
-    const chatWidget = document.getElementById('chat-widget-container');
-    if (chatWidget) chatWidget.style.display = 'block';
-
-    showSection('home');
-  } else {
-    // Show public landing page
-    showSection('landing');
-  }
+  showSection('landing');
 });
