@@ -138,9 +138,13 @@ const VIDEO_MASTERCLASSES = [
   }
 ];
 
+const TOTAL_REGISTERED_STUDENTS = 10482;
+let currentSelectedCompany = 'amazon';
+
 const HR_DATA = {
   amazon: {
     name: "Amazon", logo: "🟠", title: "Design a Distributed Rate Limiter",
+    submissions: 482, shortlisted: 24, activeDrives: "2 Drives", nextDeadline: "in 17 days",
     students: [
       { name: "Neha Gupta", college: "IIT Delhi", match: "95%", xp: "4,200 XP" },
       { name: "Rahul K.", college: "Pune Institute", match: "90%", xp: "3,850 XP" },
@@ -149,6 +153,7 @@ const HR_DATA = {
   },
   google: {
     name: "Google", logo: "🔵", title: "Optimize Search API Load Time",
+    submissions: 615, shortlisted: 18, activeDrives: "1 Drive", nextDeadline: "in 10 days",
     students: [
       { name: "Priya M.", college: "State Engineering College", match: "98%", xp: "5,100 XP" },
       { name: "Kartik B.", college: "Delhi University", match: "88%", xp: "2,900 XP" }
@@ -156,6 +161,7 @@ const HR_DATA = {
   },
   microsoft: {
     name: "Microsoft", logo: "🟦", title: "Build an Accessible Data Grid",
+    submissions: 512, shortlisted: 22, activeDrives: "1 Drive", nextDeadline: "in 28 days",
     students: [
       { name: "Sneha P.", college: "BITS Pilani", match: "100%", xp: "6,000 XP" },
       { name: "Ankit D.", college: "VIT Vellore", match: "92%", xp: "3,100 XP" }
@@ -163,11 +169,90 @@ const HR_DATA = {
   },
   netflix: {
     name: "Netflix", logo: "🔴", title: "Implement Video Streaming Buffering",
+    submissions: 340, shortlisted: 12, activeDrives: "1 Drive", nextDeadline: "in 6 days",
     students: [
       { name: "Rohan M.", college: "IIT Bombay", match: "99%", xp: "7,200 XP" }
     ]
   }
 };
+
+const HR_NOTICES = [
+  {
+    id: 1,
+    company: "amazon",
+    companyBadge: "🟠 Amazon AWS",
+    title: "Amazon AWS SDE-1 Cloud Systems Hiring Drive (2026 Batch)",
+    role: "Software Development Engineer 1 (AWS Cloud Core)",
+    deadline: "Oct 25, 2026 • 11:59 PM IST",
+    daysLeft: "17 Days Left",
+    badgeType: "green",
+    batches: "2025 & 2026 Graduating Batches",
+    mandatoryChallenge: "Design a Distributed Rate Limiter",
+    ctc: "₹45 LPA • Bangalore / Hyderabad / Hybrid",
+    applicants: 482,
+    instructions: "Students must solve the Rate Limiter challenge with >90% edge case pass rate. Top 50 will receive fast-track technical interview invitations."
+  },
+  {
+    id: 2,
+    company: "amazon",
+    companyBadge: "🟠 Amazon AWS",
+    title: "Amazon Summer Cloud Engineering Internship 2027",
+    role: "Cloud Infrastructure Intern",
+    deadline: "Nov 10, 2026 • 06:00 PM IST",
+    daysLeft: "33 Days Left",
+    badgeType: "green",
+    batches: "2027 Batch (3rd Year Undergrads)",
+    mandatoryChallenge: "Design a Distributed Rate Limiter",
+    ctc: "₹1.1 Lakh/month Stipend + PPO Opportunity",
+    applicants: 290,
+    instructions: "Evaluation based on clean code structure, concurrency handling, and system design architecture documentation."
+  },
+  {
+    id: 3,
+    company: "google",
+    companyBadge: "🔵 Google Search",
+    title: "Google Search SRE & Performance Engineering Drive",
+    role: "Site Reliability Engineer (Search Infra)",
+    deadline: "Oct 18, 2026 • 05:00 PM IST",
+    daysLeft: "10 Days Left",
+    badgeType: "yellow",
+    batches: "2025 & 2026 Batch",
+    mandatoryChallenge: "Optimize Search API Load Time",
+    ctc: "₹52 LPA • Bangalore / Pune",
+    applicants: 615,
+    instructions: "Must optimize the target search endpoint to sub-50ms latency using intelligent Redis caching and async indexing."
+  },
+  {
+    id: 4,
+    company: "netflix",
+    companyBadge: "🔴 Netflix",
+    title: "Netflix Edge & UI Architecture Fellowship 2026",
+    role: "Frontend Infrastructure Engineer",
+    deadline: "Oct 14, 2026 • 11:59 PM IST",
+    daysLeft: "6 Days Left",
+    badgeType: "red",
+    batches: "All Batches & Self-Taught Developers",
+    mandatoryChallenge: "Implement Video Streaming Buffering",
+    ctc: "$120,000 / ₹60 LPA Equivalent • Remote",
+    applicants: 340,
+    instructions: "🔴 URGENT CUTOFF: Submission window closes in 6 days. Implement adaptive bitrate streaming with client buffer management."
+  },
+  {
+    id: 5,
+    company: "microsoft",
+    companyBadge: "🟦 Microsoft",
+    title: "Microsoft 365 Accessible Web Systems Graduate Program",
+    role: "Software Engineer - Web Platforms",
+    deadline: "Nov 05, 2026 • 11:59 PM IST",
+    daysLeft: "28 Days Left",
+    badgeType: "green",
+    batches: "2025 & 2026 Batch",
+    mandatoryChallenge: "Build an Accessible Data Grid",
+    ctc: "₹42 LPA • Hyderabad / Noida / Bengaluru",
+    applicants: 512,
+    instructions: "Requirement: 100% WCAG 2.1 AA accessibility compliance and keyboard navigation support for virtualized data grids."
+  }
+];
 
 // ---------- RENDER FUNCTIONS ----------
 function renderProblems(filter = 'all') {
@@ -228,6 +313,8 @@ function filterProblems(filter, btn) {
 }
 
 function switchCompany(companyKey, btn) {
+  currentSelectedCompany = companyKey;
+
   // Update active chip safely
   if (btn) {
     const chips = btn.parentElement.querySelectorAll('.chip');
@@ -245,27 +332,352 @@ function switchCompany(companyKey, btn) {
   if (hrTitle) hrTitle.textContent = `${data.name} Recruiter Dashboard`;
 
   const hrSub = document.getElementById('hr-sub');
-  if (hrSub) hrSub.innerHTML = `Top performers for: <strong>"${data.title}"</strong>`;
+  if (hrSub) hrSub.innerHTML = `Target Challenge: <strong>"${data.title}"</strong>`;
 
+  // Update stats cards
+  const statTotal = document.getElementById('hr-stat-total');
+  if (statTotal) statTotal.textContent = TOTAL_REGISTERED_STUDENTS.toLocaleString();
+
+  const statSolved = document.getElementById('hr-stat-solved');
+  if (statSolved) statSolved.textContent = data.submissions;
+
+  const statHired = document.getElementById('hr-stat-hired');
+  if (statHired) statHired.textContent = data.shortlisted;
+
+  const statNotices = document.getElementById('hr-stat-notices');
+  if (statNotices) statNotices.textContent = data.activeDrives;
+
+  // Render leaderboard
   const tbody = document.getElementById('leaderboard-body');
-  if (!tbody) return;
+  if (tbody) {
+    let html = '';
+    data.students.forEach((student, index) => {
+      const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
+      const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`;
+      html += `
+        <tr>
+          <td class="${rankClass}">${rankIcon}</td>
+          <td><strong>${student.name}</strong></td>
+          <td>${student.college}</td>
+          <td><span class="tech-tag" style="background:var(--green);color:white;border:none;">${student.match}</span></td>
+          <td class="xp-reward">${student.xp}</td>
+          <td><button class="btn-hire" onclick="alert('Interview invite sent to ${student.name} via SkillBridge platform!')">Hire / Interview</button></td>
+        </tr>
+      `;
+    });
+    tbody.innerHTML = html;
+  }
+
+  // Also refresh notices, tutorials, challenges for this company
+  renderHRNotices(companyKey);
+  renderHRTutorials(companyKey);
+  renderHRChallenges(companyKey);
+}
+
+function switchHRTab(tabName) {
+  // Update button active states
+  const tabBtns = document.querySelectorAll('.hr-subtab-btn');
+  tabBtns.forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`hr-tab-${tabName}-btn`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // Hide all panes, show target pane
+  const panes = document.querySelectorAll('.hr-tab-pane');
+  panes.forEach(p => p.style.display = 'none');
+  const targetPane = document.getElementById(`hr-view-${tabName}`);
+  if (targetPane) targetPane.style.display = 'block';
+
+  // Render content
+  if (tabName === 'notices') renderHRNotices(currentSelectedCompany);
+  if (tabName === 'tutorials') renderHRTutorials(currentSelectedCompany);
+  if (tabName === 'challenges') renderHRChallenges(currentSelectedCompany);
+}
+
+function renderHRNotices(companyKey) {
+  const container = document.getElementById('hr-notices-list');
+  if (!container) return;
+
+  const notices = HR_NOTICES.filter(n => n.company.toLowerCase() === companyKey.toLowerCase());
+  if (notices.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 2rem; text-align: center; color: var(--text3); background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius2);">
+        No active recruitment notices found for ${companyKey.toUpperCase()}. Click "+ Post New Drive Notice" above to create one.
+      </div>
+    `;
+    return;
+  }
 
   let html = '';
-  data.students.forEach((student, index) => {
-    const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
-    const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`;
+  notices.forEach(n => {
     html += `
-      <tr>
-        <td class="${rankClass}">${rankIcon}</td>
-        <td><strong>${student.name}</strong></td>
-        <td>${student.college}</td>
-        <td><span class="tech-tag" style="background:var(--green);color:white;border:none;">${student.match}</span></td>
-        <td class="xp-reward">${student.xp}</td>
-        <td><button class="btn-hire" onclick="alert('Interview invite sent to ${student.name} via SkillBridge platform!')">Hire / Interview</button></td>
-      </tr>
+      <div class="hr-notice-card">
+        <div class="hr-notice-header">
+          <div>
+            <span style="font-size:0.75rem; background:var(--primary-glow); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">
+              ${n.companyBadge}
+            </span>
+            <h4 style="margin: 0.5rem 0 0.2rem 0; font-size: 1.15rem; color: var(--text);">${n.title}</h4>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--primary); font-weight: 600;">Role: ${n.role}</p>
+          </div>
+          <span class="hr-notice-deadline-badge ${n.badgeType}">
+            ⏳ Deadline: ${n.deadline} (${n.daysLeft})
+          </span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem; margin: 0.8rem 0; font-size: 0.85rem;">
+          <div><strong style="color:var(--text3);">Eligible Batches:</strong><br/>${n.batches}</div>
+          <div><strong style="color:var(--text3);">Mandatory Challenge:</strong><br/><span style="color:var(--primary); font-weight:600;">${n.mandatoryChallenge}</span></div>
+          <div><strong style="color:var(--text3);">CTC / Stipend:</strong><br/>${n.ctc}</div>
+          <div><strong style="color:var(--text3);">Active Applicants:</strong><br/><span style="color:var(--green); font-weight:700;">${n.applicants} Candidates</span></div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text2); line-height: 1.5; margin: 0 0 1rem 0;">
+          <em>"${n.instructions}"</em>
+        </p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 0.8rem; flex-wrap: wrap; gap: 8px;">
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="alert('Viewing applicant tracking list for: ${n.title}\\nTotal submissions: ${n.applicants}')">
+            👥 View Applicants (${n.applicants})
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-ghost" style="padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Notice deadline extended by 7 days!')">⏰ Extend Deadline</button>
+            <button class="btn-ghost" style="padding: 6px 12px; font-size: 0.8rem; color: #ff4b4b;" onclick="alert('Notice archived.')">Archive</button>
+          </div>
+        </div>
+      </div>
     `;
   });
-  tbody.innerHTML = html;
+  container.innerHTML = html;
+}
+
+function renderHRTutorials(companyKey) {
+  const container = document.getElementById('hr-tutorials-list');
+  if (!container) return;
+
+  const tutorials = VIDEO_MASTERCLASSES.filter(v => v.company.toLowerCase() === companyKey.toLowerCase());
+  if (tutorials.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; padding: 2rem; text-align: center; color: var(--text3); background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius2);">
+        No tutorials published by ${companyKey.toUpperCase()} yet. Click "+ Add New Tutorial" to upload one.
+      </div>
+    `;
+    return;
+  }
+
+  let html = '';
+  tutorials.forEach(video => {
+    html += `
+      <div class="video-card">
+        <div class="video-thumb" onclick="openVideoModal(${video.id})">
+          <div class="video-thumb-inner">
+            <span class="video-mnc-badge">${video.companyBadge}</span>
+            <div class="video-play-btn">▶</div>
+            <span class="video-duration-badge">${video.duration}</span>
+          </div>
+        </div>
+        <div class="video-body">
+          <h4 class="video-title">${video.title}</h4>
+          <div class="video-speaker">👨‍💼 ${video.speaker} • ${video.speakerRole}</div>
+          <p style="font-size:0.85rem; color:var(--text2); line-height:1.5; margin-bottom:1rem;">${video.summary.substring(0, 110)}...</p>
+          <div class="video-meta">
+            <span>${video.rating}</span>
+            <button class="btn-primary" style="padding:6px 12px; font-size:0.8rem;" onclick="openVideoModal(${video.id})">Preview ▶</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function renderHRChallenges(companyKey) {
+  const container = document.getElementById('hr-challenges-list');
+  if (!container) return;
+
+  const challenges = MOCK_PROBLEMS.filter(p => p.company.toLowerCase() === companyKey.toLowerCase());
+  if (challenges.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; padding: 2rem; text-align: center; color: var(--text3); background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius2);">
+        No active challenges posted for ${companyKey.toUpperCase()}. Click "+ Post New Challenge" to deploy one.
+      </div>
+    `;
+    return;
+  }
+
+  let html = '';
+  challenges.forEach(p => {
+    const diffColor = p.diff === 'Hard' ? 'var(--red)' : p.diff === 'Medium' ? 'var(--yellow)' : 'var(--green)';
+    html += `
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="company-badge">${p.company}</div>
+          <span class="xp-reward">+${p.xp} XP</span>
+        </div>
+        <h3 class="problem-title">${p.title}</h3>
+        <p class="problem-desc">${p.desc}</p>
+        <div class="problem-meta">
+          <span style="color:${diffColor};">🎯 ${p.diff}</span>
+          <span>⏱️ 45 mins</span>
+        </div>
+        <div class="tech-stack">
+          ${p.tags.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+        </div>
+        <div class="problem-actions">
+          <span class="xp-reward">Active in Arena</span>
+          <button class="btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="switchHRTab('leaderboard')">View Candidates</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+// Modal actions
+function openPostProblemModal() {
+  const modal = document.getElementById('hr-post-problem-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function openAddTutorialModal() {
+  const modal = document.getElementById('hr-add-tutorial-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function openPostNoticeModal() {
+  const modal = document.getElementById('hr-post-notice-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeHRModal(e, modalId) {
+  if (!e || e.target.id === modalId || (e.target && e.target.classList && e.target.classList.contains('modal-close'))) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.remove('active');
+  }
+}
+
+function submitHRPostProblem() {
+  const title = document.getElementById('hr-np-title')?.value.trim();
+  const company = document.getElementById('hr-np-company')?.value || 'Amazon';
+  const diff = document.getElementById('hr-np-diff')?.value || 'Medium';
+  const xp = parseInt(document.getElementById('hr-np-xp')?.value || '500', 10);
+  const tagsStr = document.getElementById('hr-np-tags')?.value || 'System Design, Backend';
+  const desc = document.getElementById('hr-np-desc')?.value.trim();
+
+  if (!title) {
+    alert("Please enter a challenge title.");
+    return;
+  }
+
+  const tags = tagsStr.split(',').map(t => t.trim()).filter(Boolean);
+
+  const newProblem = {
+    company: company,
+    title: title,
+    diff: diff,
+    xp: xp,
+    tags: tags.length ? tags : ["System Design"],
+    recommended: true,
+    desc: desc || `Production challenge deployed by the ${company} engineering team.`
+  };
+
+  MOCK_PROBLEMS.unshift(newProblem);
+  renderProblems('all');
+  renderHRChallenges(currentSelectedCompany);
+
+  document.getElementById('hr-post-problem-modal').classList.remove('active');
+  alert(`✅ Success! Real-world problem "${title}" has been posted to SkillBridge Arena! Students can now start solving it.`);
+  switchHRTab('challenges');
+}
+
+function submitHRAddTutorial() {
+  const title = document.getElementById('hr-nt-title')?.value.trim();
+  const company = document.getElementById('hr-nt-company')?.value || 'Amazon';
+  const duration = document.getElementById('hr-nt-duration')?.value || '28:00';
+  const speaker = document.getElementById('hr-nt-speaker')?.value || 'Principal Systems Architect';
+  const url = document.getElementById('hr-nt-url')?.value || '';
+  const summary = document.getElementById('hr-nt-summary')?.value || 'System architecture deep-dive.';
+
+  if (!title) {
+    alert("Please enter a tutorial title.");
+    return;
+  }
+
+  const newTutorial = {
+    id: Date.now(),
+    company: company.toLowerCase(),
+    companyBadge: `🏢 ${company}`,
+    title: title,
+    speaker: speaker,
+    speakerRole: `Engineering Lead @ ${company}`,
+    duration: duration,
+    rating: "⭐ 5.0 (New Release)",
+    tags: ["System Design", "Cloud Architecture"],
+    summary: summary,
+    chapters: [
+      "00:00 - Architecture overview & bottleneck analysis",
+      "10:00 - Data structures & scaling trade-offs",
+      "20:00 - Live production debugging & Q&A"
+    ],
+    challengeIndex: 0,
+    challengeTitle: `${company} Challenge (+500 XP)`
+  };
+
+  VIDEO_MASTERCLASSES.unshift(newTutorial);
+  renderMasterclasses('all');
+  renderHRTutorials(currentSelectedCompany);
+
+  document.getElementById('hr-add-tutorial-modal').classList.remove('active');
+  alert(`✅ Success! Tutorial / Masterclass "${title}" has been published to all students!`);
+  switchHRTab('tutorials');
+}
+
+function submitHRPostNotice() {
+  const title = document.getElementById('hr-nn-title')?.value.trim();
+  const company = document.getElementById('hr-nn-company')?.value || 'Amazon';
+  const role = document.getElementById('hr-nn-role')?.value || 'Software Engineer';
+  const deadline = document.getElementById('hr-nn-deadline')?.value || 'Nov 15, 2026';
+  const daysLeft = document.getElementById('hr-nn-days')?.value || '20 Days Left';
+  const batches = document.getElementById('hr-nn-batch')?.value || '2025 & 2026 Batches';
+  const mandatoryChallenge = document.getElementById('hr-nn-challenge')?.value || 'Design a Distributed Rate Limiter';
+  const ctc = document.getElementById('hr-nn-ctc')?.value || '₹40 LPA • Full-time';
+  const instructions = document.getElementById('hr-nn-notes')?.value || 'Direct Day-1 interview invites for top performers.';
+
+  if (!title) {
+    alert("Please enter a notice headline.");
+    return;
+  }
+
+  const newNotice = {
+    id: Date.now(),
+    company: company.toLowerCase(),
+    companyBadge: `🏢 ${company}`,
+    title: title,
+    role: role,
+    deadline: deadline,
+    daysLeft: daysLeft,
+    badgeType: "green",
+    batches: batches,
+    mandatoryChallenge: mandatoryChallenge,
+    ctc: ctc,
+    applicants: 12,
+    instructions: instructions
+  };
+
+  HR_NOTICES.unshift(newNotice);
+
+  if (HR_DATA[company.toLowerCase()]) {
+    HR_DATA[company.toLowerCase()].activeDrives = `${HR_NOTICES.filter(n => n.company === company.toLowerCase()).length} Drives`;
+  }
+
+  renderHRNotices(currentSelectedCompany);
+  const statNotices = document.getElementById('hr-stat-notices');
+  if (statNotices && HR_DATA[currentSelectedCompany]) {
+    statNotices.textContent = HR_DATA[currentSelectedCompany].activeDrives;
+  }
+
+  document.getElementById('hr-post-notice-modal').classList.remove('active');
+  alert(`📢 Success! Recruitment Notice "${title}" published with deadline ${deadline}! Students have been notified.`);
+  switchHRTab('notices');
 }
 
 function renderStreakCalendar() {

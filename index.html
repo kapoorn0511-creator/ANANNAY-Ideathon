@@ -329,6 +329,53 @@
         </div>
       </div>
 
+      <!-- ACTIVE MNC HIRING DRIVES WITH DEADLINES -->
+      <div style="margin-bottom: 3rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;">📢 Active MNC Hiring Drives & Deadlines</h3>
+            <p style="color: var(--text2); font-size: 0.9rem; margin: 0;">Solve mandatory architecture challenges before the deadline countdown expires to get shortlisted.</p>
+          </div>
+          <button class="btn-ghost small" onclick="showSection('hr-view')">View Recruiter Leaderboards →</button>
+        </div>
+
+        <div class="grid-2">
+          <!-- Drive Notice 1 -->
+          <div class="hr-notice-card" style="margin-bottom:0;">
+            <div class="hr-notice-header">
+              <div>
+                <span style="font-size:0.75rem; background:var(--primary-glow); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">🟠 Amazon AWS</span>
+                <h4 style="margin: 0.5rem 0 0.2rem 0; font-size: 1.1rem; color: var(--text);">Amazon SDE-1 Cloud Systems Hiring Drive</h4>
+                <p style="margin:0; font-size:0.85rem; color:var(--primary); font-weight:600;">₹45 LPA • 2025 & 2026 Batches</p>
+              </div>
+              <span class="hr-notice-deadline-badge green">⏳ 17 Days Left</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text2); margin:0.6rem 0;">Mandatory: <strong>Design a Distributed Rate Limiter</strong> (>90% test cases required).</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:0.8rem; margin-top:auto;">
+              <span style="font-size:0.8rem; color:var(--text3);">482 Candidates Submitted</span>
+              <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem;" onclick="openModal(0)">⚡ Solve Challenge Now</button>
+            </div>
+          </div>
+
+          <!-- Drive Notice 2 -->
+          <div class="hr-notice-card" style="margin-bottom:0;">
+            <div class="hr-notice-header">
+              <div>
+                <span style="font-size:0.75rem; background:rgba(255,75,75,0.15); color:var(--red); padding:3px 10px; border-radius:999px; font-weight:700;">🔴 Netflix Infra</span>
+                <h4 style="margin: 0.5rem 0 0.2rem 0; font-size: 1.1rem; color: var(--text);">Netflix UI Architecture Fellowship</h4>
+                <p style="margin:0; font-size:0.85rem; color:var(--primary); font-weight:600;">$120,000 / ₹60 LPA • Remote</p>
+              </div>
+              <span class="hr-notice-deadline-badge" style="background:rgba(255,75,75,0.15); color:#ff4b4b;">🔴 6 Days Left</span>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text2); margin:0.6rem 0;">Mandatory: <strong>Implement Video Streaming Buffering</strong> (Client MSE buffer logic).</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:0.8rem; margin-top:auto;">
+              <span style="font-size:0.8rem; color:var(--text3);">340 Candidates Submitted</span>
+              <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem;" onclick="openModal(3)">⚡ Solve Challenge Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- QUICK SHORTCUT TILES -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 2rem;">
         <div class="pitch-card" style="padding: 1.5rem; cursor: pointer; transition: var(--transition);" onclick="showSection('arena')">
@@ -473,38 +520,142 @@
 
   <!-- ======================== HR VIEW ======================== -->
   <section id="hr-view" class="section">
-    <div class="hr-container">
-      <div class="hr-header">
-        <div class="hr-company-logo" id="hr-logo">A</div>
-        <div>
-          <h2 id="hr-title">Amazon Recruiter Dashboard</h2>
-          <p id="hr-sub">Top performers for: <strong>"Design a Distributed Rate Limiter"</strong></p>
+    <div class="hr-container" style="max-width: 1100px;">
+      
+      <!-- Top Action Bar & Company Title -->
+      <div class="hr-header" style="justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 1.2rem;">
+          <div class="hr-company-logo" id="hr-logo">🟠</div>
+          <div>
+            <h2 id="hr-title" style="margin: 0 0 4px 0;">Amazon Recruiter Dashboard</h2>
+            <p id="hr-sub" style="margin: 0;">Target Challenge: <strong>"Design a Distributed Rate Limiter"</strong></p>
+          </div>
+        </div>
+
+        <!-- Quick HR Action Buttons -->
+        <div class="hr-btn-group">
+          <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="openPostProblemModal()">
+            ➕ Post Real-World Problem
+          </button>
+          <button class="btn-ghost" style="padding: 8px 16px; font-size: 0.85rem;" onclick="openAddTutorialModal()">
+            🎬 Add Tutorial / Masterclass
+          </button>
+          <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; background: #e056fd;" onclick="openPostNoticeModal()">
+            📢 Post Notice with Deadlines
+          </button>
         </div>
       </div>
 
-      <!-- COMPANY TABS -->
-      <div class="filters">
+      <!-- Live Recruiting Stats Bar -->
+      <div class="hr-stats-grid">
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">👥 Total Registered Students</span>
+          <div class="hr-stat-val" id="hr-stat-total">10,482</div>
+          <span class="hr-stat-sub">↑ 412 new candidate signups</span>
+        </div>
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">⚡ Submissions for Challenge</span>
+          <div class="hr-stat-val" id="hr-stat-solved">482</div>
+          <span class="hr-stat-sub">↑ 88% pass rate on edge cases</span>
+        </div>
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">🎯 Interview Invites Sent</span>
+          <div class="hr-stat-val" id="hr-stat-hired">24</div>
+          <span class="hr-stat-sub">Top 5% candidates shortlisted</span>
+        </div>
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">⏱️ Active Hiring Deadlines</span>
+          <div class="hr-stat-val" id="hr-stat-notices">2 Drives</div>
+          <span class="hr-stat-sub" style="color: #ff4b4b;">Next cutoff: in 17 days</span>
+        </div>
+      </div>
+
+      <!-- COMPANY SWITCHER TABS -->
+      <div class="filters" style="margin-bottom: 1.5rem;">
+        <span style="font-weight: 700; font-size: 0.85rem; color: var(--text3); margin-right: 8px; align-self: center;">Select Company View:</span>
         <button class="chip active" onclick="switchCompany('amazon', this)">🟠 Amazon</button>
         <button class="chip" onclick="switchCompany('google', this)">🔵 Google</button>
         <button class="chip" onclick="switchCompany('microsoft', this)">🟦 Microsoft</button>
         <button class="chip" onclick="switchCompany('netflix', this)">🔴 Netflix</button>
       </div>
 
-      <div class="leaderboard-table-wrap">
-        <table class="leaderboard-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Student</th>
-              <th>College</th>
-              <th>Skills Matched</th>
-              <th>XP Earned</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="leaderboard-body"></tbody>
-        </table>
+      <!-- HR SUB-SECTIONS NAVIGATION -->
+      <div class="hr-subtabs">
+        <button class="hr-subtab-btn active" id="hr-tab-leaderboard-btn" onclick="switchHRTab('leaderboard')">
+          🏆 Candidate Leaderboard
+        </button>
+        <button class="hr-subtab-btn" id="hr-tab-notices-btn" onclick="switchHRTab('notices')">
+          📢 Recruitment Notices & Deadlines
+        </button>
+        <button class="hr-subtab-btn" id="hr-tab-tutorials-btn" onclick="switchHRTab('tutorials')">
+          📚 Uploaded Tutorials & Masterclasses
+        </button>
+        <button class="hr-subtab-btn" id="hr-tab-challenges-btn" onclick="switchHRTab('challenges')">
+          ⚔️ Company Real-World Challenges
+        </button>
       </div>
+
+      <!-- 1. LEADERBOARD TAB -->
+      <div id="hr-view-leaderboard" class="hr-tab-pane">
+        <div class="leaderboard-table-wrap">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>College</th>
+                <th>Skills Matched</th>
+                <th>XP Earned</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. NOTICES & DEADLINES TAB -->
+      <div id="hr-view-notices" class="hr-tab-pane" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="margin: 0 0 4px 0; font-size: 1.15rem;">Active Recruitment Drives & Deadlines</h3>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text2);">Announce mandatory problem challenges and application deadlines to registered students.</p>
+          </div>
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; background: #e056fd;" onclick="openPostNoticeModal()">+ Post New Drive Notice</button>
+        </div>
+        <div id="hr-notices-list">
+          <!-- Rendered dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- 3. TUTORIALS TAB -->
+      <div id="hr-view-tutorials" class="hr-tab-pane" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="margin: 0 0 4px 0; font-size: 1.15rem;">Company Engineering Masterclasses & Tutorials</h3>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text2);">System design walkthroughs taught by company engineering leads.</p>
+          </div>
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openAddTutorialModal()">+ Add New Tutorial</button>
+        </div>
+        <div id="hr-tutorials-list" class="masterclass-grid">
+          <!-- Rendered dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- 4. CHALLENGES TAB -->
+      <div id="hr-view-challenges" class="hr-tab-pane" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="margin: 0 0 4px 0; font-size: 1.15rem;">Company Real-World Architecture Challenges</h3>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text2);">Challenges currently active in the Arena for this company.</p>
+          </div>
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openPostProblemModal()">+ Post New Challenge</button>
+        </div>
+        <div id="hr-challenges-list" class="arena-grid">
+          <!-- Rendered dynamically via JS -->
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -569,6 +720,181 @@
       </div>
     </div>
   </section>
+
+  <!-- HR: POST REAL-WORLD PROBLEM MODAL -->
+  <div id="hr-post-problem-modal" class="modal-overlay" onclick="closeHRModal(event, 'hr-post-problem-modal')">
+    <div class="modal-box" style="max-width: 550px; text-align: left;">
+      <button class="modal-close" onclick="document.getElementById('hr-post-problem-modal').classList.remove('active')">✕</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem; background:var(--primary-glow); padding:8px; border-radius:10px;">⚔️</span>
+        <div>
+          <h3 style="margin:0; font-size:1.3rem;">Post Real-World Problem</h3>
+          <p style="margin:0; font-size:0.85rem; color:var(--text2);">Deploy a real engineering production backlog directly into SkillBridge Arena.</p>
+        </div>
+      </div>
+      <div class="portal-form">
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Challenge Title</label>
+        <input type="text" id="hr-np-title" class="portal-input" placeholder="e.g. Design a Distributed Rate Limiter" />
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Company</label>
+            <select id="hr-np-company" class="portal-select">
+              <option value="Amazon">🟠 Amazon AWS</option>
+              <option value="Google">🔵 Google Search</option>
+              <option value="Microsoft">🟦 Microsoft</option>
+              <option value="Netflix">🔴 Netflix</option>
+              <option value="Uber">🚗 Uber</option>
+              <option value="Stripe">💳 Stripe</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Difficulty</label>
+            <select id="hr-np-diff" class="portal-select">
+              <option value="Hard">🔴 Hard</option>
+              <option value="Medium">🟡 Medium</option>
+              <option value="Easy">🟢 Easy</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">XP Reward</label>
+            <input type="number" id="hr-np-xp" class="portal-input" placeholder="e.g. 500" value="500" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Tech Tags (Comma separated)</label>
+            <input type="text" id="hr-np-tags" class="portal-input" placeholder="e.g. Redis, Go, System Design" value="Redis, System Design" />
+          </div>
+        </div>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Problem Description</label>
+        <textarea id="hr-np-desc" class="portal-input" rows="3" style="resize:vertical;" placeholder="Describe what the student needs to build and what edge cases to handle..."></textarea>
+
+        <button class="btn-primary" style="width:100%; justify-content:center; margin-top:1rem;" onclick="submitHRPostProblem()">
+          🚀 Publish Challenge to Arena
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR: ADD TUTORIAL / MASTERCLASS MODAL -->
+  <div id="hr-add-tutorial-modal" class="modal-overlay" onclick="closeHRModal(event, 'hr-add-tutorial-modal')">
+    <div class="modal-box" style="max-width: 550px; text-align: left;">
+      <button class="modal-close" onclick="document.getElementById('hr-add-tutorial-modal').classList.remove('active')">✕</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem; background:rgba(0,168,107,0.15); padding:8px; border-radius:10px;">🎬</span>
+        <div>
+          <h3 style="margin:0; font-size:1.3rem;">Add Tutorial & Masterclass</h3>
+          <p style="margin:0; font-size:0.85rem; color:var(--text2);">Publish architecture lectures directly from your engineering leads.</p>
+        </div>
+      </div>
+      <div class="portal-form">
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Tutorial / Lecture Title</label>
+        <input type="text" id="hr-nt-title" class="portal-input" placeholder="e.g. Deep Dive into DynamoDB & Redis Cache-Aside Pattern" />
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Company</label>
+            <select id="hr-nt-company" class="portal-select">
+              <option value="Amazon">🟠 Amazon AWS</option>
+              <option value="Google">🔵 Google Search</option>
+              <option value="Microsoft">🟦 Microsoft</option>
+              <option value="Netflix">🔴 Netflix</option>
+              <option value="Uber">🚗 Uber</option>
+              <option value="Stripe">💳 Stripe</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Duration</label>
+            <input type="text" id="hr-nt-duration" class="portal-input" placeholder="e.g. 28:00" value="28:00" />
+          </div>
+        </div>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Speaker & Role</label>
+        <input type="text" id="hr-nt-speaker" class="portal-input" placeholder="e.g. Rohit Sen • Principal Systems Architect @ Amazon" />
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Video Stream / Recording Link</label>
+        <input type="text" id="hr-nt-url" class="portal-input" placeholder="e.g. https://cdn.amazon.jobs/lectures/dynamodb-caching.mp4" />
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Lecture Syllabus / Takeaways</label>
+        <textarea id="hr-nt-summary" class="portal-input" rows="3" style="resize:vertical;" placeholder="Summary of architectural concepts taught in this lecture..."></textarea>
+
+        <button class="btn-primary" style="width:100%; justify-content:center; margin-top:1rem;" onclick="submitHRAddTutorial()">
+          🎬 Publish Masterclass to Students
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR: POST NOTICE WITH DEADLINES MODAL -->
+  <div id="hr-post-notice-modal" class="modal-overlay" onclick="closeHRModal(event, 'hr-post-notice-modal')">
+    <div class="modal-box" style="max-width: 580px; text-align: left;">
+      <button class="modal-close" onclick="document.getElementById('hr-post-notice-modal').classList.remove('active')">✕</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem; background:rgba(224,86,253,0.15); padding:8px; border-radius:10px;">📢</span>
+        <div>
+          <h3 style="margin:0; font-size:1.3rem;">Post Notice with Deadlines</h3>
+          <p style="margin:0; font-size:0.85rem; color:var(--text2);">Announce recruitment drives, off-campus hiring, and mandatory challenge deadlines.</p>
+        </div>
+      </div>
+      <div class="portal-form">
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Notice / Drive Headline</label>
+        <input type="text" id="hr-nn-title" class="portal-input" placeholder="e.g. Amazon AWS SDE-1 Cloud Systems Hiring Drive 2026" />
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Company</label>
+            <select id="hr-nn-company" class="portal-select">
+              <option value="Amazon">🟠 Amazon AWS</option>
+              <option value="Google">🔵 Google Search</option>
+              <option value="Microsoft">🟦 Microsoft</option>
+              <option value="Netflix">🔴 Netflix</option>
+              <option value="Uber">🚗 Uber</option>
+              <option value="Stripe">💳 Stripe</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Target Role</label>
+            <input type="text" id="hr-nn-role" class="portal-input" placeholder="e.g. SDE-1 Backend" value="Software Development Engineer 1" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Submission Deadline</label>
+            <input type="text" id="hr-nn-deadline" class="portal-input" placeholder="e.g. Oct 25, 2026 • 11:59 PM IST" value="Oct 25, 2026 • 11:59 PM IST" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Days Remaining</label>
+            <input type="text" id="hr-nn-days" class="portal-input" placeholder="e.g. 17 Days Left" value="17 Days Left" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Eligible Batches</label>
+            <input type="text" id="hr-nn-batch" class="portal-input" placeholder="e.g. 2025 & 2026 Graduates" value="2025 & 2026 Graduating Batches" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Mandatory Challenge</label>
+            <input type="text" id="hr-nn-challenge" class="portal-input" placeholder="e.g. Design a Distributed Rate Limiter" value="Design a Distributed Rate Limiter" />
+          </div>
+        </div>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Package / CTC & Location</label>
+        <input type="text" id="hr-nn-ctc" class="portal-input" placeholder="e.g. ₹45 LPA • Bangalore / Hyderabad / Hybrid" value="₹45 LPA • Bangalore / Hyderabad / Hybrid" />
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Special Drive Instructions</label>
+        <textarea id="hr-nn-notes" class="portal-input" rows="2" style="resize:vertical;" placeholder="Students ranking in top 50 with all test cases passed will receive direct Day-1 interview invites..."></textarea>
+
+        <button class="btn-primary" style="width:100%; justify-content:center; margin-top:1rem; background:#e056fd;" onclick="submitHRPostNotice()">
+          📢 Publish Notice & Activate Deadline
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- MNC VIDEO PLAYER MODAL -->
   <div id="video-modal" class="modal-overlay" onclick="closeVideoModal(event)">
