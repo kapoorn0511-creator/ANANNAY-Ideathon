@@ -432,3 +432,22 @@ select:focus { outline: none; border-color: var(--primary); }
 .chat-input-area input:focus { border-color: var(--primary); }
 .chat-input-area button { background: var(--primary); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; margin-left: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: var(--transition); }
 .chat-input-area button:hover { background: var(--primary-dark); transform: scale(1.05); }
+
+/* IG-Style Profiles & Study Groups */
+.chat-username { font-weight: 700; color: var(--primary); cursor: pointer; transition: 0.2s; }
+.chat-username:hover { text-decoration: underline; color: var(--primary-dark); }
+.mini-profile-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 260px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); padding: 15px; z-index: 1001; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes popIn { 0% { transform: translate(-50%, -40%) scale(0.8); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+.close-profile { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text3); }
+.profile-header { display: flex; gap: 10px; align-items: center; margin-bottom: 15px; }
+.profile-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #ff007f); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; border: 2px solid var(--card); box-shadow: 0 0 0 2px var(--primary); }
+.profile-stats { display: flex; justify-content: space-around; text-align: center; font-size: 0.75rem; background: var(--bg); padding: 10px; border-radius: 8px; margin-bottom: 12px; color: var(--text2); }
+.profile-stats strong { font-size: 1.1rem; color: var(--text); }
+.profile-bio { font-size: 0.8rem; color: var(--text2); margin-bottom: 12px; line-height: 1.5; }
+
+.study-group-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 10px; transition: var(--transition); }
+.study-group-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.study-group-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: var(--text); }
+.study-group-meta { font-size: 0.75rem; color: var(--text3); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.btn-join { background: var(--primary-glow); color: var(--primary); border: 1px solid var(--primary); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600; width: 100%; transition: var(--transition); }
+.btn-join:hover { background: var(--primary); color: white; }

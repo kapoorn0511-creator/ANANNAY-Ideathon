@@ -249,34 +249,64 @@ function mockLogin() {
 }
 
 // ---------- PEER CHAT ENHANCEMENTS ----------
+const USER_PROFILES = {
+  '@neha_g': { name: 'Neha Gupta', avatar: '👱‍♀️', bio: 'Backend & Cloud. Prepping for Amazon roles.', streak: 14, xp: '2.4k' },
+  '@rahul_k': { name: 'Rahul Kumar', avatar: '🧑‍💻', bio: 'Fullstack Dev. Solving real problems daily.', streak: 5, xp: '800' },
+  '@karan_m': { name: 'Karan M.', avatar: '👨‍🎓', bio: 'Looking for study partners for system design.', streak: 21, xp: '5.1k' },
+  '@priya_d': { name: 'Priya D.', avatar: '👩‍🔬', bio: 'AI enthusiast and front-end learner.', streak: 2, xp: '150' },
+  '@rohan_k': { name: 'Rohan K.', avatar: '🎸', bio: 'Music and code. Let us chill.', streak: 8, xp: '1.2k' },
+};
+
 const CHAT_DATA = {
   'venting-space': `
     <div class="chat-msg system-msg">Welcome to #venting-space. A judgment-free zone to share your stress. 💙</div>
     <div class="chat-row">
       <div class="chat-avatar">👱‍♀️</div>
-      <div class="chat-msg"><strong>Neha G.</strong> <span class="msg-time">2 mins ago</span><br/>Feeling so burnt out today. This API rate limiter problem is making me crazy 😭</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">2 mins ago</span><br/>Feeling so burnt out today. This API rate limiter problem is making me crazy 😭</div>
     </div>
     <div class="chat-row">
       <div class="chat-avatar">🧑‍💻</div>
-      <div class="chat-msg"><strong>Rahul K.</strong> <span class="msg-time">1 min ago</span><br/>Take a 10 min walk Neha! Mental health > XP points. Drink some water! 🫂</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rahul_k')">@rahul_k</span> <span class="msg-time">1 min ago</span><br/>Take a 10 min walk Neha! Mental health > XP points. Drink some water! 🫂</div>
     </div>
   `,
   'interview-prep': `
     <div class="chat-msg system-msg">Welcome to #interview-prep. Let's crack these companies together! 🚀</div>
     <div class="chat-row">
       <div class="chat-avatar">👨‍🎓</div>
-      <div class="chat-msg"><strong>Karan M.</strong> <span class="msg-time">10 mins ago</span><br/>Anyone has good resources for understanding WebSockets? The Uber challenge is tough.</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@karan_m')">@karan_m</span> <span class="msg-time">10 mins ago</span><br/>Anyone has good resources for understanding WebSockets? The Uber challenge is tough.</div>
     </div>
     <div class="chat-row">
       <div class="chat-avatar">👩‍🔬</div>
-      <div class="chat-msg"><strong>Priya D.</strong> <span class="msg-time">5 mins ago</span><br/>I found a great 10-min tutorial. I'll share the link here shortly!</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@priya_d')">@priya_d</span> <span class="msg-time">5 mins ago</span><br/>I found a great 10-min tutorial. I'll share the link here shortly!</div>
+    </div>
+  `,
+  'study-groups': `
+    <div class="chat-msg system-msg" style="margin-bottom:1rem;">Find peers preparing for the same roles and study together.</div>
+    <button class="btn-primary" style="width:100%; padding:8px; font-size:0.85rem; margin-bottom:1rem; border-radius:8px;" onclick="createStudyGroup()">+ Create Study Group</button>
+    
+    <div class="study-group-card">
+      <div class="study-group-title">Amazon SDE Prep</div>
+      <div class="study-group-meta">
+        <span>Host: <span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span></span>
+        <span>👥 3/5</span>
+      </div>
+      <button class="btn-join" onclick="joinStudyGroup(this)">Join Group</button>
+    </div>
+
+    <div class="study-group-card">
+      <div class="study-group-title">System Design Mocks</div>
+      <div class="study-group-meta">
+        <span>Host: <span class="chat-username" onclick="showProfile('@rahul_k')">@rahul_k</span></span>
+        <span>👥 1/2</span>
+      </div>
+      <button class="btn-join" onclick="joinStudyGroup(this)">Join Group</button>
     </div>
   `,
   'general-chill': `
     <div class="chat-msg system-msg">Welcome to #general-chill. Turn on some lofi and relax. 🎧</div>
     <div class="chat-row">
       <div class="chat-avatar">🎸</div>
-      <div class="chat-msg"><strong>Rohan K.</strong> <span class="msg-time">1 hr ago</span><br/>What's everyone listening to right now while coding?</div>
+      <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rohan_k')">@rohan_k</span> <span class="msg-time">1 hr ago</span><br/>What's everyone listening to right now while coding?</div>
     </div>
   `
 };
@@ -285,11 +315,11 @@ function toggleChat() {
   const chat = document.getElementById('peer-chat-window');
   const badge = document.getElementById('chat-badge');
   if (chat) chat.classList.toggle('active');
-  if (badge) badge.style.display = 'none'; // Clear badge on open
+  if (badge) badge.style.display = 'none';
   
-  // Auto-scroll on open
   const chatBody = document.getElementById('chat-messages');
   if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+  closeProfile(); // Ensure profile is closed when toggling
 }
 
 function switchChatChannel(channelName, btn) {
@@ -298,10 +328,20 @@ function switchChatChannel(channelName, btn) {
   if (btn) btn.classList.add('active');
   
   const chatBody = document.getElementById('chat-messages');
+  const inputArea = document.getElementById('chat-input-area');
+  
   if (chatBody && CHAT_DATA[channelName]) {
     chatBody.innerHTML = CHAT_DATA[channelName];
     chatBody.scrollTop = chatBody.scrollHeight;
   }
+
+  // Hide input area in study-groups tab
+  if (channelName === 'study-groups') {
+    inputArea.style.display = 'none';
+  } else {
+    inputArea.style.display = 'flex';
+  }
+  closeProfile();
 }
 
 function handleChatEnter(e) {
@@ -314,13 +354,11 @@ function sendChatMessage() {
   if(!msgText) return;
   
   const chatBody = document.getElementById('chat-messages');
-  
-  // User Message
   const msgHTML = `
     <div class="chat-row you">
       <div class="chat-avatar">👨‍💻</div>
       <div class="chat-msg">
-        <strong>Arjun S. (You)</strong> <span class="msg-time">Just now</span><br/>
+        <span class="chat-username">@arjun_s</span> <span class="msg-time">Just now</span><br/>
         ${msgText}
       </div>
     </div>
@@ -329,14 +367,10 @@ function sendChatMessage() {
   input.value = '';
   chatBody.scrollTop = chatBody.scrollHeight;
   
-  // Simulate Peer Reply after a delay
-  setTimeout(() => {
-    simulatePeerReply(chatBody);
-  }, 1000);
+  setTimeout(() => { simulatePeerReply(chatBody); }, 1000);
 }
 
 function simulatePeerReply(chatBody) {
-  // Show typing indicator
   const typingHTML = `
     <div class="chat-row" id="typing-indicator">
       <div class="chat-avatar">👱‍♀️</div>
@@ -354,7 +388,7 @@ function simulatePeerReply(chatBody) {
       <div class="chat-row">
         <div class="chat-avatar">👱‍♀️</div>
         <div class="chat-msg">
-          <strong>Neha G.</strong> <span class="msg-time">Just now</span><br/>
+          <span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">Just now</span><br/>
           Thanks Arjun! That really helps. I appreciate the support. 💙
         </div>
       </div>
@@ -362,6 +396,44 @@ function simulatePeerReply(chatBody) {
     chatBody.insertAdjacentHTML('beforeend', replyHTML);
     chatBody.scrollTop = chatBody.scrollHeight;
   }, 2500);
+}
+
+// --- PROFILE & GROUP STUDY LOGIC ---
+function showProfile(handle) {
+  const p = USER_PROFILES[handle];
+  if(!p) return;
+  document.getElementById('mp-avatar').innerText = p.avatar;
+  document.getElementById('mp-name').innerText = p.name;
+  document.getElementById('mp-handle').innerText = handle;
+  document.getElementById('mp-bio').innerText = p.bio;
+  document.getElementById('mp-streak').innerText = p.streak;
+  document.getElementById('mp-xp').innerText = p.xp;
+  document.getElementById('mini-profile').style.display = 'block';
+}
+
+function closeProfile() {
+  document.getElementById('mini-profile').style.display = 'none';
+}
+
+function joinStudyGroup(btn) {
+  if(btn.innerText === 'Join Group') {
+    btn.innerText = 'Joined ✓';
+    btn.style.background = 'var(--green)';
+    btn.style.color = 'white';
+    btn.style.borderColor = 'var(--green)';
+  } else {
+    btn.innerText = 'Join Group';
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+  }
+}
+
+function createStudyGroup() {
+  const topic = prompt("Enter Study Group Topic (e.g., 'Google Cloud APIs'):");
+  if(topic && topic.trim() !== '') {
+    alert(`Success! Your study group '${topic}' has been created. Others can now join you.`);
+  }
 }
 
 // ---------- INIT ----------

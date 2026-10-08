@@ -418,6 +418,7 @@
       <div class="chat-channels">
         <span class="chat-channel active" onclick="switchChatChannel('venting-space', this)">#venting-space</span>
         <span class="chat-channel" onclick="switchChatChannel('interview-prep', this)">#interview-prep</span>
+        <span class="chat-channel" onclick="switchChatChannel('study-groups', this)">#study-groups</span>
         <span class="chat-channel" onclick="switchChatChannel('general-chill', this)">#general-chill</span>
       </div>
       
@@ -425,9 +426,27 @@
         <!-- Messages will be loaded here via JS -->
       </div>
       
-      <div class="chat-input-area">
+      <div class="chat-input-area" id="chat-input-area">
         <input type="text" id="chat-input" placeholder="Type a supportive message..." onkeypress="handleChatEnter(event)">
         <button onclick="sendChatMessage()">➤</button>
+      </div>
+
+      <!-- IG-Style Mini Profile Card -->
+      <div id="mini-profile" class="mini-profile-card" style="display:none;">
+        <button class="close-profile" onclick="closeProfile()">✕</button>
+        <div class="profile-header">
+          <div class="profile-avatar" id="mp-avatar">👱‍♀️</div>
+          <div>
+            <h4 id="mp-name" style="margin:0; font-size:1rem;">Neha G.</h4>
+            <p id="mp-handle" style="margin:0; font-size:0.8rem; color:var(--primary); font-weight:600;">@neha_g</p>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div><strong id="mp-streak">14</strong><br/>Streaks</div>
+          <div><strong id="mp-xp">2.4k</strong><br/>XP Points</div>
+        </div>
+        <p class="profile-bio" id="mp-bio">Passionate about backend & System Design. Open to mock interviews!</p>
+        <button class="btn-primary" style="width:100%; padding: 6px; font-size:0.8rem;">Follow / Message</button>
       </div>
     </div>
   </div>
