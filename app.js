@@ -254,6 +254,164 @@ const HR_NOTICES = [
   }
 ];
 
+const MOCK_JOBS = [
+  {
+    id: 1,
+    title: "Software Development Engineer 1 (SDE-1) - Cloud Systems",
+    company: "amazon",
+    companyBadge: "🟠 Amazon AWS",
+    type: "job",
+    typeLabel: "Full-Time Job",
+    package: "₹45 LPA + Stocks",
+    location: "Bangalore / Hyderabad / Hybrid",
+    batches: "2025 & 2026 Graduating Batches",
+    deadline: "Oct 25, 2026 • 11:59 PM IST",
+    daysLeft: "17 Days Left",
+    badgeType: "green",
+    syllabus: [
+      "Distributed Systems: Rate limiting patterns (Token Bucket, Sliding Window Log)",
+      "In-Memory Caching: Redis cluster eviction policies, cache-aside, and atomic Lua scripts",
+      "Concurrency: Goroutines/Channels in Go, or Java Virtual Threads / ThreadPools",
+      "API Performance: Sub-10ms response SLAs, connection pooling, and HTTP/2 multiplexing"
+    ],
+    readinessScore: "Level 7+ or >80% on Amazon Rate Limiter challenge",
+    tutorialId: 0,
+    tutorialTitle: "Architecting Distributed Token-Bucket Rate Limiters in Go (28:00)",
+    challengeIndex: 0,
+    challengeTitle: "Design a Distributed Rate Limiter (+500 XP)",
+    recruiter: {
+      name: "Ananya Verma",
+      title: "Tech Recruiting Lead @ Amazon AWS Cloud",
+      avatar: "👩‍💼",
+      intro: "Hi! I'm Ananya from Amazon AWS University Recruiting. We're actively screening for our 2026 SDE-1 Cloud batch. Candidates who solve our companion challenge with >85% edge case pass rate get fast-tracked to final round interviews!"
+    }
+  },
+  {
+    id: 2,
+    title: "Frontend Infrastructure & UI Systems Engineer",
+    company: "netflix",
+    companyBadge: "🔴 Netflix",
+    type: "job",
+    typeLabel: "Full-Time Job",
+    package: "$120,000 / ₹60 LPA • Remote / Mumbai",
+    location: "Remote / Hybrid",
+    batches: "All Batches & Self-Taught Devs",
+    deadline: "Oct 14, 2026 • 11:59 PM IST",
+    daysLeft: "6 Days Left",
+    badgeType: "red",
+    syllabus: [
+      "Client-Side Media Buffering: MediaSource Extensions (MSE) and WebCodecs APIs",
+      "Streaming Protocols: Adaptive Bitrate (ABR) switching algorithms in fluctuating bandwidth",
+      "React Architecture: Concurrent rendering, compiler optimization, and zero-runtime CSS",
+      "Performance Profiling: Chrome DevTools CPU/memory timelines, reducing layout thrashing"
+    ],
+    readinessScore: "Level 8+ or >85% on Netflix Video Buffering challenge",
+    tutorialId: 1,
+    tutorialTitle: "Client-Side Video Buffering & Chunk Streaming Protocols (34:00)",
+    challengeIndex: 3,
+    challengeTitle: "Implement Video Streaming Buffering (+600 XP)",
+    recruiter: {
+      name: "Marcus Zhao",
+      title: "Staff Technical Recruiter @ Netflix Streaming Infra",
+      avatar: "👨‍💼",
+      intro: "Hey there! I lead hiring for Netflix's Player Architecture team. We care deeply about how you handle browser memory and video buffer starvation. Feel free to ask about our culture or technical loop."
+    }
+  },
+  {
+    id: 3,
+    title: "Site Reliability & Cloud Systems Intern (Summer 2027)",
+    company: "google",
+    companyBadge: "🔵 Google Search",
+    type: "internship",
+    typeLabel: "Summer Internship",
+    package: "₹1,25,000/month Stipend + Pre-Placement Offer",
+    location: "Bangalore / Pune",
+    batches: "2027 Batch (3rd Year Undergrads)",
+    deadline: "Oct 18, 2026 • 05:00 PM IST",
+    daysLeft: "10 Days Left",
+    badgeType: "yellow",
+    syllabus: [
+      "Query Optimization: Multi-Tier B-Tree indexing and SQL/NoSQL query execution plans",
+      "Cache Invalidation: Asynchronous cache warming, write-through vs write-back caching",
+      "System Reliability: SLOs/SLAs, error budgets, circuit breakers, and rate throttles",
+      "Operating Systems: Linux processes, I/O wait monitoring, and memory paging"
+    ],
+    readinessScore: "Level 6+ or >75% on Google Search API challenge",
+    tutorialId: 2,
+    tutorialTitle: "Sub-50ms Search API Latency: Multi-Tier Cache Invalidation (22:00)",
+    challengeIndex: 1,
+    challengeTitle: "Optimize Search API Load Time (+300 XP)",
+    recruiter: {
+      name: "Sneha Reddy",
+      title: "University Talent Lead @ Google India",
+      avatar: "👩‍💼",
+      intro: "Welcome! Google SRE internships are open for pre-final year engineering students. Solve our latency challenge in the Arena to prove your systems acumen!"
+    }
+  },
+  {
+    id: 4,
+    title: "Real-time Geospatial Backend Engineer (Core Dispatch)",
+    company: "uber",
+    companyBadge: "🚗 Uber",
+    type: "job",
+    typeLabel: "Full-Time Job",
+    package: "₹48 LPA • Bangalore / Hyderabad",
+    location: "Bangalore / Hyderabad",
+    batches: "2025 & 2026 Graduating Batches",
+    deadline: "Nov 02, 2026 • 11:59 PM IST",
+    daysLeft: "25 Days Left",
+    badgeType: "green",
+    syllabus: [
+      "WebSocket Architecture: Managing 100k persistent socket connections in Go",
+      "Geospatial Indexing: Spatial hashing, Google S2 geometry library, Quadtrees",
+      "Message Streaming: Apache Kafka partitions, consumer groups, and idempotent delivery",
+      "Concurrency Models: Go goroutine pools, mutex contention, and lock-free data structures"
+    ],
+    readinessScore: "Level 8+ or >80% on Uber Driver Tracking challenge",
+    tutorialId: 3,
+    tutorialTitle: "Handling 100k Concurrent Driver Location WebSockets in Real-Time (30:00)",
+    challengeIndex: 4,
+    challengeTitle: "Real-time Driver Location Tracking (+550 XP)",
+    recruiter: {
+      name: "Karan Johal",
+      title: "Engineering Talent Partner @ Uber Dispatch Core",
+      avatar: "👨‍💻",
+      intro: "Hi candidate! Uber is expanding its core dispatch infrastructure in India. We look for candidates who understand distributed concurrency and WebSocket connection lifecycles."
+    }
+  },
+  {
+    id: 5,
+    title: "Payments Infrastructure & Webhooks Engineer",
+    company: "stripe",
+    companyBadge: "💳 Stripe",
+    type: "job",
+    typeLabel: "Full-Time Job",
+    package: "₹50 LPA • Remote / Bengaluru",
+    location: "Remote / Bengaluru",
+    batches: "2025 & 2026 Graduating Batches",
+    deadline: "Nov 15, 2026 • 11:59 PM IST",
+    daysLeft: "38 Days Left",
+    badgeType: "green",
+    syllabus: [
+      "Idempotency Keys: Designing replay protection for distributed financial transactions",
+      "Consistency & Locks: Two-phase commit (2PC), distributed locks with Redlock",
+      "Fault Tolerance: Exponential backoff with jitter retry algorithms and DLQ monitoring",
+      "API Security: HMAC SHA-256 webhook signature validation and payload verification"
+    ],
+    readinessScore: "Level 7+ or >80% on Stripe Webhook Idempotency challenge",
+    tutorialId: 4,
+    tutorialTitle: "Building Fault-Tolerant, Idempotent Payment Webhook Systems (26:00)",
+    challengeIndex: 5,
+    challengeTitle: "Idempotent Payment Webhooks (+350 XP)",
+    recruiter: {
+      name: "Rachel Simmons",
+      title: "Senior University Recruiter @ Stripe Payments",
+      avatar: "👩‍💼",
+      intro: "Hello! At Stripe, code correctness is paramount. When network packets duplicate, users cannot be double charged. Prove your idempotency skills in our challenge!"
+    }
+  }
+];
+
 // ---------- RENDER FUNCTIONS ----------
 function renderProblems(filter = 'all') {
   const recContainer = document.getElementById('recommended-problems');
@@ -678,6 +836,176 @@ function submitHRPostNotice() {
   document.getElementById('hr-post-notice-modal').classList.remove('active');
   alert(`📢 Success! Recruitment Notice "${title}" published with deadline ${deadline}! Students have been notified.`);
   switchHRTab('notices');
+}
+
+// ---------- JOBS & INTERNSHIPS ----------
+let currentChatRecruiter = null;
+
+function renderJobs(filter = 'all') {
+  const container = document.getElementById('jobs-container');
+  if (!container) return;
+
+  let filtered = MOCK_JOBS;
+  if (filter === 'job' || filter === 'internship') {
+    filtered = MOCK_JOBS.filter(j => j.type === filter);
+  } else if (filter !== 'all') {
+    filtered = MOCK_JOBS.filter(j => j.company.toLowerCase() === filter.toLowerCase());
+  }
+
+  let html = '';
+  filtered.forEach(job => {
+    html += `
+      <div class="job-card">
+        <div class="job-header-top">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+              <span class="job-company-pill">${job.companyBadge}</span>
+              <span style="font-size:0.75rem; background:rgba(108,99,255,0.15); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">
+                ${job.typeLabel}
+              </span>
+              <span style="font-size:0.75rem; background:var(--bg2); color:var(--text3); border:1px solid var(--border); padding:3px 10px; border-radius:999px;">
+                📍 ${job.location}
+              </span>
+            </div>
+            <h3 style="margin: 0 0 4px 0; font-size: 1.25rem; color: var(--text);">${job.title}</h3>
+            <p style="margin:0; font-size:0.95rem; color:var(--green); font-weight:700;">
+              💰 ${job.package} &nbsp;•&nbsp; <span style="color:var(--text2); font-weight:500;">Eligibility: ${job.batches}</span>
+            </p>
+          </div>
+          <span class="hr-notice-deadline-badge ${job.badgeType}">
+            ⏳ ${job.deadline}
+          </span>
+        </div>
+
+        <!-- What to Study Box -->
+        <div class="job-study-box">
+          <div class="job-study-title">
+            <span>📚 What You Need To Study / Syllabus for This Role:</span>
+            <span style="margin-left:auto; font-size:0.75rem; background:var(--primary); color:white; padding:2px 8px; border-radius:999px; font-weight:600;">
+              ${job.readinessScore}
+            </span>
+          </div>
+          <ul class="job-study-list">
+            ${job.syllabus.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+
+        <!-- Action Row -->
+        <div class="job-actions-row">
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn-ghost" style="padding:7px 14px; font-size:0.82rem; border-color:var(--primary); color:var(--primary);" onclick="openVideoModal(${job.tutorialId})">
+              🎬 Watch Company Tutorial (${job.companyBadge})
+            </button>
+            <button class="btn-ghost" style="padding:7px 14px; font-size:0.82rem;" onclick="openModal(${job.challengeIndex})">
+              ⚔️ Solve Required Challenge (+500 XP)
+            </button>
+            <button class="btn-ghost" style="padding:7px 14px; font-size:0.82rem; color:var(--green); border-color:rgba(0,168,107,0.4);" onclick="openRecruiterChat('${job.company}')">
+              💬 Chat with HR (${job.recruiter.name.split(' ')[0]})
+            </button>
+          </div>
+          <button class="btn-primary" style="padding:8px 18px; font-size:0.85rem;" onclick="applyForJob(${job.id})">
+            ⚡ Quick Apply with SkillBridge
+          </button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function filterJobs(filter, btn) {
+  if (btn) {
+    const chips = btn.parentElement.querySelectorAll('.chip');
+    chips.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderJobs(filter);
+}
+
+function applyForJob(id) {
+  const job = MOCK_JOBS.find(j => j.id === id);
+  if (!job) return;
+  alert(`🎉 Application Submitted for: ${job.title} at ${job.companyBadge}!\n\nYour verified SkillBridge profile (Level 8 Practitioner, 2,450 XP, 81.6% readiness score) and companion challenge solution have been sent directly to ${job.recruiter.name} (${job.recruiter.title}).\n\nExpect an update in your SkillBridge inbox within 48 hours!`);
+}
+
+function openRecruiterChat(companyKey) {
+  const job = MOCK_JOBS.find(j => j.company.toLowerCase() === companyKey.toLowerCase());
+  if (!job) return;
+  currentChatRecruiter = job.recruiter;
+
+  document.getElementById('rc-name').textContent = job.recruiter.name;
+  document.getElementById('rc-title').textContent = job.recruiter.title;
+  document.getElementById('rc-avatar').textContent = job.recruiter.avatar;
+
+  const msgContainer = document.getElementById('rc-messages-body');
+  msgContainer.innerHTML = `
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 14px; font-size:0.88rem; line-height:1.5; color:var(--text); align-self:flex-start; max-width:85%;">
+      <strong>${job.recruiter.name}</strong> <span style="font-size:0.75rem; color:var(--text3); margin-left:6px;">Just now</span>
+      <p style="margin:6px 0 0 0; color:var(--text2);">${job.recruiter.intro}</p>
+    </div>
+  `;
+
+  document.getElementById('recruiter-chat-modal').classList.add('active');
+}
+
+function closeRecruiterChat(e) {
+  if (!e || e.target.id === 'recruiter-chat-modal' || (e.target && e.target.classList && e.target.classList.contains('modal-close'))) {
+    const modal = document.getElementById('recruiter-chat-modal');
+    if (modal) modal.classList.remove('active');
+  }
+}
+
+function sendRecruiterMessage() {
+  const input = document.getElementById('rc-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  const msgContainer = document.getElementById('rc-messages-body');
+
+  // Append user message
+  msgContainer.innerHTML += `
+    <div style="background:var(--primary); color:white; border-radius:10px; padding:10px 14px; font-size:0.88rem; line-height:1.5; align-self:flex-end; max-width:80%;">
+      ${text}
+    </div>
+  `;
+  msgContainer.scrollTop = msgContainer.scrollHeight;
+
+  // Simulate smart HR reply
+  setTimeout(() => {
+    let reply = "Thanks for asking! We value practical architecture over rote theory. Candidates with clean code and high edge case pass rates get direct Day-1 interview invites.";
+    const lower = text.toLowerCase();
+    if (lower.includes('benchmark') || lower.includes('score') || lower.includes('shortlist')) {
+      reply = "Our shortlisting benchmark is >85% edge-case pass rate on the companion challenge. Top performers on our leaderboard bypass online assessments entirely!";
+    } else if (lower.includes('language') || lower.includes('python') || lower.includes('java') || lower.includes('c++')) {
+      reply = "You can solve using Go, Java, Python, or C++. What matters most is understanding concurrency, memory consumption, and sub-millisecond latency trade-offs!";
+    } else if (lower.includes('batch') || lower.includes('eligib') || lower.includes('2027') || lower.includes('2026')) {
+      reply = "2025 and 2026 batches are eligible for full-time SDE-1 roles, and 2027 batch undergrads are eligible for our 2-month summer internship with PPO opportunities.";
+    }
+
+    msgContainer.innerHTML += `
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 14px; font-size:0.88rem; line-height:1.5; color:var(--text); align-self:flex-start; max-width:85%;">
+        <strong>${currentChatRecruiter ? currentChatRecruiter.name : 'Recruiter'}</strong> <span style="font-size:0.75rem; color:var(--text3); margin-left:6px;">Just now</span>
+        <p style="margin:6px 0 0 0; color:var(--text2);">${reply}</p>
+      </div>
+    `;
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+  }, 700);
+}
+
+function sendQuickHRQuestion(question) {
+  const input = document.getElementById('rc-input');
+  if (input) {
+    input.value = question;
+    sendRecruiterMessage();
+  }
+}
+
+function handleRecruiterEnter(e) {
+  if (e.key === 'Enter') {
+    sendRecruiterMessage();
+  }
 }
 
 function renderStreakCalendar() {
@@ -1327,5 +1655,6 @@ document.addEventListener('DOMContentLoaded', () => {
   switchCompany('amazon', document.querySelector('#hr-view .chip.active')); // Load initial HR view
   renderStreakCalendar();
   renderMasterclasses('all');
+  renderJobs('all');
   switchChatChannel('venting-space', document.querySelector('.chat-channel.active')); // Load initial chat
 });

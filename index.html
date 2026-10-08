@@ -33,6 +33,7 @@
       <a href="#masterclasses" class="nav-link" onclick="showSection('masterclasses')">Masterclasses 🎬</a>
       <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
       <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR View</a>
+      <a href="#jobs" class="nav-link" onclick="showSection('jobs')">Jobs & Internships 💼</a>
       <a href="javascript:void(0)" class="nav-link" style="display:flex; align-items:center; gap:6px; position:relative;" onclick="toggleChat()">
         Peer Lounge <span class="online-dot" style="position:static;"></span>
         <span class="unread-badge" id="chat-badge" style="top:-8px; right:-12px; left:auto; width:18px; height:18px; font-size:0.7rem; box-shadow:0 0 0 2px var(--card);">1</span>
@@ -659,6 +660,57 @@
     </div>
   </section>
 
+  <!-- ======================== JOBS & INTERNSHIPS ======================== -->
+  <section id="jobs" class="section">
+    <div class="arena-container" style="max-width: 1100px;">
+      <div class="step-header">
+        <h2>💼 Live MNC Jobs & Internships</h2>
+        <p>Verified hiring openings from top tech companies. Discover what to study, watch company architecture masterclasses, solve required challenges, and chat directly with recruiters.</p>
+      </div>
+
+      <!-- Quick Summary Stats -->
+      <div class="hr-stats-grid" style="margin-bottom: 2rem;">
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">🚀 Active Openings</span>
+          <div class="hr-stat-val">18 Live</div>
+          <span class="hr-stat-sub">Amazon, Google, Netflix, Uber</span>
+        </div>
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">🎓 Eligible Batches</span>
+          <div class="hr-stat-val">2025 – 2027</div>
+          <span class="hr-stat-sub">Freshers & Undergrads</span>
+        </div>
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">💰 Top CTC / Stipend</span>
+          <div class="hr-stat-val">₹60 LPA</div>
+          <span class="hr-stat-sub">Avg: ₹44 LPA / ₹1.1L Intern</span>
+        </div>
+        <div class="hr-stat-card">
+          <span class="hr-stat-lbl">💬 Recruiter DMs</span>
+          <div class="hr-stat-val" style="color:var(--green);">🟢 Online</div>
+          <span class="hr-stat-sub">Direct chat with tech HR</span>
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filters" style="margin-bottom: 2rem;">
+        <button class="chip active" onclick="filterJobs('all', this)">All Openings</button>
+        <button class="chip" onclick="filterJobs('job', this)">💼 Full-Time Jobs</button>
+        <button class="chip" onclick="filterJobs('internship', this)">🎓 Internships</button>
+        <button class="chip" onclick="filterJobs('amazon', this)">🟠 Amazon</button>
+        <button class="chip" onclick="filterJobs('google', this)">🔵 Google</button>
+        <button class="chip" onclick="filterJobs('netflix', this)">🔴 Netflix</button>
+        <button class="chip" onclick="filterJobs('uber', this)">🚗 Uber</button>
+        <button class="chip" onclick="filterJobs('stripe', this)">💳 Stripe</button>
+      </div>
+
+      <!-- JOBS LIST -->
+      <div id="jobs-container" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Rendered dynamically via JS -->
+      </div>
+    </div>
+  </section>
+
   <!-- ======================== COMPANY PORTAL ======================== -->
   <section id="company-portal" class="section">
     <div class="portal-container">
@@ -893,6 +945,56 @@
           📢 Publish Notice & Activate Deadline
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- RECRUITER 1-ON-1 DIRECT CHAT MODAL -->
+  <div id="recruiter-chat-modal" class="modal-overlay" onclick="closeRecruiterChat(event)">
+    <div class="modal-box" style="width: 580px; max-width: 95%; max-height: 85vh; display: flex; flex-direction: column; text-align: left; padding: 0; overflow: hidden;">
+      
+      <!-- Chat Header -->
+      <div style="background: var(--bg2); padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div id="rc-avatar" style="font-size: 2rem; background: var(--card); border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border);">
+            👩‍💼
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h4 id="rc-name" style="margin: 0; font-size: 1.05rem;">Ananya Verma</h4>
+              <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--green); background: rgba(0,168,107,0.15); padding: 2px 8px; border-radius: 999px; font-weight: 700;">
+                <span class="online-dot" style="position: static; width: 6px; height: 6px;"></span> Active Now
+              </span>
+            </div>
+            <p id="rc-title" style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text3);">Tech Recruiting Lead @ Amazon AWS</p>
+          </div>
+        </div>
+        <button onclick="document.getElementById('recruiter-chat-modal').classList.remove('active')" style="background: none; border: none; color: var(--text2); font-size: 1.4rem; cursor: pointer;">✕</button>
+      </div>
+
+      <!-- Quick Chips / FAQs -->
+      <div style="background: var(--card); padding: 8px 1.5rem; border-bottom: 1px solid var(--border); display: flex; gap: 8px; overflow-x: auto;">
+        <button class="chip" style="font-size: 0.75rem; padding: 4px 10px; margin: 0; white-space: nowrap;" onclick="sendQuickHRQuestion('What is the benchmark score for direct interview shortlisting?')">
+          🎯 Shortlist Benchmark?
+        </button>
+        <button class="chip" style="font-size: 0.75rem; padding: 4px 10px; margin: 0; white-space: nowrap;" onclick="sendQuickHRQuestion('Can I use Python or Java instead of Go for the challenge?')">
+          💻 Allowed Languages?
+        </button>
+        <button class="chip" style="font-size: 0.75rem; padding: 4px 10px; margin: 0; white-space: nowrap;" onclick="sendQuickHRQuestion('Are 2027 batch undergrads eligible for this drive?')">
+          🎓 Eligibility Criteria?
+        </button>
+      </div>
+
+      <!-- Chat Messages Body -->
+      <div id="rc-messages-body" style="flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--bg); max-height: 380px;">
+        <!-- Loaded dynamically -->
+      </div>
+
+      <!-- Chat Input Area -->
+      <div style="padding: 1rem 1.5rem; background: var(--bg2); border-top: 1px solid var(--border); display: flex; gap: 10px;">
+        <input type="text" id="rc-input" class="portal-input" placeholder="Ask recruiter about interview loop, tech stack, or deadlines..." style="margin: 0; flex: 1;" onkeypress="handleRecruiterEnter(event)" />
+        <button class="btn-primary" style="padding: 0 16px;" onclick="sendRecruiterMessage()">➤</button>
+      </div>
+
     </div>
   </div>
 
