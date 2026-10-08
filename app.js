@@ -148,7 +148,7 @@ const HR_DATA = {
     students: [
       { name: "Neha Gupta", college: "IIT Delhi", match: "95%", xp: "4,200 XP" },
       { name: "Rahul K.", college: "Pune Institute", match: "90%", xp: "3,850 XP" },
-      { name: "Arjun Sharma", college: "NIT Kurukshetra", match: "85%", xp: "2,450 XP" }
+      { name: "Anannay Kapoor", college: "NIT Kurukshetra", match: "96%", xp: "2,450 XP" }
     ]
   },
   google: {
@@ -1246,7 +1246,7 @@ function mockLogin() {
   // Go to Student Home
   showSection('home');
   
-  alert("Welcome to SkillBridge! You are now logged in as Arjun S.");
+  alert("Welcome to SkillBridge! You are now logged in as Anannay Kapoor.");
 }
 
 // ---------- PEER CHAT ENHANCEMENTS ----------
@@ -1359,7 +1359,7 @@ function sendChatMessage() {
     <div class="chat-row you">
       <div class="chat-avatar">👨‍💻</div>
       <div class="chat-msg">
-        <span class="chat-username">@arjun_s</span> <span class="msg-time">Just now</span><br/>
+        <span class="chat-username">@anannay_k</span> <span class="msg-time">Just now</span><br/>
         ${msgText}
       </div>
     </div>
@@ -1390,7 +1390,7 @@ function simulatePeerReply(chatBody) {
         <div class="chat-avatar">👱‍♀️</div>
         <div class="chat-msg">
           <span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">Just now</span><br/>
-          Thanks Arjun! That really helps. I appreciate the support. 💙
+          Thanks Anannay! That really helps. I appreciate the support. 💙
         </div>
       </div>
     `;
@@ -1646,6 +1646,51 @@ function renderSmartRoadmap(topic) {
       </ol>
     </div>
   `;
+}
+
+// ---------- USER PROFILE & RESUME MODAL FUNCTIONS ----------
+function openUserProfileModal(tab = 'overview') {
+  const modal = document.getElementById('user-profile-modal');
+  if (modal) {
+    modal.classList.add('active');
+    switchProfileTab(tab);
+  }
+}
+
+function closeUserProfileModal(e) {
+  if (!e || e.target.id === 'user-profile-modal' || e.target.classList.contains('modal-close')) {
+    document.getElementById('user-profile-modal')?.classList.remove('active');
+  }
+}
+
+function switchProfileTab(tabName) {
+  document.querySelectorAll('#user-profile-modal .hr-subtab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`prof-tab-btn-${tabName}`)?.classList.add('active');
+  ['overview', 'resume', 'settings'].forEach(p => {
+    const el = document.getElementById(`prof-pane-${p}`);
+    if (el) el.style.display = p === tabName ? 'block' : 'none';
+  });
+}
+
+function downloadResumePDF() {
+  alert('📄 Downloading Anannay_Kapoor_SkillBridge_Resume.pdf (ATS Score: 94%)...\nVerified challenge badges, NIT Kurukshetra credentials, and MNC recruiter readiness included!');
+}
+
+function uploadResumeMock() {
+  alert('✅ Custom resume uploaded! SkillBridge ATS scanner re-calculated your score at 94% match for SDE / Cloud Intern roles.');
+}
+
+function saveUserSettings() {
+  const newName = document.getElementById('setting-name')?.value.trim() || 'Anannay Kapoor';
+  const newCollege = document.getElementById('setting-college')?.value.trim() || 'NIT Kurukshetra';
+  const dispName = document.getElementById('prof-display-name');
+  if (dispName) dispName.textContent = newName;
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.textContent = `${newName} (${newCollege})`;
+  const homeName = document.getElementById('home-welcome-name');
+  if (homeName) homeName.textContent = newName;
+  alert('💾 Profile and account settings saved successfully!');
+  document.getElementById('user-profile-modal')?.classList.remove('active');
 }
 
 // Ensure init covers basic setup

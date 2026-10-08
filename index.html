@@ -47,9 +47,12 @@
     </div>
 
     <!-- User Profile (Visible after Login) -->
-    <div class="nav-profile" id="user-nav" style="display: none;" onclick="showSection('dashboard')">
-      <div class="avatar" style="width:35px;height:35px;font-size:1.2rem;">👨‍💻</div>
-      <span style="font-weight:600;font-size:0.9rem;">Arjun S.</span>
+    <div class="nav-profile" id="user-nav" style="display: none; cursor: pointer; align-items: center; gap: 8px;" onclick="openUserProfileModal('overview')">
+      <div class="avatar" style="width:34px;height:34px;font-size:1.1rem;">👨‍💻</div>
+      <div style="display: flex; flex-direction: column; text-align: left;">
+        <span id="nav-user-name" style="font-weight:700;font-size:0.85rem; line-height:1.2;">Anannay Kapoor</span>
+        <span style="font-size:0.7rem; color:var(--text3);">NIT Kurukshetra</span>
+      </div>
     </div>
   </header>
 
@@ -173,19 +176,20 @@
       <div style="background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,168,107,0.1)); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2.5rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
         <div style="max-width: 650px;">
           <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 0.8rem;">
-            🔥 Day 7 Streak Active • Top 5% in College
+            🔥 14-Day Streak Active • Top 3% at NIT Kurukshetra
           </div>
           <h2 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -0.5px;">
-            Welcome back, Arjun! 👋
+            Welcome back, <span id="home-welcome-name">Anannay Kapoor</span>! 👋
           </h2>
           <p style="color: var(--text2); font-size: 1.05rem; line-height: 1.6; margin: 0;">
-            Ready to practice real MNC architecture? Today's top recruiter focus is on <strong>Distributed Systems</strong> and <strong>WebSockets</strong>.
+            Ready to build real MNC architecture? Your verified profile is currently <strong>81.6% ATS-ready</strong> with 2 active recruiter profile visits today.
           </p>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn-primary" onclick="showSection('arena')">⚡ Jump to Arena</button>
-          <button class="btn-ghost" onclick="toggleChat()">👥 Peer Lounge</button>
-          <button class="btn-ghost" onclick="toggleAIModal()">✨ AI Roadmap</button>
+          <button class="btn-primary" onclick="openUserProfileModal('overview')">👤 My Profile</button>
+          <button class="btn-primary" style="background:#e056fd;" onclick="openUserProfileModal('resume')">📄 ATS Resume (94%)</button>
+          <button class="btn-ghost" onclick="openUserProfileModal('settings')">⚙️ Settings</button>
+          <button class="btn-ghost" onclick="showSection('arena')">⚡ Arena</button>
         </div>
       </div>
 
@@ -416,7 +420,7 @@
     <div class="dash-container">
       <div class="dash-header-row">
         <div>
-          <h2>👋 Welcome back, Arjun</h2>
+          <h2>👋 Welcome back, Anannay</h2>
           <p>Your Industry Readiness Score</p>
         </div>
         <button class="btn-primary" onclick="showSection('arena')">+ Solve a Problem</button>
@@ -428,7 +432,7 @@
           <div class="profile-header">
             <div class="avatar">👨‍💻</div>
             <div>
-              <h3>Arjun Sharma</h3>
+              <h3>Anannay Kapoor</h3>
               <p>NIT Kurukshetra • CSE 2026</p>
             </div>
           </div>
@@ -766,7 +770,7 @@
           <div class="mini-leaderboard">
             <div class="mini-row"><span class="rank-1">🥇</span><span><strong>Neha Gupta</strong> — IIT Delhi</span><span class="xp-reward">4,200 XP</span><button class="btn-hire" onclick="alert('Invite sent to Neha Gupta!')">Invite</button></div>
             <div class="mini-row"><span class="rank-2">🥈</span><span><strong>Rahul K.</strong> — Pune Institute</span><span class="xp-reward">3,850 XP</span><button class="btn-hire" onclick="alert('Invite sent to Rahul K.!')">Invite</button></div>
-            <div class="mini-row"><span class="rank-3">🥉</span><span><strong>Arjun Sharma</strong> — NIT Kurukshetra</span><span class="xp-reward">2,450 XP</span><button class="btn-hire" onclick="alert('Invite sent to Arjun Sharma!')">Invite</button></div>
+            <div class="mini-row"><span class="rank-3">🥉</span><span><strong>Anannay Kapoor</strong> — NIT Kurukshetra</span><span class="xp-reward">2,450 XP</span><button class="btn-hire" onclick="alert('Invite sent to Anannay Kapoor!')">Invite</button></div>
           </div>
         </div>
       </div>
@@ -993,6 +997,234 @@
       <div style="padding: 1rem 1.5rem; background: var(--bg2); border-top: 1px solid var(--border); display: flex; gap: 10px;">
         <input type="text" id="rc-input" class="portal-input" placeholder="Ask recruiter about interview loop, tech stack, or deadlines..." style="margin: 0; flex: 1;" onkeypress="handleRecruiterEnter(event)" />
         <button class="btn-primary" style="padding: 0 16px;" onclick="sendRecruiterMessage()">➤</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- USER PROFILE, RESUME & SETTINGS MODAL -->
+  <div id="user-profile-modal" class="modal-overlay" onclick="closeUserProfileModal(event)">
+    <div class="modal-box" style="width: 750px; max-width: 95%; max-height: 90vh; overflow-y: auto; text-align: left; padding: 1.8rem;">
+      <button class="modal-close" onclick="document.getElementById('user-profile-modal').classList.remove('active')">✕</button>
+      
+      <!-- Modal Header -->
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border); padding-bottom: 1.2rem; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 2.2rem; background: var(--bg2); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary);">
+            👨‍💻
+          </div>
+          <div>
+            <h2 id="prof-display-name" style="margin: 0; font-size: 1.4rem;">Anannay Kapoor</h2>
+            <p id="prof-display-sub" style="margin: 2px 0 0 0; font-size: 0.85rem; color: var(--text2);">
+              NIT Kurukshetra • CSE 2026 • Aspiring Distributed Systems Engineer
+            </p>
+          </div>
+        </div>
+        <span class="ats-score-badge">🟢 94% ATS Score</span>
+      </div>
+
+      <!-- Navigation Tabs inside Profile -->
+      <div class="hr-subtabs" style="margin-bottom: 1.5rem;">
+        <button class="hr-subtab-btn active" id="prof-tab-btn-overview" onclick="switchProfileTab('overview')">
+          👤 Overview & Badges
+        </button>
+        <button class="hr-subtab-btn" id="prof-tab-btn-resume" onclick="switchProfileTab('resume')">
+          📄 Resume & ATS Checker
+        </button>
+        <button class="hr-subtab-btn" id="prof-tab-btn-settings" onclick="switchProfileTab('settings')">
+          ⚙️ Account Settings
+        </button>
+      </div>
+
+      <!-- 1. OVERVIEW TAB -->
+      <div id="prof-pane-overview">
+        <div class="dash-stats" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.5rem;">
+          <div class="dash-card" style="padding: 1rem; flex-direction: column; align-items: flex-start;">
+            <span class="g-label">Readiness Score</span>
+            <div class="g-value" style="font-size: 1.4rem; color: var(--primary);">81.6%</div>
+            <span style="font-size: 0.75rem; color: var(--text3);">Level 8 Practitioner</span>
+          </div>
+          <div class="dash-card" style="padding: 1rem; flex-direction: column; align-items: flex-start;">
+            <span class="g-label">Total XP</span>
+            <div class="g-value" style="font-size: 1.4rem; color: var(--yellow);">2,450</div>
+            <span style="font-size: 0.75rem; color: var(--text3);">Global Rank #3</span>
+          </div>
+          <div class="dash-card" style="padding: 1rem; flex-direction: column; align-items: flex-start;">
+            <span class="g-label">Streak</span>
+            <div class="g-value" style="font-size: 1.4rem; color: var(--orange);">14 Days 🔥</div>
+            <span style="font-size: 0.75rem; color: var(--text3);">Daily active solver</span>
+          </div>
+          <div class="dash-card" style="padding: 1rem; flex-direction: column; align-items: flex-start;">
+            <span class="g-label">MNC Challenges</span>
+            <div class="g-value" style="font-size: 1.4rem; color: var(--green);">14 Solved</div>
+            <span style="font-size: 0.75rem; color: var(--text3);">Amazon, Netflix, Uber</span>
+          </div>
+        </div>
+
+        <h4 style="margin: 0 0 0.8rem 0; font-size: 1rem;">🏆 Verified Industry Skill Badges</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🟠</span>
+              <div>
+                <strong style="font-size: 0.9rem;">Amazon Distributed Rate Limiter Verified Solver</strong>
+                <p style="margin: 0; font-size: 0.78rem; color: var(--text3);">Ranked Top 5% • Sub-5ms Redis Lua script implementation</p>
+              </div>
+            </div>
+            <span style="color: var(--green); font-weight: 700; font-size: 0.8rem;">95% Score</span>
+          </div>
+          <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🔴</span>
+              <div>
+                <strong style="font-size: 0.9rem;">Netflix Adaptive Bitrate & Buffer Protocol Specialist</strong>
+                <p style="margin: 0; font-size: 0.78rem; color: var(--text3);">Client-side MSE buffer starvation algorithm</p>
+              </div>
+            </div>
+            <span style="color: var(--green); font-weight: 700; font-size: 0.8rem;">92% Score</span>
+          </div>
+          <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🔵</span>
+              <div>
+                <strong style="font-size: 0.9rem;">Google Search Multi-Tier Cache Optimizer</strong>
+                <p style="margin: 0; font-size: 0.78rem; color: var(--text3);">Sub-50ms API endpoint latency SLA achieved</p>
+              </div>
+            </div>
+            <span style="color: var(--green); font-weight: 700; font-size: 0.8rem;">98% Score</span>
+          </div>
+        </div>
+
+        <h4 style="margin: 0 0 0.8rem 0; font-size: 1rem;">🔗 Verified Handles & Links</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+          <div style="background: var(--card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.85rem;">
+            <strong>GitHub:</strong> <a href="https://github.com/kapoorn0511-creator" target="_blank" style="color: var(--primary);">kapoorn0511-creator</a>
+          </div>
+          <div style="background: var(--card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.85rem;">
+            <strong>Email:</strong> anannay.kapoor@nitkkr.ac.in
+          </div>
+          <div style="background: var(--card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.85rem;">
+            <strong>College:</strong> NIT Kurukshetra (2022–2026)
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. RESUME TAB -->
+      <div id="prof-pane-resume" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="margin: 0; font-size: 1.15rem;">Anannay Kapoor — ATS-Optimized Resume</h3>
+            <p style="margin: 0; font-size: 0.82rem; color: var(--text2);">Automatically incorporates verified SkillBridge MNC challenge achievements.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="downloadResumePDF()">📥 Download PDF</button>
+            <button class="btn-ghost" style="padding: 6px 14px; font-size: 0.8rem;" onclick="uploadResumeMock()">🔄 Upload Custom PDF</button>
+          </div>
+        </div>
+
+        <!-- Resume Document Viewer -->
+        <div class="resume-paper" id="resume-document">
+          <div class="resume-name">ANANNAY KAPOOR</div>
+          <div class="resume-contact">
+            Kurukshetra, India • +91 98765 43210 • anannay.kapoor@nitkkr.ac.in • <a href="https://github.com/kapoorn0511-creator" target="_blank" style="color:#4338ca;">github.com/kapoorn0511-creator</a> • linkedin.com/in/anannay-kapoor
+          </div>
+
+          <div class="resume-section-title">EDUCATION</div>
+          <div class="resume-item-header">
+            <span>National Institute of Technology (NIT) Kurukshetra</span>
+            <span>2022 – 2026</span>
+          </div>
+          <div class="resume-item-sub">Bachelor of Technology in Computer Science & Engineering • CGPA: 8.9 / 10</div>
+
+          <div class="resume-section-title">VERIFIED INDUSTRY PROJECTS (SKILLBRIDGE CERTIFIED)</div>
+          
+          <div class="resume-item-header">
+            <span>Distributed Token-Bucket Rate Limiter in Go (Amazon AWS Problem)</span>
+            <span>Verified Top 5%</span>
+          </div>
+          <div class="resume-item-sub">Go, Redis, Docker, System Design, Concurrency</div>
+          <ul class="resume-bullets">
+            <li>Architected a distributed token-bucket rate limiter benchmarked to throttle 1,000,000+ requests/sec across API gateways.</li>
+            <li>Implemented Redis Lua atomic scripts to eliminate race conditions under distributed concurrency, achieving sub-4ms P99 latency.</li>
+            <li>Ranked #3 on Amazon AWS Recruiter Leaderboard with 96% edge-case validation score.</li>
+          </ul>
+
+          <div class="resume-item-header">
+            <span>Adaptive Bitrate Video Streaming Client (Netflix Problem)</span>
+            <span>Verified Top 8%</span>
+          </div>
+          <div class="resume-item-sub">React 19, TypeScript, MediaSource Extensions (MSE), HLS</div>
+          <ul class="resume-bullets">
+            <li>Built an adaptive bitrate player dynamically adjusting streaming chunks to eliminate video buffer stalls on fluctuating 4G networks.</li>
+            <li>Optimized browser memory usage, reducing frame drop rates by 42% on high-load UI re-renders.</li>
+          </ul>
+
+          <div class="resume-item-header">
+            <span>Real-time Geospatial Dispatch Engine (Uber Problem)</span>
+            <span>Verified Practitioner</span>
+          </div>
+          <div class="resume-item-sub">Go, WebSockets, Quadtrees, Geospatial Hashing</div>
+          <ul class="resume-bullets">
+            <li>Engineered bidirectional WebSocket server managing 10,000+ concurrent rider and driver location telemetry streams.</li>
+          </ul>
+
+          <div class="resume-section-title">TECHNICAL SKILLS</div>
+          <p style="font-size:0.83rem; color:#334155; margin:0; line-height:1.6;">
+            <strong>Languages:</strong> Go, JavaScript/TypeScript, Python, C++, SQL<br/>
+            <strong>Technologies & Frameworks:</strong> Node.js, React 19, Redis, PostgreSQL, WebSockets, Docker, Git, REST & GraphQL APIs<br/>
+            <strong>Core Concepts:</strong> Distributed Systems, System Design, Concurrency, Caching Strategies, Data Structures & Algorithms
+          </p>
+        </div>
+
+        <div style="background: rgba(0, 168, 107, 0.1); border: 1px solid var(--green); border-radius: 8px; padding: 12px; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <strong style="color: var(--green); font-size: 0.9rem;">✅ ATS Optimization Score: 94 / 100</strong>
+            <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text2);">Keyword-matched for SDE-1 roles at Amazon, Google, Microsoft, and Netflix.</p>
+          </div>
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="downloadResumePDF()">Download Resume</button>
+        </div>
+      </div>
+
+      <!-- 3. SETTINGS TAB -->
+      <div id="prof-pane-settings" style="display: none;">
+        <h3 style="margin: 0 0 1rem 0; font-size: 1.15rem;">Profile & Account Settings</h3>
+        <div class="portal-form">
+          <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Full Name</label>
+          <input type="text" id="setting-name" class="portal-input" value="Anannay Kapoor" />
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">College / Institute</label>
+              <input type="text" id="setting-college" class="portal-input" value="NIT Kurukshetra" />
+            </div>
+            <div>
+              <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Graduation Year</label>
+              <input type="text" id="setting-batch" class="portal-input" value="2026 Batch" />
+            </div>
+          </div>
+
+          <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Target Engineering Roles</label>
+          <input type="text" id="setting-role" class="portal-input" value="Software Development Engineer 1 (Distributed Systems / Full-Stack)" />
+
+          <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">GitHub Profile URL</label>
+          <input type="text" id="setting-github" class="portal-input" value="https://github.com/kapoorn0511-creator" />
+
+          <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 1rem 0; display: flex; flex-direction: column; gap: 10px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer;">
+              <input type="checkbox" checked /> Allow verified MNC recruiters (Amazon, Google, Netflix) to message me directly
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer;">
+              <input type="checkbox" checked /> Send email reminders 48 hours before hiring drive challenge deadlines
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer;">
+              <input type="checkbox" checked /> Automatically append verified Arena challenge solutions to my public profile
+            </label>
+          </div>
+
+          <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="saveUserSettings()">
+            💾 Save Profile Settings
+          </button>
+        </div>
       </div>
 
     </div>
