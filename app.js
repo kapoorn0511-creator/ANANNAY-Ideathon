@@ -370,4 +370,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProblems('all');
   switchCompany('amazon', document.querySelector('#hr-view .chip.active')); // Load initial HR view
   renderStreakCalendar();
+  switchChatChannel('venting-space', document.querySelector('.chat-channel.active')); // Load initial chat
 });
