@@ -16,6 +16,15 @@ function showSection(id) {
   window.scrollTo(0, 0);
 }
 
+function handleBrandClick() {
+  const internalNav = document.getElementById('internal-nav');
+  if (internalNav && internalNav.style.display !== 'none') {
+    showSection('home');
+  } else {
+    showSection('landing');
+  }
+}
+
 // ---------- MOCK DATA ----------
 const MOCK_PROBLEMS = [
   { company: "Amazon", title: "Design a Distributed Rate Limiter", diff: "Hard", xp: 500, tags: ["System Design", "Backend", "Redis"], recommended: true, desc: "Our API gateway handles 1M requests/sec. We need to implement a token bucket rate limiter to prevent abuse." },
@@ -242,8 +251,8 @@ function mockLogin() {
   const chatWidget = document.getElementById('chat-widget-container');
   if (chatWidget) chatWidget.style.display = 'block';
 
-  // Go to Dashboard
-  showSection('dashboard');
+  // Go to Student Home
+  showSection('home');
   
   alert("Welcome to SkillBridge! You are now logged in as Arjun S.");
 }
@@ -649,7 +658,7 @@ function renderSmartRoadmap(topic) {
 
 // Ensure init covers basic setup
 document.addEventListener('DOMContentLoaded', () => {
-  showSection('home');
+  showSection('landing');
   renderProblems('all');
   switchCompany('amazon', document.querySelector('#hr-view .chip.active')); // Load initial HR view
   renderStreakCalendar();
