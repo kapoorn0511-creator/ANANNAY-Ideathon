@@ -526,7 +526,8 @@ function switchCompany(companyKey, btn) {
     tbody.innerHTML = html;
   }
 
-  // Also refresh notices, tutorials, challenges for this company
+  // Also refresh jobs, notices, tutorials, challenges for this company
+  renderHRJobs(companyKey);
   renderHRNotices(companyKey);
   renderHRTutorials(companyKey);
   renderHRChallenges(companyKey);
@@ -546,6 +547,7 @@ function switchHRTab(tabName) {
   if (targetPane) targetPane.style.display = 'block';
 
   // Render content
+  if (tabName === 'jobs') renderHRJobs(currentSelectedCompany);
   if (tabName === 'notices') renderHRNotices(currentSelectedCompany);
   if (tabName === 'tutorials') renderHRTutorials(currentSelectedCompany);
   if (tabName === 'challenges') renderHRChallenges(currentSelectedCompany);
@@ -836,6 +838,161 @@ function submitHRPostNotice() {
   document.getElementById('hr-post-notice-modal').classList.remove('active');
   alert(`📢 Success! Recruitment Notice "${title}" published with deadline ${deadline}! Students have been notified.`);
   switchHRTab('notices');
+}
+
+function openPostJobModal() {
+  const modal = document.getElementById('hr-post-job-modal');
+  if (modal) {
+    const compSelect = document.getElementById('hr-pj-company');
+    if (compSelect && currentSelectedCompany) {
+      compSelect.value = currentSelectedCompany.toLowerCase();
+    }
+    modal.classList.add('active');
+  }
+}
+
+function submitHRPostJob() {
+  const companyKey = document.getElementById('hr-pj-company')?.value || 'amazon';
+  const type = document.getElementById('hr-pj-type')?.value || 'job';
+  const title = document.getElementById('hr-pj-title')?.value.trim();
+  const pkg = document.getElementById('hr-pj-package')?.value.trim() || 'Competitive CTC';
+  const location = document.getElementById('hr-pj-location')?.value.trim() || 'Bangalore / Remote';
+  const batches = document.getElementById('hr-pj-batches')?.value.trim() || '2025 & 2026 Batches';
+  const deadline = document.getElementById('hr-pj-deadline')?.value.trim() || 'Oct 31, 2026';
+  const challengeIdx = parseInt(document.getElementById('hr-pj-challenge')?.value || '0', 10);
+  const syllabusStr = document.getElementById('hr-pj-syllabus')?.value.trim() || 'System Design, Backend, API Optimization';
+
+  if (!title) {
+    alert('Please enter a Job/Internship Title.');
+    return;
+  }
+
+  const syllabus = syllabusStr.split(',').map(s => s.trim()).filter(Boolean);
+
+  const companyBadges = {
+    amazon: '🟠 Amazon AWS',
+    google: '🔵 Google',
+    microsoft: '🟦 Microsoft',
+    netflix: '🔴 Netflix',
+    uber: '🚗 Uber',
+    atlassian: '🔷 Atlassian'
+  };
+
+  const challengeTitles = [
+    'Design a Distributed Rate Limiter (+500 XP)',
+    'Optimize Search API Load Time (+300 XP)',
+    'Build an Accessible Keyboard Data Grid (+400 XP)',
+    'Client-Side Video Buffering Protocols (+600 XP)',
+    'Real-time Driver Location Telemetry (+550 XP)'
+  ];
+
+  const newJob = {
+    id: Date.now(),
+    title: title,
+    company: companyKey,
+    companyBadge: companyBadges[companyKey] || `🏢 ${companyKey.toUpperCase()}`,
+    type: type,
+    typeLabel: type === 'internship' ? 'Summer / 6-Month Internship' : 'Full-Time Job',
+    package: pkg,
+    location: location,
+    batches: batches,
+    deadline: deadline,
+    daysLeft: '24 Days Left',
+    badgeType: 'green',
+    syllabus: syllabus.length ? syllabus : ['Distributed Systems', 'Data Structures & Algorithms'],
+    readinessScore: 'Level 7+ or >80% on companion challenge',
+    tutorialId: challengeIdx % 2,
+    tutorialTitle: 'MNC Production Engineering Architecture Walkthrough',
+    challengeIndex: challengeIdx,
+    challengeTitle: challengeTitles[challengeIdx] || 'SkillBridge Arena Challenge',
+    recruiter: {
+      name: 'Talent Acquisition Team',
+      title: `Recruiting Lead @ ${companyKey.toUpperCase()}`,
+      avatar: '👩‍💼',
+      intro: `Hi! We are actively hiring for ${title}. Solve the companion challenge with high test case coverage to be fast-tracked to interviews!`
+    }
+  };
+
+  MOCK_JOBS.unshift(newJob);
+
+  // Re-render in both Student Jobs section and HR portal
+  renderJobs('all');
+  renderHRJobs(companyKey);
+
+  // Close modal
+  document.getElementById('hr-post-job-modal')?.classList.remove('active');
+
+  alert(`✅ Job / Internship opening "${title}" published successfully!\nIt is now live in the Jobs & Internships portal for all students and listed in your recruiter dashboard.`);
+  
+  // Switch to this company and jobs tab
+  switchCompany(companyKey);
+  switchHRTab('jobs');
+}
+
+function renderHRJobs(companyKey) {
+  const container = document.getElementById('hr-jobs-list');
+  if (!container) return;
+
+  const jobs = MOCK_JOBS.filter(j => j.company.toLowerCase() === companyKey.toLowerCase());
+  if (jobs.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 2.5rem; text-align: center; color: var(--text3); background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius2);">
+        <div style="font-size: 2.2rem; margin-bottom: 8px;">💼</div>
+        <p style="font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 4px;">No active job or internship postings found for ${companyKey.toUpperCase()}</p>
+        <p style="font-size: 0.85rem; margin-bottom: 1rem;">Publish a new role to announce open positions to 10,000+ top engineering candidates.</p>
+        <button class="btn-primary" style="background: var(--green); padding: 8px 18px;" onclick="openPostJobModal()">+ Post Job or Internship</button>
+      </div>
+    `;
+    return;
+  }
+
+  let html = '';
+  jobs.forEach(job => {
+    const isIntern = job.type === 'internship';
+    const typeBadge = isIntern ? '🌱 Internship' : '💼 Full-Time Job';
+    const typeColor = isIntern ? 'var(--green)' : 'var(--primary)';
+    const typeBg = isIntern ? 'rgba(0,168,107,0.12)' : 'rgba(108,99,255,0.12)';
+
+    html += `
+      <div class="hr-notice-card" style="margin-bottom: 0; padding: 1.5rem;">
+        <div class="hr-notice-header" style="align-items: flex-start;">
+          <div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 0.75rem; background: ${typeBg}; color: ${typeColor}; padding: 3px 10px; border-radius: 999px; font-weight: 700;">${typeBadge}</span>
+              <span style="font-size: 0.75rem; background: var(--bg2); color: var(--text2); padding: 3px 10px; border-radius: 999px; font-weight: 600;">${job.batches}</span>
+            </div>
+            <h4 style="margin: 0 0 4px 0; font-size: 1.15rem; color: var(--text);">${job.title}</h4>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--primary); font-weight: 700;">
+              💰 ${job.package} • 📍 ${job.location}
+            </p>
+          </div>
+          <span class="hr-notice-deadline-badge ${job.badgeType || 'green'}">⏳ ${job.daysLeft}</span>
+        </div>
+
+        <div style="margin: 0.8rem 0; font-size: 0.85rem; color: var(--text2); background: var(--bg2); padding: 10px 14px; border-radius: 8px;">
+          <strong>🎯 Mandatory SkillBridge Challenge:</strong> ${job.challengeTitle}<br/>
+          <strong>📚 Syllabus / What Candidates Study:</strong> ${(job.syllabus || []).join(' • ')}
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 0.8rem; margin-top: auto; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; gap: 12px; font-size: 0.8rem; color: var(--text3);">
+            <span>👥 <strong>482</strong> Registered Applicants</span>
+            <span>⚡ <strong>24</strong> Candidates Shortlisted</span>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-ghost" style="padding: 6px 12px; font-size: 0.8rem;" onclick="switchHRTab('leaderboard')">
+              🏆 View Shortlisted Candidates
+            </button>
+            <button class="btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="openRecruiterChat('${job.company}')">
+              💬 Recruiter Chat
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
 }
 
 // ---------- JOBS & INTERNSHIPS ----------

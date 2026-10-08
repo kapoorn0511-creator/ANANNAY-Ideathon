@@ -774,6 +774,9 @@
 
         <!-- Quick HR Action Buttons -->
         <div class="hr-btn-group">
+          <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; background: var(--green);" onclick="openPostJobModal()">
+            💼 Post Job / Internship
+          </button>
           <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="openPostProblemModal()">
             ➕ Post Real-World Problem
           </button>
@@ -824,6 +827,9 @@
         <button class="hr-subtab-btn active" id="hr-tab-leaderboard-btn" onclick="switchHRTab('leaderboard')">
           🏆 Candidate Leaderboard
         </button>
+        <button class="hr-subtab-btn" id="hr-tab-jobs-btn" onclick="switchHRTab('jobs')">
+          💼 Jobs & Internships Posted
+        </button>
         <button class="hr-subtab-btn" id="hr-tab-notices-btn" onclick="switchHRTab('notices')">
           📢 Recruitment Notices & Deadlines
         </button>
@@ -854,7 +860,21 @@
         </div>
       </div>
 
-      <!-- 2. NOTICES & DEADLINES TAB -->
+      <!-- 2. JOBS & INTERNSHIPS TAB -->
+      <div id="hr-view-jobs" class="hr-tab-pane" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="margin: 0 0 4px 0; font-size: 1.15rem;">Active Jobs & Internships Posted</h3>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text2);">Positions currently open for candidate applications, study roadmaps, and recruiter interviews.</p>
+          </div>
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; background: var(--green);" onclick="openPostJobModal()">+ Post New Job / Internship</button>
+        </div>
+        <div id="hr-jobs-list" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Rendered dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- 3. NOTICES & DEADLINES TAB -->
       <div id="hr-view-notices" class="hr-tab-pane" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 10px;">
           <div>
@@ -1182,6 +1202,83 @@
 
         <button class="btn-primary" style="width:100%; justify-content:center; margin-top:1rem; background:#e056fd;" onclick="submitHRPostNotice()">
           📢 Publish Notice & Activate Deadline
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR: POST JOB / INTERNSHIP MODAL -->
+  <div id="hr-post-job-modal" class="modal-overlay" onclick="closeHRModal(event, 'hr-post-job-modal')">
+    <div class="modal-box" style="max-width: 620px; text-align: left;">
+      <button class="modal-close" onclick="document.getElementById('hr-post-job-modal').classList.remove('active')">✕</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem; background:rgba(0,168,107,0.15); padding:8px; border-radius:10px;">💼</span>
+        <div>
+          <h3 style="margin:0; font-size:1.3rem;">Post Job or Internship Opening</h3>
+          <p style="margin:0; font-size:0.85rem; color:var(--text2);">Announce verified campus opportunities, define study roadmap, and fast-track top problem solvers.</p>
+        </div>
+      </div>
+      <div class="portal-form">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Hiring Company</label>
+            <select id="hr-pj-company" class="portal-select">
+              <option value="amazon">🟠 Amazon AWS</option>
+              <option value="google">🔵 Google Search</option>
+              <option value="microsoft">🟦 Microsoft</option>
+              <option value="netflix">🔴 Netflix</option>
+              <option value="uber">🚗 Uber</option>
+              <option value="atlassian">🔷 Atlassian</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Opportunity Type</label>
+            <select id="hr-pj-type" class="portal-select">
+              <option value="job" selected>💼 Full-Time Job (FTE)</option>
+              <option value="internship">🌱 Summer / 6-Month Internship</option>
+            </select>
+          </div>
+        </div>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Job Title / Designation</label>
+        <input type="text" id="hr-pj-title" class="portal-input" placeholder="e.g. Software Development Engineer 1 (SDE-1) - Cloud Systems" value="Software Development Engineer 1 (SDE-1) - Cloud Systems" />
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Compensation / Package</label>
+            <input type="text" id="hr-pj-package" class="portal-input" placeholder="e.g. ₹45 LPA + Stocks or ₹1,20,000 / month" value="₹45 LPA + Stocks" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Location & Mode</label>
+            <input type="text" id="hr-pj-location" class="portal-input" placeholder="e.g. Bangalore / Hyderabad / Hybrid" value="Bangalore / Hyderabad / Hybrid" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Target Batches</label>
+            <input type="text" id="hr-pj-batches" class="portal-input" placeholder="e.g. 2025 & 2026 Graduating Batches" value="2025 & 2026 Graduating Batches" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Application Deadline</label>
+            <input type="text" id="hr-pj-deadline" class="portal-input" placeholder="e.g. Oct 31, 2026 • 11:59 PM IST" value="Oct 31, 2026 • 11:59 PM IST" />
+          </div>
+        </div>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">Mandatory SkillBridge Arena Challenge</label>
+        <select id="hr-pj-challenge" class="portal-select">
+          <option value="0">Amazon: Design a Distributed Rate Limiter (+500 XP)</option>
+          <option value="1">Google: Optimize Search API Load Time (+300 XP)</option>
+          <option value="2">Microsoft: Build an Accessible Keyboard Data Grid (+400 XP)</option>
+          <option value="3">Netflix: Client-Side Video Buffering Protocols (+600 XP)</option>
+          <option value="4">Uber: Real-time Driver Location Telemetry (+550 XP)</option>
+        </select>
+
+        <label style="font-size:0.85rem; font-weight:700; color:var(--text2);">What Candidates Must Study (Comma-separated)</label>
+        <input type="text" id="hr-pj-syllabus" class="portal-input" placeholder="e.g. Distributed Caching, Redis Lua, Concurrency in Go, API Gateways" value="Distributed Caching, Redis Lua, Concurrency in Go, API Gateways" />
+
+        <button class="btn-primary" style="width:100%; justify-content:center; margin-top:1rem; background:var(--green);" onclick="submitHRPostJob()">
+          🚀 Publish Job / Internship Opening
         </button>
       </div>
     </div>
