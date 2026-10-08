@@ -1993,10 +1993,78 @@ select:focus { outline: none; border-color: var(--primary); }
   box-shadow: 0 6px 18px rgba(108,99,255,0.08);
 }
 
+/* ============================================================
+   LOGOUT & SESSION STYLES
+   ============================================================ */
+.nav-user-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.2;
+}
 
+.btn-logout:hover {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
 
+.btn-logout-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
+.btn-logout-compact:hover {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
 
+.dash-sidebar-link.dash-logout-link {
+  color: #ef4444 !important;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
 
+.dash-sidebar-link.dash-logout-link:hover {
+  background: rgba(239, 68, 68, 0.08) !important;
+  color: #dc2626 !important;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+@media (max-width: 700px) {
+  .nav-user-area .logout-text {
+    display: none;
+  }
+  .nav-user-area .btn-logout {
+    padding: 6px 10px;
+  }
+}
 

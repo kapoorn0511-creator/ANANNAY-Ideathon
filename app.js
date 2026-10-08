@@ -1739,12 +1739,26 @@ function toggleAuthMode(type) {
 
 function mockLogin() {
   // Hide Auth Modal
-  document.getElementById('auth-modal').classList.remove('active');
+  const authModal = document.getElementById('auth-modal');
+  if (authModal) authModal.classList.remove('active');
   
+  // Persist session in localStorage
+  try {
+    localStorage.setItem('sb_user_logged_in', 'true');
+  } catch (e) {}
+
   // Update Navbar UI
-  document.getElementById('auth-nav').style.display = 'none';
-  document.getElementById('internal-nav').style.display = 'flex';
-  document.getElementById('user-nav').style.display = 'flex';
+  const authNav = document.getElementById('auth-nav');
+  if (authNav) authNav.style.display = 'none';
+
+  const internalNav = document.getElementById('internal-nav');
+  if (internalNav) internalNav.style.display = 'flex';
+
+  const userWrapper = document.getElementById('user-nav-wrapper');
+  if (userWrapper) userWrapper.style.display = 'flex';
+
+  const userNav = document.getElementById('user-nav');
+  if (userNav) userNav.style.display = 'flex';
   
   // Show Chat Widget
   const chatWidget = document.getElementById('chat-widget-container');
@@ -1753,7 +1767,68 @@ function mockLogin() {
   // Go to Student Home
   showSection('home');
   
-  alert("Welcome to SkillBridge! You are now logged in as Anannay Kapoor.");
+  alert("🎉 Welcome back to SkillBridge! You are now logged in as Anannay Kapoor (NIT Kurukshetra).");
+}
+
+function confirmLogout() {
+  // Close any active user profile modal so confirmation modal is front and center
+  const profModal = document.getElementById('user-profile-modal');
+  if (profModal) profModal.classList.remove('active');
+
+  const logoutModal = document.getElementById('logout-confirm-modal');
+  if (logoutModal) {
+    logoutModal.classList.add('active');
+  } else {
+    if (confirm("Are you sure you want to log out of SkillBridge?")) {
+      executeLogout();
+    }
+  }
+}
+
+function closeLogoutModal(e) {
+  if (!e || e.target.id === 'logout-confirm-modal' || (e.target.classList && e.target.classList.contains('modal-close'))) {
+    const modal = document.getElementById('logout-confirm-modal');
+    if (modal) modal.classList.remove('active');
+  }
+}
+
+function executeLogout() {
+  const modal = document.getElementById('logout-confirm-modal');
+  if (modal) modal.classList.remove('active');
+  logoutUser();
+}
+
+function logoutUser() {
+  // Persist logged out state
+  try {
+    localStorage.setItem('sb_user_logged_in', 'false');
+  } catch (e) {}
+
+  // Close all open modals
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+
+  // Update Navbar UI
+  const internalNav = document.getElementById('internal-nav');
+  if (internalNav) internalNav.style.display = 'none';
+
+  const userWrapper = document.getElementById('user-nav-wrapper');
+  if (userWrapper) userWrapper.style.display = 'none';
+
+  const userNav = document.getElementById('user-nav');
+  if (userNav) userNav.style.display = 'none';
+
+  const authNav = document.getElementById('auth-nav');
+  if (authNav) authNav.style.display = 'flex';
+
+  // Hide floating chat widget
+  const chatWidget = document.getElementById('chat-widget-container');
+  if (chatWidget) chatWidget.style.display = 'none';
+
+  // Navigate to public landing page
+  showSection('landing');
+
+  // Friendly alert notification
+  alert("👋 You have been successfully logged out of SkillBridge.\n\nAll verified data for Anannay Kapoor (81.6% Readiness Score, 2,450 XP, ATS Resume) remains saved. Click 'Sign In' whenever you are ready!");
 }
 
 // ---------- PEER CHAT ENHANCEMENTS ----------
@@ -3119,7 +3194,6 @@ function filterChallengesBySkill(skill) {
 
 // Ensure init covers basic setup
 document.addEventListener('DOMContentLoaded', () => {
-  showSection('landing');
   renderProblems('all');
   switchCompany('amazon', document.querySelector('#hr-view .chip.active')); // Load initial HR view
   renderStreakCalendar();
@@ -3127,4 +3201,33 @@ document.addEventListener('DOMContentLoaded', () => {
   renderJobs('all');
   switchChatChannel('venting-space', document.querySelector('.chat-channel.active')); // Load initial chat
   renderInstaInboxList(); // Pre-load Instagram DM conversations
+
+  // Check saved session in localStorage
+  let savedLogin = null;
+  try {
+    savedLogin = localStorage.getItem('sb_user_logged_in');
+  } catch (e) {}
+
+  if (savedLogin === 'true') {
+    // Automatically restore logged-in dashboard state
+    const authNav = document.getElementById('auth-nav');
+    if (authNav) authNav.style.display = 'none';
+
+    const internalNav = document.getElementById('internal-nav');
+    if (internalNav) internalNav.style.display = 'flex';
+
+    const userWrapper = document.getElementById('user-nav-wrapper');
+    if (userWrapper) userWrapper.style.display = 'flex';
+
+    const userNav = document.getElementById('user-nav');
+    if (userNav) userNav.style.display = 'flex';
+
+    const chatWidget = document.getElementById('chat-widget-container');
+    if (chatWidget) chatWidget.style.display = 'block';
+
+    showSection('home');
+  } else {
+    // Show public landing page
+    showSection('landing');
+  }
 });
