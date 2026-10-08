@@ -27,11 +27,15 @@
     </div>
     
     <!-- Internal Links (Hidden before Login) -->
-    <nav class="nav-links" id="internal-nav" style="display: none;">
+    <nav class="nav-links" id="internal-nav" style="display: none; align-items: center;">
       <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
       <a href="#arena" class="nav-link" onclick="showSection('arena')">Arena</a>
       <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR View</a>
       <a href="#company-portal" class="nav-link" onclick="showSection('company-portal')">Company Portal</a>
+      <a href="javascript:void(0)" class="nav-link" style="display:flex; align-items:center; gap:6px; position:relative;" onclick="toggleChat()">
+        Peer Lounge <span class="online-dot" style="position:static;"></span>
+        <span class="unread-badge" id="chat-badge" style="top:-8px; right:-12px; left:auto; width:18px; height:18px; font-size:0.7rem; box-shadow:0 0 0 2px var(--card);">1</span>
+      </a>
     </nav>
     
     <!-- Auth Buttons (Visible before Login) -->
@@ -403,11 +407,6 @@
 
   <!-- PEER CONNECT CHAT WIDGET (Hidden until login) -->
   <div id="chat-widget-container" style="display: none;">
-    <button class="peer-chat-btn" onclick="toggleChat()">
-      <span class="unread-badge" id="chat-badge">1</span>
-      💬 Peer Lounge <span class="online-dot"></span>
-    </button>
-
     <div id="peer-chat-window" class="peer-chat-window">
       <div class="chat-header">
         <div>
