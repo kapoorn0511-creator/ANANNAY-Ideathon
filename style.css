@@ -461,26 +461,75 @@ select:focus { outline: none; border-color: var(--primary); }
 .btn-join { background: var(--primary-glow); color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 700; width: 100%; transition: var(--transition); }
 .btn-join:hover { background: var(--primary); color: white; }
 
-/* AI FAB */
+/* AI FAB & ASSISTANT */
 .ai-fab {
   position: fixed !important;
   bottom: 25px !important;
   right: 25px !important;
-  width: 65px !important;
-  height: 65px !important;
+  width: 62px !important;
+  height: 62px !important;
   border-radius: 50% !important;
   background: linear-gradient(135deg, #bb66ff, var(--primary)) !important;
   color: white !important;
-  border: none !important;
-  box-shadow: 0 8px 25px rgba(108,99,255,0.4) !important;
+  border: 2px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(108,99,255,0.45) !important;
   cursor: pointer !important;
-  z-index: 999999 !important;
+  z-index: 9999 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 2rem !important;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  font-size: 1.8rem !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
 }
 .ai-fab:hover {
-  transform: scale(1.15) rotate(10deg) !important;
+  transform: scale(1.1) rotate(8deg) !important;
+  box-shadow: 0 14px 35px rgba(108,99,255,0.65) !important;
 }
+
+#ai-modal-overlay {
+  z-index: 100000 !important;
+}
+
+/* Roadmap Output Styling */
+.roadmap-week-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--primary);
+  transition: var(--transition);
+}
+.roadmap-week-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 15px rgba(108,99,255,0.08);
+}
+.roadmap-week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+.roadmap-week-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.roadmap-badge {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: var(--primary-glow);
+  color: var(--primary);
+}
+.roadmap-points {
+  padding-left: 1.2rem;
+  color: var(--text2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.roadmap-points li {
+  margin-bottom: 0.4rem;
+}
+

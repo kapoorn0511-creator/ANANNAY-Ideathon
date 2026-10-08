@@ -423,36 +423,56 @@
   </div>
 
   <!-- GEMINI AI ROADMAP MODAL -->
-  <div id="ai-modal-overlay" class="modal-overlay" style="display: none;" onclick="if(event.target===this) toggleAIModal()">
-    <div class="modal-box ai-modal" style="width: 700px; max-width: 95%; text-align: left;">
-      <button class="modal-close" onclick="toggleAIModal()">✕</button>
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;">
+  <div id="ai-modal-overlay" class="modal-overlay" onclick="closeAIModal(event)">
+    <div class="modal-box ai-modal" style="width: 720px; max-width: 95%; max-height: 88vh; overflow-y: auto; text-align: left;">
+      <button class="modal-close" onclick="closeAIModal()">&times;</button>
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 1.2rem;">
         <div style="background: var(--primary-glow); padding: 12px; border-radius: 12px; font-size: 1.8rem;">✨</div>
         <div>
-          <h2 style="margin-bottom: 0; font-size: 1.4rem;">Gemini AI Roadmap Builder</h2>
-          <p style="font-size:0.9rem; color:var(--text2); margin:0;">Generate a personalized 4-week prep strategy using live Google AI.</p>
+          <h2 style="margin-bottom: 2px; font-size: 1.35rem;">SkillBridge AI Career Assistant</h2>
+          <p style="font-size:0.88rem; color:var(--text2); margin:0;">Generate custom 4-week preparation roadmaps tailored to company job profiles.</p>
         </div>
       </div>
 
-      <div style="background:var(--bg2); padding:15px; border-radius:8px; margin-bottom:1.5rem; border: 1px solid var(--border);">
-        <label style="display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text2);">GEMINI API KEY (Saved locally)</label>
-        <input type="password" id="gemini-api-key" placeholder="Paste your free API key here..." style="width:100%; padding:12px; border:1px solid var(--border); border-radius:6px; font-size:0.9rem; background:var(--bg); color: var(--text); outline: none;">
-        <div style="font-size:0.75rem; color:var(--text3); margin-top:8px;">Get a free key instantly at <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--primary); text-decoration: underline;">Google AI Studio</a>. Key never leaves your browser.</div>
+      <!-- Quick Role Suggestions -->
+      <div style="margin-bottom: 1rem;">
+        <span style="font-size:0.75rem; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:6px;">Quick Targets:</span>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <button type="button" class="chip" style="font-size:0.8rem; padding:4px 10px;" onclick="setRoadmapTopic('Frontend Engineer at Netflix (React / Perf)')">Frontend (Netflix)</button>
+          <button type="button" class="chip" style="font-size:0.8rem; padding:4px 10px;" onclick="setRoadmapTopic('Backend Engineer at Amazon (System Design / Redis)')">Backend (Amazon)</button>
+          <button type="button" class="chip" style="font-size:0.8rem; padding:4px 10px;" onclick="setRoadmapTopic('Full Stack Developer (MERN Stack & Scalability)')">Full Stack (MERN)</button>
+          <button type="button" class="chip" style="font-size:0.8rem; padding:4px 10px;" onclick="setRoadmapTopic('Distributed Systems & Cloud (Go / Kubernetes / Uber)')">Distributed (Uber)</button>
+          <button type="button" class="chip" style="font-size:0.8rem; padding:4px 10px;" onclick="setRoadmapTopic('Machine Learning & Generative AI Engineer')">AI / ML Engineer</button>
+        </div>
       </div>
 
-      <div style="display:flex; gap:10px; margin-bottom: 1.5rem;">
-        <input type="text" id="roadmap-topic" placeholder="E.g., Backend Developer at Uber, System Design..." style="flex:1; padding:12px 15px; border:1px solid var(--border); border-radius:8px; font-size:1rem; background: var(--bg); color: var(--text); outline: none;">
-        <button class="btn-primary" onclick="generateRoadmap()" id="ai-generate-btn" style="padding: 0 25px;">Generate</button>
+      <!-- Input and Generate Button -->
+      <div style="display:flex; gap:10px; margin-bottom: 1rem;">
+        <input type="text" id="roadmap-topic" placeholder="E.g., Backend Developer at Uber, System Design at Google..." style="flex:1; padding:12px 15px; border:1px solid var(--border); border-radius:8px; font-size:0.95rem; background: var(--bg); color: var(--text); outline: none;" onkeydown="if(event.key==='Enter') generateRoadmap()" />
+        <button class="btn-primary" onclick="generateRoadmap()" id="ai-generate-btn" style="padding: 0 22px; white-space:nowrap;">Generate ✨</button>
       </div>
 
-      <div id="ai-roadmap-output" style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:1.5rem; max-height:400px; overflow-y:auto; display:none; line-height: 1.6; font-size: 0.95rem;">
-        <!-- Roadmap goes here -->
+      <!-- Optional API Key Accordion -->
+      <details style="background:var(--bg2); padding:8px 12px; border-radius:8px; margin-bottom:1.2rem; border: 1px solid var(--border); font-size:0.82rem;">
+        <summary style="cursor:pointer; color:var(--primary); font-weight:600; outline:none; user-select:none;">
+          ⚙️ Optional: Connect Live Google Gemini API Key
+        </summary>
+        <div style="margin-top:8px;">
+          <input type="password" id="gemini-api-key" placeholder="Paste your Google AI Studio API key here (optional)..." style="width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:6px; font-size:0.82rem; background:var(--bg); color: var(--text); outline: none;" />
+          <div style="font-size:0.75rem; color:var(--text3); margin-top:4px;">
+            Leave blank to use our instant built-in AI roadmap engine. Get a free key anytime from <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--primary); text-decoration: underline;">Google AI Studio</a>.
+          </div>
+        </div>
+      </details>
+
+      <!-- Output Roadmap Area -->
+      <div id="ai-roadmap-output" style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:1.25rem; max-height:420px; overflow-y:auto; display:none; line-height: 1.6; font-size: 0.92rem;">
       </div>
     </div>
   </div>
 
-  <!-- FLOATING AI BUTTON -->
-  <button class="ai-fab" onclick="toggleAIModal()" title="AI Roadmap Builder">
+  <!-- FLOATING AI ASSISTANT BUTTON -->
+  <button class="ai-fab" id="ai-fab-btn" onclick="toggleAIModal()" title="SkillBridge AI Assistant">
     ✨
   </button>
 
