@@ -403,62 +403,388 @@ select:focus { outline: none; border-color: var(--primary); }
 .analysis-tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .analysis-tip { background: rgba(108,99,255,0.1); border-left: 3px solid var(--primary); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.8rem 1rem; font-size: 0.88rem; color: var(--text2); line-height: 1.6; margin-top: 0.5rem; }
 
-/* ============ PEER CHAT (MENTAL WELLNESS) ============ */
-.online-dot { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #00ff88; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); } }
+/* ============ INSTAGRAM DIRECT MESSAGE (DM) CHAT INTERFACE ============ */
+.online-dot { width: 9px; height: 9px; background: #00ff88; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #00ff88; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); } }
 
-/* Full-Height Sidebar Drawer */
-.peer-chat-window { position: fixed; top: 0; right: 0; width: 450px; height: 100vh; background: var(--bg); border-left: 1px solid var(--border); box-shadow: -10px 0 40px rgba(0,0,0,0.15); z-index: 2000; display: flex; flex-direction: column; overflow: hidden; transform: translateX(100%); pointer-events: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+/* Full-Height Instagram Drawer Window */
+.peer-chat-window {
+  position: fixed; top: 0; right: 0; width: 440px; max-width: 100vw; height: 100vh;
+  background: #ffffff; border-left: 1px solid #dbdbdb;
+  box-shadow: -10px 0 45px rgba(0,0,0,0.18); z-index: 2000;
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: translateX(100%); pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
 .peer-chat-window.active { transform: translateX(0); pointer-events: auto; }
 
-.chat-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-.chat-header h4 { font-size: 1.2rem !important; margin-bottom: 4px !important; }
-.chat-header p { font-size: 0.85rem !important; }
-.chat-channels { display: flex; gap: 12px; padding: 15px 1.5rem; background: var(--bg2); border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; }
-.chat-channel { font-size: 0.9rem; font-weight: 600; color: var(--text2); cursor: pointer; padding: 8px 16px; border-radius: 999px; transition: var(--transition); }
-.chat-channel.active { background: var(--card); color: var(--primary); border: 1px solid var(--border); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+/* Instagram Top Header */
+.insta-header {
+  background: #ffffff; border-bottom: 1px solid #efefef;
+  padding: 10px 16px; display: flex; align-items: center; justify-content: space-between;
+  min-height: 60px; z-index: 20; position: relative;
+}
+.insta-header-left { display: flex; align-items: center; gap: 10px; }
+.insta-header-btn {
+  background: none; border: none; font-size: 1.3rem; color: #262626;
+  cursor: pointer; padding: 6px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; transition: 0.15s;
+}
+.insta-header-btn:hover { background: #f2f2f2; }
+.insta-account-pill {
+  font-size: 1.05rem; font-weight: 700; color: #262626; display: flex;
+  align-items: center; gap: 5px; cursor: pointer;
+}
+.insta-verified-badge {
+  color: #0095f6; font-size: 0.85rem; display: inline-flex;
+}
+.insta-header-contact { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.insta-header-avatar {
+  position: relative; width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+  background: #efefef;
+}
+.insta-header-avatar.has-story {
+  padding: 2px;
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+}
+.insta-header-avatar.has-story .avatar-inner {
+  width: 100%; height: 100%; background: #ffffff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.insta-online-indicator {
+  position: absolute; bottom: 0; right: 0; width: 10px; height: 10px;
+  background: #10b981; border: 2px solid #ffffff; border-radius: 50%;
+}
+.insta-header-info { line-height: 1.25; }
+.insta-header-name {
+  font-size: 0.95rem; font-weight: 700; color: #262626; display: flex; align-items: center; gap: 4px;
+}
+.insta-header-sub {
+  font-size: 0.72rem; color: #8e8e8e; display: flex; align-items: center; gap: 4px;
+}
+.insta-header-actions { display: flex; align-items: center; gap: 4px; }
 
-.chat-body { padding: 1.5rem; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1.5rem; background: var(--bg); scroll-behavior: smooth; }
-.chat-row { display: flex; gap: 12px; align-items: flex-end; }
-.chat-row.you { flex-direction: row-reverse; }
-.chat-avatar { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.chat-msg { background: var(--card); padding: 12px 16px; border-radius: 16px 16px 16px 0; font-size: 0.95rem; color: var(--text); border: 1px solid var(--border); max-width: 85%; line-height: 1.5; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-.chat-row.you .chat-msg { background: var(--primary-glow); border-color: rgba(108,99,255,0.2); border-radius: 16px 16px 0 16px; }
-.chat-msg.system-msg { background: transparent; border: none; text-align: center; color: var(--text3); font-size: 0.85rem; align-self: center; font-style: italic; max-width: 100%; box-shadow: none; padding: 5px; margin: 0 auto; }
-.msg-time { font-size: 0.7rem; color: var(--text3); font-weight: normal; margin-left: 8px; }
+/* Instagram Notes / Stories Tray */
+.insta-notes-tray {
+  display: flex; gap: 14px; padding: 12px 16px; overflow-x: auto;
+  background: #fafafa; border-bottom: 1px solid #efefef;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.insta-notes-tray::-webkit-scrollbar { display: none; }
+.insta-note-item {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; min-width: 68px; max-width: 72px; text-align: center;
+  transition: transform 0.15s;
+}
+.insta-note-item:hover { transform: scale(1.04); }
+.insta-note-bubble {
+  background: #ffffff; border-radius: 12px; padding: 3px 8px;
+  font-size: 0.65rem; font-weight: 600; color: #262626;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #efefef;
+  margin-bottom: 5px; white-space: nowrap; max-width: 72px;
+  overflow: hidden; text-overflow: ellipsis; position: relative;
+}
+.insta-note-bubble::after {
+  content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+  border-width: 4px 4px 0 4px; border-style: solid; border-color: #ffffff transparent transparent transparent;
+}
+.insta-story-circle {
+  width: 52px; height: 52px; border-radius: 50%; padding: 2.5px;
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.insta-story-circle.your-note {
+  background: #dbdbdb;
+}
+.insta-story-circle-inner {
+  width: 100%; height: 100%; background: #ffffff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+}
+.insta-note-add-badge {
+  position: absolute; bottom: 0; right: 0; width: 18px; height: 18px;
+  background: #0095f6; color: white; border-radius: 50%;
+  border: 2px solid white; display: flex; align-items: center;
+  justify-content: center; font-size: 0.75rem; font-weight: 800;
+}
+.insta-note-user {
+  font-size: 0.72rem; color: #262626; font-weight: 600; margin-top: 5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 68px;
+}
 
-/* Typing Animation */
-.typing-dots { display: flex; gap: 4px; padding: 4px 8px; }
-.typing-dots span { width: 6px; height: 6px; background: var(--text3); border-radius: 50%; animation: chatBounce 1.4s infinite ease-in-out both; }
-.typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-.typing-dots span:nth-child(2) { animation-delay: -0.16s; }
-@keyframes chatBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+/* Instagram Search & Filter Tabs */
+.insta-subnav {
+  padding: 8px 14px; background: #ffffff; border-bottom: 1px solid #efefef;
+}
+.insta-search-wrap {
+  position: relative; margin-bottom: 8px;
+}
+.insta-search-wrap input {
+  width: 100%; padding: 8px 12px 8px 32px; border-radius: 10px;
+  background: #efefef; border: none; font-size: 0.85rem; color: #262626; outline: none;
+}
+.insta-search-wrap span {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  font-size: 0.85rem; color: #8e8e8e; pointer-events: none;
+}
+.insta-tabs {
+  display: flex; gap: 8px;
+}
+.insta-tab {
+  flex: 1; padding: 7px 0; text-align: center; font-size: 0.8rem; font-weight: 700;
+  color: #8e8e8e; background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; transition: 0.15s;
+}
+.insta-tab.active {
+  color: #0095f6; border-bottom-color: #0095f6;
+}
 
-.unread-badge { position: absolute; top: -5px; left: -5px; background: var(--red); color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; border: 2px solid var(--card); }
+/* Instagram Direct Conversations List */
+.insta-inbox-list {
+  flex: 1; overflow-y: auto; background: #ffffff;
+}
+.insta-dm-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  cursor: pointer; transition: background 0.15s; border-bottom: 1px solid #fafafa;
+}
+.insta-dm-item:hover, .insta-dm-item.active {
+  background: #f7f7f7;
+}
+.insta-dm-avatar-wrap {
+  position: relative; width: 48px; height: 48px; flex-shrink: 0;
+}
+.insta-dm-avatar {
+  width: 48px; height: 48px; border-radius: 50%; background: #efefef;
+  display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+}
+.insta-dm-online {
+  position: absolute; bottom: 2px; right: 2px; width: 11px; height: 11px;
+  background: #10b981; border: 2px solid #ffffff; border-radius: 50%;
+}
+.insta-dm-details { flex: 1; min-width: 0; }
+.insta-dm-name {
+  font-size: 0.9rem; font-weight: 700; color: #262626; display: flex;
+  align-items: center; justify-content: space-between; margin-bottom: 2px;
+}
+.insta-dm-handle {
+  font-size: 0.75rem; color: #8e8e8e; font-weight: 500;
+}
+.insta-dm-preview {
+  font-size: 0.8rem; color: #8e8e8e; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
+}
+.insta-dm-preview.unread {
+  color: #262626; font-weight: 700;
+}
+.insta-unread-dot {
+  width: 8px; height: 8px; background: #0095f6; border-radius: 50%; flex-shrink: 0;
+}
 
-.chat-input-area { display: flex; padding: 1.5rem; background: var(--card); border-top: 1px solid var(--border); align-items: center; }
-.chat-input-area input { flex: 1; padding: 14px 20px; border: 1px solid var(--border); border-radius: 999px; outline: none; font-family: inherit; font-size: 1rem; background: var(--bg); transition: var(--transition); }
-.chat-input-area input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(108,99,255,0.1); }
-.chat-input-area button { background: var(--primary); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; margin-left: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: var(--transition); }
-.chat-input-area button:hover { background: var(--primary-dark); transform: scale(1.05); }
+/* Instagram Message Thread Body */
+.insta-thread-body {
+  flex: 1; overflow-y: auto; padding: 16px; background: #ffffff;
+  display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth;
+}
+.insta-peer-intro {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 20px 10px 10px 10px; border-bottom: 1px solid #efefef;
+  margin-bottom: 8px;
+}
+.insta-intro-avatar {
+  width: 72px; height: 72px; border-radius: 50%; padding: 3px;
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+  margin-bottom: 10px; display: flex; align-items: center; justify-content: center;
+}
+.insta-intro-avatar .avatar-inner {
+  width: 100%; height: 100%; border-radius: 50%; background: #ffffff;
+  display: flex; align-items: center; justify-content: center; font-size: 2.2rem;
+}
+.insta-intro-name { font-size: 1.15rem; font-weight: 800; color: #262626; margin-bottom: 2px; }
+.insta-intro-handle { font-size: 0.82rem; color: #8e8e8e; margin-bottom: 6px; }
+.insta-intro-bio { font-size: 0.82rem; color: #555555; max-width: 280px; line-height: 1.4; margin-bottom: 12px; }
+.insta-view-profile-btn {
+  background: #efefef; border: none; padding: 6px 14px; border-radius: 8px;
+  font-size: 0.8rem; font-weight: 700; color: #262626; cursor: pointer; transition: 0.15s;
+}
+.insta-view-profile-btn:hover { background: #e0e0e0; }
+
+.insta-date-separator {
+  text-align: center; font-size: 0.72rem; color: #8e8e8e; font-weight: 600;
+  margin: 10px 0; text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* Instagram Message Rows & Bubbles */
+.insta-msg-row {
+  display: flex; gap: 8px; align-items: flex-end; position: relative;
+}
+.insta-msg-row.them {
+  align-self: flex-start; max-width: 82%;
+}
+.insta-msg-row.you {
+  align-self: flex-end; flex-direction: row-reverse; max-width: 82%;
+}
+.insta-msg-avatar {
+  width: 28px; height: 28px; border-radius: 50%; background: #efefef;
+  display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+  flex-shrink: 0; margin-bottom: 4px;
+}
+.insta-bubble-wrap {
+  position: relative; display: flex; flex-direction: column;
+}
+.insta-bubble-them {
+  background: #efefef; color: #000000;
+  border-radius: 20px 20px 20px 4px;
+  padding: 10px 15px; font-size: 0.92rem; line-height: 1.45;
+  cursor: pointer; user-select: none; position: relative;
+  word-break: break-word;
+}
+.insta-bubble-you {
+  background: linear-gradient(135deg, #7026ed 0%, #9b39f1 40%, #e1306c 100%);
+  color: #ffffff;
+  border-radius: 20px 20px 4px 20px;
+  padding: 10px 15px; font-size: 0.92rem; line-height: 1.45;
+  cursor: pointer; user-select: none; position: relative;
+  word-break: break-word;
+  box-shadow: 0 2px 8px rgba(112, 38, 237, 0.22);
+}
+.insta-heart-badge {
+  position: absolute; bottom: -8px; right: 10px;
+  background: #ffffff; border: 1px solid #efefef; border-radius: 999px;
+  padding: 1px 6px; font-size: 0.72rem; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  display: flex; align-items: center; gap: 2px; cursor: pointer; z-index: 5;
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.insta-seen-status {
+  font-size: 0.68rem; color: #8e8e8e; align-self: flex-end; margin-top: 3px; margin-right: 4px;
+}
+
+/* Instagram Double-Click Floating Heart */
+.insta-floating-heart {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 2.5rem; pointer-events: none; z-index: 10;
+  animation: instaHeartPop 0.85s forwards ease-out;
+}
+@keyframes instaHeartPop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-15deg); opacity: 0; }
+  40% { transform: translate(-50%, -50%) scale(1.4) rotate(0deg); opacity: 1; }
+  75% { transform: translate(-50%, -75%) scale(1.1) rotate(5deg); opacity: 0.9; }
+  100% { transform: translate(-50%, -110%) scale(0.8) rotate(0deg); opacity: 0; }
+}
+
+/* Instagram Typing Bubble */
+.insta-typing-bubble {
+  background: #efefef; border-radius: 18px 18px 18px 4px;
+  padding: 10px 16px; display: inline-flex; align-items: center; gap: 4px;
+}
+.insta-typing-bubble span {
+  width: 6px; height: 6px; background: #8e8e8e; border-radius: 50%;
+  animation: instaTyping 1.4s infinite ease-in-out both;
+}
+.insta-typing-bubble span:nth-child(1) { animation-delay: -0.32s; }
+.insta-typing-bubble span:nth-child(2) { animation-delay: -0.16s; }
+@keyframes instaTyping { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1.1); opacity: 1; } }
+
+/* Instagram Bottom Input Pill */
+.insta-input-bar {
+  padding: 10px 14px; background: #ffffff; border-top: 1px solid #efefef;
+  display: flex; align-items: center; gap: 8px; position: relative; z-index: 20;
+}
+.insta-pill-input-box {
+  display: flex; align-items: center; flex: 1;
+  border: 1px solid #dbdbdb; border-radius: 24px; padding: 4px 12px;
+  background: #fafafa; transition: border-color 0.2s;
+}
+.insta-pill-input-box:focus-within {
+  border-color: #a8a8a8;
+}
+.insta-action-icon {
+  background: none; border: none; font-size: 1.15rem; color: #262626;
+  cursor: pointer; padding: 4px 6px; display: flex; align-items: center;
+  justify-content: center; transition: transform 0.15s;
+}
+.insta-action-icon:hover { transform: scale(1.15); }
+.insta-input-field {
+  flex: 1; border: none; background: transparent; padding: 8px 10px;
+  font-size: 0.93rem; color: #262626; outline: none; font-family: inherit;
+}
+.insta-input-field::placeholder { color: #8e8e8e; }
+.insta-dynamic-btn {
+  background: none; border: none; cursor: pointer; padding: 4px 8px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+  transition: transform 0.15s;
+}
+.insta-dynamic-btn.send-mode {
+  color: #0095f6; font-size: 0.92rem; font-weight: 700;
+}
+.insta-dynamic-btn:hover { transform: scale(1.1); }
+
+/* Quick Emojis Popover */
+.insta-emoji-tray {
+  position: absolute; bottom: 65px; left: 16px; right: 16px;
+  background: #ffffff; border: 1px solid #efefef; border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12); padding: 8px 14px;
+  display: flex; justify-content: space-around; z-index: 30;
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.insta-emoji-item {
+  font-size: 1.4rem; cursor: pointer; transition: transform 0.15s;
+}
+.insta-emoji-item:hover { transform: scale(1.3); }
+
+/* Instagram Calling Simulation Modal */
+.insta-call-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(18, 18, 18, 0.96); backdrop-filter: blur(15px);
+  z-index: 2100; display: flex; flex-direction: column; align-items: center;
+  justify-content: space-between; padding: 50px 20px; color: white;
+  animation: fadeIn 0.25s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.insta-call-avatar-pulse {
+  position: relative; width: 110px; height: 110px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
+  background: #262626; margin: 30px auto 20px;
+  box-shadow: 0 0 0 0 rgba(0, 149, 246, 0.7);
+  animation: callPulse 1.8s infinite;
+}
+@keyframes callPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 149, 246, 0.7); }
+  70% { box-shadow: 0 0 0 35px rgba(0, 149, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 149, 246, 0); }
+}
+.insta-call-actions {
+  display: flex; gap: 24px; align-items: center;
+}
+.insta-call-btn {
+  width: 52px; height: 52px; border-radius: 50%; border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; cursor: pointer; transition: transform 0.15s;
+}
+.insta-call-btn.mute { background: rgba(255,255,255,0.2); color: white; }
+.insta-call-btn.end { background: #ed4956; color: white; }
+.insta-call-btn:hover { transform: scale(1.1); }
 
 /* IG-Style Profiles & Study Groups */
-.chat-username { font-weight: 700; color: var(--primary); cursor: pointer; transition: 0.2s; }
-.chat-username:hover { text-decoration: underline; color: var(--primary-dark); }
-.mini-profile-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); padding: 20px; z-index: 2001; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.chat-username { font-weight: 700; color: #0095f6; cursor: pointer; transition: 0.2s; }
+.chat-username:hover { text-decoration: underline; }
+.mini-profile-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; background: #ffffff; border: 1px solid #dbdbdb; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); padding: 22px; z-index: 2200; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 @keyframes popIn { 0% { transform: translate(-50%, -40%) scale(0.8); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
-.close-profile { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text3); }
-.profile-header { display: flex; gap: 15px; align-items: center; margin-bottom: 20px; }
-.profile-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #ff007f); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; border: 3px solid var(--card); box-shadow: 0 0 0 2px var(--primary); }
-.profile-stats { display: flex; justify-content: space-around; text-align: center; font-size: 0.8rem; background: var(--bg); padding: 12px; border-radius: 8px; margin-bottom: 15px; color: var(--text2); }
-.profile-stats strong { font-size: 1.2rem; color: var(--text); }
-.profile-bio { font-size: 0.9rem; color: var(--text2); margin-bottom: 15px; line-height: 1.5; }
+.close-profile { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #8e8e8e; }
+.profile-header { display: flex; gap: 15px; align-items: center; margin-bottom: 16px; }
+.profile-avatar { width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(135deg, #7026ed, #e1306c); display: flex; align-items: center; justify-content: center; font-size: 1.9rem; color: white; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e1306c; }
+.profile-stats { display: flex; justify-content: space-around; text-align: center; font-size: 0.78rem; background: #fafafa; padding: 12px; border-radius: 10px; margin-bottom: 14px; color: #555555; border: 1px solid #efefef; }
+.profile-stats strong { font-size: 1.15rem; color: #262626; display: block; }
+.profile-bio { font-size: 0.88rem; color: #333333; margin-bottom: 15px; line-height: 1.45; }
 
-.study-group-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 12px; transition: var(--transition); }
-.study-group-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(108,99,255,0.05); }
-.study-group-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
-.study-group-meta { font-size: 0.85rem; color: var(--text3); display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.btn-join { background: var(--primary-glow); color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 700; width: 100%; transition: var(--transition); }
+.study-group-card { background: #ffffff; border: 1px solid #dbdbdb; border-radius: 12px; padding: 15px; margin-bottom: 12px; transition: var(--transition); }
+.study-group-card:hover { border-color: #0095f6; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,149,246,0.08); }
+.study-group-title { font-weight: 800; font-size: 1.02rem; margin-bottom: 8px; color: #262626; }
+.study-group-meta { font-size: 0.82rem; color: #8e8e8e; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.btn-join { background: #f0f7ff; color: #0095f6; border: 1px solid #0095f6; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.88rem; font-weight: 700; width: 100%; transition: var(--transition); }
+.btn-join:hover { background: #0095f6; color: white; }
 .btn-join:hover { background: var(--primary); color: white; }
 
 /* AI FAB & ASSISTANT */

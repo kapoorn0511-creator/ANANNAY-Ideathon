@@ -1568,63 +1568,205 @@ const CHAT_DATA = {
 };
 
 let currentChatChannel = 'venting-space';
+let activeDMPeer = null;
+let activeInboxTab = 'direct';
+
+// ---------- INSTAGRAM DIRECT MESSAGE (DM) CONVERSATIONS ----------
+const DM_CONVERSATIONS = {
+  '@neha_g': {
+    handle: '@neha_g',
+    name: 'Neha Gupta',
+    avatar: '👱‍♀️',
+    subtitle: 'Active now',
+    college: 'IIT Delhi • Global Rank #1',
+    bio: 'Backend & Cloud. Solved Amazon Distributed Rate Limiter with 98% score.',
+    lastMsg: 'Thanks Anannay! That really helps. 💙',
+    lastTime: '2m',
+    unread: false,
+    messages: [
+      { sender: 'them', text: 'Hey Anannay! Are you practicing the Amazon Rate Limiter challenge today?', time: '8:20 PM', heart: false },
+      { sender: 'you', text: 'Hey Neha! Yes, just completed the Redis Token Bucket solution with sub-5ms latency.', time: '8:22 PM', heart: true },
+      { sender: 'them', text: 'Nice! The race condition in atomic increment was tricky. Did you use Lua scripts?', time: '8:24 PM', heart: false },
+      { sender: 'you', text: 'Yes, Lua scripts execute atomically in Redis without cluster lock contention! 🚀', time: '8:25 PM', heart: true },
+      { sender: 'them', text: 'Thanks Anannay! That really helps. 💙', time: '8:26 PM', heart: false }
+    ]
+  },
+  '@rahul_k': {
+    handle: '@rahul_k',
+    name: 'Rahul Kumar',
+    avatar: '🧑‍💻',
+    subtitle: 'Active 15m ago',
+    college: 'Pune Institute • Global Rank #2',
+    bio: 'Fullstack Dev. Daily MNC problem solver. 14 problems solved.',
+    lastMsg: 'Bro lets do a mock round tomorrow!',
+    lastTime: '15m',
+    unread: true,
+    messages: [
+      { sender: 'them', text: 'Bro lets do a mock round tomorrow! System design whiteboard review.', time: '7:45 PM', heart: false },
+      { sender: 'them', text: 'We can practice the Netflix video buffering MSE algorithm together.', time: '7:46 PM', heart: false }
+    ]
+  },
+  '@karan_m': {
+    handle: '@karan_m',
+    name: 'Karan M.',
+    avatar: '👨‍🎓',
+    subtitle: 'Active now',
+    college: 'State Engineering College • Rank #4',
+    bio: 'Targeting Uber Geospatial Telemetry with Go concurrency.',
+    lastMsg: 'Quadtrees geospatial partitioning is so cool!',
+    lastTime: '1h',
+    unread: false,
+    messages: [
+      { sender: 'them', text: 'Quadtrees geospatial partitioning is so cool for the Uber challenge!', time: '6:30 PM', heart: false },
+      { sender: 'you', text: 'Totally, divides 2D plane into four quadrants recursively for sub-10ms driver matching!', time: '6:35 PM', heart: true }
+    ]
+  },
+  '@priya_d': {
+    handle: '@priya_d',
+    name: 'Priya D.',
+    avatar: '👩‍🔬',
+    subtitle: 'Active 2h ago',
+    college: 'Delhi University • Rank #5',
+    bio: 'Frontend Infra architect learner. Practicing Netflix MSE challenges.',
+    lastMsg: 'MSE buffer starvation solved!',
+    lastTime: '2h',
+    unread: false,
+    messages: [
+      { sender: 'them', text: 'MSE buffer starvation solved with adaptive bitrate switching algorithm!', time: '5:10 PM', heart: false }
+    ]
+  },
+  '@rohan_k': {
+    handle: '@rohan_k',
+    name: 'Rohan K.',
+    avatar: '🎸',
+    subtitle: 'Active 3h ago',
+    college: 'NIT Trichy • Rank #8',
+    bio: 'Music & code. Practicing DSA & system design. Chill vibes.',
+    lastMsg: 'Listening to synthwave while writing Go channels 🎧',
+    lastTime: '3h',
+    unread: false,
+    messages: [
+      { sender: 'them', text: 'Listening to synthwave while writing Go channels 🎧', time: '4:15 PM', heart: false }
+    ]
+  }
+};
 
 function toggleChat() {
+  const container = document.getElementById('chat-widget-container');
+  if (container) container.style.display = 'block';
+
   const chat = document.getElementById('peer-chat-window');
   const badge = document.getElementById('chat-badge');
-  if (chat) chat.classList.toggle('active');
-  if (badge) badge.style.display = 'none';
-  
-  const chatBody = document.getElementById('chat-messages');
-  if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-  closeProfile();
-}
+  if (!chat) return;
 
-function switchChatChannel(channelName, btn) {
-  currentChatChannel = channelName;
-  const channels = document.querySelectorAll('.chat-channel');
-  channels.forEach(c => c.classList.remove('active'));
-  
-  if (btn) {
-    btn.classList.add('active');
+  const isActive = chat.classList.contains('active');
+  if (isActive) {
+    chat.classList.remove('active');
   } else {
-    // Find matching button by text or onclick
-    channels.forEach(c => {
-      if (c.getAttribute('onclick')?.includes(channelName)) c.classList.add('active');
-    });
-  }
-  
-  const chatBody = document.getElementById('chat-messages');
-  const inputArea = document.getElementById('chat-input-area');
-  
-  if (channelName === 'study-groups') {
-    renderStudyGroupsChannel();
-    if (inputArea) inputArea.style.display = 'none';
-  } else if (channelName === 'active-peers') {
-    renderActivePeersChannel();
-    if (inputArea) inputArea.style.display = 'none';
-  } else {
-    if (chatBody && CHAT_DATA[channelName]) {
-      chatBody.innerHTML = CHAT_DATA[channelName];
-      chatBody.scrollTop = chatBody.scrollHeight;
+    chat.classList.add('active');
+    if (badge) badge.style.display = 'none';
+
+    // If currently in a thread, render thread, else render inbox
+    if (activeDMPeer && DM_CONVERSATIONS[activeDMPeer]) {
+      renderInstaThread(activeDMPeer);
+    } else {
+      renderInstaInboxList();
     }
-    if (inputArea) inputArea.style.display = 'flex';
   }
   closeProfile();
 }
 
-function renderStudyGroupsChannel() {
-  const chatBody = document.getElementById('chat-messages');
-  if (!chatBody) return;
+function renderInstaInboxList(filterQuery = '') {
+  const container = document.getElementById('insta-inbox-list');
+  if (!container) return;
+
+  const q = filterQuery.toLowerCase().trim();
+  let html = '';
+
+  for (const handle in DM_CONVERSATIONS) {
+    const c = DM_CONVERSATIONS[handle];
+    if (q && !c.name.toLowerCase().includes(q) && !c.handle.toLowerCase().includes(q)) {
+      continue;
+    }
+
+    const unreadDot = c.unread ? '<span class="insta-unread-dot"></span>' : '';
+    const unreadClass = c.unread ? 'unread' : '';
+
+    html += `
+      <div class="insta-dm-item" onclick="openDMChat('${handle}')">
+        <div class="insta-dm-avatar-wrap">
+          <div class="insta-dm-avatar">${c.avatar}</div>
+          <span class="insta-dm-online"></span>
+        </div>
+        <div class="insta-dm-details">
+          <div class="insta-dm-name">
+            <span>${c.name}</span>
+            <span class="insta-dm-handle">${c.lastTime}</span>
+          </div>
+          <div class="insta-dm-preview ${unreadClass}">
+            ${c.lastMsg}
+          </div>
+        </div>
+        ${unreadDot}
+      </div>
+    `;
+  }
+
+  if (html === '') {
+    html = `
+      <div style="padding: 2rem; text-align: center; color: #8e8e8e; font-size: 0.88rem;">
+        No conversations found matching "${filterQuery}"
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function filterInstaDMs(query) {
+  renderInstaInboxList(query);
+}
+
+function switchInstaInboxTab(tab) {
+  activeInboxTab = tab;
+
+  // Update tabs active state
+  ['direct', 'squads', 'channels'].forEach(t => {
+    const btn = document.getElementById(`tab-insta-${t}`);
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+
+  const directList = document.getElementById('insta-inbox-list');
+  const squadsList = document.getElementById('insta-squads-list');
+  const channelsWrap = document.getElementById('insta-channels-wrap');
+
+  if (tab === 'direct') {
+    if (directList) directList.style.display = 'block';
+    if (squadsList) squadsList.style.display = 'none';
+    if (channelsWrap) channelsWrap.style.display = 'none';
+    renderInstaInboxList();
+  } else if (tab === 'squads') {
+    if (directList) directList.style.display = 'none';
+    if (squadsList) squadsList.style.display = 'block';
+    if (channelsWrap) channelsWrap.style.display = 'none';
+    renderStudyGroupsInInsta();
+  } else if (tab === 'channels') {
+    if (directList) directList.style.display = 'none';
+    if (squadsList) squadsList.style.display = 'none';
+    if (channelsWrap) channelsWrap.style.display = 'flex';
+    switchChatChannel(currentChatChannel);
+  }
+}
+
+function renderStudyGroupsInInsta() {
+  const container = document.getElementById('insta-squads-list');
+  if (!container) return;
 
   let html = `
-    <div class="chat-msg system-msg" style="margin-bottom:0.8rem;">
-      Find peers preparing for the same roles and practice live mocks together.
-    </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:8px;">
-      <span style="font-size:0.85rem; font-weight:800; color:var(--text);">🔥 Active Study Squads</span>
-      <button class="btn-primary" style="padding:6px 14px; font-size:0.8rem; background:var(--primary);" onclick="openCreateGroupModal()">
-        ➕ Create Study Group
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <span style="font-size:0.9rem; font-weight:800; color:#262626;">🔥 Live Study Squads</span>
+      <button class="btn-primary" style="padding:5px 12px; font-size:0.78rem; border-radius:6px;" onclick="openCreateGroupModal()">
+        + Create Squad
       </button>
     </div>
   `;
@@ -1632,23 +1774,23 @@ function renderStudyGroupsChannel() {
   MOCK_STUDY_GROUPS.forEach(g => {
     const isJoined = g.joined;
     const isHost = g.hostHandle === '@anannay_k';
-    const hostTag = isHost ? '<span style="font-size:0.7rem; background:rgba(108,99,255,0.15); color:var(--primary); font-weight:700; padding:2px 6px; border-radius:4px; margin-left:4px;">You (Host)</span>' : '';
+    const hostTag = isHost ? '<span style="font-size:0.68rem; background:#f0f7ff; color:#0095f6; font-weight:700; padding:2px 6px; border-radius:4px; margin-left:4px;">You (Host)</span>' : '';
     const joinText = isJoined ? 'Joined ✓ (Audio Room 🎧)' : '+ Join Group';
-    const joinStyle = isJoined ? 'background:var(--green); color:white; border-color:var(--green);' : '';
+    const joinStyle = isJoined ? 'background:#10b981; color:white; border-color:#10b981;' : '';
 
     html += `
-      <div class="study-group-card-enhanced">
+      <div class="study-group-card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
           <div>
-            <span style="font-size:0.72rem; background:var(--primary-glow); color:var(--primary); padding:2px 8px; border-radius:999px; font-weight:700;">${g.companyBadge}</span>
-            <div class="study-group-title" style="margin-top:6px; font-size:0.98rem;">${g.title}</div>
+            <span style="font-size:0.72rem; background:#f0f7ff; color:#0095f6; padding:2px 8px; border-radius:999px; font-weight:700;">${g.companyBadge}</span>
+            <div class="study-group-title" style="margin-top:6px; font-size:0.95rem;">${g.title}</div>
           </div>
-          <span style="font-size:0.75rem; background:var(--bg2); color:var(--text2); padding:3px 8px; border-radius:6px; font-weight:700;">
+          <span style="font-size:0.75rem; background:#efefef; color:#555; padding:3px 8px; border-radius:6px; font-weight:700;">
             👥 ${g.currentMembers}/${g.maxMembers}
           </span>
         </div>
 
-        <p style="font-size:0.8rem; color:var(--text2); margin:0 0 8px 0; line-height:1.4;">${g.desc}</p>
+        <p style="font-size:0.8rem; color:#666; margin:0 0 8px 0; line-height:1.4;">${g.desc}</p>
 
         <div class="study-group-meta" style="margin-bottom:8px; font-size:0.78rem;">
           <span>Host: <span class="chat-username" onclick="showProfile('${g.hostHandle}')">${g.hostAvatar} ${g.hostName}</span>${hostTag}</span>
@@ -1662,198 +1804,418 @@ function renderStudyGroupsChannel() {
     `;
   });
 
-  chatBody.innerHTML = html;
-  chatBody.scrollTop = 0;
+  container.innerHTML = html;
 }
 
-function renderActivePeersChannel() {
-  const chatBody = document.getElementById('chat-messages');
-  if (!chatBody) return;
+function openDMChat(handle) {
+  if (!DM_CONVERSATIONS[handle]) return;
+  activeDMPeer = handle;
+  const peer = DM_CONVERSATIONS[handle];
+
+  // Mark unread as false
+  peer.unread = false;
+
+  // Update Instagram Header UI
+  const backBtn = document.getElementById('insta-back-btn');
+  const contactHead = document.getElementById('insta-header-contact');
+  const accountPill = document.getElementById('insta-header-account');
+  const callBtn = document.getElementById('insta-call-btn');
+  const videoBtn = document.getElementById('insta-video-btn');
+  const infoBtn = document.getElementById('insta-info-btn');
+  const createSquadBtn = document.getElementById('insta-create-squad-btn');
+
+  if (backBtn) backBtn.style.display = 'flex';
+  if (contactHead) contactHead.style.display = 'flex';
+  if (accountPill) accountPill.style.display = 'none';
+  if (callBtn) callBtn.style.display = 'flex';
+  if (videoBtn) videoBtn.style.display = 'flex';
+  if (infoBtn) infoBtn.style.display = 'flex';
+  if (createSquadBtn) createSquadBtn.style.display = 'none';
+
+  const headTitle = document.getElementById('insta-header-title');
+  const headAvatar = document.getElementById('insta-header-avatar');
+  const headSub = document.getElementById('insta-header-subtitle');
+
+  if (headTitle) headTitle.innerText = peer.name;
+  if (headAvatar) headAvatar.innerText = peer.avatar;
+  if (headSub) headSub.innerText = peer.subtitle;
+
+  // Switch View Visibility
+  const inboxHeaderWrap = document.getElementById('insta-inbox-header-wrap');
+  const inboxList = document.getElementById('insta-inbox-list');
+  const squadsList = document.getElementById('insta-squads-list');
+  const channelsWrap = document.getElementById('insta-channels-wrap');
+  const threadContainer = document.getElementById('insta-thread-container');
+
+  if (inboxHeaderWrap) inboxHeaderWrap.style.display = 'none';
+  if (inboxList) inboxList.style.display = 'none';
+  if (squadsList) squadsList.style.display = 'none';
+  if (channelsWrap) channelsWrap.style.display = 'none';
+  if (threadContainer) threadContainer.style.display = 'flex';
+
+  renderInstaThread(handle);
+
+  setTimeout(() => {
+    const input = document.getElementById('insta-msg-input');
+    if (input) input.focus();
+  }, 100);
+}
+
+function backToInstaInbox() {
+  activeDMPeer = null;
+
+  // Reset Header
+  const backBtn = document.getElementById('insta-back-btn');
+  const contactHead = document.getElementById('insta-header-contact');
+  const accountPill = document.getElementById('insta-header-account');
+  const callBtn = document.getElementById('insta-call-btn');
+  const videoBtn = document.getElementById('insta-video-btn');
+  const infoBtn = document.getElementById('insta-info-btn');
+  const createSquadBtn = document.getElementById('insta-create-squad-btn');
+
+  if (backBtn) backBtn.style.display = 'none';
+  if (contactHead) contactHead.style.display = 'none';
+  if (accountPill) accountPill.style.display = 'flex';
+  if (callBtn) callBtn.style.display = 'none';
+  if (videoBtn) videoBtn.style.display = 'none';
+  if (infoBtn) infoBtn.style.display = 'none';
+  if (createSquadBtn) createSquadBtn.style.display = 'flex';
+
+  // Show Inbox Header
+  const inboxHeaderWrap = document.getElementById('insta-inbox-header-wrap');
+  const threadContainer = document.getElementById('insta-thread-container');
+  if (inboxHeaderWrap) inboxHeaderWrap.style.display = 'block';
+  if (threadContainer) threadContainer.style.display = 'none';
+
+  switchInstaInboxTab(activeInboxTab);
+}
+
+function renderInstaThread(handle) {
+  const container = document.getElementById('insta-thread-body');
+  if (!container || !DM_CONVERSATIONS[handle]) return;
+
+  const peer = DM_CONVERSATIONS[handle];
 
   let html = `
-    <div class="chat-msg system-msg" style="margin-bottom:0.8rem;">
-      Live engineering peers online from NIT Kurukshetra, IITs, and top tech campuses.
+    <!-- Peer Intro Profile Header -->
+    <div class="insta-peer-intro">
+      <div class="insta-intro-avatar">
+        <div class="avatar-inner">${peer.avatar}</div>
+      </div>
+      <div class="insta-intro-name">${peer.name} <span class="insta-verified-badge">✓</span></div>
+      <div class="insta-intro-handle">${peer.handle} • SkillBridge Peer</div>
+      <div class="insta-intro-bio">${peer.college} • ${peer.bio}</div>
+      <button class="insta-view-profile-btn" onclick="showProfile('${handle}')">
+        View Profile
+      </button>
     </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
-      <span style="font-size:0.85rem; font-weight:800; color:var(--text);">🎓 142 Peers Online Now</span>
-      <span style="font-size:0.75rem; color:var(--green); font-weight:700;">● Active</span>
-    </div>
-    <div style="display:flex; flex-direction:column; gap:10px;">
+
+    <div class="insta-date-separator">Today • Direct Message</div>
   `;
 
-  for (const handle in USER_PROFILES) {
-    const p = USER_PROFILES[handle];
-    const isYou = handle === '@anannay_k';
-    const youBadge = isYou ? '<span style="font-size:0.7rem; background:rgba(0,168,107,0.15); color:var(--green); font-weight:700; padding:2px 6px; border-radius:4px; margin-left:4px;">You</span>' : '';
-    const btnText = isYou ? '👤 My Profile' : '👋 Invite Mock';
-    const btnAction = isYou ? `showProfile('${handle}')` : `invitePeerMock('${handle}')`;
-    const btnClass = isYou ? 'btn-ghost' : 'btn-primary';
+  peer.messages.forEach((m, idx) => {
+    const isYou = m.sender === 'you';
+    const rowClass = isYou ? 'you' : 'them';
+    const bubbleClass = isYou ? 'insta-bubble-you' : 'insta-bubble-them';
+    const avatarHTML = !isYou ? `<div class="insta-msg-avatar">${peer.avatar}</div>` : '';
+    
+    // Heart badge
+    const heartBadgeHTML = m.heart 
+      ? `<div class="insta-heart-badge" onclick="toggleMsgHeart('${handle}', ${idx}, event)" title="Liked message">❤️ 1</div>` 
+      : '';
+
+    // Seen status on latest message
+    const seenHTML = (isYou && idx === peer.messages.length - 1)
+      ? `<span class="insta-seen-status">Seen • Just now</span>`
+      : '';
+
+    // Check if heart sticker
+    const bubbleContent = m.isSticker 
+      ? `<span style="font-size:2.8rem; line-height:1; display:inline-block; animation:popIn 0.3s ease;">${m.text}</span>` 
+      : m.text;
 
     html += `
-      <div class="peer-dir-card">
-        <div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="showProfile('${handle}')">
-          <div class="peer-dir-avatar">
-            ${p.avatar}
-            <span class="peer-dir-online"></span>
+      <div class="insta-msg-row ${rowClass}">
+        ${avatarHTML}
+        <div class="insta-bubble-wrap">
+          <div class="${bubbleClass}" id="msg-${handle}-${idx}" ondblclick="toggleMsgHeart('${handle}', ${idx}, event)" title="Double click to like">
+            ${bubbleContent}
+            ${heartBadgeHTML}
           </div>
-          <div>
-            <div style="font-size:0.88rem; font-weight:800; color:var(--text); line-height:1.2;">
-              ${p.name} ${youBadge}
-            </div>
-            <div style="font-size:0.75rem; color:var(--primary); font-weight:600;">
-              ${handle} • <span style="color:var(--text3);">${p.college}</span>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text3); margin-top:2px;">
-              🔥 ${p.streak} Streak • ⚡ ${p.xp} • 🏆 ${p.rank}
-            </div>
-          </div>
+          ${seenHTML}
         </div>
-        <button class="${btnClass}" style="padding:5px 12px; font-size:0.75rem; white-space:nowrap;" onclick="${btnAction}">
-          ${btnText}
-        </button>
       </div>
     `;
-  }
+  });
 
-  html += `</div>`;
-  chatBody.innerHTML = html;
-  chatBody.scrollTop = 0;
+  container.innerHTML = html;
+  container.scrollTop = container.scrollHeight;
 }
 
-function invitePeerMock(handle) {
-  const p = USER_PROFILES[handle];
-  alert(`🤝 1-on-1 Mock Interview Invite sent to ${p ? p.name : handle}!\nWhen they accept, a live audio room with shared architecture canvas will launch.`);
-}
+function handleInstaInputChange(input) {
+  const dynamicBtn = document.getElementById('insta-dynamic-btn');
+  if (!dynamicBtn) return;
 
-function openCreateGroupModal() {
-  const modal = document.getElementById('create-study-group-modal');
-  if (modal) modal.classList.add('active');
-}
-
-function closeCreateGroupModal(e) {
-  if (!e || e.target.id === 'create-study-group-modal' || (e.target && e.target.classList && e.target.classList.contains('modal-close'))) {
-    const modal = document.getElementById('create-study-group-modal');
-    if (modal) modal.classList.remove('active');
-  }
-}
-
-function submitCreateStudyGroup() {
-  const title = document.getElementById('sg-title')?.value.trim();
-  const company = document.getElementById('sg-company')?.value || 'Amazon';
-  const capacity = parseInt(document.getElementById('sg-capacity')?.value || '4', 10);
-  const time = document.getElementById('sg-time')?.value.trim() || 'Starting in 15 mins';
-  const desc = document.getElementById('sg-desc')?.value.trim() || 'Collaborative whiteboard system design session.';
-
-  if (!title) {
-    alert('Please enter a group title / topic.');
-    return;
-  }
-
-  const companyBadges = {
-    Amazon: '🟠 Amazon AWS',
-    Netflix: '🔴 Netflix',
-    Google: '🔵 Google',
-    Microsoft: '🟦 Microsoft',
-    Uber: '🚗 Uber',
-    General: '🎯 System Design'
-  };
-
-  const newGroup = {
-    id: Date.now(),
-    title: title,
-    hostHandle: '@anannay_k',
-    hostName: 'Anannay Kapoor',
-    hostAvatar: '👨‍💻',
-    company: company,
-    companyBadge: companyBadges[company] || `🏢 ${company}`,
-    currentMembers: 1,
-    maxMembers: capacity,
-    time: time,
-    desc: desc,
-    isHostYou: true,
-    joined: true
-  };
-
-  MOCK_STUDY_GROUPS.unshift(newGroup);
-
-  // Close modal
-  document.getElementById('create-study-group-modal')?.classList.remove('active');
-
-  // Switch to study groups channel
-  switchChatChannel('study-groups');
-
-  alert(`🎉 Success! Your study group "${title}" has been launched with you (@anannay_k) as the host!\nPeers online in the Lounge can now join your squad.`);
-}
-
-function joinStudyGroup(groupId, btn) {
-  const g = MOCK_STUDY_GROUPS.find(item => item.id === groupId);
-  if (!g) return;
-
-  if (!g.joined) {
-    g.joined = true;
-    g.currentMembers = Math.min(g.maxMembers, g.currentMembers + 1);
-    btn.innerHTML = 'Joined ✓ (Audio Room 🎧)';
-    btn.style.background = 'var(--green)';
-    btn.style.color = 'white';
-    btn.style.borderColor = 'var(--green)';
-    alert(`🎉 You joined "${g.title}" hosted by ${g.hostName}! Live voice/audio session is active.`);
+  const val = input.value.trim();
+  if (val.length > 0) {
+    dynamicBtn.classList.add('send-mode');
+    dynamicBtn.innerText = 'Send';
+    dynamicBtn.title = 'Send message';
   } else {
-    alert(`🎧 Entering voice & whiteboard room for "${g.title}"... Connecting you with ${g.hostName} and squad!`);
+    dynamicBtn.classList.remove('send-mode');
+    dynamicBtn.innerText = '❤️';
+    dynamicBtn.title = 'Send like heart';
   }
 }
 
-function handleChatEnter(e) {
-  if(e.key === 'Enter') sendChatMessage();
+function handleInstaInputKey(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    sendInstaMessage();
+  }
 }
 
-function sendChatMessage() {
-  const input = document.getElementById('chat-input');
-  const msgText = input.value.trim();
-  if(!msgText) return;
+function handleInstaDynamicBtnClick() {
+  const dynamicBtn = document.getElementById('insta-dynamic-btn');
+  if (dynamicBtn && dynamicBtn.classList.contains('send-mode')) {
+    sendInstaMessage();
+  } else {
+    sendInstaHeartSticker();
+  }
+}
+
+function sendInstaMessage() {
+  const input = document.getElementById('insta-msg-input');
+  if (!input || !activeDMPeer || !DM_CONVERSATIONS[activeDMPeer]) return;
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Add message to thread
+  DM_CONVERSATIONS[activeDMPeer].messages.push({
+    sender: 'you',
+    text: text,
+    time: 'Just now',
+    heart: false
+  });
+
+  // Update preview
+  DM_CONVERSATIONS[activeDMPeer].lastMsg = text;
+  DM_CONVERSATIONS[activeDMPeer].lastTime = 'Just now';
+
+  input.value = '';
+  handleInstaInputChange(input);
+
+  // Close emoji tray if open
+  const emojiTray = document.getElementById('insta-emoji-tray');
+  if (emojiTray) emojiTray.style.display = 'none';
+
+  renderInstaThread(activeDMPeer);
+
+  // Simulate peer reply
+  simulateInstaPeerReply(activeDMPeer, text);
+}
+
+function sendInstaHeartSticker() {
+  if (!activeDMPeer || !DM_CONVERSATIONS[activeDMPeer]) return;
+
+  DM_CONVERSATIONS[activeDMPeer].messages.push({
+    sender: 'you',
+    text: '❤️',
+    isSticker: true,
+    time: 'Just now',
+    heart: false
+  });
+
+  DM_CONVERSATIONS[activeDMPeer].lastMsg = '❤️ Sent a heart';
+  DM_CONVERSATIONS[activeDMPeer].lastTime = 'Just now';
+
+  renderInstaThread(activeDMPeer);
+  simulateInstaPeerReply(activeDMPeer, '❤️');
+}
+
+function simulateInstaPeerReply(handle, userMsg) {
+  const container = document.getElementById('insta-thread-body');
+  if (!container || !DM_CONVERSATIONS[handle]) return;
+
+  const peer = DM_CONVERSATIONS[handle];
+
+  // Append typing indicator
+  setTimeout(() => {
+    if (activeDMPeer !== handle) return;
+    const typingHTML = `
+      <div class="insta-msg-row them" id="insta-typing-indicator">
+        <div class="insta-msg-avatar">${peer.avatar}</div>
+        <div class="insta-bubble-wrap">
+          <div class="insta-typing-bubble">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', typingHTML);
+    container.scrollTop = container.scrollHeight;
+  }, 700);
+
+  // Deliver real reply
+  setTimeout(() => {
+    const indicator = document.getElementById('insta-typing-indicator');
+    if (indicator) indicator.remove();
+
+    if (!DM_CONVERSATIONS[handle]) return;
+
+    let replyText = '';
+    if (userMsg === '❤️') {
+      replyText = '❤️ 🥰';
+    } else if (handle === '@neha_g') {
+      replyText = 'Totally agree Anannay! Let us do a 45-min system design mock on SkillBridge tonight! 🚀';
+    } else if (handle === '@rahul_k') {
+      replyText = 'Awesome Anannay! Adding the Redis Lua scripts to my cheat sheet right now. Let us pair program tomorrow!';
+    } else if (handle === '@karan_m') {
+      replyText = 'Got it Anannay! The Go channels concurrency pattern makes total sense for the Uber challenge.';
+    } else if (handle === '@priya_d') {
+      replyText = 'Thanks Anannay! Testing the MSE buffer playback right now on the Netflix sandbox!';
+    } else {
+      replyText = 'Thanks for sharing Anannay! Keep crushing those MNC challenges on SkillBridge! 💯';
+    }
+
+    DM_CONVERSATIONS[handle].messages.push({
+      sender: 'them',
+      text: replyText,
+      time: 'Just now',
+      heart: false
+    });
+
+    DM_CONVERSATIONS[handle].lastMsg = replyText;
+    DM_CONVERSATIONS[handle].lastTime = 'Just now';
+
+    if (activeDMPeer === handle) {
+      renderInstaThread(handle);
+    }
+  }, 2200);
+}
+
+function toggleMsgHeart(handle, msgIndex, event) {
+  if (event) event.stopPropagation();
+
+  const peer = DM_CONVERSATIONS[handle];
+  if (!peer || !peer.messages[msgIndex]) return;
+
+  const msg = peer.messages[msgIndex];
+  msg.heart = !msg.heart;
+
+  // Floating heart animation if newly liked
+  if (msg.heart) {
+    const bubbleEl = document.getElementById(`msg-${handle}-${msgIndex}`);
+    if (bubbleEl) {
+      const heartEl = document.createElement('div');
+      heartEl.className = 'insta-floating-heart';
+      heartEl.innerText = '❤️';
+      bubbleEl.appendChild(heartEl);
+      setTimeout(() => heartEl.remove(), 900);
+    }
+  }
+
+  renderInstaThread(handle);
+}
+
+function toggleInstaEmojiTray() {
+  const tray = document.getElementById('insta-emoji-tray');
+  if (tray) {
+    tray.style.display = tray.style.display === 'none' ? 'flex' : 'none';
+  }
+}
+
+function insertInstaEmoji(emoji) {
+  const input = document.getElementById('insta-msg-input');
+  if (input) {
+    input.value += emoji;
+    input.focus();
+    handleInstaInputChange(input);
+  }
+  const tray = document.getElementById('insta-emoji-tray');
+  if (tray) tray.style.display = 'none';
+}
+
+function sendInstaMediaSimulation(type) {
+  if (!activeDMPeer || !DM_CONVERSATIONS[activeDMPeer]) return;
+
+  DM_CONVERSATIONS[activeDMPeer].messages.push({
+    sender: 'you',
+    text: '🖼️ [Shared System Architecture Diagram: Redis Token Bucket Cluster & Rate Limiter Flowchart]',
+    time: 'Just now',
+    heart: true
+  });
+
+  DM_CONVERSATIONS[activeDMPeer].lastMsg = '🖼️ Shared an architecture diagram';
+  DM_CONVERSATIONS[activeDMPeer].lastTime = 'Just now';
+
+  renderInstaThread(activeDMPeer);
+  simulateInstaPeerReply(activeDMPeer, 'diagram');
+}
+
+function sendInstaVoiceSimulation() {
+  if (!activeDMPeer || !DM_CONVERSATIONS[activeDMPeer]) return;
+
+  DM_CONVERSATIONS[activeDMPeer].messages.push({
+    sender: 'you',
+    text: '🎙️ Voice Note (0:14) • ▶ ılılllılı',
+    time: 'Just now',
+    heart: false
+  });
+
+  DM_CONVERSATIONS[activeDMPeer].lastMsg = '🎙️ Sent a voice memo';
+  DM_CONVERSATIONS[activeDMPeer].lastTime = 'Just now';
+
+  renderInstaThread(activeDMPeer);
+  simulateInstaPeerReply(activeDMPeer, 'voice');
+}
+
+function startInstaCall(type) {
+  const modal = document.getElementById('insta-call-modal');
+  if (!modal || !activeDMPeer || !DM_CONVERSATIONS[activeDMPeer]) return;
+
+  const peer = DM_CONVERSATIONS[activeDMPeer];
+  const nameEl = document.getElementById('insta-call-peer-name');
+  const avatarEl = document.getElementById('insta-call-avatar');
+  const typeEl = document.getElementById('insta-call-type');
+
+  if (nameEl) nameEl.innerText = peer.name;
+  if (avatarEl) avatarEl.innerText = peer.avatar;
+  if (typeEl) typeEl.innerText = type === 'video' ? 'SkillBridge Encrypted Video Call' : 'SkillBridge Encrypted Voice Call';
+
+  modal.style.display = 'flex';
+}
+
+function endInstaCall() {
+  const modal = document.getElementById('insta-call-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+function showCurrentPeerProfile() {
+  if (activeDMPeer) {
+    showProfile(activeDMPeer);
+  }
+}
+
+function switchChatChannel(channelName, btn) {
+  currentChatChannel = channelName;
+  const channels = document.querySelectorAll('.chat-channel');
+  channels.forEach(c => c.classList.remove('active'));
+  
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    channels.forEach(c => {
+      if (c.getAttribute('onclick')?.includes(channelName)) c.classList.add('active');
+    });
+  }
   
   const chatBody = document.getElementById('chat-messages');
-  const msgHTML = `
-    <div class="chat-row you">
-      <div class="chat-avatar">👨‍💻</div>
-      <div class="chat-msg">
-        <span class="chat-username" onclick="showProfile('@anannay_k')">@anannay_k</span> <span class="msg-time">Just now</span><br/>
-        ${msgText}
-      </div>
-    </div>
-  `;
-  chatBody.insertAdjacentHTML('beforeend', msgHTML);
-  input.value = '';
-  chatBody.scrollTop = chatBody.scrollHeight;
-  
-  setTimeout(() => { simulatePeerReply(chatBody); }, 1000);
-}
-
-function simulatePeerReply(chatBody) {
-  const typingHTML = `
-    <div class="chat-row" id="typing-indicator">
-      <div class="chat-avatar">👱‍♀️</div>
-      <div class="chat-msg"><div class="typing-dots"><span></span><span></span><span></span></div></div>
-    </div>
-  `;
-  chatBody.insertAdjacentHTML('beforeend', typingHTML);
-  chatBody.scrollTop = chatBody.scrollHeight;
-  
-  setTimeout(() => {
-    const indicator = document.getElementById('typing-indicator');
-    if (indicator) indicator.remove();
-    
-    const replyHTML = `
-      <div class="chat-row">
-        <div class="chat-avatar">👱‍♀️</div>
-        <div class="chat-msg">
-          <span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">Just now</span><br/>
-          Thanks Anannay! That really helps. I appreciate the support. 💙
-        </div>
-      </div>
-    `;
-    chatBody.insertAdjacentHTML('beforeend', replyHTML);
+  if (chatBody && CHAT_DATA[channelName]) {
+    chatBody.innerHTML = CHAT_DATA[channelName];
     chatBody.scrollTop = chatBody.scrollHeight;
-  }, 2500);
+  }
 }
 
 // --- PROFILE & GROUP STUDY LOGIC ---
@@ -1861,7 +2223,7 @@ let currentViewedHandle = null;
 
 function showProfile(handle) {
   const p = USER_PROFILES[handle];
-  if(!p) return;
+  if (!p) return;
   currentViewedHandle = handle;
 
   const mpAvatar = document.getElementById('mp-avatar');
@@ -1886,14 +2248,15 @@ function showProfile(handle) {
   if (mpBtn) {
     if (handle === '@anannay_k') {
       mpBtn.innerText = '👤 Open My Full Profile & ATS Resume';
-      mpBtn.style.background = 'var(--primary)';
+      mpBtn.style.background = '#0095f6';
     } else {
-      mpBtn.innerText = `👋 Invite ${p.name.split(' ')[0]} to 1v1 Mock`;
-      mpBtn.style.background = 'var(--green)';
+      mpBtn.innerText = `💬 Direct Message (${p.name.split(' ')[0]})`;
+      mpBtn.style.background = '#0095f6';
     }
   }
 
-  document.getElementById('mini-profile').style.display = 'block';
+  const miniProfile = document.getElementById('mini-profile');
+  if (miniProfile) miniProfile.style.display = 'block';
 }
 
 function handleProfileActionButton() {
@@ -1902,14 +2265,15 @@ function handleProfileActionButton() {
     toggleChat();
     openUserProfileModal('overview');
   } else {
-    const p = USER_PROFILES[currentViewedHandle];
-    alert(`🤝 Mock Interview Invite sent to ${p ? p.name : currentViewedHandle}! They will receive an in-app ping and email alert.`);
+    // Open Direct Message chat with this peer directly in the Instagram DM interface!
     closeProfile();
+    openDMChat(currentViewedHandle);
   }
 }
 
 function closeProfile() {
-  document.getElementById('mini-profile').style.display = 'none';
+  const miniProfile = document.getElementById('mini-profile');
+  if (miniProfile) miniProfile.style.display = 'none';
 }
 
 // ---------- AI ROADMAP (GEMINI API) ----------
@@ -2201,4 +2565,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderMasterclasses('all');
   renderJobs('all');
   switchChatChannel('venting-space', document.querySelector('.chat-channel.active')); // Load initial chat
+  renderInstaInboxList(); // Pre-load Instagram DM conversations
 });

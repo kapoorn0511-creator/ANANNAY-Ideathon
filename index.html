@@ -1578,73 +1578,268 @@
     </div>
   </div>
 
-  <!-- PEER CONNECT CHAT WIDGET (Hidden until login) -->
+  <!-- PEER CONNECT CHAT WIDGET - AUTHENTIC INSTAGRAM DIRECT MESSAGE (DM) -->
   <div id="chat-widget-container" style="display: none;">
     <div id="peer-chat-window" class="peer-chat-window">
-      <div class="chat-header">
-        <div>
-          <h4 style="margin:0;font-size:1.1rem;display:flex;align-items:center;gap:6px;">☕ Peer Lounge & Study Space</h4>
-          <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.85);">142 students online • NIT Kurukshetra & IITs</p>
-        </div>
-        <button onclick="toggleChat()" style="background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;">✕</button>
-      </div>
-
-      <!-- User Identity Bar (Anannay Kapoor) -->
-      <div class="chat-my-id-bar">
-        <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="showProfile('@anannay_k')" title="Click to view your peer profile">
-          <div class="avatar" style="width:30px; height:30px; font-size:1rem; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--green)); display:flex; align-items:center; justify-content:center;">👨‍💻</div>
-          <div>
-            <div style="font-size:0.82rem; font-weight:800; color:var(--text); line-height:1.2;">
-              Anannay Kapoor <span style="font-size:0.72rem; color:var(--primary); font-weight:600;">(@anannay_k)</span>
+      
+      <!-- 1. INSTAGRAM TOP HEADER -->
+      <div class="insta-header" id="insta-header">
+        <!-- Left: Back button (in thread) OR User Account Pill (in inbox) -->
+        <div class="insta-header-left" id="insta-header-left">
+          <button class="insta-header-btn" id="insta-back-btn" style="display:none;" onclick="backToInstaInbox()" title="Back to Direct Messages">
+            ‹
+          </button>
+          
+          <div class="insta-header-contact" id="insta-header-contact" style="display:none;" onclick="showCurrentPeerProfile()">
+            <div class="insta-header-avatar has-story" id="insta-header-avatar-wrap">
+              <div class="avatar-inner" id="insta-header-avatar">👱‍♀️</div>
+              <span class="insta-online-indicator"></span>
             </div>
-            <div style="font-size:0.68rem; color:var(--text3);">NIT Kurukshetra • 🔥 14-Day Streak</div>
+            <div class="insta-header-info">
+              <div class="insta-header-name">
+                <span id="insta-header-title">Neha Gupta</span>
+                <span class="insta-verified-badge" title="Verified SkillBridge Top Solver">✓</span>
+              </div>
+              <div class="insta-header-sub">
+                <span class="online-dot" style="position:static; width:6px; height:6px;"></span>
+                <span id="insta-header-subtitle">Active now</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="insta-account-pill" id="insta-header-account" onclick="showProfile('@anannay_k')" title="Your Instagram Profile">
+            <span>anannay_k</span>
+            <span class="insta-verified-badge">✓</span>
+            <span style="font-size:0.75rem; color:#8e8e8e;">▾</span>
           </div>
         </div>
-        <div style="display:flex; align-items:center; gap:6px;">
-          <span style="font-size:0.68rem; background:rgba(0,168,107,0.12); color:var(--green); font-weight:700; padding:2px 8px; border-radius:999px;">● Online</span>
-          <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; background:var(--primary);" onclick="openCreateGroupModal()">+ Group</button>
+
+        <!-- Right: Actions (Call, Video, Info, Close) -->
+        <div class="insta-header-actions">
+          <button class="insta-header-btn" id="insta-call-btn" style="display:none;" onclick="startInstaCall('audio')" title="Start Voice Call">
+            📞
+          </button>
+          <button class="insta-header-btn" id="insta-video-btn" style="display:none;" onclick="startInstaCall('video')" title="Start Video Call">
+            📹
+          </button>
+          <button class="insta-header-btn" id="insta-info-btn" style="display:none;" onclick="showCurrentPeerProfile()" title="Conversation Details">
+            ℹ️
+          </button>
+          <button class="insta-header-btn" id="insta-create-squad-btn" onclick="openCreateGroupModal()" title="Create New Study Squad">
+            📝
+          </button>
+          <button class="insta-header-btn" onclick="toggleChat()" title="Close Direct Messages">
+            ✕
+          </button>
         </div>
       </div>
 
-      <!-- Navigation Channels -->
-      <div class="chat-channels">
-        <span class="chat-channel active" onclick="switchChatChannel('venting-space', this)">💬 Venting Space</span>
-        <span class="chat-channel" onclick="switchChatChannel('interview-prep', this)">📚 Interview Prep</span>
-        <span class="chat-channel" onclick="switchChatChannel('study-groups', this)">👥 Study Groups</span>
-        <span class="chat-channel" onclick="switchChatChannel('active-peers', this)">🎓 Active Peers</span>
-        <span class="chat-channel" onclick="switchChatChannel('general-chill', this)">☕ General Chill</span>
-      </div>
-      
-      <div class="chat-body" id="chat-messages">
-        <!-- Messages will be loaded here via JS -->
-      </div>
-      
-      <div class="chat-input-area" id="chat-input-area">
-        <input type="text" id="chat-input" placeholder="Type a supportive message or ask a tech question..." onkeypress="handleChatEnter(event)">
-        <button onclick="sendChatMessage()">➤</button>
+      <!-- 2. INSTAGRAM INBOX HEADER (Notes Tray, Search, Tabs) -->
+      <div id="insta-inbox-header-wrap">
+        <!-- Notes / Stories Tray -->
+        <div class="insta-notes-tray" id="insta-notes-tray">
+          <!-- Your Note -->
+          <div class="insta-note-item" onclick="showProfile('@anannay_k')">
+            <div class="insta-note-bubble" title="Prepping for Amazon SDE-1 🚀">Amazon SDE-1 🚀</div>
+            <div class="insta-story-circle your-note">
+              <div class="insta-story-circle-inner">👨‍💻</div>
+              <span class="insta-note-add-badge">+</span>
+            </div>
+            <div class="insta-note-user">Your note</div>
+          </div>
+
+          <!-- Peer Notes -->
+          <div class="insta-note-item" onclick="openDMChat('@neha_g')">
+            <div class="insta-note-bubble" title="System Design mock? ☕">Mock prep? ☕</div>
+            <div class="insta-story-circle">
+              <div class="insta-story-circle-inner">👱‍♀️</div>
+            </div>
+            <div class="insta-note-user">neha_g</div>
+          </div>
+
+          <div class="insta-note-item" onclick="openDMChat('@rahul_k')">
+            <div class="insta-note-bubble" title="Sub-5ms rate limiter done ⚡">Rate limiter ⚡</div>
+            <div class="insta-story-circle">
+              <div class="insta-story-circle-inner">🧑‍💻</div>
+            </div>
+            <div class="insta-note-user">rahul_k</div>
+          </div>
+
+          <div class="insta-note-item" onclick="openDMChat('@karan_m')">
+            <div class="insta-note-bubble" title="Uber Go concurrency 🚗">Uber Go 🚗</div>
+            <div class="insta-story-circle">
+              <div class="insta-story-circle-inner">👨‍🎓</div>
+            </div>
+            <div class="insta-note-user">karan_m</div>
+          </div>
+
+          <div class="insta-note-item" onclick="openDMChat('@priya_d')">
+            <div class="insta-note-bubble" title="Netflix MSE stream 🎬">Netflix MSE 🎬</div>
+            <div class="insta-story-circle">
+              <div class="insta-story-circle-inner">👩‍🔬</div>
+            </div>
+            <div class="insta-note-user">priya_d</div>
+          </div>
+
+          <div class="insta-note-item" onclick="openDMChat('@rohan_k')">
+            <div class="insta-note-bubble" title="Lofi & DSA chill 🎧">Lofi beats 🎧</div>
+            <div class="insta-story-circle">
+              <div class="insta-story-circle-inner">🎸</div>
+            </div>
+            <div class="insta-note-user">rohan_k</div>
+          </div>
+        </div>
+
+        <!-- Search and Tabs Bar -->
+        <div class="insta-subnav">
+          <div class="insta-search-wrap">
+            <span>🔍</span>
+            <input type="text" id="insta-search-input" placeholder="Search direct messages..." onkeyup="filterInstaDMs(this.value)" />
+          </div>
+          <div class="insta-tabs">
+            <button class="insta-tab active" id="tab-insta-direct" onclick="switchInstaInboxTab('direct')">Messages</button>
+            <button class="insta-tab" id="tab-insta-squads" onclick="switchInstaInboxTab('squads')">Study Squads</button>
+            <button class="insta-tab" id="tab-insta-channels" onclick="switchInstaInboxTab('channels')">Lounge Rooms</button>
+          </div>
+        </div>
       </div>
 
-      <!-- Enhanced IG-Style Mini Profile Card -->
+      <!-- 3. INBOX VIEW: DIRECT MESSAGES LIST -->
+      <div class="insta-inbox-list" id="insta-inbox-list">
+        <!-- Rendered dynamically by renderInstaInboxList() -->
+      </div>
+
+      <!-- 4. INBOX VIEW: STUDY SQUADS LIST (Tab 2) -->
+      <div id="insta-squads-list" style="display:none; flex:1; overflow-y:auto; padding:14px; background:#ffffff;">
+        <!-- Rendered dynamically by renderStudyGroupsChannel() -->
+      </div>
+
+      <!-- 5. INBOX VIEW: COMMUNITY LOUNGE CHANNELS (Tab 3) -->
+      <div id="insta-channels-wrap" style="display:none; flex:1; flex-direction:column; background:#ffffff;">
+        <div class="chat-channels" style="padding:10px 14px; background:#fafafa;">
+          <span class="chat-channel active" onclick="switchChatChannel('venting-space', this)">💬 Venting Space</span>
+          <span class="chat-channel" onclick="switchChatChannel('interview-prep', this)">📚 Interview Prep</span>
+          <span class="chat-channel" onclick="switchChatChannel('general-chill', this)">☕ General Chill</span>
+        </div>
+        <div class="chat-body" id="chat-messages" style="flex:1; overflow-y:auto; padding:14px;">
+          <!-- Lounge messages -->
+        </div>
+      </div>
+
+      <!-- 6. ACTIVE 1-ON-1 DM THREAD VIEW -->
+      <div id="insta-thread-container" style="display:none; flex:1; flex-direction:column; overflow:hidden;">
+        <!-- Thread messages scroll area -->
+        <div class="insta-thread-body" id="insta-thread-body">
+          <!-- Loaded dynamically with peer intro + messages -->
+        </div>
+
+        <!-- Emoji Quick Palette -->
+        <div class="insta-emoji-tray" id="insta-emoji-tray" style="display:none;">
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('❤️')">❤️</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('🔥')">🔥</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('👏')">👏</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('😂')">😂</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('🚀')">🚀</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('💯')">💯</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('☕')">☕</span>
+          <span class="insta-emoji-item" onclick="insertInstaEmoji('⚡')">⚡</span>
+        </div>
+
+        <!-- Instagram Bottom Pill Input Bar -->
+        <div class="insta-input-bar" id="insta-input-bar">
+          <div class="insta-pill-input-box">
+            <button class="insta-action-icon" onclick="toggleInstaEmojiTray()" title="Add emoji">
+              😊
+            </button>
+            <input 
+              type="text" 
+              id="insta-msg-input" 
+              class="insta-input-field" 
+              placeholder="Message..." 
+              autocomplete="off"
+              oninput="handleInstaInputChange(this)" 
+              onkeydown="handleInstaInputKey(event)" 
+            />
+            <button class="insta-action-icon" onclick="sendInstaMediaSimulation('screenshot')" title="Share Code Screenshot">
+              🖼️
+            </button>
+            <button class="insta-action-icon" onclick="sendInstaVoiceSimulation()" title="Send Voice Note">
+              🎙️
+            </button>
+          </div>
+          <!-- Dynamic Right Button: Heart by default, blue 'Send' when typing -->
+          <button class="insta-dynamic-btn" id="insta-dynamic-btn" onclick="handleInstaDynamicBtnClick()" title="Send like heart">
+            ❤️
+          </button>
+        </div>
+      </div>
+
+      <!-- 7. INSTAGRAM CALL SIMULATION OVERLAY -->
+      <div class="insta-call-overlay" id="insta-call-modal" style="display:none;">
+        <div>
+          <div style="font-size:0.85rem; color:#8e8e8e; text-transform:uppercase; letter-spacing:1px;" id="insta-call-type">SkillBridge Video Call</div>
+          <h2 style="margin:6px 0 2px 0; font-size:1.6rem;" id="insta-call-peer-name">Neha Gupta</h2>
+          <p style="margin:0; font-size:0.88rem; color:#00ff88;">Connecting end-to-end encrypted audio room...</p>
+        </div>
+        
+        <div>
+          <div class="insta-call-avatar-pulse" id="insta-call-avatar">👱‍♀️</div>
+          <p style="font-size:0.85rem; color:#a8a8a8; margin:0;" id="insta-call-timer">Calling...</p>
+        </div>
+
+        <div class="insta-call-actions">
+          <button class="insta-call-btn mute" onclick="alert('Microphone toggled!')" title="Mute Mic">🎙️</button>
+          <button class="insta-call-btn mute" onclick="alert('Camera feed toggled!')" title="Camera">📹</button>
+          <button class="insta-call-btn mute" onclick="alert('Speaker audio switched!')" title="Speaker">🔊</button>
+          <button class="insta-call-btn end" onclick="endInstaCall()" title="End Call">✕</button>
+        </div>
+      </div>
+
+      <!-- 8. AUTHENTIC INSTAGRAM MINI PROFILE MODAL -->
       <div id="mini-profile" class="mini-profile-card" style="display:none;">
         <button class="close-profile" onclick="closeProfile()">✕</button>
+        
+        <!-- Header Handle -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <strong id="mp-handle" style="font-size:1.05rem; color:#262626;">@neha_g</strong>
+            <span class="insta-verified-badge">✓</span>
+          </div>
+          <span style="font-size:0.75rem; background:#f0f7ff; color:#0095f6; font-weight:700; padding:2px 8px; border-radius:999px;">Verified Solver</span>
+        </div>
+
+        <!-- Profile Top Info -->
         <div class="profile-header">
-          <div class="profile-avatar" id="mp-avatar">👨‍💻</div>
+          <div class="profile-avatar" id="mp-avatar">👱‍♀️</div>
           <div>
-            <h4 id="mp-name" style="margin:0; font-size:1.05rem;">Anannay Kapoor</h4>
-            <p id="mp-handle" style="margin:0; font-size:0.8rem; color:var(--primary); font-weight:700;">@anannay_k</p>
-            <span id="mp-college" style="font-size:0.72rem; color:var(--text3);">NIT Kurukshetra</span>
+            <h4 id="mp-name" style="margin:0; font-size:1.15rem; color:#262626;">Neha Gupta</h4>
+            <span id="mp-college" style="font-size:0.8rem; color:#8e8e8e; display:block; margin-top:2px;">IIT Delhi</span>
           </div>
         </div>
+
+        <!-- Instagram Stats -->
         <div class="profile-stats">
-          <div><strong id="mp-streak">14</strong><br/>Streaks 🔥</div>
-          <div><strong id="mp-xp">2,450 XP</strong><br/>XP Points ⚡</div>
-          <div><strong id="mp-rank">#3</strong><br/>Campus Rank 🏆</div>
+          <div><strong id="mp-streak">14</strong>Streak 🔥</div>
+          <div><strong id="mp-xp">4,200</strong>Total XP ⚡</div>
+          <div><strong id="mp-rank">#1</strong>Rank 🏆</div>
         </div>
-        <p class="profile-bio" id="mp-bio">B.Tech CSE @ NIT Kurukshetra (2026 Batch). Targeting Amazon AWS & Netflix SDE-1 roles.</p>
-        <div id="mp-actions">
-          <button id="mp-btn" class="btn-primary" style="width:100%; padding:8px; font-size:0.82rem;" onclick="handleProfileActionButton()">💬 Direct Message / Invite</button>
+
+        <!-- Bio -->
+        <p class="profile-bio" id="mp-bio">
+          B.Tech CSE. Prepping for Amazon AWS roles. Solved Distributed Rate Limiter with sub-5ms Redis Lua scripts.
+        </p>
+
+        <!-- Instagram Action Buttons -->
+        <div id="mp-actions" style="display:flex; gap:8px;">
+          <button id="mp-btn" class="btn-primary" style="flex:1; padding:8px; font-size:0.85rem; border-radius:8px;" onclick="handleProfileActionButton()">
+            Message
+          </button>
+          <button class="btn-ghost" style="padding:8px 12px; font-size:0.85rem; border-radius:8px;" onclick="alert('Profile link copied to clipboard!')">
+            🔗 Share
+          </button>
         </div>
       </div>
+
     </div>
   </div>
 
