@@ -17,7 +17,10 @@
     </div>
     <nav class="nav-links">
       <a href="#home" class="nav-link active" onclick="showSection('home')">Home</a>
+      <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
       <a href="#drill" class="nav-link" onclick="showSection('drill')">Start Drill</a>
+      <a href="#arena" class="nav-link" onclick="showSection('arena')">Arena</a>
+      <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR View</a>
       <a href="#about" class="nav-link" onclick="showSection('about')">About</a>
     </nav>
   </header>
@@ -305,6 +308,100 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ======================== DASHBOARD SECTION ======================== -->
+  <section id="dashboard" class="section">
+    <div class="dash-container">
+      <div class="dash-header">
+        <h2>👋 Welcome back, Arjun</h2>
+        <p>Your placement preparation stats</p>
+      </div>
+      
+      <div class="dash-stats">
+        <div class="dash-card profile-card">
+          <div class="profile-header">
+            <div class="avatar">👨‍💻</div>
+            <div>
+              <h3>Arjun Sharma</h3>
+              <p>NIT Kurukshetra • CSE 2026</p>
+            </div>
+          </div>
+          <div class="rank-badge">🏆 Overall Rank: #42</div>
+        </div>
+        
+        <div class="dash-card gamification-card">
+          <div class="gamification-item">
+            <span class="g-icon">🔥</span>
+            <div>
+              <div class="g-value">7 Days</div>
+              <div class="g-label">Current Streak</div>
+            </div>
+          </div>
+          <div class="gamification-item">
+            <span class="g-icon">⭐</span>
+            <div>
+              <div class="g-value">2,450 XP</div>
+              <div class="g-label">Total Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-subtitle">Recommended Industry Problems</h3>
+      <div class="recommended-grid" id="recommended-problems">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== ARENA SECTION ======================== -->
+  <section id="arena" class="section">
+    <div class="arena-container">
+      <div class="step-header">
+        <h2>⚔️ Company Problem Arena</h2>
+        <p>Real-world tech challenges posted by top MNCs. Solve them to earn XP and get hired.</p>
+      </div>
+      <div class="filters">
+        <button class="chip active">All</button>
+        <button class="chip">Backend</button>
+        <button class="chip">Frontend</button>
+        <button class="chip">System Design</button>
+      </div>
+      <div class="arena-grid" id="arena-problems">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== HR VIEW SECTION ======================== -->
+  <section id="hr-view" class="section">
+    <div class="hr-container">
+      <div class="hr-header">
+        <div class="hr-company-logo">A</div>
+        <div>
+          <h2>Amazon Recruiter Dashboard</h2>
+          <p>Top performers for "Design a Rate Limiter" challenge</p>
+        </div>
+      </div>
+      
+      <div class="leaderboard-table-wrap">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Student</th>
+              <th>College</th>
+              <th>Solution XP</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 

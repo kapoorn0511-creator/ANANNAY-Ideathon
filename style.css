@@ -236,6 +236,58 @@ select:focus { outline: none; border-color: var(--primary); }
 .footer-text { font-size: 0.82rem; color: var(--text3); }
 .footer-gh { color: var(--primary); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
 
+/* ============================================================
+   NEW SECTIONS: Dashboard, Arena, HR View
+   ============================================================ */
+.dash-container, .arena-container, .hr-container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
+.dash-header, .hr-header { margin-bottom: 2rem; }
+.dash-header h2, .hr-header h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.dash-header p, .hr-header p { color: var(--text2); }
+
+.dash-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+.dash-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow); }
+.profile-header { display: flex; align-items: center; gap: 1rem; }
+.avatar { font-size: 2.5rem; background: var(--bg2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; }
+.profile-card h3 { font-size: 1.2rem; font-weight: 700; }
+.profile-card p { font-size: 0.85rem; color: var(--text3); }
+.rank-badge { background: rgba(230,168,0,0.15); color: var(--yellow); padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; border: 1px solid rgba(230,168,0,0.3); }
+
+.gamification-card { display: flex; justify-content: space-around; }
+.gamification-item { display: flex; align-items: center; gap: 1rem; }
+.g-icon { font-size: 2rem; }
+.g-value { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+.g-label { font-size: 0.75rem; color: var(--text3); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+
+.section-subtitle { font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; }
+.recommended-grid, .arena-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.problem-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.5rem; transition: var(--transition); display: flex; flex-direction: column; }
+.problem-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow); }
+.company-tag { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.problem-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; line-height: 1.4; }
+.problem-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text3); margin-bottom: 1.5rem; }
+.problem-meta span { display: flex; align-items: center; gap: 4px; }
+.tech-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; flex-grow: 1; }
+.tech-tag { background: var(--bg2); color: var(--text2); font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); }
+.problem-actions { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem; }
+.xp-reward { font-weight: 800; color: var(--yellow); font-size: 0.9rem; }
+
+.filters { display: flex; gap: 0.8rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.filters .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+.hr-header { display: flex; align-items: center; gap: 1.5rem; }
+.hr-company-logo { width: 60px; height: 60px; background: #232f3e; color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; }
+.leaderboard-table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius2); overflow: hidden; box-shadow: var(--shadow); }
+.leaderboard-table { width: 100%; border-collapse: collapse; text-align: left; }
+.leaderboard-table th { background: var(--bg2); padding: 1rem 1.5rem; font-size: 0.85rem; color: var(--text3); text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--border); }
+.leaderboard-table td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); color: var(--text); font-size: 0.95rem; font-weight: 500; }
+.leaderboard-table tr:last-child td { border-bottom: none; }
+.leaderboard-table tr:hover td { background: var(--bg3); }
+.rank-1 { color: var(--yellow); font-weight: 900; font-size: 1.2rem; }
+.rank-2 { color: #C0C0C0; font-weight: 800; font-size: 1.1rem; }
+.rank-3 { color: #CD7F32; font-weight: 800; font-size: 1.1rem; }
+.btn-hire { background: var(--green); color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer; transition: var(--transition); }
+.btn-hire:hover { background: #008a56; transform: scale(1.05); }
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
