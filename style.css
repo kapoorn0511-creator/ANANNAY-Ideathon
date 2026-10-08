@@ -216,19 +216,22 @@ select:focus { outline: none; border-color: var(--primary); }
 .fscore-label { font-size: 0.7rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .results-actions { display: flex; gap: 1rem; justify-content: center; }
 
-/* ============ ABOUT ============ */
-.about-container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
-.about-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-bottom: 3rem; }
-.about-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2rem; }
-.about-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
-.about-card p { font-size: 0.9rem; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
-.about-card code { background: var(--bg3); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
-.tech-list { list-style: none; }
-.tech-list li { font-size: 0.88rem; color: var(--text2); padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
-.tech-list li:last-child { border-bottom: none; }
-.team-section { text-align: center; padding: 3rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius2); }
-.team-section h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
-.team-section p { color: var(--text2); font-size: 0.9rem; }
+/* ============ LANDING PAGE PITCH SECTIONS ============ */
+.pitch-section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.pitch-title { text-align: center; font-size: 2.2rem; margin-bottom: 3rem; font-weight: 900; letter-spacing: -0.5px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+@media (max-width: 768px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+.pitch-card { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow); transition: var(--transition); }
+.pitch-card:hover { transform: translateY(-5px); box-shadow: var(--shadow2); border-color: var(--primary); }
+.pitch-card .icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+.pitch-card h3 { font-size: 1.3rem; margin-bottom: 1rem; font-weight: 800; }
+.pitch-card p { font-size: 0.95rem; color: var(--text2); line-height: 1.6; }
+.stat-box h3 { font-size: 3.5rem; color: var(--primary); margin-bottom: 0.2rem; font-weight: 900; letter-spacing: -2px; }
+.stat-box p { font-size: 0.85rem; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.check-list { list-style: none; padding: 0; }
+.check-list li { padding: 0.8rem 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; color: var(--text); display: flex; gap: 10px; align-items: flex-start; }
+.check-list li:last-child { border-bottom: none; }
 
 /* ============ FOOTER ============ */
 .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
