@@ -951,16 +951,99 @@
         </div>
       </div>
 
-      <!-- FILTERS -->
-      <div class="filters" style="margin-bottom: 2rem;">
-        <button class="chip active" onclick="filterJobs('all', this)">All Openings</button>
-        <button class="chip" onclick="filterJobs('job', this)">💼 Full-Time Jobs</button>
-        <button class="chip" onclick="filterJobs('internship', this)">🎓 Internships</button>
-        <button class="chip" onclick="filterJobs('amazon', this)">🟠 Amazon</button>
-        <button class="chip" onclick="filterJobs('google', this)">🔵 Google</button>
-        <button class="chip" onclick="filterJobs('netflix', this)">🔴 Netflix</button>
-        <button class="chip" onclick="filterJobs('uber', this)">🚗 Uber</button>
-        <button class="chip" onclick="filterJobs('stripe', this)">💳 Stripe</button>
+      <!-- ADVANCED JOB SEARCH & MULTI-CRITERIA FILTERS PANEL -->
+      <div class="job-search-panel">
+        
+        <!-- Search Bar with Instant Matching & Clear -->
+        <div class="job-search-input-wrap">
+          <span class="job-search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="job-search-input" 
+            placeholder="Search roles, companies, tech skills (e.g. SDE, Go, React, Python, Remote, WFH)..." 
+            autocomplete="off"
+            oninput="handleJobSearch(this.value)"
+          />
+          <button class="job-search-clear" id="job-search-clear-btn" style="display:none;" onclick="clearJobSearch()" title="Clear search">
+            ✕
+          </button>
+        </div>
+
+        <!-- Dropdown Select Filters (Work Mode, Employment Type, Batches, Sort By) -->
+        <div class="job-filters-row">
+          <!-- 1. Work Mode (Remote / WFH / Hybrid / On-Site) -->
+          <div class="job-filter-select-wrap">
+            <label class="job-filter-label" for="job-filter-mode">🏠 Workplace Mode</label>
+            <select id="job-filter-mode" class="job-select-control" onchange="applyJobFilterCriteria()">
+              <option value="all">🌐 All Workplace Modes</option>
+              <option value="remote">🏠 100% Remote / WFH</option>
+              <option value="hybrid">🔄 Hybrid (In-Office + WFH)</option>
+              <option value="onsite">🏢 In-Office / On-Site</option>
+            </select>
+          </div>
+
+          <!-- 2. Employment Type (Full-time, Internship, Part-time) -->
+          <div class="job-filter-select-wrap">
+            <label class="job-filter-label" for="job-filter-type">💼 Employment Type</label>
+            <select id="job-filter-type" class="job-select-control" onchange="applyJobFilterCriteria()">
+              <option value="all">📋 All Employment Types</option>
+              <option value="full-time">💼 Full-Time (FTE)</option>
+              <option value="internship">🌱 Internship (Summer / 6M)</option>
+              <option value="part-time">⏱️ Part-Time Roles</option>
+            </select>
+          </div>
+
+          <!-- 3. Eligible Batches -->
+          <div class="job-filter-select-wrap">
+            <label class="job-filter-label" for="job-filter-batch">🎓 Eligible Batches</label>
+            <select id="job-filter-batch" class="job-select-control" onchange="applyJobFilterCriteria()">
+              <option value="all">👥 All Batches</option>
+              <option value="2025-2026">🎓 2025 & 2026 Graduating</option>
+              <option value="2027">📚 2027 Pre-Final Year</option>
+              <option value="flexible">🌟 All Undergrads / Open</option>
+            </select>
+          </div>
+
+          <!-- 4. Sort By -->
+          <div class="job-filter-select-wrap">
+            <label class="job-filter-label" for="job-filter-sort">⚡ Sort Openings</label>
+            <select id="job-filter-sort" class="job-select-control" onchange="applyJobFilterCriteria()">
+              <option value="deadline">⏳ Deadline (Closing Soonest)</option>
+              <option value="salary">💰 Package / Stipend (High to Low)</option>
+              <option value="xp">⭐ Highest Challenge XP</option>
+              <option value="match">🎯 Best Match (Anannay Kapoor 81.6%)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Quick Shortcut Filter Chips -->
+        <div class="job-quick-chips-wrap">
+          <button class="chip active" id="jchip-all" onclick="quickFilterJobs('all', this)">All Openings</button>
+          <button class="chip" id="jchip-remote" onclick="quickFilterJobs('remote', this)">🏠 100% Remote / WFH</button>
+          <button class="chip" id="jchip-hybrid" onclick="quickFilterJobs('hybrid', this)">🔄 Hybrid</button>
+          <button class="chip" id="jchip-fulltime" onclick="quickFilterJobs('full-time', this)">💼 Full-Time</button>
+          <button class="chip" id="jchip-internship" onclick="quickFilterJobs('internship', this)">🌱 Internships</button>
+          <button class="chip" id="jchip-parttime" onclick="quickFilterJobs('part-time', this)">⏱️ Part-Time</button>
+          <button class="chip" id="jchip-amazon" onclick="quickFilterJobs('amazon', this)">🟠 Amazon</button>
+          <button class="chip" id="jchip-google" onclick="quickFilterJobs('google', this)">🔵 Google</button>
+          <button class="chip" id="jchip-netflix" onclick="quickFilterJobs('netflix', this)">🔴 Netflix</button>
+          <button class="chip" id="jchip-uber" onclick="quickFilterJobs('uber', this)">🚗 Uber</button>
+          <button class="chip" id="jchip-stripe" onclick="quickFilterJobs('stripe', this)">💳 Stripe</button>
+          <button class="chip" id="jchip-microsoft" onclick="quickFilterJobs('microsoft', this)">🟦 Microsoft</button>
+          <button class="chip" id="jchip-atlassian" onclick="quickFilterJobs('atlassian', this)">🔷 Atlassian</button>
+        </div>
+
+        <!-- Status & Active Results Counter -->
+        <div class="job-status-bar">
+          <div>
+            <strong id="job-results-count" style="color:var(--primary); font-size:0.92rem;">Showing verified opportunities</strong>
+            <span id="job-active-query-text" style="color:var(--text3); margin-left:6px;"></span>
+          </div>
+          <button class="btn-ghost" style="padding:4px 12px; font-size:0.78rem;" onclick="resetJobFilters()">
+            🔄 Reset All Filters
+          </button>
+        </div>
+
       </div>
 
       <!-- JOBS LIST -->

@@ -260,14 +260,21 @@ const MOCK_JOBS = [
     title: "Software Development Engineer 1 (SDE-1) - Cloud Systems",
     company: "amazon",
     companyBadge: "🟠 Amazon AWS",
-    type: "job",
-    typeLabel: "Full-Time Job",
+    type: "full-time",
+    typeLabel: "💼 Full-Time Job",
+    workMode: "hybrid",
+    workModeLabel: "🔄 Hybrid (In-Office + WFH)",
     package: "₹45 LPA + Stocks",
+    salaryNumeric: 4500000,
     location: "Bangalore / Hyderabad / Hybrid",
     batches: "2025 & 2026 Graduating Batches",
     deadline: "Oct 25, 2026 • 11:59 PM IST",
     daysLeft: "17 Days Left",
+    daysLeftNum: 17,
     badgeType: "green",
+    xpReward: 500,
+    matchScore: 92,
+    skills: ["Go", "Redis", "Distributed Systems", "AWS", "Rate Limiting"],
     syllabus: [
       "Distributed Systems: Rate limiting patterns (Token Bucket, Sliding Window Log)",
       "In-Memory Caching: Redis cluster eviction policies, cache-aside, and atomic Lua scripts",
@@ -291,14 +298,21 @@ const MOCK_JOBS = [
     title: "Frontend Infrastructure & UI Systems Engineer",
     company: "netflix",
     companyBadge: "🔴 Netflix",
-    type: "job",
-    typeLabel: "Full-Time Job",
-    package: "$120,000 / ₹60 LPA • Remote / Mumbai",
-    location: "Remote / Hybrid",
+    type: "full-time",
+    typeLabel: "💼 Full-Time Job",
+    workMode: "remote",
+    workModeLabel: "🏠 100% Remote / WFH",
+    package: "$120,000 / ₹60 LPA (100% WFH)",
+    salaryNumeric: 6000000,
+    location: "Remote (Pan-India / Worldwide WFH)",
     batches: "All Batches & Self-Taught Devs",
     deadline: "Oct 14, 2026 • 11:59 PM IST",
     daysLeft: "6 Days Left",
+    daysLeftNum: 6,
     badgeType: "red",
+    xpReward: 600,
+    matchScore: 88,
+    skills: ["React", "MSE", "Streaming", "WebCodecs", "JavaScript", "Remote", "WFH"],
     syllabus: [
       "Client-Side Media Buffering: MediaSource Extensions (MSE) and WebCodecs APIs",
       "Streaming Protocols: Adaptive Bitrate (ABR) switching algorithms in fluctuating bandwidth",
@@ -323,13 +337,20 @@ const MOCK_JOBS = [
     company: "google",
     companyBadge: "🔵 Google Search",
     type: "internship",
-    typeLabel: "Summer Internship",
+    typeLabel: "🌱 Summer Internship",
+    workMode: "onsite",
+    workModeLabel: "🏢 In-Office / On-Site",
     package: "₹1,25,000/month Stipend + Pre-Placement Offer",
-    location: "Bangalore / Pune",
+    salaryNumeric: 1500000,
+    location: "Bangalore / Pune Campus",
     batches: "2027 Batch (3rd Year Undergrads)",
     deadline: "Oct 18, 2026 • 05:00 PM IST",
     daysLeft: "10 Days Left",
+    daysLeftNum: 10,
     badgeType: "yellow",
+    xpReward: 300,
+    matchScore: 94,
+    skills: ["Linux", "SRE", "Caching", "C++", "SQL", "Onsite"],
     syllabus: [
       "Query Optimization: Multi-Tier B-Tree indexing and SQL/NoSQL query execution plans",
       "Cache Invalidation: Asynchronous cache warming, write-through vs write-back caching",
@@ -353,14 +374,21 @@ const MOCK_JOBS = [
     title: "Real-time Geospatial Backend Engineer (Core Dispatch)",
     company: "uber",
     companyBadge: "🚗 Uber",
-    type: "job",
-    typeLabel: "Full-Time Job",
+    type: "full-time",
+    typeLabel: "💼 Full-Time Job",
+    workMode: "hybrid",
+    workModeLabel: "🔄 Hybrid (In-Office + WFH)",
     package: "₹48 LPA • Bangalore / Hyderabad",
+    salaryNumeric: 4800000,
     location: "Bangalore / Hyderabad",
     batches: "2025 & 2026 Graduating Batches",
     deadline: "Nov 02, 2026 • 11:59 PM IST",
     daysLeft: "25 Days Left",
+    daysLeftNum: 25,
     badgeType: "green",
+    xpReward: 550,
+    matchScore: 85,
+    skills: ["Go", "WebSockets", "Kafka", "Geospatial", "Quadtrees"],
     syllabus: [
       "WebSocket Architecture: Managing 100k persistent socket connections in Go",
       "Geospatial Indexing: Spatial hashing, Google S2 geometry library, Quadtrees",
@@ -384,14 +412,21 @@ const MOCK_JOBS = [
     title: "Payments Infrastructure & Webhooks Engineer",
     company: "stripe",
     companyBadge: "💳 Stripe",
-    type: "job",
-    typeLabel: "Full-Time Job",
-    package: "₹50 LPA • Remote / Bengaluru",
-    location: "Remote / Bengaluru",
+    type: "full-time",
+    typeLabel: "💼 Full-Time Job",
+    workMode: "remote",
+    workModeLabel: "🏠 100% Remote / WFH",
+    package: "₹50 LPA • 100% Work From Home",
+    salaryNumeric: 5000000,
+    location: "Remote (Work From Anywhere Pan-India)",
     batches: "2025 & 2026 Graduating Batches",
     deadline: "Nov 15, 2026 • 11:59 PM IST",
     daysLeft: "38 Days Left",
+    daysLeftNum: 38,
     badgeType: "green",
+    xpReward: 350,
+    matchScore: 90,
+    skills: ["Idempotency", "Distributed Locks", "Ruby", "Go", "Security", "Remote", "WFH"],
     syllabus: [
       "Idempotency Keys: Designing replay protection for distributed financial transactions",
       "Consistency & Locks: Two-phase commit (2PC), distributed locks with Redlock",
@@ -408,6 +443,120 @@ const MOCK_JOBS = [
       title: "Senior University Recruiter @ Stripe Payments",
       avatar: "👩‍💼",
       intro: "Hello! At Stripe, code correctness is paramount. When network packets duplicate, users cannot be double charged. Prove your idempotency skills in our challenge!"
+    }
+  },
+  {
+    id: 6,
+    title: "AI & Distributed Cloud Systems Fellow (Part-Time WFH)",
+    company: "microsoft",
+    companyBadge: "🟦 Microsoft",
+    type: "part-time",
+    typeLabel: "⏱️ Part-Time Role (20 hrs/week)",
+    workMode: "remote",
+    workModeLabel: "🏠 100% Remote / WFH",
+    package: "₹65,000/month (Flexible Part-Time Hours)",
+    salaryNumeric: 780000,
+    location: "Remote / WFH (College Friendly)",
+    batches: "2025, 2026 & 2027 Batches (College Students)",
+    deadline: "Oct 28, 2026 • 11:59 PM IST",
+    daysLeft: "20 Days Left",
+    daysLeftNum: 20,
+    badgeType: "green",
+    xpReward: 450,
+    matchScore: 95,
+    skills: ["Azure", "Python", "FastAPI", "OpenAI", "Part-Time", "Remote", "WFH"],
+    syllabus: [
+      "Cloud Microservices: Building async event-driven endpoints with Azure Functions & Python",
+      "LLM Application Orchestration: Retrieval Augmented Generation (RAG) and Semantic Kernel",
+      "Data Streaming: Azure Event Hubs partition management and sub-100ms pipeline latencies",
+      "Part-Time Workflow: Flexible 20 hrs/week scheduled around your college classes and exams"
+    ],
+    readinessScore: "Level 6+ or >75% in SkillBridge Arena",
+    tutorialId: 2,
+    tutorialTitle: "Sub-50ms Search API Latency: Multi-Tier Cache Invalidation (22:00)",
+    challengeIndex: 2,
+    challengeTitle: "Build a High-Concurrency API Gateway (+450 XP)",
+    recruiter: {
+      name: "Divya Nair",
+      title: "University Talent Lead @ Microsoft Cloud & AI",
+      avatar: "👩‍💼",
+      intro: "Hi! Microsoft is hiring student fellows for flexible 20-hour part-time cloud engineering. Perfect to balance college academics while gaining verified tier-1 MNC experience!"
+    }
+  },
+  {
+    id: 7,
+    title: "Cloud Reliability & Microservices Intern (6-Month WFH)",
+    company: "atlassian",
+    companyBadge: "🔷 Atlassian",
+    type: "internship",
+    typeLabel: "🌱 6-Month Internship",
+    workMode: "remote",
+    workModeLabel: "🏠 100% Remote / WFH",
+    package: "₹1,15,000/month Stipend + Pre-Placement Offer",
+    salaryNumeric: 1380000,
+    location: "100% Remote (WFH Anywhere in India)",
+    batches: "2026 & 2027 Graduating Batches",
+    deadline: "Nov 08, 2026 • 11:59 PM IST",
+    daysLeft: "31 Days Left",
+    daysLeftNum: 31,
+    badgeType: "green",
+    xpReward: 500,
+    matchScore: 89,
+    skills: ["Java", "Docker", "Kubernetes", "AWS", "Jira", "Remote", "WFH"],
+    syllabus: [
+      "Multi-Tenant DB Sharding: Scaling Jira database transactions across thousands of enterprise tenants",
+      "Resilience Testing: Chaos engineering, circuit breaking, and latency injection testing",
+      "Cloud Orchestration: Helm charts, container networking, and Kubernetes pod autoscaling",
+      "100% Distributed Team: Full work-from-home setup with top-spec MacBook Pro & home office allowance"
+    ],
+    readinessScore: "Level 7+ or >80% on System Design challenge",
+    tutorialId: 0,
+    tutorialTitle: "Architecting Distributed Token-Bucket Rate Limiters in Go (28:00)",
+    challengeIndex: 0,
+    challengeTitle: "Design a Distributed Rate Limiter (+500 XP)",
+    recruiter: {
+      name: "Rohan Mehra",
+      title: "Global Campus Talent Partner @ Atlassian",
+      avatar: "👨‍💼",
+      intro: "Hey students! Atlassian is 100% Team Anywhere. Work from your college hostel or home while building software that powers millions of engineers globally."
+    }
+  },
+  {
+    id: 8,
+    title: "High-Concurrency Flash Dispatch Systems Fellow (Part-Time)",
+    company: "zomato",
+    companyBadge: "⚡ Blinkit / Zomato",
+    type: "part-time",
+    typeLabel: "⏱️ Part-Time Role (15 hrs/week)",
+    workMode: "hybrid",
+    workModeLabel: "🔄 Hybrid / Flexible",
+    package: "₹80,000/month (Part-Time Evening / Weekend)",
+    salaryNumeric: 960000,
+    location: "Gurgaon / Hybrid / Flexible Remote",
+    batches: "All Pre-Final & Final Year Students",
+    deadline: "Oct 30, 2026 • 11:59 PM IST",
+    daysLeft: "22 Days Left",
+    daysLeftNum: 22,
+    badgeType: "yellow",
+    xpReward: 550,
+    matchScore: 91,
+    skills: ["Redis", "Golang", "Kafka", "Part-Time", "Sub-10ms", "Dispatch"],
+    syllabus: [
+      "Sub-10 Minute Dispatch: High-speed route optimization and nearest dark-store geospatial lookup",
+      "Peak Traffic Handling: Managing 100k requests/minute during festival flash sales without server drops",
+      "In-Memory State: Distributed locks and atomic inventory countdowns using Redis Lua",
+      "Flexible Hours: 15 hours per week on evenings/weekends designed specifically for engineering undergrads"
+    ],
+    readinessScore: "Level 7+ on Rate Limiting & Concurrency",
+    tutorialId: 3,
+    tutorialTitle: "Handling 100k Concurrent Driver Location WebSockets in Real-Time (30:00)",
+    challengeIndex: 4,
+    challengeTitle: "Real-time Driver Location Tracking (+550 XP)",
+    recruiter: {
+      name: "Aditi Sharma",
+      title: "Tech Staffing Lead @ Blinkit Core Engineering",
+      avatar: "👩‍💼",
+      intro: "Hello! If you love adrenaline and building lightning-fast real-time systems, join our part-time flash delivery engineering squad. Evening & weekend flexible hours!"
     }
   }
 ];
@@ -995,29 +1144,132 @@ function renderHRJobs(companyKey) {
   container.innerHTML = html;
 }
 
-// ---------- JOBS & INTERNSHIPS ----------
+// ---------- JOBS & INTERNSHIPS FILTER & SEARCH STATE ----------
 let currentChatRecruiter = null;
+let currentJobSearch = '';
+let currentJobMode = 'all';      // 'all', 'remote', 'hybrid', 'onsite'
+let currentJobType = 'all';      // 'all', 'full-time', 'internship', 'part-time'
+let currentJobBatch = 'all';     // 'all', '2025-2026', '2027', 'flexible'
+let currentJobSort = 'deadline';  // 'deadline', 'salary', 'xp', 'match'
+let currentJobCompanyChip = 'all';
 
-function renderJobs(filter = 'all') {
+function renderJobs() {
   const container = document.getElementById('jobs-container');
   if (!container) return;
 
-  let filtered = MOCK_JOBS;
-  if (filter === 'job' || filter === 'internship') {
-    filtered = MOCK_JOBS.filter(j => j.type === filter);
-  } else if (filter !== 'all') {
-    filtered = MOCK_JOBS.filter(j => j.company.toLowerCase() === filter.toLowerCase());
+  const q = currentJobSearch.toLowerCase().trim();
+
+  let filtered = MOCK_JOBS.filter(job => {
+    // 1. Text search filter (title, company, location, skills, syllabus)
+    if (q) {
+      const matchTitle = job.title.toLowerCase().includes(q);
+      const matchCompany = job.company.toLowerCase().includes(q) || job.companyBadge.toLowerCase().includes(q);
+      const matchLoc = job.location.toLowerCase().includes(q);
+      const matchMode = (job.workModeLabel || '').toLowerCase().includes(q) || (job.workMode || '').toLowerCase().includes(q);
+      const matchType = (job.typeLabel || '').toLowerCase().includes(q) || (job.type || '').toLowerCase().includes(q);
+      const matchSkills = (job.skills || []).some(s => s.toLowerCase().includes(q));
+      const matchSyllabus = (job.syllabus || []).some(s => s.toLowerCase().includes(q));
+      if (!matchTitle && !matchCompany && !matchLoc && !matchMode && !matchType && !matchSkills && !matchSyllabus) {
+        return false;
+      }
+    }
+
+    // 2. Work Mode filter (remote, hybrid, onsite)
+    if (currentJobMode !== 'all' && job.workMode !== currentJobMode) {
+      return false;
+    }
+
+    // 3. Employment Type filter (full-time, internship, part-time)
+    if (currentJobType !== 'all') {
+      if (currentJobType === 'full-time' && job.type !== 'full-time' && job.type !== 'job') return false;
+      if (currentJobType === 'internship' && job.type !== 'internship') return false;
+      if (currentJobType === 'part-time' && job.type !== 'part-time') return false;
+    }
+
+    // 4. Batch filter
+    if (currentJobBatch !== 'all') {
+      if (currentJobBatch === '2025-2026' && !job.batches.includes('2025') && !job.batches.includes('2026')) {
+        return false;
+      }
+      if (currentJobBatch === '2027' && !job.batches.includes('2027')) {
+        return false;
+      }
+      if (currentJobBatch === 'flexible' && !job.batches.toLowerCase().includes('all')) {
+        return false;
+      }
+    }
+
+    // 5. Company Chip Filter
+    if (currentJobCompanyChip !== 'all' && job.company.toLowerCase() !== currentJobCompanyChip.toLowerCase()) {
+      return false;
+    }
+
+    return true;
+  });
+
+  // Sort criteria
+  if (currentJobSort === 'deadline') {
+    filtered.sort((a, b) => (a.daysLeftNum || 99) - (b.daysLeftNum || 99));
+  } else if (currentJobSort === 'salary') {
+    filtered.sort((a, b) => (b.salaryNumeric || 0) - (a.salaryNumeric || 0));
+  } else if (currentJobSort === 'xp') {
+    filtered.sort((a, b) => (b.xpReward || 0) - (a.xpReward || 0));
+  } else if (currentJobSort === 'match') {
+    filtered.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+  }
+
+  // Update counter in UI
+  const counterEl = document.getElementById('job-results-count');
+  if (counterEl) {
+    counterEl.textContent = `Showing ${filtered.length} of ${MOCK_JOBS.length} verified opportunities`;
+  }
+
+  const queryTextEl = document.getElementById('job-active-query-text');
+  if (queryTextEl) {
+    let tags = [];
+    if (currentJobSearch) tags.push(`matching "${currentJobSearch}"`);
+    if (currentJobMode !== 'all') tags.push(currentJobMode === 'remote' ? '🏠 Remote/WFH' : currentJobMode === 'hybrid' ? '🔄 Hybrid' : '🏢 On-Site');
+    if (currentJobType !== 'all') tags.push(currentJobType);
+    if (currentJobCompanyChip !== 'all') tags.push(currentJobCompanyChip.toUpperCase());
+    queryTextEl.textContent = tags.length ? `• ${tags.join(', ')}` : '';
+  }
+
+  const clearBtn = document.getElementById('job-search-clear-btn');
+  if (clearBtn) {
+    clearBtn.style.display = currentJobSearch ? 'block' : 'none';
+  }
+
+  // If no match found
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 3rem 1.5rem; text-align: center; background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius2);">
+        <div style="font-size: 3rem; margin-bottom: 10px;">🔍</div>
+        <h3 style="margin-bottom: 6px; font-size: 1.25rem;">No Opportunities Found</h3>
+        <p style="color: var(--text2); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem;">
+          No verified jobs or internships match your current search criteria. Try removing filters or searching for terms like <strong>"Remote"</strong>, <strong>"Go"</strong>, or <strong>"Full-Time"</strong>.
+        </p>
+        <button class="btn-primary" onclick="resetJobFilters()">🔄 Reset All Filters</button>
+      </div>
+    `;
+    return;
   }
 
   let html = '';
   filtered.forEach(job => {
+    // Mode badge styling
+    const modeClass = job.workMode || 'onsite';
+    const typeClass = (job.type === 'full-time' || job.type === 'job') ? 'fulltime' : job.type === 'part-time' ? 'parttime' : 'internship';
+
     html += `
       <div class="job-card">
         <div class="job-header-top">
           <div>
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
               <span class="job-company-pill">${job.companyBadge}</span>
-              <span style="font-size:0.75rem; background:rgba(108,99,255,0.15); color:var(--primary); padding:3px 10px; border-radius:999px; font-weight:700;">
+              <span class="workmode-badge ${modeClass}">
+                ${job.workModeLabel || '🏢 On-Site'}
+              </span>
+              <span class="jobtype-badge ${typeClass}">
                 ${job.typeLabel}
               </span>
               <span style="font-size:0.75rem; background:var(--bg2); color:var(--text3); border:1px solid var(--border); padding:3px 10px; border-radius:999px;">
@@ -1032,6 +1284,11 @@ function renderJobs(filter = 'all') {
           <span class="hr-notice-deadline-badge ${job.badgeType}">
             ⏳ ${job.deadline}
           </span>
+        </div>
+
+        <!-- Tech Skills Tags -->
+        <div class="tech-stack" style="margin: 0.6rem 0 0.8rem 0;">
+          ${(job.skills || []).map(s => `<span class="tech-tag">${s}</span>`).join('')}
         </div>
 
         <!-- What to Study Box -->
@@ -1054,7 +1311,7 @@ function renderJobs(filter = 'all') {
               🎬 Watch Company Tutorial (${job.companyBadge})
             </button>
             <button class="btn-ghost" style="padding:7px 14px; font-size:0.82rem;" onclick="openModal(${job.challengeIndex})">
-              ⚔️ Solve Required Challenge (+500 XP)
+              ⚔️ Solve Required Challenge (+${job.xpReward || 500} XP)
             </button>
             <button class="btn-ghost" style="padding:7px 14px; font-size:0.82rem; color:var(--green); border-color:rgba(0,168,107,0.4);" onclick="openRecruiterChat('${job.company}')">
               💬 Chat with HR (${job.recruiter.name.split(' ')[0]})
@@ -1067,16 +1324,109 @@ function renderJobs(filter = 'all') {
       </div>
     `;
   });
+
   container.innerHTML = html;
 }
 
-function filterJobs(filter, btn) {
+function handleJobSearch(val) {
+  currentJobSearch = val || '';
+  renderJobs();
+}
+
+function clearJobSearch() {
+  const input = document.getElementById('job-search-input');
+  if (input) input.value = '';
+  currentJobSearch = '';
+  renderJobs();
+}
+
+function applyJobFilterCriteria() {
+  const modeSelect = document.getElementById('job-filter-mode');
+  const typeSelect = document.getElementById('job-filter-type');
+  const batchSelect = document.getElementById('job-filter-batch');
+  const sortSelect = document.getElementById('job-filter-sort');
+
+  if (modeSelect) currentJobMode = modeSelect.value;
+  if (typeSelect) currentJobType = typeSelect.value;
+  if (batchSelect) currentJobBatch = batchSelect.value;
+  if (sortSelect) currentJobSort = sortSelect.value;
+
+  renderJobs();
+}
+
+function quickFilterJobs(filterKey, btn) {
   if (btn) {
     const chips = btn.parentElement.querySelectorAll('.chip');
     chips.forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
   }
-  renderJobs(filter);
+
+  if (filterKey === 'all') {
+    resetJobFilters();
+    return;
+  }
+
+  if (filterKey === 'remote') {
+    currentJobMode = 'remote';
+    const select = document.getElementById('job-filter-mode');
+    if (select) select.value = 'remote';
+  } else if (filterKey === 'hybrid') {
+    currentJobMode = 'hybrid';
+    const select = document.getElementById('job-filter-mode');
+    if (select) select.value = 'hybrid';
+  } else if (filterKey === 'full-time') {
+    currentJobType = 'full-time';
+    const select = document.getElementById('job-filter-type');
+    if (select) select.value = 'full-time';
+  } else if (filterKey === 'internship') {
+    currentJobType = 'internship';
+    const select = document.getElementById('job-filter-type');
+    if (select) select.value = 'internship';
+  } else if (filterKey === 'part-time') {
+    currentJobType = 'part-time';
+    const select = document.getElementById('job-filter-type');
+    if (select) select.value = 'part-time';
+  } else {
+    // Specific Company
+    currentJobCompanyChip = filterKey;
+  }
+
+  renderJobs();
+}
+
+function filterJobs(filter, btn) {
+  quickFilterJobs(filter, btn);
+}
+
+function resetJobFilters() {
+  currentJobSearch = '';
+  currentJobMode = 'all';
+  currentJobType = 'all';
+  currentJobBatch = 'all';
+  currentJobCompanyChip = 'all';
+  currentJobSort = 'deadline';
+
+  const sInput = document.getElementById('job-search-input');
+  if (sInput) sInput.value = '';
+
+  const modeSelect = document.getElementById('job-filter-mode');
+  if (modeSelect) modeSelect.value = 'all';
+
+  const typeSelect = document.getElementById('job-filter-type');
+  if (typeSelect) typeSelect.value = 'all';
+
+  const batchSelect = document.getElementById('job-filter-batch');
+  if (batchSelect) batchSelect.value = 'all';
+
+  const sortSelect = document.getElementById('job-filter-sort');
+  if (sortSelect) sortSelect.value = 'deadline';
+
+  const chips = document.querySelectorAll('.job-quick-chips-wrap .chip');
+  chips.forEach(c => c.classList.remove('active'));
+  const allChip = document.getElementById('jchip-all');
+  if (allChip) allChip.classList.add('active');
+
+  renderJobs();
 }
 
 function applyForJob(id) {

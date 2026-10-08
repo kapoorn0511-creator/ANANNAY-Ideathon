@@ -1139,6 +1139,167 @@ select:focus { outline: none; border-color: var(--primary); }
 }
 
 /* ============ JOBS & INTERNSHIPS STYLING ============ */
+.job-search-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+.job-search-input-wrap {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+.job-search-input-wrap input {
+  width: 100%;
+  padding: 13px 44px 13px 44px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  font-size: 0.98rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+}
+.job-search-input-wrap input:focus {
+  border-color: var(--primary);
+  background: var(--card);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+.job-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--text3);
+  pointer-events: none;
+}
+.job-search-clear {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--text3);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: 0.15s;
+}
+.job-search-clear:hover {
+  color: var(--text);
+  background: var(--bg2);
+}
+.job-filters-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.2rem;
+}
+.job-filter-select-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.job-filter-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.job-select-control {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.job-select-control:focus {
+  border-color: var(--primary);
+}
+.job-quick-chips-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  flex-wrap: wrap;
+}
+.job-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--text2);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Badges for Work Mode and Job Type */
+.workmode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.workmode-badge.remote {
+  background: rgba(0, 168, 107, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(0, 168, 107, 0.35);
+}
+.workmode-badge.hybrid {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--primary);
+  border: 1px solid rgba(108, 99, 255, 0.35);
+}
+.workmode-badge.onsite {
+  background: rgba(230, 120, 0, 0.12);
+  color: var(--orange);
+  border: 1px solid rgba(230, 120, 0, 0.35);
+}
+
+.jobtype-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.jobtype-badge.fulltime {
+  background: var(--bg2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.jobtype-badge.internship {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.35);
+}
+.jobtype-badge.parttime {
+  background: rgba(224, 86, 253, 0.12);
+  color: #c026d3;
+  border: 1px solid rgba(224, 86, 253, 0.35);
+}
+
 .job-card {
   background: var(--card);
   border: 1px solid var(--border);
