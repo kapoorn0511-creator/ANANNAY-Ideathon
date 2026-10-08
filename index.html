@@ -17,87 +17,177 @@
     </div>
     <nav class="nav-links">
       <a href="#home" class="nav-link active" onclick="showSection('home')">Home</a>
-      <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Student Dashboard</a>
-      <a href="#arena" class="nav-link" onclick="showSection('arena')">Problem Arena</a>
-      <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR / Recruiters</a>
+      <a href="#dashboard" class="nav-link" onclick="showSection('dashboard')">Dashboard</a>
+      <a href="#arena" class="nav-link" onclick="showSection('arena')">Arena</a>
+      <a href="#hr-view" class="nav-link" onclick="showSection('hr-view')">HR View</a>
+      <a href="#company-portal" class="nav-link" onclick="showSection('company-portal')">Company Portal</a>
     </nav>
+    <button class="btn-primary nav-cta" onclick="showSection('dashboard')">Get Started →</button>
   </header>
 
-  <!-- ======================== HOME SECTION ======================== -->
+  <!-- ======================== HOME ======================== -->
   <section id="home" class="section active">
+
+    <!-- HERO -->
     <div class="hero">
       <div class="hero-content">
-        <div class="hero-tag">🚀 The Industry-Academia Bridge</div>
+        <div class="hero-tag">🚀 The Industry-Academia Bridge Platform</div>
         <h1 class="hero-title">
-          Stop solving outdated <span class="highlight-red">algorithms.</span><br/>
-          Solve Real-World Problems.
+          Stop solving <span class="highlight-red">outdated</span> algorithms.<br/>
+          Solve what MNCs need <span class="highlight-purple">today.</span>
         </h1>
         <p class="hero-sub">
-          Colleges teach 20-year-old syllabus. LeetCode gives you theoretical puzzles. 
-          <strong>IndustrySync connects you directly with top MNCs.</strong> Learn their tech stack, solve their current problems, earn XP, and get hired directly by HRs.
+          Universities teach 20-year-old syllabus. LeetCode gives you puzzles no one uses at work.
+          <strong>IndustrySync connects you directly with top MNCs.</strong> Learn their real tech stack, solve their current problems, earn XP, and get hired directly.
         </p>
         <div class="hero-cta-row">
-          <button class="btn-primary" onclick="showSection('arena')">
-            ⚔️ Enter the Arena
-          </button>
-          <a href="#dashboard" class="btn-ghost" onclick="showSection('dashboard')">View Dashboard →</a>
+          <button class="btn-primary large" onclick="showSection('arena')">⚔️ Enter the Arena</button>
+          <button class="btn-ghost" onclick="showSection('dashboard')">View Dashboard →</button>
+        </div>
+        <div class="hero-trust">
+          <span>🏢 50+ MNCs</span><span>•</span>
+          <span>🎓 10,000+ Students</span><span>•</span>
+          <span>💼 1,200+ Direct Hires</span><span>•</span>
+          <span>⭐ 500+ Live Challenges</span>
         </div>
       </div>
       <div class="hero-visual">
         <div class="interview-card mock-card">
-          <div class="interviewer-label">🏢 Google is hiring</div>
+          <div class="interviewer-label">🏢 Amazon — Active Challenge</div>
           <div class="question-bubble">
-            <strong>Problem: Optimize API Load Time</strong><br/><br/>
-            "Our microservice is experiencing 400ms latency. Use Redis caching to bring it under 50ms. You can use AI, we don't care — just get it done."
+            <strong>Design a Distributed Rate Limiter</strong><br/><br/>
+            Our API gateway is getting hammered. Implement token-bucket rate limiting across 12 microservices.
+            <br/><br/><em style="font-size:0.82rem;opacity:0.7;">Use AI, use your brain — we only care about the solution. That's how real work gets done.</em>
           </div>
-          <div class="timer-label">💰 Reward: 500 XP + Direct HR Interview</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+            <span class="xp-reward" style="font-size:1rem;">+500 XP</span>
+            <button class="btn-primary" style="padding:8px 16px;font-size:0.85rem;" onclick="showSection('arena')">Solve Now →</button>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-bar-item"><div class="stat-bar-num">50+</div><div class="stat-bar-label">MNC Partners</div></div>
+      <div class="stat-bar-item"><div class="stat-bar-num">10K+</div><div class="stat-bar-label">Active Students</div></div>
+      <div class="stat-bar-item"><div class="stat-bar-num">500+</div><div class="stat-bar-label">Live Problems</div></div>
+      <div class="stat-bar-item"><div class="stat-bar-num">1,200+</div><div class="stat-bar-label">Direct Hires</div></div>
+      <div class="stat-bar-item"><div class="stat-bar-num">6mo</div><div class="stat-bar-label">Avg. Training Cut</div></div>
+    </div>
+
+    <!-- COMPANIES ROW -->
+    <div class="companies-section">
+      <p class="companies-label">Real problems from real companies</p>
+      <div class="companies-row">
+        <div class="company-logo-chip">🟠 Amazon</div>
+        <div class="company-logo-chip">🔵 Google</div>
+        <div class="company-logo-chip">🟦 Microsoft</div>
+        <div class="company-logo-chip">🔴 Netflix</div>
+        <div class="company-logo-chip">⚫ Uber</div>
+        <div class="company-logo-chip">🟣 Stripe</div>
+        <div class="company-logo-chip">🟡 Flipkart</div>
+        <div class="company-logo-chip">🔷 Razorpay</div>
+      </div>
+    </div>
+
+    <!-- VS LEETCODE -->
+    <div class="diff-section">
+      <h2 class="section-title">Why Not Just Use LeetCode?</h2>
+      <p class="section-sub">The gap between what platforms teach and what MNCs actually need is massive.</p>
+      <div class="diff-table-wrap">
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>LeetCode / HackerRank</th>
+              <th>University</th>
+              <th class="highlight-col">IndustrySync ✅</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Problem Type</td>
+              <td>❌ Theoretical algorithms (20 yr old)</td>
+              <td>❌ Textbook exercises</td>
+              <td class="highlight-col">✅ Real, live MNC engineering problems</td>
+            </tr>
+            <tr>
+              <td>Industry Relevance</td>
+              <td>❌ Low — no one reverses linked lists at work</td>
+              <td>❌ Very Low</td>
+              <td class="highlight-col">✅ Directly from company backlogs</td>
+            </tr>
+            <tr>
+              <td>Can use AI?</td>
+              <td>❌ No, flagged as cheating</td>
+              <td>❌ Not allowed</td>
+              <td class="highlight-col">✅ Yes! Real world allows AI — we do too</td>
+            </tr>
+            <tr>
+              <td>Learning Path</td>
+              <td>⚠️ Generic</td>
+              <td>❌ Outdated syllabus</td>
+              <td class="highlight-col">✅ MNC-uploaded tutorials for exact skills needed</td>
+            </tr>
+            <tr>
+              <td>Hiring Pipeline</td>
+              <td>❌ Not connected to recruiters</td>
+              <td>❌ Campus placements only</td>
+              <td class="highlight-col">✅ HR directly hires from leaderboard</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <!-- HOW IT WORKS -->
     <div class="how-section">
-      <h2 class="section-title">How It Works</h2>
+      <h2 class="section-title">How IndustrySync Works</h2>
       <div class="steps-row">
         <div class="step-card">
           <div class="step-num">01</div>
           <div class="step-icon">📚</div>
-          <h3>Learn from MNCs</h3>
-          <p>Companies upload tutorials on the exact skills they actually want in an employee today.</p>
+          <h3>Companies Upload Skills</h3>
+          <p>MNCs define the exact skills they want and upload targeted tutorials — so you learn what actually gets you hired.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step-card">
           <div class="step-num">02</div>
           <div class="step-icon">💻</div>
           <h3>Solve Real Problems</h3>
-          <p>Tackle active engineering problems. Use your brain, use AI. In the real world, execution matters.</p>
+          <p>Tackle current engineering challenges. Use AI, use your brain — in the real world, only execution matters.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step-card">
           <div class="step-num">03</div>
           <div class="step-icon">🔥</div>
           <h3>Earn XP & Streaks</h3>
-          <p>Gamify your learning. Maintain daily streaks and climb the global ranking leaderboard.</p>
+          <p>Gamified daily streaks and XP keep you consistent. Climb the global leaderboard and stand out.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step-card">
           <div class="step-num">04</div>
           <div class="step-icon">🤝</div>
           <h3>Get Hired Directly</h3>
-          <p>HRs view the leaderboard for specific problems and hire top performers instantly.</p>
+          <p>HRs filter leaderboards by their own challenges and send interview invites to top performers instantly.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================== DASHBOARD SECTION ======================== -->
+  <!-- ======================== DASHBOARD ======================== -->
   <section id="dashboard" class="section">
     <div class="dash-container">
-      <div class="dash-header">
-        <h2>👋 Welcome back, Arjun</h2>
-        <p>Your Industry Readiness Stats</p>
+      <div class="dash-header-row">
+        <div>
+          <h2>👋 Welcome back, Arjun</h2>
+          <p>Your Industry Readiness Score</p>
+        </div>
+        <button class="btn-primary" onclick="showSection('arena')">+ Solve a Problem</button>
       </div>
-      
+
+      <!-- TOP CARDS -->
       <div class="dash-stats">
         <div class="dash-card profile-card">
           <div class="profile-header">
@@ -107,64 +197,90 @@
               <p>NIT Kurukshetra • CSE 2026</p>
             </div>
           </div>
-          <div class="rank-badge">🏆 Overall Rank: #42</div>
+          <div class="rank-badge">🏆 Global Rank: #42</div>
         </div>
-        
-        <div class="dash-card gamification-card">
-          <div class="gamification-item">
-            <span class="g-icon">🔥</span>
-            <div>
-              <div class="g-value">7 Days</div>
-              <div class="g-label">Current Streak</div>
-            </div>
-          </div>
-          <div class="gamification-item">
-            <span class="g-icon">⭐</span>
-            <div>
-              <div class="g-value">2,450 XP</div>
-              <div class="g-label">Total Experience</div>
-            </div>
-          </div>
+        <div class="dash-card streak-card">
+          <div class="gamification-item"><span class="g-icon">🔥</span><div><div class="g-value">7 Days</div><div class="g-label">Current Streak</div></div></div>
+          <div class="gamification-item"><span class="g-icon">⭐</span><div><div class="g-value">2,450 XP</div><div class="g-label">Total XP</div></div></div>
+          <div class="gamification-item"><span class="g-icon">✅</span><div><div class="g-value">14</div><div class="g-label">Problems Solved</div></div></div>
         </div>
       </div>
 
-      <h3 class="section-subtitle">Recommended Industry Problems</h3>
-      <div class="recommended-grid" id="recommended-problems">
-        <!-- Rendered by JS -->
+      <!-- XP PROGRESS -->
+      <div class="dash-card xp-progress-card">
+        <div class="xp-progress-header">
+          <div>
+            <span class="g-label">Level 8 — Industry Practitioner</span>
+            <div class="g-value" style="font-size:1.1rem;">2,450 / 3,000 XP to Level 9</div>
+          </div>
+          <div class="level-badge">LVL 8</div>
+        </div>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar-fill" style="width: 81.6%"></div>
+        </div>
+        <div class="xp-bar-labels"><span>0</span><span style="color:var(--primary);font-weight:700;">81.6% there</span><span>3,000 XP</span></div>
       </div>
+
+      <!-- STREAK CALENDAR -->
+      <div class="dash-card streak-calendar-card">
+        <h4>📅 Last 14 Days Activity</h4>
+        <div class="streak-calendar" id="streak-calendar"></div>
+      </div>
+
+      <!-- SKILLS -->
+      <h3 class="section-subtitle" style="margin-top:2rem;">🎯 Your Skill Tracks</h3>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-header"><span>⚙️ Backend Engineering</span><span class="skill-pct">74%</span></div><div class="skill-bar"><div class="skill-fill" style="width:74%;background:var(--primary)"></div></div></div>
+        <div class="skill-card"><div class="skill-header"><span>🎨 Frontend Development</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" style="width:55%;background:var(--green)"></div></div></div>
+        <div class="skill-card"><div class="skill-header"><span>🏗️ System Design</span><span class="skill-pct">38%</span></div><div class="skill-bar"><div class="skill-fill" style="width:38%;background:var(--yellow)"></div></div></div>
+        <div class="skill-card"><div class="skill-header"><span>🤖 ML / AI Engineering</span><span class="skill-pct">20%</span></div><div class="skill-bar"><div class="skill-fill" style="width:20%;background:var(--orange)"></div></div></div>
+      </div>
+
+      <!-- RECOMMENDED -->
+      <h3 class="section-subtitle" style="margin-top:2rem;">⚡ Recommended For You</h3>
+      <div class="recommended-grid" id="recommended-problems"></div>
     </div>
   </section>
 
-  <!-- ======================== ARENA SECTION ======================== -->
+  <!-- ======================== ARENA ======================== -->
   <section id="arena" class="section">
     <div class="arena-container">
       <div class="step-header">
         <h2>⚔️ Company Problem Arena</h2>
-        <p>Real-world tech challenges posted by top MNCs. Solve them to earn XP and get hired.</p>
+        <p>Real-world engineering challenges from top MNCs. Solve them to earn XP and get noticed by HRs.</p>
       </div>
+      <!-- FILTER TABS -->
       <div class="filters">
-        <button class="chip active">All Challenges</button>
-        <button class="chip">Amazon</button>
-        <button class="chip">Google</button>
-        <button class="chip">Microsoft</button>
+        <button class="chip active" onclick="filterProblems('all', this)">All</button>
+        <button class="chip" onclick="filterProblems('amazon', this)">🟠 Amazon</button>
+        <button class="chip" onclick="filterProblems('google', this)">🔵 Google</button>
+        <button class="chip" onclick="filterProblems('microsoft', this)">🟦 Microsoft</button>
+        <button class="chip" onclick="filterProblems('hard', this)">🔴 Hard Only</button>
+        <button class="chip" onclick="filterProblems('medium', this)">🟡 Medium</button>
       </div>
-      <div class="arena-grid" id="arena-problems">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="arena-grid" id="arena-problems"></div>
     </div>
   </section>
 
-  <!-- ======================== HR VIEW SECTION ======================== -->
+  <!-- ======================== HR VIEW ======================== -->
   <section id="hr-view" class="section">
     <div class="hr-container">
       <div class="hr-header">
-        <div class="hr-company-logo">A</div>
+        <div class="hr-company-logo" id="hr-logo">A</div>
         <div>
-          <h2>Amazon Recruiter Dashboard</h2>
-          <p>Top performers for: <strong>"Design a Rate Limiter"</strong> challenge</p>
+          <h2 id="hr-title">Amazon Recruiter Dashboard</h2>
+          <p id="hr-sub">Top performers for: <strong>"Design a Distributed Rate Limiter"</strong></p>
         </div>
       </div>
-      
+
+      <!-- COMPANY TABS -->
+      <div class="filters">
+        <button class="chip active" onclick="switchCompany('amazon', this)">🟠 Amazon</button>
+        <button class="chip" onclick="switchCompany('google', this)">🔵 Google</button>
+        <button class="chip" onclick="switchCompany('microsoft', this)">🟦 Microsoft</button>
+        <button class="chip" onclick="switchCompany('netflix', this)">🔴 Netflix</button>
+      </div>
+
       <div class="leaderboard-table-wrap">
         <table class="leaderboard-table">
           <thead>
@@ -172,21 +288,89 @@
               <th>Rank</th>
               <th>Student</th>
               <th>College</th>
-              <th>Solution XP</th>
+              <th>Skills Matched</th>
+              <th>XP Earned</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody id="leaderboard-body">
-            <!-- Rendered by JS -->
-          </tbody>
+          <tbody id="leaderboard-body"></tbody>
         </table>
       </div>
     </div>
   </section>
 
+  <!-- ======================== COMPANY PORTAL ======================== -->
+  <section id="company-portal" class="section">
+    <div class="portal-container">
+      <div class="portal-header">
+        <h2>🏢 Company Portal</h2>
+        <p>MNCs can upload real-world challenges, define skill requirements, and access a pipeline of job-ready candidates.</p>
+      </div>
+      <div class="portal-grid">
+        <div class="portal-card">
+          <div class="portal-icon">📤</div>
+          <h3>Upload a Challenge</h3>
+          <p>Post a real problem your engineering team is currently solving. Students solve it using any means — AI or their own skills.</p>
+          <div class="portal-form">
+            <input type="text" class="portal-input" placeholder="Challenge Title (e.g. Optimize our DB query)"/>
+            <select class="portal-select">
+              <option>Backend Engineering</option>
+              <option>Frontend Development</option>
+              <option>System Design</option>
+              <option>ML / AI Engineering</option>
+              <option>DevOps / Cloud</option>
+            </select>
+            <select class="portal-select">
+              <option>Medium</option>
+              <option>Hard</option>
+              <option>Easy</option>
+            </select>
+            <input type="number" class="portal-input" placeholder="XP Reward (e.g. 500)"/>
+            <button class="btn-primary" onclick="alert('Challenge submitted! Students will see it in the Arena within 24hrs.')">📤 Post Challenge</button>
+          </div>
+        </div>
+        <div class="portal-card">
+          <div class="portal-icon">📚</div>
+          <h3>Upload Tutorials</h3>
+          <p>Upload learning resources on the exact tech stack and skills your company uses. Students learn directly from you before applying.</p>
+          <div class="portal-form">
+            <input type="text" class="portal-input" placeholder="Tutorial Title (e.g. How we use Redis at Amazon)"/>
+            <input type="text" class="portal-input" placeholder="Video / Doc Link"/>
+            <select class="portal-select">
+              <option>Redis / Caching</option>
+              <option>System Design</option>
+              <option>React / Frontend</option>
+              <option>Go / Backend</option>
+              <option>Machine Learning</option>
+            </select>
+            <button class="btn-primary" onclick="alert('Tutorial uploaded! Students will see this on their Dashboard.')">📚 Upload Tutorial</button>
+          </div>
+        </div>
+        <div class="portal-card portal-card-full">
+          <div class="portal-icon">📊</div>
+          <h3>Your Hiring Pipeline</h3>
+          <p>Students who solved your challenges are ranked here. Send interview invites in one click.</p>
+          <div class="mini-leaderboard">
+            <div class="mini-row"><span class="rank-1">🥇</span><span><strong>Neha Gupta</strong> — IIT Delhi</span><span class="xp-reward">4,200 XP</span><button class="btn-hire" onclick="alert('Invite sent to Neha Gupta!')">Invite</button></div>
+            <div class="mini-row"><span class="rank-2">🥈</span><span><strong>Rahul K.</strong> — Pune Institute</span><span class="xp-reward">3,850 XP</span><button class="btn-hire" onclick="alert('Invite sent to Rahul K.!')">Invite</button></div>
+            <div class="mini-row"><span class="rank-3">🥉</span><span><strong>Arjun Sharma</strong> — NIT Kurukshetra</span><span class="xp-reward">2,450 XP</span><button class="btn-hire" onclick="alert('Invite sent to Arjun Sharma!')">Invite</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM MODAL -->
+  <div id="problem-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('problem-modal').classList.remove('active')">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="footer-brand">🌐 IndustrySync</div>
-    <div class="footer-text">Bridging the Gap | ANANNAY Ideathon 2025</div>
+    <div class="footer-text">Bridging the Gap between Universities & Industry | ANANNAY Ideathon 2025</div>
     <a href="https://github.com/kapoorn0511-creator/ANANNAY-Ideathon" target="_blank" class="footer-gh">GitHub →</a>
   </footer>
 
