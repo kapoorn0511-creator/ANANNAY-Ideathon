@@ -248,10 +248,60 @@ function mockLogin() {
   alert("Welcome to SkillBridge! You are now logged in as Arjun S.");
 }
 
-// ---------- PEER CHAT ----------
+// ---------- PEER CHAT ENHANCEMENTS ----------
+const CHAT_DATA = {
+  'venting-space': `
+    <div class="chat-msg system-msg">Welcome to #venting-space. A judgment-free zone to share your stress. 💙</div>
+    <div class="chat-row">
+      <div class="chat-avatar">👱‍♀️</div>
+      <div class="chat-msg"><strong>Neha G.</strong> <span class="msg-time">2 mins ago</span><br/>Feeling so burnt out today. This API rate limiter problem is making me crazy 😭</div>
+    </div>
+    <div class="chat-row">
+      <div class="chat-avatar">🧑‍💻</div>
+      <div class="chat-msg"><strong>Rahul K.</strong> <span class="msg-time">1 min ago</span><br/>Take a 10 min walk Neha! Mental health > XP points. Drink some water! 🫂</div>
+    </div>
+  `,
+  'interview-prep': `
+    <div class="chat-msg system-msg">Welcome to #interview-prep. Let's crack these companies together! 🚀</div>
+    <div class="chat-row">
+      <div class="chat-avatar">👨‍🎓</div>
+      <div class="chat-msg"><strong>Karan M.</strong> <span class="msg-time">10 mins ago</span><br/>Anyone has good resources for understanding WebSockets? The Uber challenge is tough.</div>
+    </div>
+    <div class="chat-row">
+      <div class="chat-avatar">👩‍🔬</div>
+      <div class="chat-msg"><strong>Priya D.</strong> <span class="msg-time">5 mins ago</span><br/>I found a great 10-min tutorial. I'll share the link here shortly!</div>
+    </div>
+  `,
+  'general-chill': `
+    <div class="chat-msg system-msg">Welcome to #general-chill. Turn on some lofi and relax. 🎧</div>
+    <div class="chat-row">
+      <div class="chat-avatar">🎸</div>
+      <div class="chat-msg"><strong>Rohan K.</strong> <span class="msg-time">1 hr ago</span><br/>What's everyone listening to right now while coding?</div>
+    </div>
+  `
+};
+
 function toggleChat() {
   const chat = document.getElementById('peer-chat-window');
+  const badge = document.getElementById('chat-badge');
   if (chat) chat.classList.toggle('active');
+  if (badge) badge.style.display = 'none'; // Clear badge on open
+  
+  // Auto-scroll on open
+  const chatBody = document.getElementById('chat-messages');
+  if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function switchChatChannel(channelName, btn) {
+  const channels = document.querySelectorAll('.chat-channel');
+  channels.forEach(c => c.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  
+  const chatBody = document.getElementById('chat-messages');
+  if (chatBody && CHAT_DATA[channelName]) {
+    chatBody.innerHTML = CHAT_DATA[channelName];
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
 }
 
 function handleChatEnter(e) {
@@ -260,18 +310,58 @@ function handleChatEnter(e) {
 
 function sendChatMessage() {
   const input = document.getElementById('chat-input');
-  if(!input.value.trim()) return;
+  const msgText = input.value.trim();
+  if(!msgText) return;
   
   const chatBody = document.getElementById('chat-messages');
+  
+  // User Message
   const msgHTML = `
-    <div class="chat-msg you" style="align-self:flex-end; background:var(--primary-glow); border-color:rgba(108,99,255,0.2); border-radius:12px 0 12px 12px;">
-      <strong>Arjun S. (You)</strong> <span class="msg-time">Just now</span><br/>
-      ${input.value}
+    <div class="chat-row you">
+      <div class="chat-avatar">👨‍💻</div>
+      <div class="chat-msg">
+        <strong>Arjun S. (You)</strong> <span class="msg-time">Just now</span><br/>
+        ${msgText}
+      </div>
     </div>
   `;
   chatBody.insertAdjacentHTML('beforeend', msgHTML);
   input.value = '';
-  chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll to bottom
+  chatBody.scrollTop = chatBody.scrollHeight;
+  
+  // Simulate Peer Reply after a delay
+  setTimeout(() => {
+    simulatePeerReply(chatBody);
+  }, 1000);
+}
+
+function simulatePeerReply(chatBody) {
+  // Show typing indicator
+  const typingHTML = `
+    <div class="chat-row" id="typing-indicator">
+      <div class="chat-avatar">👱‍♀️</div>
+      <div class="chat-msg"><div class="typing-dots"><span></span><span></span><span></span></div></div>
+    </div>
+  `;
+  chatBody.insertAdjacentHTML('beforeend', typingHTML);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  
+  setTimeout(() => {
+    const indicator = document.getElementById('typing-indicator');
+    if (indicator) indicator.remove();
+    
+    const replyHTML = `
+      <div class="chat-row">
+        <div class="chat-avatar">👱‍♀️</div>
+        <div class="chat-msg">
+          <strong>Neha G.</strong> <span class="msg-time">Just now</span><br/>
+          Thanks Arjun! That really helps. I appreciate the support. 💙
+        </div>
+      </div>
+    `;
+    chatBody.insertAdjacentHTML('beforeend', replyHTML);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 2500);
 }
 
 // ---------- INIT ----------

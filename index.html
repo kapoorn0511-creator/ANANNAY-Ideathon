@@ -404,6 +404,7 @@
   <!-- PEER CONNECT CHAT WIDGET (Hidden until login) -->
   <div id="chat-widget-container" style="display: none;">
     <button class="peer-chat-btn" onclick="toggleChat()">
+      <span class="unread-badge" id="chat-badge">1</span>
       💬 Peer Lounge <span class="online-dot"></span>
     </button>
 
@@ -411,22 +412,22 @@
       <div class="chat-header">
         <div>
           <h4 style="margin:0;font-size:1rem;">☕ Safe Space Lounge</h4>
-          <p style="margin:0;font-size:0.75rem;color:var(--bg2);">142 students online — You are not alone!</p>
+          <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.8);">142 students online — You are not alone!</p>
         </div>
         <button onclick="toggleChat()" style="background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;">✕</button>
       </div>
       <div class="chat-channels">
-        <span class="chat-channel active">#venting-space</span>
-        <span class="chat-channel">#interview-prep</span>
-        <span class="chat-channel">#general-chill</span>
+        <span class="chat-channel active" onclick="switchChatChannel('venting-space', this)">#venting-space</span>
+        <span class="chat-channel" onclick="switchChatChannel('interview-prep', this)">#interview-prep</span>
+        <span class="chat-channel" onclick="switchChatChannel('general-chill', this)">#general-chill</span>
       </div>
+      
       <div class="chat-body" id="chat-messages">
-        <div class="chat-msg system-msg">Welcome to the community! This is a judgment-free zone. Ask for help, share your stress, or just hang out. 💙</div>
-        <div class="chat-msg"><strong>Neha G.</strong> <span class="msg-time">2 mins ago</span><br/>Feeling so burnt out today. This API rate limiter problem is making me crazy 😭</div>
-        <div class="chat-msg you" style="align-self:flex-start; background:var(--card); border-color:var(--border); border-radius:0 12px 12px 12px;"><strong>Rahul K.</strong> <span class="msg-time">1 min ago</span><br/>Take a 10 min walk Neha! I was stuck there too. Mental health > XP points. Drink some water, we can solve it together later! 🫂</div>
+        <!-- Messages will be loaded here via JS -->
       </div>
+      
       <div class="chat-input-area">
-        <input type="text" id="chat-input" placeholder="Say something supportive..." onkeypress="handleChatEnter(event)">
+        <input type="text" id="chat-input" placeholder="Type a supportive message..." onkeypress="handleChatEnter(event)">
         <button onclick="sendChatMessage()">➤</button>
       </div>
     </div>
