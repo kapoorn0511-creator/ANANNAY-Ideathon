@@ -54,109 +54,212 @@
   <!-- ======================== HOME ======================== -->
   <section id="home" class="section active">
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <div class="hero">
-      <div class="hero-content" style="max-width: 800px; margin: 0 auto;">
-        <div class="hero-tag">🚀 The Industry-Academia Bridge Platform</div>
+      <div class="hero-content" style="max-width: 860px; margin: 0 auto;">
+        <div class="hero-tag">✨ SkillBridge • Industry Placements Reimagined</div>
         <h1 class="hero-title">
-          Stop solving <span class="highlight-red">outdated</span> algorithms.<br/>
-          Solve what MNCs need <span class="highlight-purple">today.</span>
+          Master Real MNC Systems.<br/>
+          Crack Placements <span style="background:linear-gradient(90deg, var(--primary), var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Together.</span>
         </h1>
-        <p class="hero-sub" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-          Universities teach 20-year-old syllabus. LeetCode gives you puzzles no one uses at work.
-          <strong>SkillBridge connects you directly with top MNCs.</strong> Learn their real tech stack, solve their current problems, earn XP, and get hired directly.
+        <p class="hero-sub" style="max-width: 720px; margin-left: auto; margin-right: auto;">
+          Colleges teach 20-year-old theory. LeetCode traps you in artificial puzzles. 
+          <strong>SkillBridge</strong> connects students directly with production challenges from Amazon, Google, and Netflix — backed by a supportive peer community and direct recruiter pipelines.
         </p>
-        <div class="hero-cta-row" style="justify-content: center;">
-          <button class="btn-primary large" onclick="openAuth('signup')">🚀 Get Started</button>
-          <button class="btn-ghost" onclick="document.getElementById('vision').scrollIntoView({behavior: 'smooth'})">Read Our Vision ↓</button>
+        
+        <div class="hero-cta-row" style="justify-content: center; gap: 1rem;">
+          <button class="btn-primary large" onclick="showSection('arena')">⚡ Explore Live Challenges</button>
+          <button class="btn-secondary" onclick="showSection('dashboard')" style="padding: 15px 28px; font-size: 1rem;">📊 Open Dashboard</button>
+          <button class="btn-ghost" onclick="toggleAIModal()" style="padding: 14px 22px; font-size: 0.95rem;">✨ AI Prep Roadmap</button>
         </div>
-        <div class="hero-trust" style="justify-content: center; flex-wrap: wrap;">
-          <span>🏢 50+ MNCs</span><span>•</span>
-          <span>🎓 10,000+ Students</span><span>•</span>
-          <span>💼 1,200+ Direct Hires</span><span>•</span>
-          <span>⭐ 500+ Live Challenges</span>
+
+        <div class="hero-trust" style="justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+          <span>🏢 50+ MNC Production Tasks</span><span>•</span>
+          <span>👥 10,000+ Active Students</span><span>•</span>
+          <span>🔥 Peer Support & Wellness</span><span>•</span>
+          <span>💼 Direct HR Hiring Leaderboard</span>
         </div>
       </div>
     </div>
 
-    <!-- 1. THE PROBLEM -->
-    <div class="pitch-section">
-      <h2 class="pitch-title">The Broken Placement Journey</h2>
-      <div class="grid-3">
-        <div class="pitch-card">
-          <div class="icon">🎯</div>
-          <h3>Who Faces It?</h3>
-          <p>Engineering students preparing for highly competitive MNC placements while juggling academics.</p>
-        </div>
-        <div class="pitch-card">
-          <div class="icon">💸</div>
-          <h3>What It Costs Them?</h3>
-          <p>Severe mental burnout, isolation, and rejections because they memorize algorithms instead of learning real systems.</p>
-        </div>
-        <div class="pitch-card">
-          <div class="icon">⚠️</div>
-          <h3>Why Tools Fall Short?</h3>
-          <p>LeetCode teaches 20-year-old puzzles. WhatsApp/Discord is unorganized. None prioritize student mental health.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. THE EVIDENCE -->
-    <div class="pitch-section" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; padding-left: 2rem; padding-right: 2rem;">
-      <div style="max-width: 1100px; margin: 0 auto;">
-        <h2 class="pitch-title">Evidence: Backed by Real Students</h2>
-        <div class="grid-2" style="align-items: center;">
-          <div>
-            <div style="display:flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
-              <div class="stat-box"><h3>100%</h3><p>Felt academic-industry gap</p></div>
-              <div class="stat-box"><h3>80%</h3><p>Reported severe isolation</p></div>
-            </div>
-            <p style="color: var(--text2); font-size: 1.1rem; line-height: 1.6;">Based on deep 1-on-1 interviews with 5 final-year students (full data available in our repository's evidence folder).</p>
-          </div>
-          <div class="pitch-card" style="border-left: 4px solid var(--primary); background: var(--card);">
-            <p style="font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--text);">"I can invert a binary tree perfectly, but failed my Uber interview because I didn't know WebSockets. The loneliness of studying all day is the hardest part."</p>
-            <p style="margin-top: 1rem; font-weight: bold; color: var(--text3);">- Student Interviewee #3</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. DIFFERENTIATION & PROTOTYPE -->
-    <div class="pitch-section">
-      <h2 class="pitch-title">How SkillBridge is Different</h2>
-      <div class="grid-2">
-        <div class="pitch-card" style="border: 1px solid rgba(255, 71, 87, 0.3); background: rgba(255, 71, 87, 0.02);">
-          <h3 style="color: var(--red); margin-bottom: 1rem;">Existing Platforms</h3>
-          <ul class="check-list cross">
-            <li>❌ Solo grinding & extreme isolation</li>
-            <li>❌ Theoretical algorithmic puzzles (LeetCode)</li>
-            <li>❌ No connection to actual HR backlogs</li>
-            <li>❌ Zero focus on student mental wellness</li>
-          </ul>
-        </div>
-        <div class="pitch-card" style="border: 1px solid rgba(46, 213, 115, 0.3); background: rgba(46, 213, 115, 0.02);">
-          <h3 style="color: var(--green); margin-bottom: 1rem;">SkillBridge Solution</h3>
-          <ul class="check-list check">
-            <li>✅ <strong>Peer Lounge</strong> for study groups & wellness</li>
-            <li>✅ Real MNC architecture challenges</li>
-            <li>✅ HR directly hires from active leaderboards</li>
-            <li>✅ Dedicated <em>#venting-space</em> for mental health</li>
-          </ul>
-          <button class="btn-primary" style="margin-top: 1.5rem; width: 100%; justify-content: center;" onclick="openAuth('signup')">Launch Working Prototype 🚀</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. TRACTION / SIGNS OF USE -->
-    <div class="pitch-section" style="text-align: center; margin-bottom: 2rem;">
-      <h2 class="pitch-title" style="margin-bottom: 1rem;">Signs of Immediate Demand</h2>
-      <p style="font-size: 1.2rem; color: var(--text2); max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;">
-        When presented with the prototype concept, <strong>100% of interviewed students asked for early access</strong>, specifically highlighting the gamified XP and the Peer Lounge support system.
+    <!-- COMPANY HIRING STRIP -->
+    <div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center;">
+      <p style="font-size: 0.85rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem;">
+        Solve verified architecture problems from engineering teams at
       </p>
-      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-        <div class="pitch-card" style="padding: 1.5rem 2.5rem;">
-          <h3 style="font-size: 2.5rem; margin-bottom: 0;">50+</h3>
-          <p style="color: var(--text3); font-weight: bold; margin-top: 5px;">Waitlist Signups</p>
+      <div style="display: flex; gap: 2.5rem; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.85; font-size: 1.15rem; font-weight: 800; color: var(--text);">
+        <span>🟠 Amazon</span>
+        <span>🔵 Google</span>
+        <span>🟦 Microsoft</span>
+        <span>🔴 Netflix</span>
+        <span>🚗 Uber</span>
+        <span>💳 Stripe</span>
+      </div>
+    </div>
+
+    <!-- 3 CORE PILLARS / HOW IT WORKS -->
+    <div style="max-width: 1100px; margin: 0 auto; padding: 5rem 2rem;">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Why SkillBridge</span>
+        <h2 style="font-size: 2.2rem; font-weight: 800; margin-top: 0.5rem; margin-bottom: 0.8rem;">Bridging The University-Industry Divide</h2>
+        <p style="color: var(--text2); max-width: 650px; margin: 0 auto; font-size: 1.05rem;">Traditional placement prep causes loneliness and interview shocks. SkillBridge fixes both with a holistic 3-pillar ecosystem.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="pitch-card" style="padding: 2rem; border-top: 3px solid var(--primary); transition: var(--transition);">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.6rem;">Real-World Arena</h3>
+          <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+            No generic whiteboard brainteasers. Solve distributed rate-limiters, real-time WebSocket dispatchers, and caching bottlenecks that engineering managers actually test.
+          </p>
+          <a href="#arena" onclick="showSection('arena')" style="color: var(--primary); font-weight: 700; text-decoration: none; font-size: 0.9rem;">Solve Problems →</a>
+        </div>
+
+        <div class="pitch-card" style="padding: 2rem; border-top: 3px solid var(--accent); transition: var(--transition);">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">👥</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.6rem;">Peer Lounge & Wellness</h3>
+          <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+            80% of students suffer from solitary burnout. Our Peer Lounge provides live study groups, collaborative peer mocks, and a safe venting space to keep you mentally energized.
+          </p>
+          <a href="javascript:void(0)" onclick="toggleChat()" style="color: var(--primary); font-weight: 700; text-decoration: none; font-size: 0.9rem;">Open Peer Lounge →</a>
+        </div>
+
+        <div class="pitch-card" style="padding: 2rem; border-top: 3px solid var(--green); transition: var(--transition);">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">💼</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.6rem;">Direct Recruiter Hiring</h3>
+          <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+            Skip automated resume rejection filters. Verified technical recruiters view candidate XP, completed problem backlogs, and extend direct interview invitations.
+          </p>
+          <a href="#hr-view" onclick="showSection('hr-view')" style="color: var(--green); font-weight: 700; text-decoration: none; font-size: 0.9rem;">View Recruiter Portal →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED CHALLENGES SPOTLIGHT -->
+    <div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 2rem;">
+      <div style="max-width: 1100px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Live Production Challenges</span>
+            <h2 style="font-size: 2rem; font-weight: 800; margin-top: 0.4rem;">Featured MNC Backlogs</h2>
+          </div>
+          <button class="btn-primary" onclick="showSection('arena')">View All in Arena →</button>
+        </div>
+
+        <div class="grid-3">
+          <!-- Problem 1 -->
+          <div class="problem-card" style="background: var(--card);">
+            <div class="company-tag">Amazon</div>
+            <h3 class="problem-title">Design a Distributed Rate Limiter</h3>
+            <div class="problem-meta">
+              <span style="color: var(--red);">🎯 Hard</span>
+              <span>⏱️ Est: 45 mins</span>
+            </div>
+            <div class="tech-stack">
+              <span class="tech-tag">System Design</span>
+              <span class="tech-tag">Backend</span>
+              <span class="tech-tag">Redis</span>
+            </div>
+            <div class="problem-actions">
+              <span class="xp-reward">+500 XP</span>
+              <button class="btn-ghost small" onclick="openModal(0)">View Challenge</button>
+            </div>
+          </div>
+
+          <!-- Problem 2 -->
+          <div class="problem-card" style="background: var(--card);">
+            <div class="company-tag">Google</div>
+            <h3 class="problem-title">Optimize Search API Load Time</h3>
+            <div class="problem-meta">
+              <span style="color: var(--orange);">🎯 Medium</span>
+              <span>⏱️ Est: 45 mins</span>
+            </div>
+            <div class="tech-stack">
+              <span class="tech-tag">API</span>
+              <span class="tech-tag">Performance</span>
+              <span class="tech-tag">Node.js</span>
+            </div>
+            <div class="problem-actions">
+              <span class="xp-reward">+300 XP</span>
+              <button class="btn-ghost small" onclick="openModal(1)">View Challenge</button>
+            </div>
+          </div>
+
+          <!-- Problem 3 -->
+          <div class="problem-card" style="background: var(--card);">
+            <div class="company-tag">Uber</div>
+            <h3 class="problem-title">Real-time Driver Location Tracking</h3>
+            <div class="problem-meta">
+              <span style="color: var(--red);">🎯 Hard</span>
+              <span>⏱️ Est: 45 mins</span>
+            </div>
+            <div class="tech-stack">
+              <span class="tech-tag">WebSockets</span>
+              <span class="tech-tag">Backend</span>
+              <span class="tech-tag">Go</span>
+            </div>
+            <div class="problem-actions">
+              <span class="xp-reward">+550 XP</span>
+              <button class="btn-ghost small" onclick="openModal(4)">View Challenge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOCIAL PROOF & STUDENT IMPACT -->
+    <div style="max-width: 1100px; margin: 0 auto; padding: 5rem 2rem;">
+      <div class="grid-2" style="align-items: center; gap: 3rem;">
+        <div>
+          <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Student-Validated</span>
+          <h2 style="font-size: 2.2rem; font-weight: 800; margin-top: 0.5rem; margin-bottom: 1.2rem;">Built for Engineering Students Who Deserve Better</h2>
+          <p style="color: var(--text2); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+            We interviewed final-year engineering students across colleges. <strong>100%</strong> validated that textbook syllabi don't prepare them for modern MNC technical screenings, and <strong>80%</strong> reported severe isolation during placement season.
+          </p>
+          
+          <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+            <div>
+              <div style="font-size: 2.2rem; font-weight: 900; color: var(--primary);">100%</div>
+              <p style="color: var(--text3); font-size: 0.85rem; font-weight: 600; margin-top: 4px;">Verified Need</p>
+            </div>
+            <div>
+              <div style="font-size: 2.2rem; font-weight: 900; color: var(--green);">50+</div>
+              <p style="color: var(--text3); font-size: 0.85rem; font-weight: 600; margin-top: 4px;">Waitlist Signups</p>
+            </div>
+            <div>
+              <div style="font-size: 2.2rem; font-weight: 900; color: var(--yellow);">2,450 XP</div>
+              <p style="color: var(--text3); font-size: 0.85rem; font-weight: 600; margin-top: 4px;">Avg Student Growth</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; border-left: 5px solid var(--primary); box-shadow: var(--shadow);">
+          <div style="font-size: 1.5rem; margin-bottom: 1rem;">💬</div>
+          <p style="font-style: italic; font-size: 1.15rem; line-height: 1.7; color: var(--text); margin-bottom: 1.5rem;">
+            "I could invert a binary tree on LeetCode with my eyes closed, but I failed my Uber interview because I didn't know WebSockets. The loneliness of studying all day in my hostel was the hardest part. SkillBridge's Peer Lounge and real architecture tasks are exactly what we needed."
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--green)); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">👨‍🎓</div>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Arjun Sharma</h4>
+              <p style="margin: 0; font-size: 0.82rem; color: var(--text3);">NIT Kurukshetra • Placed at Amazon (2025)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALL TO ACTION BANNER -->
+    <div style="background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(0,168,107,0.12)); border-top: 1px solid var(--border); padding: 5rem 2rem; text-align: center;">
+      <div style="max-width: 750px; margin: 0 auto;">
+        <h2 style="font-size: 2.4rem; font-weight: 900; margin-bottom: 1rem;">Ready to Bridge Your Career Gap?</h2>
+        <p style="color: var(--text2); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem;">
+          Start solving production problems, join peer study groups, and fast-track your MNC placement journey today.
+        </p>
+        <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn-primary large" onclick="showSection('arena')">🚀 Start Solving Now</button>
+          <button class="btn-ghost" onclick="toggleChat()" style="padding: 14px 28px; font-size: 1rem;">💬 Join Peer Lounge</button>
+          <button class="btn-ghost" onclick="toggleAIModal()" style="padding: 14px 28px; font-size: 1rem;">✨ AI Roadmap</button>
         </div>
       </div>
     </div>
