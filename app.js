@@ -238,10 +238,40 @@ function mockLogin() {
   document.getElementById('internal-nav').style.display = 'flex';
   document.getElementById('user-nav').style.display = 'flex';
   
+  // Show Chat Widget
+  const chatWidget = document.getElementById('chat-widget-container');
+  if (chatWidget) chatWidget.style.display = 'block';
+
   // Go to Dashboard
   showSection('dashboard');
   
   alert("Welcome to SkillBridge! You are now logged in as Arjun S.");
+}
+
+// ---------- PEER CHAT ----------
+function toggleChat() {
+  const chat = document.getElementById('peer-chat-window');
+  if (chat) chat.classList.toggle('active');
+}
+
+function handleChatEnter(e) {
+  if(e.key === 'Enter') sendChatMessage();
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  if(!input.value.trim()) return;
+  
+  const chatBody = document.getElementById('chat-messages');
+  const msgHTML = `
+    <div class="chat-msg you" style="align-self:flex-end; background:var(--primary-glow); border-color:rgba(108,99,255,0.2); border-radius:12px 0 12px 12px;">
+      <strong>Arjun S. (You)</strong> <span class="msg-time">Just now</span><br/>
+      ${input.value}
+    </div>
+  `;
+  chatBody.insertAdjacentHTML('beforeend', msgHTML);
+  input.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll to bottom
 }
 
 // ---------- INIT ----------
