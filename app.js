@@ -259,7 +259,7 @@ const USER_PROFILES = {
 
 const CHAT_DATA = {
   'venting-space': `
-    <div class="chat-msg system-msg">Welcome to #venting-space. A judgment-free zone to share your stress. 💙</div>
+    <div class="chat-msg system-msg">Welcome to Venting Space. A judgment-free zone to share your stress. 💙</div>
     <div class="chat-row">
       <div class="chat-avatar">👱‍♀️</div>
       <div class="chat-msg"><span class="chat-username" onclick="showProfile('@neha_g')">@neha_g</span> <span class="msg-time">2 mins ago</span><br/>Feeling so burnt out today. This API rate limiter problem is making me crazy 😭</div>
@@ -270,7 +270,7 @@ const CHAT_DATA = {
     </div>
   `,
   'interview-prep': `
-    <div class="chat-msg system-msg">Welcome to #interview-prep. Let's crack these companies together! 🚀</div>
+    <div class="chat-msg system-msg">Welcome to Interview Prep. Let's crack these companies together! 🚀</div>
     <div class="chat-row">
       <div class="chat-avatar">👨‍🎓</div>
       <div class="chat-msg"><span class="chat-username" onclick="showProfile('@karan_m')">@karan_m</span> <span class="msg-time">10 mins ago</span><br/>Anyone has good resources for understanding WebSockets? The Uber challenge is tough.</div>
@@ -303,7 +303,7 @@ const CHAT_DATA = {
     </div>
   `,
   'general-chill': `
-    <div class="chat-msg system-msg">Welcome to #general-chill. Turn on some lofi and relax. 🎧</div>
+    <div class="chat-msg system-msg">Welcome to General Chill. Turn on some lofi and relax. 🎧</div>
     <div class="chat-row">
       <div class="chat-avatar">🎸</div>
       <div class="chat-msg"><span class="chat-username" onclick="showProfile('@rohan_k')">@rohan_k</span> <span class="msg-time">1 hr ago</span><br/>What's everyone listening to right now while coding?</div>
