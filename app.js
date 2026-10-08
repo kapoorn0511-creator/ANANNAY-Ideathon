@@ -1888,6 +1888,33 @@ const USER_PROFILES = {
     xp: '1,200 XP', 
     rank: '#8' 
   },
+  '@megha_s': { 
+    name: 'Megha Singh', 
+    avatar: '👩‍💻', 
+    college: 'Lloyd', 
+    bio: 'Final Year CSE @ Lloyd. Prepping for Cloud & Backend roles. Watching Netflix & Amazon Masterclasses!', 
+    streak: 9, 
+    xp: '3,400 XP', 
+    rank: '#4' 
+  },
+  '@akshiv_s': { 
+    name: 'Akshiv Sharma', 
+    avatar: '👨‍🎓', 
+    college: 'Lloyd', 
+    bio: '3rd Year CSE @ Lloyd. Solving daily MNC Arena tickets. Active in Peer Lounge Study Groups!', 
+    streak: 11, 
+    xp: '3,150 XP', 
+    rank: '#5' 
+  },
+  '@harsh_y': { 
+    name: 'Harsh Yadav', 
+    avatar: '👨‍💻', 
+    college: 'Lloyd', 
+    bio: 'Final Year CSE @ Lloyd. Solved Uber WebSockets & Amazon Rate Limiter. System Design enthusiast.', 
+    streak: 16, 
+    xp: '3,920 XP', 
+    rank: '#2' 
+  }
 };
 
 const MOCK_STUDY_GROUPS = [
@@ -1948,6 +1975,36 @@ const MOCK_STUDY_GROUPS = [
     maxMembers: 3,
     time: "Tonight at 9:00 PM IST",
     desc: "Building real-time geospatial location dispatch with Quadtrees & Go concurrency channels.",
+    isHostYou: false,
+    joined: false
+  },
+  {
+    id: 5,
+    title: "Docker & Redis Caching Deep Dive (Lloyd Peer Pod)",
+    hostHandle: "@megha_s",
+    hostName: "Megha Singh",
+    hostAvatar: "👩‍💻",
+    company: "Google",
+    companyBadge: "🔵 Google Cloud",
+    currentMembers: 3,
+    maxMembers: 4,
+    time: "Today at 8:15 PM IST (Live Audio 🎧)",
+    desc: "Discussing distributed caching eviction policies (LRU/LFU), Docker compose containerization, and avoiding out-of-memory errors.",
+    isHostYou: false,
+    joined: false
+  },
+  {
+    id: 6,
+    title: "Uber High-Concurrency WebSocket Load Testing",
+    hostHandle: "@harsh_y",
+    hostName: "Harsh Yadav",
+    hostAvatar: "👨‍💻",
+    company: "Uber",
+    companyBadge: "🚗 Uber",
+    currentMembers: 2,
+    maxMembers: 4,
+    time: "Tomorrow at 5:00 PM IST",
+    desc: "Simulating 10,000 concurrent driver pings using Go goroutines and benchmarking sub-10ms delivery latencies.",
     isHostYou: false,
     joined: false
   }
@@ -2072,6 +2129,22 @@ const DM_CONVERSATIONS = {
     unread: false,
     messages: [
       { sender: 'them', text: 'Listening to synthwave while writing Go channels 🎧', time: '4:15 PM', heart: false }
+    ]
+  },
+  '@megha_s': {
+    handle: '@megha_s',
+    name: 'Megha Singh',
+    avatar: '👩‍💻',
+    subtitle: 'Active now',
+    college: 'Lloyd • Global Rank #4',
+    bio: 'Final Year CSE @ Lloyd. Prepping for Cloud & Backend roles. Watching Netflix & Amazon Masterclasses!',
+    lastMsg: 'The Netflix video buffering masterclass was mindblowing! 🎬',
+    lastTime: '5m',
+    unread: true,
+    messages: [
+      { sender: 'them', text: 'Hey Anannay! Did you check out the new Netflix Video Buffering Masterclass by their Staff Engineer?', time: '7:40 PM', heart: false },
+      { sender: 'you', text: 'Hey Megha! Yes, the architecture slides on MediaSource Extensions (MSE) are so much better than textbook theory.', time: '7:45 PM', heart: true },
+      { sender: 'them', text: 'The Netflix video buffering masterclass was mindblowing! 🎬', time: '7:48 PM', heart: false }
     ]
   }
 };
