@@ -80,4 +80,4 @@ No installation required.
 
 ---
 
-*ANANNAY Ideathon 2025 | PS 4 — Open Innovation*
+*ANANNAY Ideathon 2026 | PS 4 — Open Innovation*
